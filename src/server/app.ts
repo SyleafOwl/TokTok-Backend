@@ -1,11 +1,11 @@
 import express from 'express'
 import cors from 'cors'
 import { authRouter } from './routes/auth.js'
-import { postsRouter } from './routes/posts.js'
-import { giftsRouter } from './routes/gifts.js'
-import { metricsRouter } from './routes/metrics.js'
-import { liveRouter } from './routes/live.js'
-import { usersRouter } from './routes/users.js'
+import { postsRouter } from './routes/posts'
+import { giftsRouter } from './routes/gifts'
+import { metricsRouter } from './routes/metrics'
+import { liveRouter } from './routes/live'
+import { usersRouter } from './routes/users'
 
 const app = express()
 
