@@ -32,4 +32,7 @@ model Video {
 }
 
 // Nota: En Prisma v6 la URL debe estar en este schema (env(DATABASE_URL)).
-// Si actualizas a Prisma v7, puedes moverla a prisma.config.ts.
+// Nota: En Prisma v6 la URL debía estar en este schema (env(DATABASE_URL)).
+// En Prisma v7 elimina `url` del schema.prisma: mueve la URL de conexión para Migrate a prisma.config.ts
+// y, al instanciar PrismaClient, pasa `adapter` para una conexión directa o `accelerateUrl` para Accelerate.
+// Ver: https://pris.ly/d/config-datasource y https://pris.ly/d/prisma7-client-config

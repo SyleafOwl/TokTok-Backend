@@ -162,7 +162,6 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -171,8 +170,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// Prisma schema para TokTok\n// Provider: PostgreSQL\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  // Salida obligatoria para el despliegue: genera el cliente en src/generated\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id       Int    @id @default(autoincrement())\n  name     String\n  email    String @unique\n  password String\n\n  videos Video[]\n}\n\nmodel Video {\n  id    Int    @id @default(autoincrement())\n  title String\n  url   String\n  likes Int    @default(0)\n\n  userId Int\n  user   User @relation(fields: [userId], references: [id])\n}\n\n// Nota: En Prisma v6 la URL debe estar en este schema (env(DATABASE_URL)).\n// Si actualizas a Prisma v7, puedes moverla a prisma.config.ts.\n",
-  "inlineSchemaHash": "1d1587a4bae3c723c91f0edbe926ad837220c3795eac21209515447b426d180f",
+  "inlineSchema": "// Prisma schema para TokTok\n// Provider: PostgreSQL\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  // Salida obligatoria para el despliegue: genera el cliente en src/generated\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id       Int    @id @default(autoincrement())\n  name     String\n  email    String @unique\n  password String\n\n  videos Video[]\n}\n\nmodel Video {\n  id    Int    @id @default(autoincrement())\n  title String\n  url   String\n  likes Int    @default(0)\n\n  userId Int\n  user   User @relation(fields: [userId], references: [id])\n}\n\n// Nota: En Prisma v6 la URL debe estar en este schema (env(DATABASE_URL)).\n// Nota: En Prisma v6 la URL debía estar en este schema (env(DATABASE_URL)).\n// En Prisma v7 elimina `url` del schema.prisma: mueve la URL de conexión para Migrate a prisma.config.ts\n// y, al instanciar PrismaClient, pasa `adapter` para una conexión directa o `accelerateUrl` para Accelerate.\n// Ver: https://pris.ly/d/config-datasource y https://pris.ly/d/prisma7-client-config\n",
+  "inlineSchemaHash": "d3e63dc212fee455813d07a9db4f5a45ee1c42a14ffaa4bd460b30475aafd94e",
   "copyEngine": true
 }
 config.dirname = '/'
