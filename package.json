@@ -1,37 +1,15 @@
 {
   "name": "toktok-backend",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "",
   "type": "module",
+  "main": "index.js",
   "scripts": {
-    "dev": "tsx watch src/index.ts",
-    "build": "tsc -p tsconfig.json",
-    "start": "node dist/index.js",
+    "build": "npm install && npx prisma generate && npx tsc && cp -r src/generated dist/",
+    "start": "npx prisma migrate deploy && node ./dist/index.js",
+    "dev": "ts-node ./src/index.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
-  "dependencies": {
-    "@prisma/client": "^7.0.1",
-    "cors": "^2.8.5",
-    "dotenv": "^17.2.3",
-    "express": "^5.1.0",
-    "pg": "^8.16.3",
-    "zod": "^3.25.76"
-  },
-  "devDependencies": {
-    "@types/cors": "^2.8.19",
-    "@types/dotenv": "^6.1.1",
-    "@types/express": "^5.0.5",
-    "@types/node": "^24.10.1",
-    "@types/nodemon": "^1.19.6",
-    "nodemon": "^3.1.10",
-    "prisma": "^7.0.1",
-    "ts-node": "^10.9.2",
-    "ts-node-dev": "^2.0.0",
-    "tsx": "^4.20.6",
-    "typescript": "^5.9.3"
-  },
-  "description": "API REST en TypeScript con Express para soportar el frontend TokTok. Incluye endpoints básicos de auth, posts, likes, comentarios, regalos, métricas y estado de live. Usa almacenamiento en memoria (mock) por ahora.",
-  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SyleafOwl/TokTok-Backend.git"
@@ -42,5 +20,20 @@
   "bugs": {
     "url": "https://github.com/SyleafOwl/TokTok-Backend/issues"
   },
-  "homepage": "https://github.com/SyleafOwl/TokTok-Backend#readme"
+  "homepage": "https://github.com/SyleafOwl/TokTok-Backend#readme",
+  "dependencies": {
+    "@prisma/client": "^7.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "pg": "^8.16.3"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.5",
+    "@types/node": "^24.10.1",
+    "prisma": "^6.19.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
 }
