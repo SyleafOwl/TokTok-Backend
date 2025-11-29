@@ -13,18 +13,32 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
-    "zod": "^3.23.8"
+    "pg": "^8.16.3",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.17",
+    "@types/cors": "^2.8.19",
     "@types/dotenv": "^6.1.1",
     "@types/express": "^5.0.5",
-    "@types/node": "^24.9.2",
+    "@types/node": "^24.10.1",
     "@types/nodemon": "^1.19.6",
-  "tsx": "^4.19.2",
     "nodemon": "^3.1.10",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
+    "tsx": "^4.20.6",
     "typescript": "^5.9.3"
-  }
+  },
+  "description": "API REST en TypeScript con Express para soportar el frontend TokTok. Incluye endpoints básicos de auth, posts, likes, comentarios, regalos, métricas y estado de live. Usa almacenamiento en memoria (mock) por ahora.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SyleafOwl/TokTok-Backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SyleafOwl/TokTok-Backend/issues"
+  },
+  "homepage": "https://github.com/SyleafOwl/TokTok-Backend#readme"
 }

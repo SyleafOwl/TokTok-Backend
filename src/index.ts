@@ -1,6 +1,6 @@
 import 'dotenv/config'
 import { createServer } from 'node:http'
-import app from './server/app.js'
+import app from './app.js'
 
 const PORT = Number(process.env.PORT ?? 3000)
 
