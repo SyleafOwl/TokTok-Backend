@@ -135,36 +135,48 @@ function emitirToken(persona) {
 // Registro
 for (const path of ['/api/autenticacion/registrar', '/autenticacion/registrar']) {
     app.post(path, async (req, res) => {
-        const { usuario, correo, clave, rol } = req.body ?? {};
-        const rolInterno = normalizaRolInterno(rol);
-        if (!usuario || !rolInterno || !clave) {
-            return res.status(400).json({ message: 'usuario, rol y clave son requeridos' });
+        try {
+            const { usuario, correo, clave, rol } = req.body ?? {};
+            const rolInterno = normalizaRolInterno(rol);
+            if (!usuario || !rolInterno || !clave) {
+                return res.status(400).json({ message: 'usuario, rol y clave son requeridos' });
+            }
+            const existente = await prisma.user.findUnique({ where: { nombre: usuario } });
+            if (existente)
+                return res.status(409).json({ message: 'usuario ya existe' });
+            const hashed = await bcrypt.hash(clave, 10);
+            const nuevo = await prisma.user.create({ data: { nombre: usuario, rol: rolInterno, password: hashed, contacto: correo } });
+            const persona = { id: String(nuevo.id), nombre: nuevo.nombre, rol: rolExterno(nuevo.rol) };
+            const token = emitirToken(persona);
+            return res.status(200).json({ token, persona });
         }
-        const existente = await prisma.user.findUnique({ where: { nombre: usuario } });
-        if (existente)
-            return res.status(409).json({ message: 'usuario ya existe' });
-        const hashed = await bcrypt.hash(clave, 10);
-        const nuevo = await prisma.user.create({ data: { nombre: usuario, rol: rolInterno, password: hashed, contacto: correo } });
-        const persona = { id: String(nuevo.id), nombre: nuevo.nombre, rol: rolExterno(nuevo.rol) };
-        const token = emitirToken(persona);
-        return res.status(200).json({ token, persona });
+        catch (e) {
+            console.error('[Registro] Error:', e);
+            return res.status(500).json({ message: 'Error interno del servidor' });
+        }
     });
 }
 // Login
 for (const path of ['/api/autenticacion/ingresar', '/autenticacion/ingresar']) {
     app.post(path, async (req, res) => {
-        const { usuario, clave } = req.body ?? {};
-        if (!usuario || !clave)
-            return res.status(400).json({ message: 'usuario y clave son requeridos' });
-        const user = await prisma.user.findUnique({ where: { nombre: usuario } });
-        if (!user)
-            return res.status(401).json({ message: 'credenciales inválidas' });
-        const ok = await bcrypt.compare(clave, user.password);
-        if (!ok)
-            return res.status(401).json({ message: 'credenciales inválidas' });
-        const persona = { id: String(user.id), nombre: user.nombre, rol: rolExterno(user.rol) };
-        const token = emitirToken(persona);
-        return res.status(200).json({ token, persona });
+        try {
+            const { usuario, clave } = req.body ?? {};
+            if (!usuario || !clave)
+                return res.status(400).json({ message: 'usuario y clave son requeridos' });
+            const user = await prisma.user.findUnique({ where: { nombre: usuario } });
+            if (!user)
+                return res.status(401).json({ message: 'credenciales inválidas' });
+            const ok = await bcrypt.compare(clave, user.password);
+            if (!ok)
+                return res.status(401).json({ message: 'credenciales inválidas' });
+            const persona = { id: String(user.id), nombre: user.nombre, rol: rolExterno(user.rol) };
+            const token = emitirToken(persona);
+            return res.status(200).json({ token, persona });
+        }
+        catch (e) {
+            console.error('[Login] Error:', e);
+            return res.status(500).json({ message: 'Error interno del servidor' });
+        }
     });
 }
 // ---- Server ----
