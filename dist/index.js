@@ -6,32 +6,8 @@ import * as bcrypt from 'bcryptjs';
 import { PrismaClient } from "./generated/prisma/index.js";
 const app = express();
 app.use(express.json());
-const defaultOrigins = [
-    'http://localhost:5173',
-];
-const envOrigins = (process.env.CORS_ORIGINS ?? '').split(',').map(o => o.trim()).filter(Boolean);
-const allowedOrigins = [...defaultOrigins, ...envOrigins];
-const corsOptions = {
-    origin: (origin, callback) => {
-        if (!origin)
-            return callback(null, true);
-        try {
-            const url = new URL(origin);
-            if (url.hostname.endsWith('.github.io'))
-                return callback(null, true);
-        }
-        catch { }
-        if (allowedOrigins.includes(origin))
-            return callback(null, true);
-        return callback(null, false);
-    },
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Accept', 'Authorization'],
-    credentials: true,
-    optionsSuccessStatus: 204,
-};
-app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
+// CORS simple: preflight manejado automáticamente por el middleware
+app.use(cors());
 if (!process.env.DATABASE_URL) {
     console.error('[Config] FALTA la variable de entorno DATABASE_URL');
     console.error('Define DATABASE_URL en .env o en el entorno del servicio (Render).');
@@ -144,9 +120,9 @@ app.delete('/api/videos/:id', async (req, res) => {
 // ---- Autenticación ----
 function normalizaRolInterno(input) {
     const v = String(input || '').toLowerCase();
-    if (v === 'visitante' || v === 'viewer')
+    if (v === 'viewer' || v === 'visitante')
         return 'visitante';
-    if (v === 'creador' || v === 'streamer')
+    if (v === 'streamer' || v === 'creador')
         return 'creador';
     return null;
 }
@@ -159,17 +135,16 @@ function emitirToken(persona) {
 // Registro
 for (const path of ['/api/autenticacion/registrar', '/autenticacion/registrar']) {
     app.post(path, async (req, res) => {
-        const { nombre, rol, password, contrasena, contacto } = req.body ?? {};
-        const pass = password ?? contrasena;
+        const { usuario, correo, clave, rol } = req.body ?? {};
         const rolInterno = normalizaRolInterno(rol);
-        if (!nombre || !rolInterno || !pass) {
-            return res.status(400).json({ message: 'nombre, rol y password son requeridos' });
+        if (!usuario || !rolInterno || !clave) {
+            return res.status(400).json({ message: 'usuario, rol y clave son requeridos' });
         }
-        const existente = await prisma.user.findUnique({ where: { nombre } });
+        const existente = await prisma.user.findUnique({ where: { nombre: usuario } });
         if (existente)
-            return res.status(400).json({ message: 'usuario ya existe' });
-        const hashed = await bcrypt.hash(pass, 10);
-        const nuevo = await prisma.user.create({ data: { nombre, rol: rolInterno, password: hashed, contacto } });
+            return res.status(409).json({ message: 'usuario ya existe' });
+        const hashed = await bcrypt.hash(clave, 10);
+        const nuevo = await prisma.user.create({ data: { nombre: usuario, rol: rolInterno, password: hashed, contacto: correo } });
         const persona = { id: String(nuevo.id), nombre: nuevo.nombre, rol: rolExterno(nuevo.rol) };
         const token = emitirToken(persona);
         return res.status(200).json({ token, persona });
@@ -178,16 +153,15 @@ for (const path of ['/api/autenticacion/registrar', '/autenticacion/registrar'])
 // Login
 for (const path of ['/api/autenticacion/ingresar', '/autenticacion/ingresar']) {
     app.post(path, async (req, res) => {
-        const { nombre, password, contrasena } = req.body ?? {};
-        const pass = password ?? contrasena;
-        if (!nombre || !pass)
-            return res.status(400).json({ message: 'nombre y password son requeridos' });
-        const user = await prisma.user.findUnique({ where: { nombre } });
+        const { usuario, clave } = req.body ?? {};
+        if (!usuario || !clave)
+            return res.status(400).json({ message: 'usuario y clave son requeridos' });
+        const user = await prisma.user.findUnique({ where: { nombre: usuario } });
         if (!user)
-            return res.status(400).json({ message: 'credenciales inválidas' });
-        const ok = await bcrypt.compare(pass, user.password);
+            return res.status(401).json({ message: 'credenciales inválidas' });
+        const ok = await bcrypt.compare(clave, user.password);
         if (!ok)
-            return res.status(400).json({ message: 'credenciales inválidas' });
+            return res.status(401).json({ message: 'credenciales inválidas' });
         const persona = { id: String(user.id), nombre: user.nombre, rol: rolExterno(user.rol) };
         const token = emitirToken(persona);
         return res.status(200).json({ token, persona });

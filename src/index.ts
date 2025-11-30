@@ -126,8 +126,8 @@ app.delete('/api/videos/:id', async (req, res) => {
 // ---- Autenticación ----
 function normalizaRolInterno(input: string): 'visitante' | 'creador' | null {
   const v = String(input || '').toLowerCase()
-  if (v === 'visitante' || v === 'viewer') return 'visitante'
-  if (v === 'creador' || v === 'streamer') return 'creador'
+  if (v === 'viewer' || v === 'visitante') return 'visitante'
+  if (v === 'streamer' || v === 'creador') return 'creador'
   return null
 }
 
@@ -142,16 +142,15 @@ function emitirToken(persona: { id: string; nombre: string; rol: 'viewer' | 'str
 // Registro
 for (const path of ['/api/autenticacion/registrar', '/autenticacion/registrar']) {
   app.post(path, async (req, res) => {
-    const { nombre, rol, password, contrasena, contacto } = req.body ?? {}
-    const pass: string | undefined = password ?? contrasena
+    const { usuario, correo, clave, rol } = req.body ?? {}
     const rolInterno = normalizaRolInterno(rol)
-    if (!nombre || !rolInterno || !pass) {
-      return res.status(400).json({ message: 'nombre, rol y password son requeridos' })
+    if (!usuario || !rolInterno || !clave) {
+      return res.status(400).json({ message: 'usuario, rol y clave son requeridos' })
     }
-    const existente = await prisma.user.findUnique({ where: { nombre } })
-    if (existente) return res.status(400).json({ message: 'usuario ya existe' })
-    const hashed = await bcrypt.hash(pass, 10)
-    const nuevo = await prisma.user.create({ data: { nombre, rol: rolInterno, password: hashed, contacto } })
+    const existente = await prisma.user.findUnique({ where: { nombre: usuario } })
+    if (existente) return res.status(409).json({ message: 'usuario ya existe' })
+    const hashed = await bcrypt.hash(clave, 10)
+    const nuevo = await prisma.user.create({ data: { nombre: usuario, rol: rolInterno, password: hashed, contacto: correo } })
     const persona = { id: String(nuevo.id), nombre: nuevo.nombre, rol: rolExterno(nuevo.rol as 'visitante' | 'creador') }
     const token = emitirToken(persona)
     return res.status(200).json({ token, persona })
@@ -161,13 +160,12 @@ for (const path of ['/api/autenticacion/registrar', '/autenticacion/registrar'])
 // Login
 for (const path of ['/api/autenticacion/ingresar', '/autenticacion/ingresar']) {
   app.post(path, async (req, res) => {
-    const { nombre, password, contrasena } = req.body ?? {}
-    const pass: string | undefined = password ?? contrasena
-    if (!nombre || !pass) return res.status(400).json({ message: 'nombre y password son requeridos' })
-    const user = await prisma.user.findUnique({ where: { nombre } })
-    if (!user) return res.status(400).json({ message: 'credenciales inválidas' })
-    const ok = await bcrypt.compare(pass, user.password)
-    if (!ok) return res.status(400).json({ message: 'credenciales inválidas' })
+    const { usuario, clave } = req.body ?? {}
+    if (!usuario || !clave) return res.status(400).json({ message: 'usuario y clave son requeridos' })
+    const user = await prisma.user.findUnique({ where: { nombre: usuario } })
+    if (!user) return res.status(401).json({ message: 'credenciales inválidas' })
+    const ok = await bcrypt.compare(clave, user.password)
+    if (!ok) return res.status(401).json({ message: 'credenciales inválidas' })
     const persona = { id: String(user.id), nombre: user.nombre, rol: rolExterno(user.rol as 'visitante' | 'creador') }
     const token = emitirToken(persona)
     return res.status(200).json({ token, persona })
