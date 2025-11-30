@@ -25,6 +25,23 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 export type Video = $Result.DefaultSelection<Prisma.$VideoPayload>
 
 /**
+ * Enums
+ */
+export namespace $Enums {
+  export const Rol: {
+  visitante: 'visitante',
+  creador: 'creador'
+};
+
+export type Rol = (typeof Rol)[keyof typeof Rol]
+
+}
+
+export type Rol = $Enums.Rol
+
+export const Rol: typeof $Enums.Rol
+
+/**
  * ##  Prisma Client ʲˢ
  *
  * Type-safe database client for TypeScript & Node.js
@@ -988,70 +1005,58 @@ export namespace Prisma {
 
   export type AggregateUser = {
     _count: UserCountAggregateOutputType | null
-    _avg: UserAvgAggregateOutputType | null
-    _sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
   }
 
-  export type UserAvgAggregateOutputType = {
-    id: number | null
-  }
-
-  export type UserSumAggregateOutputType = {
-    id: number | null
-  }
-
   export type UserMinAggregateOutputType = {
-    id: number | null
-    name: string | null
-    email: string | null
+    id: string | null
+    nombre: string | null
+    rol: $Enums.Rol | null
     password: string | null
+    contacto: string | null
   }
 
   export type UserMaxAggregateOutputType = {
-    id: number | null
-    name: string | null
-    email: string | null
+    id: string | null
+    nombre: string | null
+    rol: $Enums.Rol | null
     password: string | null
+    contacto: string | null
   }
 
   export type UserCountAggregateOutputType = {
     id: number
-    name: number
-    email: number
+    nombre: number
+    rol: number
     password: number
+    contacto: number
     _all: number
   }
 
 
-  export type UserAvgAggregateInputType = {
-    id?: true
-  }
-
-  export type UserSumAggregateInputType = {
-    id?: true
-  }
-
   export type UserMinAggregateInputType = {
     id?: true
-    name?: true
-    email?: true
+    nombre?: true
+    rol?: true
     password?: true
+    contacto?: true
   }
 
   export type UserMaxAggregateInputType = {
     id?: true
-    name?: true
-    email?: true
+    nombre?: true
+    rol?: true
     password?: true
+    contacto?: true
   }
 
   export type UserCountAggregateInputType = {
     id?: true
-    name?: true
-    email?: true
+    nombre?: true
+    rol?: true
     password?: true
+    contacto?: true
     _all?: true
   }
 
@@ -1093,18 +1098,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: UserAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: UserSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: UserMinAggregateInputType
@@ -1135,20 +1128,17 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: UserCountAggregateInputType | true
-    _avg?: UserAvgAggregateInputType
-    _sum?: UserSumAggregateInputType
     _min?: UserMinAggregateInputType
     _max?: UserMaxAggregateInputType
   }
 
   export type UserGroupByOutputType = {
-    id: number
-    name: string
-    email: string
+    id: string
+    nombre: string
+    rol: $Enums.Rol
     password: string
+    contacto: string | null
     _count: UserCountAggregateOutputType | null
-    _avg: UserAvgAggregateOutputType | null
-    _sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
   }
@@ -1169,35 +1159,39 @@ export namespace Prisma {
 
   export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
-    email?: boolean
+    nombre?: boolean
+    rol?: boolean
     password?: boolean
+    contacto?: boolean
     videos?: boolean | User$videosArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
-    email?: boolean
+    nombre?: boolean
+    rol?: boolean
     password?: boolean
+    contacto?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
-    email?: boolean
+    nombre?: boolean
+    rol?: boolean
     password?: boolean
+    contacto?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
     id?: boolean
-    name?: boolean
-    email?: boolean
+    nombre?: boolean
+    rol?: boolean
     password?: boolean
+    contacto?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nombre" | "rol" | "password" | "contacto", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     videos?: boolean | User$videosArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1211,10 +1205,11 @@ export namespace Prisma {
       videos: Prisma.$VideoPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: number
-      name: string
-      email: string
+      id: string
+      nombre: string
+      rol: $Enums.Rol
       password: string
+      contacto: string | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1639,10 +1634,11 @@ export namespace Prisma {
    * Fields of the User model
    */
   interface UserFieldRefs {
-    readonly id: FieldRef<"User", 'Int'>
-    readonly name: FieldRef<"User", 'String'>
-    readonly email: FieldRef<"User", 'String'>
+    readonly id: FieldRef<"User", 'String'>
+    readonly nombre: FieldRef<"User", 'String'>
+    readonly rol: FieldRef<"User", 'Rol'>
     readonly password: FieldRef<"User", 'String'>
+    readonly contacto: FieldRef<"User", 'String'>
   }
     
 
@@ -2088,13 +2084,11 @@ export namespace Prisma {
   export type VideoAvgAggregateOutputType = {
     id: number | null
     likes: number | null
-    userId: number | null
   }
 
   export type VideoSumAggregateOutputType = {
     id: number | null
     likes: number | null
-    userId: number | null
   }
 
   export type VideoMinAggregateOutputType = {
@@ -2102,7 +2096,7 @@ export namespace Prisma {
     title: string | null
     url: string | null
     likes: number | null
-    userId: number | null
+    userId: string | null
   }
 
   export type VideoMaxAggregateOutputType = {
@@ -2110,7 +2104,7 @@ export namespace Prisma {
     title: string | null
     url: string | null
     likes: number | null
-    userId: number | null
+    userId: string | null
   }
 
   export type VideoCountAggregateOutputType = {
@@ -2126,13 +2120,11 @@ export namespace Prisma {
   export type VideoAvgAggregateInputType = {
     id?: true
     likes?: true
-    userId?: true
   }
 
   export type VideoSumAggregateInputType = {
     id?: true
     likes?: true
-    userId?: true
   }
 
   export type VideoMinAggregateInputType = {
@@ -2251,7 +2243,7 @@ export namespace Prisma {
     title: string
     url: string
     likes: number
-    userId: number
+    userId: string
     _count: VideoCountAggregateOutputType | null
     _avg: VideoAvgAggregateOutputType | null
     _sum: VideoSumAggregateOutputType | null
@@ -2329,7 +2321,7 @@ export namespace Prisma {
       title: string
       url: string
       likes: number
-      userId: number
+      userId: string
     }, ExtArgs["result"]["video"]>
     composites: {}
   }
@@ -2758,7 +2750,7 @@ export namespace Prisma {
     readonly title: FieldRef<"Video", 'String'>
     readonly url: FieldRef<"Video", 'String'>
     readonly likes: FieldRef<"Video", 'Int'>
-    readonly userId: FieldRef<"Video", 'Int'>
+    readonly userId: FieldRef<"Video", 'String'>
   }
     
 
@@ -3189,9 +3181,10 @@ export namespace Prisma {
 
   export const UserScalarFieldEnum: {
     id: 'id',
-    name: 'name',
-    email: 'email',
-    password: 'password'
+    nombre: 'nombre',
+    rol: 'rol',
+    password: 'password',
+    contacto: 'contacto'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -3224,23 +3217,17 @@ export namespace Prisma {
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
   /**
    * Field references
    */
-
-
-  /**
-   * Reference to a field of type 'Int'
-   */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int[]'
-   */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
 
 
   /**
@@ -3254,6 +3241,34 @@ export namespace Prisma {
    * Reference to a field of type 'String[]'
    */
   export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Rol'
+   */
+  export type EnumRolFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Rol'>
+    
+
+
+  /**
+   * Reference to a field of type 'Rol[]'
+   */
+  export type ListEnumRolFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Rol[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
 
 
@@ -3278,52 +3293,55 @@ export namespace Prisma {
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
-    id?: IntFilter<"User"> | number
-    name?: StringFilter<"User"> | string
-    email?: StringFilter<"User"> | string
+    id?: StringFilter<"User"> | string
+    nombre?: StringFilter<"User"> | string
+    rol?: EnumRolFilter<"User"> | $Enums.Rol
     password?: StringFilter<"User"> | string
+    contacto?: StringNullableFilter<"User"> | string | null
     videos?: VideoListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
+    nombre?: SortOrder
+    rol?: SortOrder
     password?: SortOrder
+    contacto?: SortOrderInput | SortOrder
     videos?: VideoOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    email?: string
+    id?: string
+    nombre?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
-    name?: StringFilter<"User"> | string
+    rol?: EnumRolFilter<"User"> | $Enums.Rol
     password?: StringFilter<"User"> | string
+    contacto?: StringNullableFilter<"User"> | string | null
     videos?: VideoListRelationFilter
-  }, "id" | "email">
+  }, "id" | "nombre">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
+    nombre?: SortOrder
+    rol?: SortOrder
     password?: SortOrder
+    contacto?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
-    _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
-    _sum?: UserSumOrderByAggregateInput
   }
 
   export type UserScalarWhereWithAggregatesInput = {
     AND?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     OR?: UserScalarWhereWithAggregatesInput[]
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"User"> | number
-    name?: StringWithAggregatesFilter<"User"> | string
-    email?: StringWithAggregatesFilter<"User"> | string
+    id?: StringWithAggregatesFilter<"User"> | string
+    nombre?: StringWithAggregatesFilter<"User"> | string
+    rol?: EnumRolWithAggregatesFilter<"User"> | $Enums.Rol
     password?: StringWithAggregatesFilter<"User"> | string
+    contacto?: StringNullableWithAggregatesFilter<"User"> | string | null
   }
 
   export type VideoWhereInput = {
@@ -3334,7 +3352,7 @@ export namespace Prisma {
     title?: StringFilter<"Video"> | string
     url?: StringFilter<"Video"> | string
     likes?: IntFilter<"Video"> | number
-    userId?: IntFilter<"Video"> | number
+    userId?: StringFilter<"Video"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -3355,7 +3373,7 @@ export namespace Prisma {
     title?: StringFilter<"Video"> | string
     url?: StringFilter<"Video"> | string
     likes?: IntFilter<"Video"> | number
-    userId?: IntFilter<"Video"> | number
+    userId?: StringFilter<"Video"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
@@ -3380,57 +3398,67 @@ export namespace Prisma {
     title?: StringWithAggregatesFilter<"Video"> | string
     url?: StringWithAggregatesFilter<"Video"> | string
     likes?: IntWithAggregatesFilter<"Video"> | number
-    userId?: IntWithAggregatesFilter<"Video"> | number
+    userId?: StringWithAggregatesFilter<"Video"> | string
   }
 
   export type UserCreateInput = {
-    name: string
-    email: string
+    id?: string
+    nombre: string
+    rol: $Enums.Rol
     password: string
+    contacto?: string | null
     videos?: VideoCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
-    id?: number
-    name: string
-    email: string
+    id?: string
+    nombre: string
+    rol: $Enums.Rol
     password: string
+    contacto?: string | null
     videos?: VideoUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
+    contacto?: NullableStringFieldUpdateOperationsInput | string | null
     videos?: VideoUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
+    contacto?: NullableStringFieldUpdateOperationsInput | string | null
     videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
-    id?: number
-    name: string
-    email: string
+    id?: string
+    nombre: string
+    rol: $Enums.Rol
     password: string
+    contacto?: string | null
   }
 
   export type UserUpdateManyMutationInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
+    contacto?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
+    contacto?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type VideoCreateInput = {
@@ -3445,7 +3473,7 @@ export namespace Prisma {
     title: string
     url: string
     likes?: number
-    userId: number
+    userId: string
   }
 
   export type VideoUpdateInput = {
@@ -3460,7 +3488,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     likes?: IntFieldUpdateOperationsInput | number
-    userId?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type VideoCreateManyInput = {
@@ -3468,7 +3496,7 @@ export namespace Prisma {
     title: string
     url: string
     likes?: number
-    userId: number
+    userId: string
   }
 
   export type VideoUpdateManyMutationInput = {
@@ -3482,18 +3510,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     likes?: IntFieldUpdateOperationsInput | number
-    userId?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -3511,10 +3528,37 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type EnumRolFilter<$PrismaModel = never> = {
+    equals?: $Enums.Rol | EnumRolFieldRefInput<$PrismaModel>
+    in?: $Enums.Rol[] | ListEnumRolFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Rol[] | ListEnumRolFieldRefInput<$PrismaModel>
+    not?: NestedEnumRolFilter<$PrismaModel> | $Enums.Rol
+  }
+
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type VideoListRelationFilter = {
     every?: VideoWhereInput
     some?: VideoWhereInput
     none?: VideoWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type VideoOrderByRelationAggregateInput = {
@@ -3523,47 +3567,26 @@ export namespace Prisma {
 
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
+    nombre?: SortOrder
+    rol?: SortOrder
     password?: SortOrder
-  }
-
-  export type UserAvgOrderByAggregateInput = {
-    id?: SortOrder
+    contacto?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
+    nombre?: SortOrder
+    rol?: SortOrder
     password?: SortOrder
+    contacto?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
+    nombre?: SortOrder
+    rol?: SortOrder
     password?: SortOrder
-  }
-
-  export type UserSumOrderByAggregateInput = {
-    id?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
+    contacto?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -3584,6 +3607,45 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type EnumRolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Rol | EnumRolFieldRefInput<$PrismaModel>
+    in?: $Enums.Rol[] | ListEnumRolFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Rol[] | ListEnumRolFieldRefInput<$PrismaModel>
+    not?: NestedEnumRolWithAggregatesFilter<$PrismaModel> | $Enums.Rol
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRolFilter<$PrismaModel>
+    _max?: NestedEnumRolFilter<$PrismaModel>
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
@@ -3600,7 +3662,6 @@ export namespace Prisma {
   export type VideoAvgOrderByAggregateInput = {
     id?: SortOrder
     likes?: SortOrder
-    userId?: SortOrder
   }
 
   export type VideoMaxOrderByAggregateInput = {
@@ -3622,7 +3683,22 @@ export namespace Prisma {
   export type VideoSumOrderByAggregateInput = {
     id?: SortOrder
     likes?: SortOrder
-    userId?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type VideoCreateNestedManyWithoutUserInput = {
@@ -3643,6 +3719,14 @@ export namespace Prisma {
     set?: string
   }
 
+  export type EnumRolFieldUpdateOperationsInput = {
+    set?: $Enums.Rol
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
   export type VideoUpdateManyWithoutUserNestedInput = {
     create?: XOR<VideoCreateWithoutUserInput, VideoUncheckedCreateWithoutUserInput> | VideoCreateWithoutUserInput[] | VideoUncheckedCreateWithoutUserInput[]
     connectOrCreate?: VideoCreateOrConnectWithoutUserInput | VideoCreateOrConnectWithoutUserInput[]
@@ -3655,14 +3739,6 @@ export namespace Prisma {
     update?: VideoUpdateWithWhereUniqueWithoutUserInput | VideoUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: VideoUpdateManyWithWhereWithoutUserInput | VideoUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: VideoScalarWhereInput | VideoScalarWhereInput[]
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type VideoUncheckedUpdateManyWithoutUserNestedInput = {
@@ -3685,23 +3761,20 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type UserUpdateOneRequiredWithoutVideosNestedInput = {
     create?: XOR<UserCreateWithoutVideosInput, UserUncheckedCreateWithoutVideosInput>
     connectOrCreate?: UserCreateOrConnectWithoutVideosInput
     upsert?: UserUpsertWithoutVideosInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutVideosInput, UserUpdateWithoutVideosInput>, UserUncheckedUpdateWithoutVideosInput>
-  }
-
-  export type NestedIntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -3716,6 +3789,93 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type NestedEnumRolFilter<$PrismaModel = never> = {
+    equals?: $Enums.Rol | EnumRolFieldRefInput<$PrismaModel>
+    in?: $Enums.Rol[] | ListEnumRolFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Rol[] | ListEnumRolFieldRefInput<$PrismaModel>
+    not?: NestedEnumRolFilter<$PrismaModel> | $Enums.Rol
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type NestedEnumRolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Rol | EnumRolFieldRefInput<$PrismaModel>
+    in?: $Enums.Rol[] | ListEnumRolFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Rol[] | ListEnumRolFieldRefInput<$PrismaModel>
+    not?: NestedEnumRolWithAggregatesFilter<$PrismaModel> | $Enums.Rol
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRolFilter<$PrismaModel>
+    _max?: NestedEnumRolFilter<$PrismaModel>
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -3743,23 +3903,6 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
-  export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
   }
 
   export type VideoCreateWithoutUserInput = {
@@ -3809,20 +3952,23 @@ export namespace Prisma {
     title?: StringFilter<"Video"> | string
     url?: StringFilter<"Video"> | string
     likes?: IntFilter<"Video"> | number
-    userId?: IntFilter<"Video"> | number
+    userId?: StringFilter<"Video"> | string
   }
 
   export type UserCreateWithoutVideosInput = {
-    name: string
-    email: string
+    id?: string
+    nombre: string
+    rol: $Enums.Rol
     password: string
+    contacto?: string | null
   }
 
   export type UserUncheckedCreateWithoutVideosInput = {
-    id?: number
-    name: string
-    email: string
+    id?: string
+    nombre: string
+    rol: $Enums.Rol
     password: string
+    contacto?: string | null
   }
 
   export type UserCreateOrConnectWithoutVideosInput = {
@@ -3842,16 +3988,19 @@ export namespace Prisma {
   }
 
   export type UserUpdateWithoutVideosInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
+    contacto?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserUncheckedUpdateWithoutVideosInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
+    contacto?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type VideoCreateManyUserInput = {

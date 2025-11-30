@@ -95,9 +95,10 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
-  name: 'name',
-  email: 'email',
-  password: 'password'
+  nombre: 'nombre',
+  rol: 'rol',
+  password: 'password',
+  contacto: 'contacto'
 };
 
 exports.Prisma.VideoScalarFieldEnum = {
@@ -118,6 +119,14 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+exports.Rol = exports.$Enums.Rol = {
+  visitante: 'visitante',
+  creador: 'creador'
+};
 
 exports.Prisma.ModelName = {
   User: 'User',
@@ -170,13 +179,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// Prisma schema para TokTok\n// Provider: PostgreSQL\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  // Salida obligatoria para el despliegue: genera el cliente en src/generated\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id       Int    @id @default(autoincrement())\n  name     String\n  email    String @unique\n  password String\n\n  videos Video[]\n}\n\nmodel Video {\n  id    Int    @id @default(autoincrement())\n  title String\n  url   String\n  likes Int    @default(0)\n\n  userId Int\n  user   User @relation(fields: [userId], references: [id])\n}\n\n// Nota: En Prisma v6 la URL debe estar en este schema (env(DATABASE_URL)).\n// Nota: En Prisma v6 la URL debía estar en este schema (env(DATABASE_URL)).\n// En Prisma v7 elimina `url` del schema.prisma: mueve la URL de conexión para Migrate a prisma.config.ts\n// y, al instanciar PrismaClient, pasa `adapter` para una conexión directa o `accelerateUrl` para Accelerate.\n// Ver: https://pris.ly/d/config-datasource y https://pris.ly/d/prisma7-client-config\n",
-  "inlineSchemaHash": "d3e63dc212fee455813d07a9db4f5a45ee1c42a14ffaa4bd460b30475aafd94e",
+  "inlineSchema": "// Prisma schema para TokTok\n// Provider: PostgreSQL\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  // Salida obligatoria para el despliegue: genera el cliente en src/generated\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nenum Rol {\n  visitante\n  creador\n}\n\nmodel User {\n  id       String  @id @default(cuid())\n  nombre   String  @unique\n  rol      Rol\n  password String\n  contacto String?\n\n  videos Video[]\n}\n\nmodel Video {\n  id    Int    @id @default(autoincrement())\n  title String\n  url   String\n  likes Int    @default(0)\n\n  userId String\n  user   User   @relation(fields: [userId], references: [id])\n}\n\n// Nota: En Prisma v6 la URL debe estar en este schema (env(DATABASE_URL)).\n// Nota: En Prisma v6 la URL debía estar en este schema (env(DATABASE_URL)).\n// En Prisma v7 elimina `url` del schema.prisma: mueve la URL de conexión para Migrate a prisma.config.ts\n// y, al instanciar PrismaClient, pasa `adapter` para una conexión directa o `accelerateUrl` para Accelerate.\n// Ver: https://pris.ly/d/config-datasource y https://pris.ly/d/prisma7-client-config\n",
+  "inlineSchemaHash": "5f2d54be02979b8f21d5f0df608c7842cddb6ec27cfff85171b820938bb739dc",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"videos\",\"kind\":\"object\",\"type\":\"Video\",\"relationName\":\"UserToVideo\"}],\"dbName\":null},\"Video\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"url\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"likes\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"UserToVideo\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"nombre\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"rol\",\"kind\":\"enum\",\"type\":\"Rol\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"contacto\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"videos\",\"kind\":\"object\",\"type\":\"Video\",\"relationName\":\"UserToVideo\"}],\"dbName\":null},\"Video\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"url\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"likes\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"UserToVideo\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),

@@ -123,9 +123,10 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
-  name: 'name',
-  email: 'email',
-  password: 'password'
+  nombre: 'nombre',
+  rol: 'rol',
+  password: 'password',
+  contacto: 'contacto'
 };
 
 exports.Prisma.VideoScalarFieldEnum = {
@@ -146,6 +147,14 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+exports.Rol = exports.$Enums.Rol = {
+  visitante: 'visitante',
+  creador: 'creador'
+};
 
 exports.Prisma.ModelName = {
   User: 'User',

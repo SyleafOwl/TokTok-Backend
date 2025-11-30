@@ -13,13 +13,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id      Int     @id @default(autoincrement())
-  name    String
-  email   String  @unique
-  password String
+enum Rol {
+  visitante
+  creador
+}
 
-  videos  Video[]
+model User {
+  id        String  @id @default(cuid())
+  nombre    String  @unique
+  rol       Rol
+  password  String
+  contacto  String?
+
+  videos    Video[]
 }
 
 model Video {
@@ -28,7 +34,7 @@ model Video {
   url    String
   likes  Int    @default(0)
 
-  userId Int
+  userId String
   user   User   @relation(fields: [userId], references: [id])
 }
 // Nota: En Prisma v6 la URL debe estar en este schema (env(DATABASE_URL)).
