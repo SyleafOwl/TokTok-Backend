@@ -2,7 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import * as jwt from 'jsonwebtoken';
-import * as bcrypt from 'bcryptjs';
+import bcrypt from 'bcryptjs';
 import { PrismaClient } from "./generated/prisma/index.js";
 const app = express();
 app.use(express.json());
@@ -152,7 +152,8 @@ for (const path of ['/api/autenticacion/registrar', '/autenticacion/registrar'])
         }
         catch (e) {
             console.error('[Registro] Error:', e);
-            return res.status(500).json({ message: 'Error interno del servidor' });
+            const msg = e?.message || 'Error interno del servidor';
+            return res.status(500).json({ message: msg });
         }
     });
 }
@@ -175,7 +176,8 @@ for (const path of ['/api/autenticacion/ingresar', '/autenticacion/ingresar']) {
         }
         catch (e) {
             console.error('[Login] Error:', e);
-            return res.status(500).json({ message: 'Error interno del servidor' });
+            const msg = e?.message || 'Error interno del servidor';
+            return res.status(500).json({ message: msg });
         }
     });
 }

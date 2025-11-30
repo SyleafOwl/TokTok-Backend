@@ -2,7 +2,7 @@ import 'dotenv/config'
 import express from 'express'
 import cors from 'cors'
 import * as jwt from 'jsonwebtoken'
-import * as bcrypt from 'bcryptjs'
+import bcrypt from 'bcryptjs'
 import { PrismaClient } from "./generated/prisma/index.js"
 
 const app = express()
