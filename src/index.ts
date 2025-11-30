@@ -7,31 +7,8 @@ import { PrismaClient } from "./generated/prisma/index.js"
 
 const app = express()
 app.use(express.json())
-
-const defaultOrigins = [
-  'http://localhost:5173',
-]
-const envOrigins = (process.env.CORS_ORIGINS ?? '').split(',').map(o => o.trim()).filter(Boolean)
-const allowedOrigins = [...defaultOrigins, ...envOrigins]
-
-const corsOptions: any = {
-  origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
-    if (!origin) return callback(null, true)
-    try {
-      const url = new URL(origin)
-      if (url.hostname.endsWith('.github.io')) return callback(null, true)
-    } catch {}
-    if (allowedOrigins.includes(origin)) return callback(null, true)
-    return callback(null, false)
-  },
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Accept', 'Authorization'],
-  credentials: true,
-  optionsSuccessStatus: 204,
-}
-
-app.use(cors(corsOptions))
-app.options('*', cors(corsOptions))
+// CORS simple: preflight manejado automáticamente por el middleware
+app.use(cors())
 
 if (!process.env.DATABASE_URL) {
   console.error('[Config] FALTA la variable de entorno DATABASE_URL')
