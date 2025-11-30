@@ -157,7 +157,8 @@ for (const path of ['/api/autenticacion/registrar', '/autenticacion/registrar'])
       return res.status(200).json({ token, persona })
     } catch (e: any) {
       console.error('[Registro] Error:', e)
-      return res.status(500).json({ message: 'Error interno del servidor' })
+      const msg = e?.message || 'Error interno del servidor'
+      return res.status(500).json({ message: msg })
     }
   })
 }
@@ -177,7 +178,8 @@ for (const path of ['/api/autenticacion/ingresar', '/autenticacion/ingresar']) {
       return res.status(200).json({ token, persona })
     } catch (e: any) {
       console.error('[Login] Error:', e)
-      return res.status(500).json({ message: 'Error interno del servidor' })
+      const msg = e?.message || 'Error interno del servidor'
+      return res.status(500).json({ message: msg })
     }
   })
 }
