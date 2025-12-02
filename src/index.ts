@@ -194,3 +194,100 @@ process.on('SIGINT', async () => {
   await prisma.$disconnect()
   process.exit(0)
 })
+
+// ---- Metrics (Streamer) ----
+// Niveles: umbrales en ms para subir de nivel. Ajusta a tu criterio.
+const LEVEL_THRESHOLDS_MS = [0, 1 * 60 * 60 * 1000, 5 * 60 * 60 * 1000, 12 * 60 * 60 * 1000, 24 * 60 * 60 * 1000, 72 * 60 * 60 * 1000, 200 * 60 * 60 * 1000]
+
+function computeLevelFromMs(totalMs: number) {
+  // devuelve el mayor nivel cuya threshold <= totalMs
+  let level = 1
+  for (let i = LEVEL_THRESHOLDS_MS.length - 1; i >= 0; i--) {
+    const threshold = LEVEL_THRESHOLDS_MS[i] ?? 0
+    if (totalMs >= threshold) {
+      level = i + 1
+      break
+    }
+  }
+  // limitar entre 1 y LEVEL_THRESHOLDS_MS.length
+  level = Math.max(1, Math.min(level, LEVEL_THRESHOLDS_MS.length))
+  return level
+}
+
+async function ensureMetricsRecord(userId: string) {
+  // El cliente Prisma debe regenerarse para reconocer los nuevos modelos.
+  // Para evitar errores de tipado antes de generar, se usa acceso dinámico.
+  const clientAny = prisma as any
+  let m = await clientAny.streamerMetrics.findUnique({ where: { userId } })
+  if (!m) {
+    m = await clientAny.streamerMetrics.create({ data: { userId } })
+  }
+  return m
+}
+
+// Obtener métricas
+app.get('/api/metrics/:userId', async (req, res) => {
+  const userId = String(req.params.userId)
+  try {
+    const metrics = await ensureMetricsRecord(userId)
+    res.json(metrics)
+  } catch (e: any) {
+    console.error('[Metrics GET] Error:', e)
+    res.status(500).json({ error: e?.message ?? 'Error obteniendo métricas' })
+  }
+})
+
+// Finalizar sesión: actualizar totalMs y totalSessions (body: { durationMs: number })
+app.post('/api/metrics/:userId/session-end', async (req, res) => {
+  const userId = String(req.params.userId)
+  const { durationMs } = req.body ?? {}
+  if (typeof durationMs !== 'number' || durationMs < 0) return res.status(400).json({ error: 'durationMs (number >= 0) es requerido' })
+  try {
+    const current = await ensureMetricsRecord(userId)
+    const newTotalMs = (current.totalMs ?? 0) + Math.floor(durationMs)
+    const newTotalSessions = (current.totalSessions ?? 0) + 1
+    const newLevel = computeLevelFromMs(newTotalMs)
+
+    const dataToUpdate: any = { totalMs: newTotalMs, totalSessions: newTotalSessions }
+    if (newLevel !== current.currentLevel) {
+      dataToUpdate.currentLevel = newLevel
+      dataToUpdate.lastLevelUpAt = new Date()
+    }
+
+    const updated = await (prisma as any).streamerMetrics.update({ where: { userId }, data: dataToUpdate })
+    res.json(updated)
+  } catch (e: any) {
+    console.error('[Metrics session-end] Error:', e)
+    res.status(500).json({ error: e?.message ?? 'Error actualizando métricas' })
+  }
+})
+
+// Recalcular métricas desde StreamSession (agrega/ajusta durationMs en sesiones)
+app.post('/api/metrics/:userId/recalculate', async (req, res) => {
+  const userId = String(req.params.userId)
+  try {
+    // agrega suma y conteo desde StreamSession
+    const agg = await (prisma as any).streamSession.aggregate({
+      where: { userId },
+      _sum: { durationMs: true },
+      _count: { id: true }
+    } as any)
+
+    const totalMs = (agg._sum?.durationMs as number) ?? 0
+    const totalSessions = (agg._count?.id as number) ?? 0
+    const newLevel = computeLevelFromMs(totalMs)
+
+    const m = await ensureMetricsRecord(userId)
+    const dataToUpdate: any = { totalMs, totalSessions }
+    if (newLevel !== m.currentLevel) {
+      dataToUpdate.currentLevel = newLevel
+      dataToUpdate.lastLevelUpAt = new Date()
+    }
+
+    const updated = await (prisma as any).streamerMetrics.update({ where: { userId }, data: dataToUpdate })
+    res.json(updated)
+  } catch (e: any) {
+    console.error('[Metrics recalc] Error:', e)
+    res.status(500).json({ error: e?.message ?? 'Error recalculando métricas' })
+  }
+})
