@@ -123,6 +123,27 @@ app.delete('/api/videos/:id', async (req, res) => {
   }
 })
 
+// ---- Pets CRUD ----
+app.get('/api/pets/:id', async (req, res) => {
+  const id = String(req.params.id)
+  const pet = await prisma.pet.findUnique({ where: { id }, include: { user: true } })
+  if (!pet) return res.status(404).json({ error: 'Mascota no encontrada' })
+  res.json(pet)
+})
+
+app.post('/api/pets', async (req, res) => {
+  const { size, hearts, userId } = req.body ?? {}
+  if (!size || !hearts || !userId) {
+    return res.status(400).json({ error: 'size, hearts y userId son requeridos' })
+  }
+  try {
+    const pet = await prisma.pet.create({ data: { size, hearts, userId } })
+    res.status(201).json(pet)
+  } catch (e: any) {
+    res.status(400).json({ error: e?.message ?? 'Error creando mascota' })
+  }
+})
+
 // ---- Autenticación ----
 function normalizaRolInterno(input: string): 'visitante' | 'creador' | null {
   const v = String(input || '').toLowerCase()
