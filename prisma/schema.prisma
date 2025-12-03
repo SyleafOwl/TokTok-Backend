@@ -66,6 +66,8 @@ model StreamSession {
   @@index([userId])
   @@index([startTime])
   @@index([userId, startTime])
+
+  //agregado comentario|
 }
 
 model StreamerMetrics {
