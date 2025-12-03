@@ -123,6 +123,24 @@ app.delete('/api/videos/:id', async (req, res) => {
   }
 })
 
+app.post('/api/videos/:id/like', async (req, res) => {
+  const id = Number(req.params.id)
+  try {
+    const video = await prisma.video.update({
+      where: { id },
+      data: { likes: { increment: 1 } },
+      select: { id: true, likes: true }
+    })
+    res.json(video)
+  } catch (e: any) {
+    // P2025 es el código de Prisma cuando no existe el registro al actualizar
+    if (e?.code === 'P2025') {
+      return res.status(404).json({ error: 'Video no encontrado' })
+    }
+    res.status(400).json({ error: e?.message ?? 'Error añadiendo like' })
+  }
+})
+
 // ---- Pets CRUD ----
 app.get('/api/pets/:id', async (req, res) => {
   const id = String(req.params.id)
