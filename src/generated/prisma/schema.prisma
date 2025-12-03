@@ -18,13 +18,15 @@ enum Rol {
 }
 
 model User {
-  id       String  @id @default(cuid())
-  nombre   String  @unique
-  rol      Rol
-  password String
-  contacto String?
-  pet      Pet?
-
+  id              String           @id @default(cuid())
+  nombre          String           @unique
+  rol             Rol
+  password        String
+  contacto        String?
+  pet             Pet?
+  puntos          Int              @default(0)
+  nivel           Int              @default(1)
+  audienceMetrics AudienceMetrics?
   // Relaciones inversas
   videos          Video[]
   streamSessions  StreamSession[]
@@ -84,6 +86,22 @@ model StreamerMetrics {
 
   totalMs       Int       @default(0)
   totalSessions Int       @default(0)
+  currentLevel  Int       @default(1)
+  lastLevelUpAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
+// Métricas para espectadores/participantes (puntos por mensajes, niveles)
+model AudienceMetrics {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  totalPoints   Int       @default(0)
   currentLevel  Int       @default(1)
   lastLevelUpAt DateTime?
 

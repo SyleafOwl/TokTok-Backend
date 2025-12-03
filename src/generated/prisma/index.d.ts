@@ -39,6 +39,11 @@ export type StreamSession = $Result.DefaultSelection<Prisma.$StreamSessionPayloa
  */
 export type StreamerMetrics = $Result.DefaultSelection<Prisma.$StreamerMetricsPayload>
 /**
+ * Model AudienceMetrics
+ * 
+ */
+export type AudienceMetrics = $Result.DefaultSelection<Prisma.$AudienceMetricsPayload>
+/**
  * Model AudienceLevel
  * 
  */
@@ -238,6 +243,16 @@ export class PrismaClient<
     * ```
     */
   get streamerMetrics(): Prisma.StreamerMetricsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.audienceMetrics`: Exposes CRUD operations for the **AudienceMetrics** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AudienceMetrics
+    * const audienceMetrics = await prisma.audienceMetrics.findMany()
+    * ```
+    */
+  get audienceMetrics(): Prisma.AudienceMetricsDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.audienceLevel`: Exposes CRUD operations for the **AudienceLevel** model.
@@ -714,6 +729,7 @@ export namespace Prisma {
     Pet: 'Pet',
     StreamSession: 'StreamSession',
     StreamerMetrics: 'StreamerMetrics',
+    AudienceMetrics: 'AudienceMetrics',
     AudienceLevel: 'AudienceLevel',
     Gift: 'Gift',
     Comment: 'Comment'
@@ -735,7 +751,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "video" | "pet" | "streamSession" | "streamerMetrics" | "audienceLevel" | "gift" | "comment"
+      modelProps: "user" | "video" | "pet" | "streamSession" | "streamerMetrics" | "audienceMetrics" | "audienceLevel" | "gift" | "comment"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1109,6 +1125,80 @@ export namespace Prisma {
           }
         }
       }
+      AudienceMetrics: {
+        payload: Prisma.$AudienceMetricsPayload<ExtArgs>
+        fields: Prisma.AudienceMetricsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AudienceMetricsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AudienceMetricsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AudienceMetricsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AudienceMetricsPayload>
+          }
+          findFirst: {
+            args: Prisma.AudienceMetricsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AudienceMetricsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AudienceMetricsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AudienceMetricsPayload>
+          }
+          findMany: {
+            args: Prisma.AudienceMetricsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AudienceMetricsPayload>[]
+          }
+          create: {
+            args: Prisma.AudienceMetricsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AudienceMetricsPayload>
+          }
+          createMany: {
+            args: Prisma.AudienceMetricsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AudienceMetricsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AudienceMetricsPayload>[]
+          }
+          delete: {
+            args: Prisma.AudienceMetricsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AudienceMetricsPayload>
+          }
+          update: {
+            args: Prisma.AudienceMetricsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AudienceMetricsPayload>
+          }
+          deleteMany: {
+            args: Prisma.AudienceMetricsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AudienceMetricsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AudienceMetricsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AudienceMetricsPayload>[]
+          }
+          upsert: {
+            args: Prisma.AudienceMetricsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AudienceMetricsPayload>
+          }
+          aggregate: {
+            args: Prisma.AudienceMetricsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAudienceMetrics>
+          }
+          groupBy: {
+            args: Prisma.AudienceMetricsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AudienceMetricsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AudienceMetricsCountArgs<ExtArgs>
+            result: $Utils.Optional<AudienceMetricsCountAggregateOutputType> | number
+          }
+        }
+      }
       AudienceLevel: {
         payload: Prisma.$AudienceLevelPayload<ExtArgs>
         fields: Prisma.AudienceLevelFieldRefs
@@ -1432,6 +1522,7 @@ export namespace Prisma {
     pet?: PetOmit
     streamSession?: StreamSessionOmit
     streamerMetrics?: StreamerMetricsOmit
+    audienceMetrics?: AudienceMetricsOmit
     audienceLevel?: AudienceLevelOmit
     gift?: GiftOmit
     comment?: CommentOmit
@@ -1627,8 +1718,20 @@ export namespace Prisma {
 
   export type AggregateUser = {
     _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
+  }
+
+  export type UserAvgAggregateOutputType = {
+    puntos: number | null
+    nivel: number | null
+  }
+
+  export type UserSumAggregateOutputType = {
+    puntos: number | null
+    nivel: number | null
   }
 
   export type UserMinAggregateOutputType = {
@@ -1637,6 +1740,8 @@ export namespace Prisma {
     rol: $Enums.Rol | null
     password: string | null
     contacto: string | null
+    puntos: number | null
+    nivel: number | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -1645,6 +1750,8 @@ export namespace Prisma {
     rol: $Enums.Rol | null
     password: string | null
     contacto: string | null
+    puntos: number | null
+    nivel: number | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -1653,9 +1760,21 @@ export namespace Prisma {
     rol: number
     password: number
     contacto: number
+    puntos: number
+    nivel: number
     _all: number
   }
 
+
+  export type UserAvgAggregateInputType = {
+    puntos?: true
+    nivel?: true
+  }
+
+  export type UserSumAggregateInputType = {
+    puntos?: true
+    nivel?: true
+  }
 
   export type UserMinAggregateInputType = {
     id?: true
@@ -1663,6 +1782,8 @@ export namespace Prisma {
     rol?: true
     password?: true
     contacto?: true
+    puntos?: true
+    nivel?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -1671,6 +1792,8 @@ export namespace Prisma {
     rol?: true
     password?: true
     contacto?: true
+    puntos?: true
+    nivel?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -1679,6 +1802,8 @@ export namespace Prisma {
     rol?: true
     password?: true
     contacto?: true
+    puntos?: true
+    nivel?: true
     _all?: true
   }
 
@@ -1720,6 +1845,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: UserAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: UserMinAggregateInputType
@@ -1750,6 +1887,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: UserCountAggregateInputType | true
+    _avg?: UserAvgAggregateInputType
+    _sum?: UserSumAggregateInputType
     _min?: UserMinAggregateInputType
     _max?: UserMaxAggregateInputType
   }
@@ -1760,7 +1899,11 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto: string | null
+    puntos: number
+    nivel: number
     _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
   }
@@ -1785,7 +1928,10 @@ export namespace Prisma {
     rol?: boolean
     password?: boolean
     contacto?: boolean
+    puntos?: boolean
+    nivel?: boolean
     pet?: boolean | User$petArgs<ExtArgs>
+    audienceMetrics?: boolean | User$audienceMetricsArgs<ExtArgs>
     videos?: boolean | User$videosArgs<ExtArgs>
     streamSessions?: boolean | User$streamSessionsArgs<ExtArgs>
     streamerMetrics?: boolean | User$streamerMetricsArgs<ExtArgs>
@@ -1802,6 +1948,8 @@ export namespace Prisma {
     rol?: boolean
     password?: boolean
     contacto?: boolean
+    puntos?: boolean
+    nivel?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1810,6 +1958,8 @@ export namespace Prisma {
     rol?: boolean
     password?: boolean
     contacto?: boolean
+    puntos?: boolean
+    nivel?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -1818,11 +1968,14 @@ export namespace Prisma {
     rol?: boolean
     password?: boolean
     contacto?: boolean
+    puntos?: boolean
+    nivel?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nombre" | "rol" | "password" | "contacto", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nombre" | "rol" | "password" | "contacto" | "puntos" | "nivel", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     pet?: boolean | User$petArgs<ExtArgs>
+    audienceMetrics?: boolean | User$audienceMetricsArgs<ExtArgs>
     videos?: boolean | User$videosArgs<ExtArgs>
     streamSessions?: boolean | User$streamSessionsArgs<ExtArgs>
     streamerMetrics?: boolean | User$streamerMetricsArgs<ExtArgs>
@@ -1839,6 +1992,7 @@ export namespace Prisma {
     name: "User"
     objects: {
       pet: Prisma.$PetPayload<ExtArgs> | null
+      audienceMetrics: Prisma.$AudienceMetricsPayload<ExtArgs> | null
       videos: Prisma.$VideoPayload<ExtArgs>[]
       streamSessions: Prisma.$StreamSessionPayload<ExtArgs>[]
       streamerMetrics: Prisma.$StreamerMetricsPayload<ExtArgs> | null
@@ -1853,6 +2007,8 @@ export namespace Prisma {
       rol: $Enums.Rol
       password: string
       contacto: string | null
+      puntos: number
+      nivel: number
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -2248,6 +2404,7 @@ export namespace Prisma {
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     pet<T extends User$petArgs<ExtArgs> = {}>(args?: Subset<T, User$petArgs<ExtArgs>>): Prisma__PetClient<$Result.GetResult<Prisma.$PetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    audienceMetrics<T extends User$audienceMetricsArgs<ExtArgs> = {}>(args?: Subset<T, User$audienceMetricsArgs<ExtArgs>>): Prisma__AudienceMetricsClient<$Result.GetResult<Prisma.$AudienceMetricsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     videos<T extends User$videosArgs<ExtArgs> = {}>(args?: Subset<T, User$videosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VideoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     streamSessions<T extends User$streamSessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$streamSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StreamSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     streamerMetrics<T extends User$streamerMetricsArgs<ExtArgs> = {}>(args?: Subset<T, User$streamerMetricsArgs<ExtArgs>>): Prisma__StreamerMetricsClient<$Result.GetResult<Prisma.$StreamerMetricsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -2289,6 +2446,8 @@ export namespace Prisma {
     readonly rol: FieldRef<"User", 'Rol'>
     readonly password: FieldRef<"User", 'String'>
     readonly contacto: FieldRef<"User", 'String'>
+    readonly puntos: FieldRef<"User", 'Int'>
+    readonly nivel: FieldRef<"User", 'Int'>
   }
     
 
@@ -2693,6 +2852,25 @@ export namespace Prisma {
      */
     include?: PetInclude<ExtArgs> | null
     where?: PetWhereInput
+  }
+
+  /**
+   * User.audienceMetrics
+   */
+  export type User$audienceMetricsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceMetrics
+     */
+    select?: AudienceMetricsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceMetrics
+     */
+    omit?: AudienceMetricsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceMetricsInclude<ExtArgs> | null
+    where?: AudienceMetricsWhereInput
   }
 
   /**
@@ -7344,6 +7522,1128 @@ export namespace Prisma {
 
 
   /**
+   * Model AudienceMetrics
+   */
+
+  export type AggregateAudienceMetrics = {
+    _count: AudienceMetricsCountAggregateOutputType | null
+    _avg: AudienceMetricsAvgAggregateOutputType | null
+    _sum: AudienceMetricsSumAggregateOutputType | null
+    _min: AudienceMetricsMinAggregateOutputType | null
+    _max: AudienceMetricsMaxAggregateOutputType | null
+  }
+
+  export type AudienceMetricsAvgAggregateOutputType = {
+    totalPoints: number | null
+    currentLevel: number | null
+  }
+
+  export type AudienceMetricsSumAggregateOutputType = {
+    totalPoints: number | null
+    currentLevel: number | null
+  }
+
+  export type AudienceMetricsMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    totalPoints: number | null
+    currentLevel: number | null
+    lastLevelUpAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AudienceMetricsMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    totalPoints: number | null
+    currentLevel: number | null
+    lastLevelUpAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AudienceMetricsCountAggregateOutputType = {
+    id: number
+    userId: number
+    totalPoints: number
+    currentLevel: number
+    lastLevelUpAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type AudienceMetricsAvgAggregateInputType = {
+    totalPoints?: true
+    currentLevel?: true
+  }
+
+  export type AudienceMetricsSumAggregateInputType = {
+    totalPoints?: true
+    currentLevel?: true
+  }
+
+  export type AudienceMetricsMinAggregateInputType = {
+    id?: true
+    userId?: true
+    totalPoints?: true
+    currentLevel?: true
+    lastLevelUpAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AudienceMetricsMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    totalPoints?: true
+    currentLevel?: true
+    lastLevelUpAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AudienceMetricsCountAggregateInputType = {
+    id?: true
+    userId?: true
+    totalPoints?: true
+    currentLevel?: true
+    lastLevelUpAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type AudienceMetricsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AudienceMetrics to aggregate.
+     */
+    where?: AudienceMetricsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AudienceMetrics to fetch.
+     */
+    orderBy?: AudienceMetricsOrderByWithRelationInput | AudienceMetricsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AudienceMetricsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AudienceMetrics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AudienceMetrics.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AudienceMetrics
+    **/
+    _count?: true | AudienceMetricsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AudienceMetricsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AudienceMetricsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AudienceMetricsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AudienceMetricsMaxAggregateInputType
+  }
+
+  export type GetAudienceMetricsAggregateType<T extends AudienceMetricsAggregateArgs> = {
+        [P in keyof T & keyof AggregateAudienceMetrics]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAudienceMetrics[P]>
+      : GetScalarType<T[P], AggregateAudienceMetrics[P]>
+  }
+
+
+
+
+  export type AudienceMetricsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AudienceMetricsWhereInput
+    orderBy?: AudienceMetricsOrderByWithAggregationInput | AudienceMetricsOrderByWithAggregationInput[]
+    by: AudienceMetricsScalarFieldEnum[] | AudienceMetricsScalarFieldEnum
+    having?: AudienceMetricsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AudienceMetricsCountAggregateInputType | true
+    _avg?: AudienceMetricsAvgAggregateInputType
+    _sum?: AudienceMetricsSumAggregateInputType
+    _min?: AudienceMetricsMinAggregateInputType
+    _max?: AudienceMetricsMaxAggregateInputType
+  }
+
+  export type AudienceMetricsGroupByOutputType = {
+    id: string
+    userId: string
+    totalPoints: number
+    currentLevel: number
+    lastLevelUpAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: AudienceMetricsCountAggregateOutputType | null
+    _avg: AudienceMetricsAvgAggregateOutputType | null
+    _sum: AudienceMetricsSumAggregateOutputType | null
+    _min: AudienceMetricsMinAggregateOutputType | null
+    _max: AudienceMetricsMaxAggregateOutputType | null
+  }
+
+  type GetAudienceMetricsGroupByPayload<T extends AudienceMetricsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AudienceMetricsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AudienceMetricsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AudienceMetricsGroupByOutputType[P]>
+            : GetScalarType<T[P], AudienceMetricsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AudienceMetricsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    totalPoints?: boolean
+    currentLevel?: boolean
+    lastLevelUpAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["audienceMetrics"]>
+
+  export type AudienceMetricsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    totalPoints?: boolean
+    currentLevel?: boolean
+    lastLevelUpAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["audienceMetrics"]>
+
+  export type AudienceMetricsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    totalPoints?: boolean
+    currentLevel?: boolean
+    lastLevelUpAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["audienceMetrics"]>
+
+  export type AudienceMetricsSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    totalPoints?: boolean
+    currentLevel?: boolean
+    lastLevelUpAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type AudienceMetricsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "totalPoints" | "currentLevel" | "lastLevelUpAt" | "createdAt" | "updatedAt", ExtArgs["result"]["audienceMetrics"]>
+  export type AudienceMetricsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type AudienceMetricsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type AudienceMetricsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $AudienceMetricsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AudienceMetrics"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      totalPoints: number
+      currentLevel: number
+      lastLevelUpAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["audienceMetrics"]>
+    composites: {}
+  }
+
+  type AudienceMetricsGetPayload<S extends boolean | null | undefined | AudienceMetricsDefaultArgs> = $Result.GetResult<Prisma.$AudienceMetricsPayload, S>
+
+  type AudienceMetricsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AudienceMetricsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AudienceMetricsCountAggregateInputType | true
+    }
+
+  export interface AudienceMetricsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AudienceMetrics'], meta: { name: 'AudienceMetrics' } }
+    /**
+     * Find zero or one AudienceMetrics that matches the filter.
+     * @param {AudienceMetricsFindUniqueArgs} args - Arguments to find a AudienceMetrics
+     * @example
+     * // Get one AudienceMetrics
+     * const audienceMetrics = await prisma.audienceMetrics.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AudienceMetricsFindUniqueArgs>(args: SelectSubset<T, AudienceMetricsFindUniqueArgs<ExtArgs>>): Prisma__AudienceMetricsClient<$Result.GetResult<Prisma.$AudienceMetricsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AudienceMetrics that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AudienceMetricsFindUniqueOrThrowArgs} args - Arguments to find a AudienceMetrics
+     * @example
+     * // Get one AudienceMetrics
+     * const audienceMetrics = await prisma.audienceMetrics.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AudienceMetricsFindUniqueOrThrowArgs>(args: SelectSubset<T, AudienceMetricsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AudienceMetricsClient<$Result.GetResult<Prisma.$AudienceMetricsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AudienceMetrics that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AudienceMetricsFindFirstArgs} args - Arguments to find a AudienceMetrics
+     * @example
+     * // Get one AudienceMetrics
+     * const audienceMetrics = await prisma.audienceMetrics.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AudienceMetricsFindFirstArgs>(args?: SelectSubset<T, AudienceMetricsFindFirstArgs<ExtArgs>>): Prisma__AudienceMetricsClient<$Result.GetResult<Prisma.$AudienceMetricsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AudienceMetrics that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AudienceMetricsFindFirstOrThrowArgs} args - Arguments to find a AudienceMetrics
+     * @example
+     * // Get one AudienceMetrics
+     * const audienceMetrics = await prisma.audienceMetrics.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AudienceMetricsFindFirstOrThrowArgs>(args?: SelectSubset<T, AudienceMetricsFindFirstOrThrowArgs<ExtArgs>>): Prisma__AudienceMetricsClient<$Result.GetResult<Prisma.$AudienceMetricsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AudienceMetrics that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AudienceMetricsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AudienceMetrics
+     * const audienceMetrics = await prisma.audienceMetrics.findMany()
+     * 
+     * // Get first 10 AudienceMetrics
+     * const audienceMetrics = await prisma.audienceMetrics.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const audienceMetricsWithIdOnly = await prisma.audienceMetrics.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AudienceMetricsFindManyArgs>(args?: SelectSubset<T, AudienceMetricsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AudienceMetricsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AudienceMetrics.
+     * @param {AudienceMetricsCreateArgs} args - Arguments to create a AudienceMetrics.
+     * @example
+     * // Create one AudienceMetrics
+     * const AudienceMetrics = await prisma.audienceMetrics.create({
+     *   data: {
+     *     // ... data to create a AudienceMetrics
+     *   }
+     * })
+     * 
+     */
+    create<T extends AudienceMetricsCreateArgs>(args: SelectSubset<T, AudienceMetricsCreateArgs<ExtArgs>>): Prisma__AudienceMetricsClient<$Result.GetResult<Prisma.$AudienceMetricsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AudienceMetrics.
+     * @param {AudienceMetricsCreateManyArgs} args - Arguments to create many AudienceMetrics.
+     * @example
+     * // Create many AudienceMetrics
+     * const audienceMetrics = await prisma.audienceMetrics.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AudienceMetricsCreateManyArgs>(args?: SelectSubset<T, AudienceMetricsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AudienceMetrics and returns the data saved in the database.
+     * @param {AudienceMetricsCreateManyAndReturnArgs} args - Arguments to create many AudienceMetrics.
+     * @example
+     * // Create many AudienceMetrics
+     * const audienceMetrics = await prisma.audienceMetrics.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AudienceMetrics and only return the `id`
+     * const audienceMetricsWithIdOnly = await prisma.audienceMetrics.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AudienceMetricsCreateManyAndReturnArgs>(args?: SelectSubset<T, AudienceMetricsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AudienceMetricsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AudienceMetrics.
+     * @param {AudienceMetricsDeleteArgs} args - Arguments to delete one AudienceMetrics.
+     * @example
+     * // Delete one AudienceMetrics
+     * const AudienceMetrics = await prisma.audienceMetrics.delete({
+     *   where: {
+     *     // ... filter to delete one AudienceMetrics
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AudienceMetricsDeleteArgs>(args: SelectSubset<T, AudienceMetricsDeleteArgs<ExtArgs>>): Prisma__AudienceMetricsClient<$Result.GetResult<Prisma.$AudienceMetricsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AudienceMetrics.
+     * @param {AudienceMetricsUpdateArgs} args - Arguments to update one AudienceMetrics.
+     * @example
+     * // Update one AudienceMetrics
+     * const audienceMetrics = await prisma.audienceMetrics.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AudienceMetricsUpdateArgs>(args: SelectSubset<T, AudienceMetricsUpdateArgs<ExtArgs>>): Prisma__AudienceMetricsClient<$Result.GetResult<Prisma.$AudienceMetricsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AudienceMetrics.
+     * @param {AudienceMetricsDeleteManyArgs} args - Arguments to filter AudienceMetrics to delete.
+     * @example
+     * // Delete a few AudienceMetrics
+     * const { count } = await prisma.audienceMetrics.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AudienceMetricsDeleteManyArgs>(args?: SelectSubset<T, AudienceMetricsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AudienceMetrics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AudienceMetricsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AudienceMetrics
+     * const audienceMetrics = await prisma.audienceMetrics.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AudienceMetricsUpdateManyArgs>(args: SelectSubset<T, AudienceMetricsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AudienceMetrics and returns the data updated in the database.
+     * @param {AudienceMetricsUpdateManyAndReturnArgs} args - Arguments to update many AudienceMetrics.
+     * @example
+     * // Update many AudienceMetrics
+     * const audienceMetrics = await prisma.audienceMetrics.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AudienceMetrics and only return the `id`
+     * const audienceMetricsWithIdOnly = await prisma.audienceMetrics.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AudienceMetricsUpdateManyAndReturnArgs>(args: SelectSubset<T, AudienceMetricsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AudienceMetricsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AudienceMetrics.
+     * @param {AudienceMetricsUpsertArgs} args - Arguments to update or create a AudienceMetrics.
+     * @example
+     * // Update or create a AudienceMetrics
+     * const audienceMetrics = await prisma.audienceMetrics.upsert({
+     *   create: {
+     *     // ... data to create a AudienceMetrics
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AudienceMetrics we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AudienceMetricsUpsertArgs>(args: SelectSubset<T, AudienceMetricsUpsertArgs<ExtArgs>>): Prisma__AudienceMetricsClient<$Result.GetResult<Prisma.$AudienceMetricsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AudienceMetrics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AudienceMetricsCountArgs} args - Arguments to filter AudienceMetrics to count.
+     * @example
+     * // Count the number of AudienceMetrics
+     * const count = await prisma.audienceMetrics.count({
+     *   where: {
+     *     // ... the filter for the AudienceMetrics we want to count
+     *   }
+     * })
+    **/
+    count<T extends AudienceMetricsCountArgs>(
+      args?: Subset<T, AudienceMetricsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AudienceMetricsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AudienceMetrics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AudienceMetricsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AudienceMetricsAggregateArgs>(args: Subset<T, AudienceMetricsAggregateArgs>): Prisma.PrismaPromise<GetAudienceMetricsAggregateType<T>>
+
+    /**
+     * Group by AudienceMetrics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AudienceMetricsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AudienceMetricsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AudienceMetricsGroupByArgs['orderBy'] }
+        : { orderBy?: AudienceMetricsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AudienceMetricsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAudienceMetricsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AudienceMetrics model
+   */
+  readonly fields: AudienceMetricsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AudienceMetrics.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AudienceMetricsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AudienceMetrics model
+   */
+  interface AudienceMetricsFieldRefs {
+    readonly id: FieldRef<"AudienceMetrics", 'String'>
+    readonly userId: FieldRef<"AudienceMetrics", 'String'>
+    readonly totalPoints: FieldRef<"AudienceMetrics", 'Int'>
+    readonly currentLevel: FieldRef<"AudienceMetrics", 'Int'>
+    readonly lastLevelUpAt: FieldRef<"AudienceMetrics", 'DateTime'>
+    readonly createdAt: FieldRef<"AudienceMetrics", 'DateTime'>
+    readonly updatedAt: FieldRef<"AudienceMetrics", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AudienceMetrics findUnique
+   */
+  export type AudienceMetricsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceMetrics
+     */
+    select?: AudienceMetricsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceMetrics
+     */
+    omit?: AudienceMetricsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceMetricsInclude<ExtArgs> | null
+    /**
+     * Filter, which AudienceMetrics to fetch.
+     */
+    where: AudienceMetricsWhereUniqueInput
+  }
+
+  /**
+   * AudienceMetrics findUniqueOrThrow
+   */
+  export type AudienceMetricsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceMetrics
+     */
+    select?: AudienceMetricsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceMetrics
+     */
+    omit?: AudienceMetricsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceMetricsInclude<ExtArgs> | null
+    /**
+     * Filter, which AudienceMetrics to fetch.
+     */
+    where: AudienceMetricsWhereUniqueInput
+  }
+
+  /**
+   * AudienceMetrics findFirst
+   */
+  export type AudienceMetricsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceMetrics
+     */
+    select?: AudienceMetricsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceMetrics
+     */
+    omit?: AudienceMetricsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceMetricsInclude<ExtArgs> | null
+    /**
+     * Filter, which AudienceMetrics to fetch.
+     */
+    where?: AudienceMetricsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AudienceMetrics to fetch.
+     */
+    orderBy?: AudienceMetricsOrderByWithRelationInput | AudienceMetricsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AudienceMetrics.
+     */
+    cursor?: AudienceMetricsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AudienceMetrics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AudienceMetrics.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AudienceMetrics.
+     */
+    distinct?: AudienceMetricsScalarFieldEnum | AudienceMetricsScalarFieldEnum[]
+  }
+
+  /**
+   * AudienceMetrics findFirstOrThrow
+   */
+  export type AudienceMetricsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceMetrics
+     */
+    select?: AudienceMetricsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceMetrics
+     */
+    omit?: AudienceMetricsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceMetricsInclude<ExtArgs> | null
+    /**
+     * Filter, which AudienceMetrics to fetch.
+     */
+    where?: AudienceMetricsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AudienceMetrics to fetch.
+     */
+    orderBy?: AudienceMetricsOrderByWithRelationInput | AudienceMetricsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AudienceMetrics.
+     */
+    cursor?: AudienceMetricsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AudienceMetrics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AudienceMetrics.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AudienceMetrics.
+     */
+    distinct?: AudienceMetricsScalarFieldEnum | AudienceMetricsScalarFieldEnum[]
+  }
+
+  /**
+   * AudienceMetrics findMany
+   */
+  export type AudienceMetricsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceMetrics
+     */
+    select?: AudienceMetricsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceMetrics
+     */
+    omit?: AudienceMetricsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceMetricsInclude<ExtArgs> | null
+    /**
+     * Filter, which AudienceMetrics to fetch.
+     */
+    where?: AudienceMetricsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AudienceMetrics to fetch.
+     */
+    orderBy?: AudienceMetricsOrderByWithRelationInput | AudienceMetricsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AudienceMetrics.
+     */
+    cursor?: AudienceMetricsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AudienceMetrics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AudienceMetrics.
+     */
+    skip?: number
+    distinct?: AudienceMetricsScalarFieldEnum | AudienceMetricsScalarFieldEnum[]
+  }
+
+  /**
+   * AudienceMetrics create
+   */
+  export type AudienceMetricsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceMetrics
+     */
+    select?: AudienceMetricsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceMetrics
+     */
+    omit?: AudienceMetricsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceMetricsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a AudienceMetrics.
+     */
+    data: XOR<AudienceMetricsCreateInput, AudienceMetricsUncheckedCreateInput>
+  }
+
+  /**
+   * AudienceMetrics createMany
+   */
+  export type AudienceMetricsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AudienceMetrics.
+     */
+    data: AudienceMetricsCreateManyInput | AudienceMetricsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AudienceMetrics createManyAndReturn
+   */
+  export type AudienceMetricsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceMetrics
+     */
+    select?: AudienceMetricsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceMetrics
+     */
+    omit?: AudienceMetricsOmit<ExtArgs> | null
+    /**
+     * The data used to create many AudienceMetrics.
+     */
+    data: AudienceMetricsCreateManyInput | AudienceMetricsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceMetricsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AudienceMetrics update
+   */
+  export type AudienceMetricsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceMetrics
+     */
+    select?: AudienceMetricsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceMetrics
+     */
+    omit?: AudienceMetricsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceMetricsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a AudienceMetrics.
+     */
+    data: XOR<AudienceMetricsUpdateInput, AudienceMetricsUncheckedUpdateInput>
+    /**
+     * Choose, which AudienceMetrics to update.
+     */
+    where: AudienceMetricsWhereUniqueInput
+  }
+
+  /**
+   * AudienceMetrics updateMany
+   */
+  export type AudienceMetricsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AudienceMetrics.
+     */
+    data: XOR<AudienceMetricsUpdateManyMutationInput, AudienceMetricsUncheckedUpdateManyInput>
+    /**
+     * Filter which AudienceMetrics to update
+     */
+    where?: AudienceMetricsWhereInput
+    /**
+     * Limit how many AudienceMetrics to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AudienceMetrics updateManyAndReturn
+   */
+  export type AudienceMetricsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceMetrics
+     */
+    select?: AudienceMetricsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceMetrics
+     */
+    omit?: AudienceMetricsOmit<ExtArgs> | null
+    /**
+     * The data used to update AudienceMetrics.
+     */
+    data: XOR<AudienceMetricsUpdateManyMutationInput, AudienceMetricsUncheckedUpdateManyInput>
+    /**
+     * Filter which AudienceMetrics to update
+     */
+    where?: AudienceMetricsWhereInput
+    /**
+     * Limit how many AudienceMetrics to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceMetricsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AudienceMetrics upsert
+   */
+  export type AudienceMetricsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceMetrics
+     */
+    select?: AudienceMetricsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceMetrics
+     */
+    omit?: AudienceMetricsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceMetricsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the AudienceMetrics to update in case it exists.
+     */
+    where: AudienceMetricsWhereUniqueInput
+    /**
+     * In case the AudienceMetrics found by the `where` argument doesn't exist, create a new AudienceMetrics with this data.
+     */
+    create: XOR<AudienceMetricsCreateInput, AudienceMetricsUncheckedCreateInput>
+    /**
+     * In case the AudienceMetrics was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AudienceMetricsUpdateInput, AudienceMetricsUncheckedUpdateInput>
+  }
+
+  /**
+   * AudienceMetrics delete
+   */
+  export type AudienceMetricsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceMetrics
+     */
+    select?: AudienceMetricsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceMetrics
+     */
+    omit?: AudienceMetricsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceMetricsInclude<ExtArgs> | null
+    /**
+     * Filter which AudienceMetrics to delete.
+     */
+    where: AudienceMetricsWhereUniqueInput
+  }
+
+  /**
+   * AudienceMetrics deleteMany
+   */
+  export type AudienceMetricsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AudienceMetrics to delete
+     */
+    where?: AudienceMetricsWhereInput
+    /**
+     * Limit how many AudienceMetrics to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AudienceMetrics without action
+   */
+  export type AudienceMetricsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceMetrics
+     */
+    select?: AudienceMetricsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceMetrics
+     */
+    omit?: AudienceMetricsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceMetricsInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model AudienceLevel
    */
 
@@ -10762,7 +12062,9 @@ export namespace Prisma {
     nombre: 'nombre',
     rol: 'rol',
     password: 'password',
-    contacto: 'contacto'
+    contacto: 'contacto',
+    puntos: 'puntos',
+    nivel: 'nivel'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -10814,6 +12116,19 @@ export namespace Prisma {
   };
 
   export type StreamerMetricsScalarFieldEnum = (typeof StreamerMetricsScalarFieldEnum)[keyof typeof StreamerMetricsScalarFieldEnum]
+
+
+  export const AudienceMetricsScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    totalPoints: 'totalPoints',
+    currentLevel: 'currentLevel',
+    lastLevelUpAt: 'lastLevelUpAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type AudienceMetricsScalarFieldEnum = (typeof AudienceMetricsScalarFieldEnum)[keyof typeof AudienceMetricsScalarFieldEnum]
 
 
   export const AudienceLevelScalarFieldEnum: {
@@ -10999,7 +12314,10 @@ export namespace Prisma {
     rol?: EnumRolFilter<"User"> | $Enums.Rol
     password?: StringFilter<"User"> | string
     contacto?: StringNullableFilter<"User"> | string | null
+    puntos?: IntFilter<"User"> | number
+    nivel?: IntFilter<"User"> | number
     pet?: XOR<PetNullableScalarRelationFilter, PetWhereInput> | null
+    audienceMetrics?: XOR<AudienceMetricsNullableScalarRelationFilter, AudienceMetricsWhereInput> | null
     videos?: VideoListRelationFilter
     streamSessions?: StreamSessionListRelationFilter
     streamerMetrics?: XOR<StreamerMetricsNullableScalarRelationFilter, StreamerMetricsWhereInput> | null
@@ -11015,7 +12333,10 @@ export namespace Prisma {
     rol?: SortOrder
     password?: SortOrder
     contacto?: SortOrderInput | SortOrder
+    puntos?: SortOrder
+    nivel?: SortOrder
     pet?: PetOrderByWithRelationInput
+    audienceMetrics?: AudienceMetricsOrderByWithRelationInput
     videos?: VideoOrderByRelationAggregateInput
     streamSessions?: StreamSessionOrderByRelationAggregateInput
     streamerMetrics?: StreamerMetricsOrderByWithRelationInput
@@ -11034,7 +12355,10 @@ export namespace Prisma {
     rol?: EnumRolFilter<"User"> | $Enums.Rol
     password?: StringFilter<"User"> | string
     contacto?: StringNullableFilter<"User"> | string | null
+    puntos?: IntFilter<"User"> | number
+    nivel?: IntFilter<"User"> | number
     pet?: XOR<PetNullableScalarRelationFilter, PetWhereInput> | null
+    audienceMetrics?: XOR<AudienceMetricsNullableScalarRelationFilter, AudienceMetricsWhereInput> | null
     videos?: VideoListRelationFilter
     streamSessions?: StreamSessionListRelationFilter
     streamerMetrics?: XOR<StreamerMetricsNullableScalarRelationFilter, StreamerMetricsWhereInput> | null
@@ -11050,9 +12374,13 @@ export namespace Prisma {
     rol?: SortOrder
     password?: SortOrder
     contacto?: SortOrderInput | SortOrder
+    puntos?: SortOrder
+    nivel?: SortOrder
     _count?: UserCountOrderByAggregateInput
+    _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
+    _sum?: UserSumOrderByAggregateInput
   }
 
   export type UserScalarWhereWithAggregatesInput = {
@@ -11064,6 +12392,8 @@ export namespace Prisma {
     rol?: EnumRolWithAggregatesFilter<"User"> | $Enums.Rol
     password?: StringWithAggregatesFilter<"User"> | string
     contacto?: StringNullableWithAggregatesFilter<"User"> | string | null
+    puntos?: IntWithAggregatesFilter<"User"> | number
+    nivel?: IntWithAggregatesFilter<"User"> | number
   }
 
   export type VideoWhereInput = {
@@ -11317,6 +12647,73 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"StreamerMetrics"> | Date | string
   }
 
+  export type AudienceMetricsWhereInput = {
+    AND?: AudienceMetricsWhereInput | AudienceMetricsWhereInput[]
+    OR?: AudienceMetricsWhereInput[]
+    NOT?: AudienceMetricsWhereInput | AudienceMetricsWhereInput[]
+    id?: StringFilter<"AudienceMetrics"> | string
+    userId?: StringFilter<"AudienceMetrics"> | string
+    totalPoints?: IntFilter<"AudienceMetrics"> | number
+    currentLevel?: IntFilter<"AudienceMetrics"> | number
+    lastLevelUpAt?: DateTimeNullableFilter<"AudienceMetrics"> | Date | string | null
+    createdAt?: DateTimeFilter<"AudienceMetrics"> | Date | string
+    updatedAt?: DateTimeFilter<"AudienceMetrics"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type AudienceMetricsOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalPoints?: SortOrder
+    currentLevel?: SortOrder
+    lastLevelUpAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type AudienceMetricsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId?: string
+    AND?: AudienceMetricsWhereInput | AudienceMetricsWhereInput[]
+    OR?: AudienceMetricsWhereInput[]
+    NOT?: AudienceMetricsWhereInput | AudienceMetricsWhereInput[]
+    totalPoints?: IntFilter<"AudienceMetrics"> | number
+    currentLevel?: IntFilter<"AudienceMetrics"> | number
+    lastLevelUpAt?: DateTimeNullableFilter<"AudienceMetrics"> | Date | string | null
+    createdAt?: DateTimeFilter<"AudienceMetrics"> | Date | string
+    updatedAt?: DateTimeFilter<"AudienceMetrics"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userId">
+
+  export type AudienceMetricsOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalPoints?: SortOrder
+    currentLevel?: SortOrder
+    lastLevelUpAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: AudienceMetricsCountOrderByAggregateInput
+    _avg?: AudienceMetricsAvgOrderByAggregateInput
+    _max?: AudienceMetricsMaxOrderByAggregateInput
+    _min?: AudienceMetricsMinOrderByAggregateInput
+    _sum?: AudienceMetricsSumOrderByAggregateInput
+  }
+
+  export type AudienceMetricsScalarWhereWithAggregatesInput = {
+    AND?: AudienceMetricsScalarWhereWithAggregatesInput | AudienceMetricsScalarWhereWithAggregatesInput[]
+    OR?: AudienceMetricsScalarWhereWithAggregatesInput[]
+    NOT?: AudienceMetricsScalarWhereWithAggregatesInput | AudienceMetricsScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"AudienceMetrics"> | string
+    userId?: StringWithAggregatesFilter<"AudienceMetrics"> | string
+    totalPoints?: IntWithAggregatesFilter<"AudienceMetrics"> | number
+    currentLevel?: IntWithAggregatesFilter<"AudienceMetrics"> | number
+    lastLevelUpAt?: DateTimeNullableWithAggregatesFilter<"AudienceMetrics"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"AudienceMetrics"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"AudienceMetrics"> | Date | string
+  }
+
   export type AudienceLevelWhereInput = {
     AND?: AudienceLevelWhereInput | AudienceLevelWhereInput[]
     OR?: AudienceLevelWhereInput[]
@@ -11539,7 +12936,10 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    puntos?: number
+    nivel?: number
     pet?: PetCreateNestedOneWithoutUserInput
+    audienceMetrics?: AudienceMetricsCreateNestedOneWithoutUserInput
     videos?: VideoCreateNestedManyWithoutUserInput
     streamSessions?: StreamSessionCreateNestedManyWithoutUserInput
     streamerMetrics?: StreamerMetricsCreateNestedOneWithoutUserInput
@@ -11555,7 +12955,10 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    puntos?: number
+    nivel?: number
     pet?: PetUncheckedCreateNestedOneWithoutUserInput
+    audienceMetrics?: AudienceMetricsUncheckedCreateNestedOneWithoutUserInput
     videos?: VideoUncheckedCreateNestedManyWithoutUserInput
     streamSessions?: StreamSessionUncheckedCreateNestedManyWithoutUserInput
     streamerMetrics?: StreamerMetricsUncheckedCreateNestedOneWithoutUserInput
@@ -11571,7 +12974,10 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    puntos?: IntFieldUpdateOperationsInput | number
+    nivel?: IntFieldUpdateOperationsInput | number
     pet?: PetUpdateOneWithoutUserNestedInput
+    audienceMetrics?: AudienceMetricsUpdateOneWithoutUserNestedInput
     videos?: VideoUpdateManyWithoutUserNestedInput
     streamSessions?: StreamSessionUpdateManyWithoutUserNestedInput
     streamerMetrics?: StreamerMetricsUpdateOneWithoutUserNestedInput
@@ -11587,7 +12993,10 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    puntos?: IntFieldUpdateOperationsInput | number
+    nivel?: IntFieldUpdateOperationsInput | number
     pet?: PetUncheckedUpdateOneWithoutUserNestedInput
+    audienceMetrics?: AudienceMetricsUncheckedUpdateOneWithoutUserNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
     streamSessions?: StreamSessionUncheckedUpdateManyWithoutUserNestedInput
     streamerMetrics?: StreamerMetricsUncheckedUpdateOneWithoutUserNestedInput
@@ -11603,6 +13012,8 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    puntos?: number
+    nivel?: number
   }
 
   export type UserUpdateManyMutationInput = {
@@ -11611,6 +13022,8 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    puntos?: IntFieldUpdateOperationsInput | number
+    nivel?: IntFieldUpdateOperationsInput | number
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -11619,6 +13032,8 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    puntos?: IntFieldUpdateOperationsInput | number
+    nivel?: IntFieldUpdateOperationsInput | number
   }
 
   export type VideoCreateInput = {
@@ -11864,6 +13279,75 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     totalMs?: IntFieldUpdateOperationsInput | number
     totalSessions?: IntFieldUpdateOperationsInput | number
+    currentLevel?: IntFieldUpdateOperationsInput | number
+    lastLevelUpAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AudienceMetricsCreateInput = {
+    id?: string
+    totalPoints?: number
+    currentLevel?: number
+    lastLevelUpAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutAudienceMetricsInput
+  }
+
+  export type AudienceMetricsUncheckedCreateInput = {
+    id?: string
+    userId: string
+    totalPoints?: number
+    currentLevel?: number
+    lastLevelUpAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AudienceMetricsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalPoints?: IntFieldUpdateOperationsInput | number
+    currentLevel?: IntFieldUpdateOperationsInput | number
+    lastLevelUpAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAudienceMetricsNestedInput
+  }
+
+  export type AudienceMetricsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    totalPoints?: IntFieldUpdateOperationsInput | number
+    currentLevel?: IntFieldUpdateOperationsInput | number
+    lastLevelUpAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AudienceMetricsCreateManyInput = {
+    id?: string
+    userId: string
+    totalPoints?: number
+    currentLevel?: number
+    lastLevelUpAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AudienceMetricsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalPoints?: IntFieldUpdateOperationsInput | number
+    currentLevel?: IntFieldUpdateOperationsInput | number
+    lastLevelUpAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AudienceMetricsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    totalPoints?: IntFieldUpdateOperationsInput | number
     currentLevel?: IntFieldUpdateOperationsInput | number
     lastLevelUpAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12126,9 +13610,25 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type PetNullableScalarRelationFilter = {
     is?: PetWhereInput | null
     isNot?: PetWhereInput | null
+  }
+
+  export type AudienceMetricsNullableScalarRelationFilter = {
+    is?: AudienceMetricsWhereInput | null
+    isNot?: AudienceMetricsWhereInput | null
   }
 
   export type VideoListRelationFilter = {
@@ -12197,6 +13697,13 @@ export namespace Prisma {
     rol?: SortOrder
     password?: SortOrder
     contacto?: SortOrder
+    puntos?: SortOrder
+    nivel?: SortOrder
+  }
+
+  export type UserAvgOrderByAggregateInput = {
+    puntos?: SortOrder
+    nivel?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -12205,6 +13712,8 @@ export namespace Prisma {
     rol?: SortOrder
     password?: SortOrder
     contacto?: SortOrder
+    puntos?: SortOrder
+    nivel?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -12213,6 +13722,13 @@ export namespace Prisma {
     rol?: SortOrder
     password?: SortOrder
     contacto?: SortOrder
+    puntos?: SortOrder
+    nivel?: SortOrder
+  }
+
+  export type UserSumOrderByAggregateInput = {
+    puntos?: SortOrder
+    nivel?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -12261,7 +13777,7 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type IntFilter<$PrismaModel = never> = {
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
     notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -12269,7 +13785,12 @@ export namespace Prisma {
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type UserScalarRelationFilter = {
@@ -12309,22 +13830,6 @@ export namespace Prisma {
   export type VideoSumOrderByAggregateInput = {
     id?: SortOrder
     likes?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type FloatFilter<$PrismaModel = never> = {
@@ -12517,6 +14022,46 @@ export namespace Prisma {
     totalSessions?: SortOrder
     currentLevel?: SortOrder
   }
+
+  export type AudienceMetricsCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalPoints?: SortOrder
+    currentLevel?: SortOrder
+    lastLevelUpAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AudienceMetricsAvgOrderByAggregateInput = {
+    totalPoints?: SortOrder
+    currentLevel?: SortOrder
+  }
+
+  export type AudienceMetricsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalPoints?: SortOrder
+    currentLevel?: SortOrder
+    lastLevelUpAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AudienceMetricsMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalPoints?: SortOrder
+    currentLevel?: SortOrder
+    lastLevelUpAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AudienceMetricsSumOrderByAggregateInput = {
+    totalPoints?: SortOrder
+    currentLevel?: SortOrder
+  }
   export type JsonNullableFilter<$PrismaModel = never> =
     | PatchUndefined<
         Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
@@ -12700,6 +14245,12 @@ export namespace Prisma {
     connect?: PetWhereUniqueInput
   }
 
+  export type AudienceMetricsCreateNestedOneWithoutUserInput = {
+    create?: XOR<AudienceMetricsCreateWithoutUserInput, AudienceMetricsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: AudienceMetricsCreateOrConnectWithoutUserInput
+    connect?: AudienceMetricsWhereUniqueInput
+  }
+
   export type VideoCreateNestedManyWithoutUserInput = {
     create?: XOR<VideoCreateWithoutUserInput, VideoUncheckedCreateWithoutUserInput> | VideoCreateWithoutUserInput[] | VideoUncheckedCreateWithoutUserInput[]
     connectOrCreate?: VideoCreateOrConnectWithoutUserInput | VideoCreateOrConnectWithoutUserInput[]
@@ -12752,6 +14303,12 @@ export namespace Prisma {
     create?: XOR<PetCreateWithoutUserInput, PetUncheckedCreateWithoutUserInput>
     connectOrCreate?: PetCreateOrConnectWithoutUserInput
     connect?: PetWhereUniqueInput
+  }
+
+  export type AudienceMetricsUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<AudienceMetricsCreateWithoutUserInput, AudienceMetricsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: AudienceMetricsCreateOrConnectWithoutUserInput
+    connect?: AudienceMetricsWhereUniqueInput
   }
 
   export type VideoUncheckedCreateNestedManyWithoutUserInput = {
@@ -12814,6 +14371,14 @@ export namespace Prisma {
     set?: string | null
   }
 
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type PetUpdateOneWithoutUserNestedInput = {
     create?: XOR<PetCreateWithoutUserInput, PetUncheckedCreateWithoutUserInput>
     connectOrCreate?: PetCreateOrConnectWithoutUserInput
@@ -12822,6 +14387,16 @@ export namespace Prisma {
     delete?: PetWhereInput | boolean
     connect?: PetWhereUniqueInput
     update?: XOR<XOR<PetUpdateToOneWithWhereWithoutUserInput, PetUpdateWithoutUserInput>, PetUncheckedUpdateWithoutUserInput>
+  }
+
+  export type AudienceMetricsUpdateOneWithoutUserNestedInput = {
+    create?: XOR<AudienceMetricsCreateWithoutUserInput, AudienceMetricsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: AudienceMetricsCreateOrConnectWithoutUserInput
+    upsert?: AudienceMetricsUpsertWithoutUserInput
+    disconnect?: AudienceMetricsWhereInput | boolean
+    delete?: AudienceMetricsWhereInput | boolean
+    connect?: AudienceMetricsWhereUniqueInput
+    update?: XOR<XOR<AudienceMetricsUpdateToOneWithWhereWithoutUserInput, AudienceMetricsUpdateWithoutUserInput>, AudienceMetricsUncheckedUpdateWithoutUserInput>
   }
 
   export type VideoUpdateManyWithoutUserNestedInput = {
@@ -12928,6 +14503,16 @@ export namespace Prisma {
     update?: XOR<XOR<PetUpdateToOneWithWhereWithoutUserInput, PetUpdateWithoutUserInput>, PetUncheckedUpdateWithoutUserInput>
   }
 
+  export type AudienceMetricsUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<AudienceMetricsCreateWithoutUserInput, AudienceMetricsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: AudienceMetricsCreateOrConnectWithoutUserInput
+    upsert?: AudienceMetricsUpsertWithoutUserInput
+    disconnect?: AudienceMetricsWhereInput | boolean
+    delete?: AudienceMetricsWhereInput | boolean
+    connect?: AudienceMetricsWhereUniqueInput
+    update?: XOR<XOR<AudienceMetricsUpdateToOneWithWhereWithoutUserInput, AudienceMetricsUpdateWithoutUserInput>, AudienceMetricsUncheckedUpdateWithoutUserInput>
+  }
+
   export type VideoUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<VideoCreateWithoutUserInput, VideoUncheckedCreateWithoutUserInput> | VideoCreateWithoutUserInput[] | VideoUncheckedCreateWithoutUserInput[]
     connectOrCreate?: VideoCreateOrConnectWithoutUserInput | VideoCreateOrConnectWithoutUserInput[]
@@ -13026,14 +14611,6 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutVideosInput, UserUncheckedCreateWithoutVideosInput>
     connectOrCreate?: UserCreateOrConnectWithoutVideosInput
     connect?: UserWhereUniqueInput
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type UserUpdateOneRequiredWithoutVideosNestedInput = {
@@ -13142,6 +14719,20 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutStreamerMetricsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutStreamerMetricsInput, UserUpdateWithoutStreamerMetricsInput>, UserUncheckedUpdateWithoutStreamerMetricsInput>
+  }
+
+  export type UserCreateNestedOneWithoutAudienceMetricsInput = {
+    create?: XOR<UserCreateWithoutAudienceMetricsInput, UserUncheckedCreateWithoutAudienceMetricsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAudienceMetricsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutAudienceMetricsNestedInput = {
+    create?: XOR<UserCreateWithoutAudienceMetricsInput, UserUncheckedCreateWithoutAudienceMetricsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAudienceMetricsInput
+    upsert?: UserUpsertWithoutAudienceMetricsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAudienceMetricsInput, UserUpdateWithoutAudienceMetricsInput>, UserUncheckedUpdateWithoutAudienceMetricsInput>
   }
 
   export type UserCreateNestedOneWithoutAudienceLevelsInput = {
@@ -13253,6 +14844,17 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -13268,17 +14870,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
-  }
-
-  export type NestedIntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type NestedEnumRolWithAggregatesFilter<$PrismaModel = never> = {
@@ -13450,6 +15041,29 @@ export namespace Prisma {
   export type PetCreateOrConnectWithoutUserInput = {
     where: PetWhereUniqueInput
     create: XOR<PetCreateWithoutUserInput, PetUncheckedCreateWithoutUserInput>
+  }
+
+  export type AudienceMetricsCreateWithoutUserInput = {
+    id?: string
+    totalPoints?: number
+    currentLevel?: number
+    lastLevelUpAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AudienceMetricsUncheckedCreateWithoutUserInput = {
+    id?: string
+    totalPoints?: number
+    currentLevel?: number
+    lastLevelUpAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AudienceMetricsCreateOrConnectWithoutUserInput = {
+    where: AudienceMetricsWhereUniqueInput
+    create: XOR<AudienceMetricsCreateWithoutUserInput, AudienceMetricsUncheckedCreateWithoutUserInput>
   }
 
   export type VideoCreateWithoutUserInput = {
@@ -13675,6 +15289,35 @@ export namespace Prisma {
     hearts?: IntFieldUpdateOperationsInput | number
   }
 
+  export type AudienceMetricsUpsertWithoutUserInput = {
+    update: XOR<AudienceMetricsUpdateWithoutUserInput, AudienceMetricsUncheckedUpdateWithoutUserInput>
+    create: XOR<AudienceMetricsCreateWithoutUserInput, AudienceMetricsUncheckedCreateWithoutUserInput>
+    where?: AudienceMetricsWhereInput
+  }
+
+  export type AudienceMetricsUpdateToOneWithWhereWithoutUserInput = {
+    where?: AudienceMetricsWhereInput
+    data: XOR<AudienceMetricsUpdateWithoutUserInput, AudienceMetricsUncheckedUpdateWithoutUserInput>
+  }
+
+  export type AudienceMetricsUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalPoints?: IntFieldUpdateOperationsInput | number
+    currentLevel?: IntFieldUpdateOperationsInput | number
+    lastLevelUpAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AudienceMetricsUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalPoints?: IntFieldUpdateOperationsInput | number
+    currentLevel?: IntFieldUpdateOperationsInput | number
+    lastLevelUpAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type VideoUpsertWithWhereUniqueWithoutUserInput = {
     where: VideoWhereUniqueInput
     update: XOR<VideoUpdateWithoutUserInput, VideoUncheckedUpdateWithoutUserInput>
@@ -13873,7 +15516,10 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    puntos?: number
+    nivel?: number
     pet?: PetCreateNestedOneWithoutUserInput
+    audienceMetrics?: AudienceMetricsCreateNestedOneWithoutUserInput
     streamSessions?: StreamSessionCreateNestedManyWithoutUserInput
     streamerMetrics?: StreamerMetricsCreateNestedOneWithoutUserInput
     audienceLevels?: AudienceLevelCreateNestedManyWithoutUserInput
@@ -13888,7 +15534,10 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    puntos?: number
+    nivel?: number
     pet?: PetUncheckedCreateNestedOneWithoutUserInput
+    audienceMetrics?: AudienceMetricsUncheckedCreateNestedOneWithoutUserInput
     streamSessions?: StreamSessionUncheckedCreateNestedManyWithoutUserInput
     streamerMetrics?: StreamerMetricsUncheckedCreateNestedOneWithoutUserInput
     audienceLevels?: AudienceLevelUncheckedCreateNestedManyWithoutUserInput
@@ -13919,7 +15568,10 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    puntos?: IntFieldUpdateOperationsInput | number
+    nivel?: IntFieldUpdateOperationsInput | number
     pet?: PetUpdateOneWithoutUserNestedInput
+    audienceMetrics?: AudienceMetricsUpdateOneWithoutUserNestedInput
     streamSessions?: StreamSessionUpdateManyWithoutUserNestedInput
     streamerMetrics?: StreamerMetricsUpdateOneWithoutUserNestedInput
     audienceLevels?: AudienceLevelUpdateManyWithoutUserNestedInput
@@ -13934,7 +15586,10 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    puntos?: IntFieldUpdateOperationsInput | number
+    nivel?: IntFieldUpdateOperationsInput | number
     pet?: PetUncheckedUpdateOneWithoutUserNestedInput
+    audienceMetrics?: AudienceMetricsUncheckedUpdateOneWithoutUserNestedInput
     streamSessions?: StreamSessionUncheckedUpdateManyWithoutUserNestedInput
     streamerMetrics?: StreamerMetricsUncheckedUpdateOneWithoutUserNestedInput
     audienceLevels?: AudienceLevelUncheckedUpdateManyWithoutUserNestedInput
@@ -13949,6 +15604,9 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    puntos?: number
+    nivel?: number
+    audienceMetrics?: AudienceMetricsCreateNestedOneWithoutUserInput
     videos?: VideoCreateNestedManyWithoutUserInput
     streamSessions?: StreamSessionCreateNestedManyWithoutUserInput
     streamerMetrics?: StreamerMetricsCreateNestedOneWithoutUserInput
@@ -13964,6 +15622,9 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    puntos?: number
+    nivel?: number
+    audienceMetrics?: AudienceMetricsUncheckedCreateNestedOneWithoutUserInput
     videos?: VideoUncheckedCreateNestedManyWithoutUserInput
     streamSessions?: StreamSessionUncheckedCreateNestedManyWithoutUserInput
     streamerMetrics?: StreamerMetricsUncheckedCreateNestedOneWithoutUserInput
@@ -13995,6 +15656,9 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    puntos?: IntFieldUpdateOperationsInput | number
+    nivel?: IntFieldUpdateOperationsInput | number
+    audienceMetrics?: AudienceMetricsUpdateOneWithoutUserNestedInput
     videos?: VideoUpdateManyWithoutUserNestedInput
     streamSessions?: StreamSessionUpdateManyWithoutUserNestedInput
     streamerMetrics?: StreamerMetricsUpdateOneWithoutUserNestedInput
@@ -14010,6 +15674,9 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    puntos?: IntFieldUpdateOperationsInput | number
+    nivel?: IntFieldUpdateOperationsInput | number
+    audienceMetrics?: AudienceMetricsUncheckedUpdateOneWithoutUserNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
     streamSessions?: StreamSessionUncheckedUpdateManyWithoutUserNestedInput
     streamerMetrics?: StreamerMetricsUncheckedUpdateOneWithoutUserNestedInput
@@ -14025,7 +15692,10 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    puntos?: number
+    nivel?: number
     pet?: PetCreateNestedOneWithoutUserInput
+    audienceMetrics?: AudienceMetricsCreateNestedOneWithoutUserInput
     videos?: VideoCreateNestedManyWithoutUserInput
     streamerMetrics?: StreamerMetricsCreateNestedOneWithoutUserInput
     audienceLevels?: AudienceLevelCreateNestedManyWithoutUserInput
@@ -14040,7 +15710,10 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    puntos?: number
+    nivel?: number
     pet?: PetUncheckedCreateNestedOneWithoutUserInput
+    audienceMetrics?: AudienceMetricsUncheckedCreateNestedOneWithoutUserInput
     videos?: VideoUncheckedCreateNestedManyWithoutUserInput
     streamerMetrics?: StreamerMetricsUncheckedCreateNestedOneWithoutUserInput
     audienceLevels?: AudienceLevelUncheckedCreateNestedManyWithoutUserInput
@@ -14105,7 +15778,10 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    puntos?: IntFieldUpdateOperationsInput | number
+    nivel?: IntFieldUpdateOperationsInput | number
     pet?: PetUpdateOneWithoutUserNestedInput
+    audienceMetrics?: AudienceMetricsUpdateOneWithoutUserNestedInput
     videos?: VideoUpdateManyWithoutUserNestedInput
     streamerMetrics?: StreamerMetricsUpdateOneWithoutUserNestedInput
     audienceLevels?: AudienceLevelUpdateManyWithoutUserNestedInput
@@ -14120,7 +15796,10 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    puntos?: IntFieldUpdateOperationsInput | number
+    nivel?: IntFieldUpdateOperationsInput | number
     pet?: PetUncheckedUpdateOneWithoutUserNestedInput
+    audienceMetrics?: AudienceMetricsUncheckedUpdateOneWithoutUserNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
     streamerMetrics?: StreamerMetricsUncheckedUpdateOneWithoutUserNestedInput
     audienceLevels?: AudienceLevelUncheckedUpdateManyWithoutUserNestedInput
@@ -14151,7 +15830,10 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    puntos?: number
+    nivel?: number
     pet?: PetCreateNestedOneWithoutUserInput
+    audienceMetrics?: AudienceMetricsCreateNestedOneWithoutUserInput
     videos?: VideoCreateNestedManyWithoutUserInput
     streamSessions?: StreamSessionCreateNestedManyWithoutUserInput
     audienceLevels?: AudienceLevelCreateNestedManyWithoutUserInput
@@ -14166,7 +15848,10 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    puntos?: number
+    nivel?: number
     pet?: PetUncheckedCreateNestedOneWithoutUserInput
+    audienceMetrics?: AudienceMetricsUncheckedCreateNestedOneWithoutUserInput
     videos?: VideoUncheckedCreateNestedManyWithoutUserInput
     streamSessions?: StreamSessionUncheckedCreateNestedManyWithoutUserInput
     audienceLevels?: AudienceLevelUncheckedCreateNestedManyWithoutUserInput
@@ -14197,7 +15882,10 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    puntos?: IntFieldUpdateOperationsInput | number
+    nivel?: IntFieldUpdateOperationsInput | number
     pet?: PetUpdateOneWithoutUserNestedInput
+    audienceMetrics?: AudienceMetricsUpdateOneWithoutUserNestedInput
     videos?: VideoUpdateManyWithoutUserNestedInput
     streamSessions?: StreamSessionUpdateManyWithoutUserNestedInput
     audienceLevels?: AudienceLevelUpdateManyWithoutUserNestedInput
@@ -14212,9 +15900,100 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    puntos?: IntFieldUpdateOperationsInput | number
+    nivel?: IntFieldUpdateOperationsInput | number
+    pet?: PetUncheckedUpdateOneWithoutUserNestedInput
+    audienceMetrics?: AudienceMetricsUncheckedUpdateOneWithoutUserNestedInput
+    videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
+    streamSessions?: StreamSessionUncheckedUpdateManyWithoutUserNestedInput
+    audienceLevels?: AudienceLevelUncheckedUpdateManyWithoutUserNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutReceiverNestedInput
+    giftsSent?: GiftUncheckedUpdateManyWithoutSenderNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutAudienceMetricsInput = {
+    id?: string
+    nombre: string
+    rol: $Enums.Rol
+    password: string
+    contacto?: string | null
+    puntos?: number
+    nivel?: number
+    pet?: PetCreateNestedOneWithoutUserInput
+    videos?: VideoCreateNestedManyWithoutUserInput
+    streamSessions?: StreamSessionCreateNestedManyWithoutUserInput
+    streamerMetrics?: StreamerMetricsCreateNestedOneWithoutUserInput
+    audienceLevels?: AudienceLevelCreateNestedManyWithoutUserInput
+    giftsReceived?: GiftCreateNestedManyWithoutReceiverInput
+    giftsSent?: GiftCreateNestedManyWithoutSenderInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutAudienceMetricsInput = {
+    id?: string
+    nombre: string
+    rol: $Enums.Rol
+    password: string
+    contacto?: string | null
+    puntos?: number
+    nivel?: number
+    pet?: PetUncheckedCreateNestedOneWithoutUserInput
+    videos?: VideoUncheckedCreateNestedManyWithoutUserInput
+    streamSessions?: StreamSessionUncheckedCreateNestedManyWithoutUserInput
+    streamerMetrics?: StreamerMetricsUncheckedCreateNestedOneWithoutUserInput
+    audienceLevels?: AudienceLevelUncheckedCreateNestedManyWithoutUserInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutReceiverInput
+    giftsSent?: GiftUncheckedCreateNestedManyWithoutSenderInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutAudienceMetricsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutAudienceMetricsInput, UserUncheckedCreateWithoutAudienceMetricsInput>
+  }
+
+  export type UserUpsertWithoutAudienceMetricsInput = {
+    update: XOR<UserUpdateWithoutAudienceMetricsInput, UserUncheckedUpdateWithoutAudienceMetricsInput>
+    create: XOR<UserCreateWithoutAudienceMetricsInput, UserUncheckedCreateWithoutAudienceMetricsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutAudienceMetricsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutAudienceMetricsInput, UserUncheckedUpdateWithoutAudienceMetricsInput>
+  }
+
+  export type UserUpdateWithoutAudienceMetricsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
+    password?: StringFieldUpdateOperationsInput | string
+    contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    puntos?: IntFieldUpdateOperationsInput | number
+    nivel?: IntFieldUpdateOperationsInput | number
+    pet?: PetUpdateOneWithoutUserNestedInput
+    videos?: VideoUpdateManyWithoutUserNestedInput
+    streamSessions?: StreamSessionUpdateManyWithoutUserNestedInput
+    streamerMetrics?: StreamerMetricsUpdateOneWithoutUserNestedInput
+    audienceLevels?: AudienceLevelUpdateManyWithoutUserNestedInput
+    giftsReceived?: GiftUpdateManyWithoutReceiverNestedInput
+    giftsSent?: GiftUpdateManyWithoutSenderNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutAudienceMetricsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
+    password?: StringFieldUpdateOperationsInput | string
+    contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    puntos?: IntFieldUpdateOperationsInput | number
+    nivel?: IntFieldUpdateOperationsInput | number
     pet?: PetUncheckedUpdateOneWithoutUserNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
     streamSessions?: StreamSessionUncheckedUpdateManyWithoutUserNestedInput
+    streamerMetrics?: StreamerMetricsUncheckedUpdateOneWithoutUserNestedInput
     audienceLevels?: AudienceLevelUncheckedUpdateManyWithoutUserNestedInput
     giftsReceived?: GiftUncheckedUpdateManyWithoutReceiverNestedInput
     giftsSent?: GiftUncheckedUpdateManyWithoutSenderNestedInput
@@ -14227,7 +16006,10 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    puntos?: number
+    nivel?: number
     pet?: PetCreateNestedOneWithoutUserInput
+    audienceMetrics?: AudienceMetricsCreateNestedOneWithoutUserInput
     videos?: VideoCreateNestedManyWithoutUserInput
     streamSessions?: StreamSessionCreateNestedManyWithoutUserInput
     streamerMetrics?: StreamerMetricsCreateNestedOneWithoutUserInput
@@ -14242,7 +16024,10 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    puntos?: number
+    nivel?: number
     pet?: PetUncheckedCreateNestedOneWithoutUserInput
+    audienceMetrics?: AudienceMetricsUncheckedCreateNestedOneWithoutUserInput
     videos?: VideoUncheckedCreateNestedManyWithoutUserInput
     streamSessions?: StreamSessionUncheckedCreateNestedManyWithoutUserInput
     streamerMetrics?: StreamerMetricsUncheckedCreateNestedOneWithoutUserInput
@@ -14273,7 +16058,10 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    puntos?: IntFieldUpdateOperationsInput | number
+    nivel?: IntFieldUpdateOperationsInput | number
     pet?: PetUpdateOneWithoutUserNestedInput
+    audienceMetrics?: AudienceMetricsUpdateOneWithoutUserNestedInput
     videos?: VideoUpdateManyWithoutUserNestedInput
     streamSessions?: StreamSessionUpdateManyWithoutUserNestedInput
     streamerMetrics?: StreamerMetricsUpdateOneWithoutUserNestedInput
@@ -14288,7 +16076,10 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    puntos?: IntFieldUpdateOperationsInput | number
+    nivel?: IntFieldUpdateOperationsInput | number
     pet?: PetUncheckedUpdateOneWithoutUserNestedInput
+    audienceMetrics?: AudienceMetricsUncheckedUpdateOneWithoutUserNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
     streamSessions?: StreamSessionUncheckedUpdateManyWithoutUserNestedInput
     streamerMetrics?: StreamerMetricsUncheckedUpdateOneWithoutUserNestedInput
@@ -14303,7 +16094,10 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    puntos?: number
+    nivel?: number
     pet?: PetCreateNestedOneWithoutUserInput
+    audienceMetrics?: AudienceMetricsCreateNestedOneWithoutUserInput
     videos?: VideoCreateNestedManyWithoutUserInput
     streamSessions?: StreamSessionCreateNestedManyWithoutUserInput
     streamerMetrics?: StreamerMetricsCreateNestedOneWithoutUserInput
@@ -14318,7 +16112,10 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    puntos?: number
+    nivel?: number
     pet?: PetUncheckedCreateNestedOneWithoutUserInput
+    audienceMetrics?: AudienceMetricsUncheckedCreateNestedOneWithoutUserInput
     videos?: VideoUncheckedCreateNestedManyWithoutUserInput
     streamSessions?: StreamSessionUncheckedCreateNestedManyWithoutUserInput
     streamerMetrics?: StreamerMetricsUncheckedCreateNestedOneWithoutUserInput
@@ -14338,7 +16135,10 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    puntos?: number
+    nivel?: number
     pet?: PetCreateNestedOneWithoutUserInput
+    audienceMetrics?: AudienceMetricsCreateNestedOneWithoutUserInput
     videos?: VideoCreateNestedManyWithoutUserInput
     streamSessions?: StreamSessionCreateNestedManyWithoutUserInput
     streamerMetrics?: StreamerMetricsCreateNestedOneWithoutUserInput
@@ -14353,7 +16153,10 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    puntos?: number
+    nivel?: number
     pet?: PetUncheckedCreateNestedOneWithoutUserInput
+    audienceMetrics?: AudienceMetricsUncheckedCreateNestedOneWithoutUserInput
     videos?: VideoUncheckedCreateNestedManyWithoutUserInput
     streamSessions?: StreamSessionUncheckedCreateNestedManyWithoutUserInput
     streamerMetrics?: StreamerMetricsUncheckedCreateNestedOneWithoutUserInput
@@ -14409,7 +16212,10 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    puntos?: IntFieldUpdateOperationsInput | number
+    nivel?: IntFieldUpdateOperationsInput | number
     pet?: PetUpdateOneWithoutUserNestedInput
+    audienceMetrics?: AudienceMetricsUpdateOneWithoutUserNestedInput
     videos?: VideoUpdateManyWithoutUserNestedInput
     streamSessions?: StreamSessionUpdateManyWithoutUserNestedInput
     streamerMetrics?: StreamerMetricsUpdateOneWithoutUserNestedInput
@@ -14424,7 +16230,10 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    puntos?: IntFieldUpdateOperationsInput | number
+    nivel?: IntFieldUpdateOperationsInput | number
     pet?: PetUncheckedUpdateOneWithoutUserNestedInput
+    audienceMetrics?: AudienceMetricsUncheckedUpdateOneWithoutUserNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
     streamSessions?: StreamSessionUncheckedUpdateManyWithoutUserNestedInput
     streamerMetrics?: StreamerMetricsUncheckedUpdateOneWithoutUserNestedInput
@@ -14450,7 +16259,10 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    puntos?: IntFieldUpdateOperationsInput | number
+    nivel?: IntFieldUpdateOperationsInput | number
     pet?: PetUpdateOneWithoutUserNestedInput
+    audienceMetrics?: AudienceMetricsUpdateOneWithoutUserNestedInput
     videos?: VideoUpdateManyWithoutUserNestedInput
     streamSessions?: StreamSessionUpdateManyWithoutUserNestedInput
     streamerMetrics?: StreamerMetricsUpdateOneWithoutUserNestedInput
@@ -14465,7 +16277,10 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    puntos?: IntFieldUpdateOperationsInput | number
+    nivel?: IntFieldUpdateOperationsInput | number
     pet?: PetUncheckedUpdateOneWithoutUserNestedInput
+    audienceMetrics?: AudienceMetricsUncheckedUpdateOneWithoutUserNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
     streamSessions?: StreamSessionUncheckedUpdateManyWithoutUserNestedInput
     streamerMetrics?: StreamerMetricsUncheckedUpdateOneWithoutUserNestedInput
@@ -14511,7 +16326,10 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    puntos?: number
+    nivel?: number
     pet?: PetCreateNestedOneWithoutUserInput
+    audienceMetrics?: AudienceMetricsCreateNestedOneWithoutUserInput
     videos?: VideoCreateNestedManyWithoutUserInput
     streamSessions?: StreamSessionCreateNestedManyWithoutUserInput
     streamerMetrics?: StreamerMetricsCreateNestedOneWithoutUserInput
@@ -14526,7 +16344,10 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    puntos?: number
+    nivel?: number
     pet?: PetUncheckedCreateNestedOneWithoutUserInput
+    audienceMetrics?: AudienceMetricsUncheckedCreateNestedOneWithoutUserInput
     videos?: VideoUncheckedCreateNestedManyWithoutUserInput
     streamSessions?: StreamSessionUncheckedCreateNestedManyWithoutUserInput
     streamerMetrics?: StreamerMetricsUncheckedCreateNestedOneWithoutUserInput
@@ -14557,7 +16378,10 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    puntos?: IntFieldUpdateOperationsInput | number
+    nivel?: IntFieldUpdateOperationsInput | number
     pet?: PetUpdateOneWithoutUserNestedInput
+    audienceMetrics?: AudienceMetricsUpdateOneWithoutUserNestedInput
     videos?: VideoUpdateManyWithoutUserNestedInput
     streamSessions?: StreamSessionUpdateManyWithoutUserNestedInput
     streamerMetrics?: StreamerMetricsUpdateOneWithoutUserNestedInput
@@ -14572,7 +16396,10 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    puntos?: IntFieldUpdateOperationsInput | number
+    nivel?: IntFieldUpdateOperationsInput | number
     pet?: PetUncheckedUpdateOneWithoutUserNestedInput
+    audienceMetrics?: AudienceMetricsUncheckedUpdateOneWithoutUserNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
     streamSessions?: StreamSessionUncheckedUpdateManyWithoutUserNestedInput
     streamerMetrics?: StreamerMetricsUncheckedUpdateOneWithoutUserNestedInput

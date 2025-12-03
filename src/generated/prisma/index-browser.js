@@ -126,7 +126,9 @@ exports.Prisma.UserScalarFieldEnum = {
   nombre: 'nombre',
   rol: 'rol',
   password: 'password',
-  contacto: 'contacto'
+  contacto: 'contacto',
+  puntos: 'puntos',
+  nivel: 'nivel'
 };
 
 exports.Prisma.VideoScalarFieldEnum = {
@@ -159,6 +161,16 @@ exports.Prisma.StreamerMetricsScalarFieldEnum = {
   userId: 'userId',
   totalMs: 'totalMs',
   totalSessions: 'totalSessions',
+  currentLevel: 'currentLevel',
+  lastLevelUpAt: 'lastLevelUpAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AudienceMetricsScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  totalPoints: 'totalPoints',
   currentLevel: 'currentLevel',
   lastLevelUpAt: 'lastLevelUpAt',
   createdAt: 'createdAt',
@@ -233,6 +245,7 @@ exports.Prisma.ModelName = {
   Pet: 'Pet',
   StreamSession: 'StreamSession',
   StreamerMetrics: 'StreamerMetrics',
+  AudienceMetrics: 'AudienceMetrics',
   AudienceLevel: 'AudienceLevel',
   Gift: 'Gift',
   Comment: 'Comment'

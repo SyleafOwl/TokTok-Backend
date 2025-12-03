@@ -7,7 +7,7 @@ import { PrismaClient } from "./generated/prisma/index.js"
 
 const app = express()
 app.use(express.json())
-// CORS simple: preflight manejado automáticamente por el middleware
+
 app.use(cors())
 
 if (!process.env.DATABASE_URL) {
@@ -133,7 +133,6 @@ app.post('/api/videos/:id/like', async (req, res) => {
     })
     res.json(video)
   } catch (e: any) {
-    // P2025 es el código de Prisma cuando no existe el registro al actualizar
     if (e?.code === 'P2025') {
       return res.status(404).json({ error: 'Video no encontrado' })
     }
@@ -141,7 +140,7 @@ app.post('/api/videos/:id/like', async (req, res) => {
   }
 })
 
-// ---- Pets CRUD ----
+
 app.get('/api/pets/:id', async (req, res) => {
   const id = String(req.params.id)
   const pet = await prisma.pet.findUnique({ where: { id }, include: { user: true } })
@@ -162,7 +161,7 @@ app.post('/api/pets', async (req, res) => {
   }
 })
 
-// ---- Autenticación ----
+
 function normalizaRolInterno(input: string): 'visitante' | 'creador' | null {
   const v = String(input || '').toLowerCase()
   if (v === 'viewer' || v === 'visitante') return 'visitante'
@@ -178,7 +177,7 @@ function emitirToken(persona: { id: string; nombre: string; rol: 'viewer' | 'str
   return jwt.sign({ sub: persona.id, nombre: persona.nombre, rol: persona.rol }, JWT_SECRET, { expiresIn: '7d' })
 }
 
-// Registro
+
 for (const path of ['/api/autenticacion/registrar', '/autenticacion/registrar']) {
   app.post(path, async (req, res) => {
     try {
@@ -202,7 +201,7 @@ for (const path of ['/api/autenticacion/registrar', '/autenticacion/registrar'])
   })
 }
 
-// Login
+
 for (const path of ['/api/autenticacion/ingresar', '/autenticacion/ingresar']) {
   app.post(path, async (req, res) => {
     try {
@@ -225,12 +224,11 @@ for (const path of ['/api/autenticacion/ingresar', '/autenticacion/ingresar']) {
 
 
 
-// ---- Metrics (Streamer) ----
-// Niveles: umbrales en ms para subir de nivel. Ajusta a tu criterio.
+
 const LEVEL_THRESHOLDS_MS = [0, 1 * 60 * 60 * 1000, 5 * 60 * 60 * 1000, 12 * 60 * 60 * 1000, 24 * 60 * 60 * 1000, 72 * 60 * 60 * 1000, 200 * 60 * 60 * 1000]
 
 function computeLevelFromMs(totalMs: number) {
-  // devuelve el mayor nivel cuya threshold <= totalMs
+
   let level = 1
   for (let i = LEVEL_THRESHOLDS_MS.length - 1; i >= 0; i--) {
     const threshold = LEVEL_THRESHOLDS_MS[i] ?? 0
@@ -239,14 +237,64 @@ function computeLevelFromMs(totalMs: number) {
       break
     }
   }
-  // limitar entre 1 y LEVEL_THRESHOLDS_MS.length
+
   level = Math.max(1, Math.min(level, LEVEL_THRESHOLDS_MS.length))
   return level
 }
 
-// ---- Stream sessions, Audience levels, Gifts, Comments ----
 
-// Crear nueva sesión de transmisión
+const PARTICIPATION_THRESHOLDS_POINTS = [0, 5, 20, 50, 100, 250, 1000]
+
+function computeParticipationLevelFromPoints(totalPoints: number) {
+  let level = 1
+  for (let i = PARTICIPATION_THRESHOLDS_POINTS.length - 1; i >= 0; i--) {
+    const threshold = PARTICIPATION_THRESHOLDS_POINTS[i] ?? 0
+    if (totalPoints >= threshold) {
+      level = i + 1
+      break
+    }
+  }
+  level = Math.max(1, Math.min(level, PARTICIPATION_THRESHOLDS_POINTS.length))
+  return level
+}
+
+function getPointsToNextLevel(totalPoints: number) {
+  const currentLevel = computeParticipationLevelFromPoints(totalPoints)
+  if (currentLevel >= PARTICIPATION_THRESHOLDS_POINTS.length) return 0
+  const nextThreshold = PARTICIPATION_THRESHOLDS_POINTS[currentLevel]
+  if (nextThreshold === undefined) return 0
+  return Math.max(0, nextThreshold - totalPoints)
+}
+
+function getPercentToNextParticipation(totalPoints: number) {
+  const currentLevel = computeParticipationLevelFromPoints(totalPoints)
+  if (currentLevel >= PARTICIPATION_THRESHOLDS_POINTS.length) return 100
+  const currentThreshold = PARTICIPATION_THRESHOLDS_POINTS[currentLevel - 1] ?? 0
+  const nextThreshold = PARTICIPATION_THRESHOLDS_POINTS[currentLevel]
+  if (nextThreshold === undefined || nextThreshold === currentThreshold) return 100
+  const pct = ((totalPoints - currentThreshold) / (nextThreshold - currentThreshold)) * 100
+  return Math.max(0, Math.min(100, Math.round(pct)))
+}
+
+async function ensureAudienceMetricsRecord(userId: string) {
+  const clientAny = prisma as any
+  let m = await clientAny.audienceMetrics.findUnique({ where: { userId } })
+  if (!m) {
+    m = await clientAny.audienceMetrics.create({ data: { userId } })
+  }
+  return m
+}
+
+function getMsToNextLevel(totalMs: number) {
+  const currentLevel = computeLevelFromMs(totalMs)
+  if (currentLevel >= LEVEL_THRESHOLDS_MS.length) return 0
+  const nextThreshold = LEVEL_THRESHOLDS_MS[currentLevel] ?? Infinity
+  return Math.max(0, nextThreshold - totalMs)
+}
+
+
+
+
 app.post('/api/stream-session', async (req, res) => {
   const { userId, startTime } = req.body ?? {}
   if (!userId || !startTime) return res.status(400).json({ error: 'userId y startTime son requeridos' })
@@ -260,7 +308,7 @@ app.post('/api/stream-session', async (req, res) => {
   }
 })
 
-// Obtener sesiones de un streamer
+
 app.get('/api/stream-session/:userId', async (req, res) => {
   const userId = String(req.params.userId)
   try {
@@ -273,7 +321,7 @@ app.get('/api/stream-session/:userId', async (req, res) => {
   }
 })
 
-// Configurar niveles de audiencia
+
 app.post('/api/audience-level', async (req, res) => {
   const { userId, level, name, description, viewPermissions } = req.body ?? {}
   if (!userId || !level || !name) return res.status(400).json({ error: 'userId, level y name son requeridos' })
@@ -299,7 +347,6 @@ app.get('/api/audience-level/:userId', async (req, res) => {
   }
 })
 
-// Enviar regalo
 app.post('/api/gift', async (req, res) => {
   const { receiverId, name, emoji, coins, senderId, message, streamSessionId, quantity } = req.body ?? {}
   if (!receiverId || !name || !emoji || typeof coins !== 'number') return res.status(400).json({ error: 'receiverId, name, emoji y coins son requeridos' })
@@ -325,17 +372,50 @@ app.get('/api/gift/received/:receiverId', async (req, res) => {
   }
 })
 
-// Comentarios
 app.post('/api/comment', async (req, res) => {
   const { userId, content } = req.body ?? {}
   if (!userId || !content) return res.status(400).json({ error: 'userId y content son requeridos' })
   try {
     const clientAny = prisma as any
     const comment = await clientAny.comment.create({ data: { userId, content } })
-    res.status(201).json(comment)
+
+    try {
+      const audience = await ensureAudienceMetricsRecord(userId)
+      const newTotalPoints = (audience.totalPoints ?? 0) + 1
+      const newLevel = computeParticipationLevelFromPoints(newTotalPoints)
+      const dataToUpdate: any = { totalPoints: newTotalPoints }
+      if (newLevel !== audience.currentLevel) {
+        dataToUpdate.currentLevel = newLevel
+        dataToUpdate.lastLevelUpAt = new Date()
+      }
+      const updatedAudience = await clientAny.audienceMetrics.update({ where: { userId }, data: dataToUpdate })
+      const pointsToNext = getPointsToNextLevel(updatedAudience.totalPoints)
+      const percentToNext = getPercentToNextParticipation(updatedAudience.totalPoints)
+      return res.status(201).json({ comment, audienceMetrics: updatedAudience, pointsToNextLevel: pointsToNext, percentToNextLevel: percentToNext })
+    } catch (e: any) {
+      console.error('[Comment create] Error updating audience metrics:', e)
+      return res.status(201).json({ comment, audienceMetricsError: e?.message ?? 'Error actualizando métricas' })
+    }
   } catch (e: any) {
     console.error('[Comment create] Error:', e)
     res.status(500).json({ error: e?.message ?? 'Error creando comentario' })
+  }
+})
+
+app.get('/api/participation/:userId', async (req, res) => {
+  const userId = String(req.params.userId)
+  try {
+    const clientAny = prisma as any
+    let am = await clientAny.audienceMetrics.findUnique({ where: { userId } })
+    if (!am) {
+      am = await clientAny.audienceMetrics.create({ data: { userId } })
+    }
+    const pointsToNext = getPointsToNextLevel(am.totalPoints)
+    const percentToNext = getPercentToNextParticipation(am.totalPoints)
+    res.json({ audienceMetrics: am, pointsToNextLevel: pointsToNext, percentToNextLevel: percentToNext })
+  } catch (e: any) {
+    console.error('[Participation GET] Error:', e)
+    res.status(500).json({ error: e?.message ?? 'Error obteniendo participation metrics' })
   }
 })
 
@@ -352,8 +432,7 @@ app.get('/api/comment', async (req, res) => {
 })
 
 async function ensureMetricsRecord(userId: string) {
-  // El cliente Prisma debe regenerarse para reconocer los nuevos modelos.
-  // Para evitar errores de tipado antes de generar, se usa acceso dinámico.
+
   const clientAny = prisma as any
   let m = await clientAny.streamerMetrics.findUnique({ where: { userId } })
   if (!m) {
@@ -362,19 +441,19 @@ async function ensureMetricsRecord(userId: string) {
   return m
 }
 
-// Obtener métricas
 app.get('/api/metrics/:userId', async (req, res) => {
   const userId = String(req.params.userId)
   try {
     const metrics = await ensureMetricsRecord(userId)
-    res.json(metrics)
+    const msToNext = getMsToNextLevel(metrics.totalMs ?? 0)
+    const hoursToNext = Math.ceil(msToNext / (1000 * 60 * 60))
+    res.json({ ...metrics, msToNextLevel: msToNext, hoursToNextLevel: hoursToNext })
   } catch (e: any) {
     console.error('[Metrics GET] Error:', e)
     res.status(500).json({ error: e?.message ?? 'Error obteniendo métricas' })
   }
 })
 
-// Finalizar sesión: actualizar totalMs y totalSessions (body: { durationMs: number })
 app.post('/api/metrics/:userId/session-end', async (req, res) => {
   const userId = String(req.params.userId)
   const { durationMs } = req.body ?? {}
@@ -392,18 +471,19 @@ app.post('/api/metrics/:userId/session-end', async (req, res) => {
     }
 
     const updated = await (prisma as any).streamerMetrics.update({ where: { userId }, data: dataToUpdate })
-    res.json(updated)
+
+    const msToNext = getMsToNextLevel(updated.totalMs ?? 0)
+    const hoursToNext = Math.ceil(msToNext / (1000 * 60 * 60))
+    res.json({ ...updated, msToNextLevel: msToNext, hoursToNextLevel: hoursToNext })
   } catch (e: any) {
     console.error('[Metrics session-end] Error:', e)
     res.status(500).json({ error: e?.message ?? 'Error actualizando métricas' })
   }
 })
 
-// Recalcular métricas desde StreamSession (agrega/ajusta durationMs en sesiones)
 app.post('/api/metrics/:userId/recalculate', async (req, res) => {
   const userId = String(req.params.userId)
   try {
-    // agrega suma y conteo desde StreamSession
     const agg = await (prisma as any).streamSession.aggregate({
       where: { userId },
       _sum: { durationMs: true },
@@ -422,14 +502,15 @@ app.post('/api/metrics/:userId/recalculate', async (req, res) => {
     }
 
     const updated = await (prisma as any).streamerMetrics.update({ where: { userId }, data: dataToUpdate })
-    res.json(updated)
+    const msToNext = getMsToNextLevel(updated.totalMs ?? 0)
+    const hoursToNext = Math.ceil(msToNext / (1000 * 60 * 60))
+    res.json({ ...updated, msToNextLevel: msToNext, hoursToNextLevel: hoursToNext })
   } catch (e: any) {
     console.error('[Metrics recalc] Error:', e)
     res.status(500).json({ error: e?.message ?? 'Error recalculando métricas' })
   }
 })
 
-// ---- Start server ----
 app.listen(PORT, () => {
   console.log(`[TokTok] API escuchando en http://localhost:${PORT}`)
 })
