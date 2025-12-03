@@ -390,6 +390,66 @@ app.post('/api/metrics/:userId/recalculate', async (req, res) => {
   }
 })
 
+app.get('/api/user/:username', async (req, res) => {
+  const username = req.params.username
+  try {
+    // Buscar usuario por nombre
+    const user = await prisma.user.findUnique({ where: { nombre: username } })
+    if (!user) return res.status(404).json({ error: 'Usuario no encontrado' })
+
+    // Buscar métricas (totalMs) usando el ID del usuario
+    // Usamos 'any' para evitar errores de tipado si Prisma no se ha regenerado
+    const clientAny = prisma as any
+    const metrics = await clientAny.streamerMetrics.findUnique({ where: { userId: String(user.id) } })
+
+    // Devolver solo lo necesario para que la barra funcione
+    res.json({
+      id: user.id,
+      username: user.nombre,
+      role: user.rol === 'creador' ? 'streamer' : 'viewer',
+      streamerStats: {
+        totalMs: metrics?.totalMs || 0 // Aquí está el dato clave para la barra
+      }
+    })
+  } catch (e) {
+    console.error(e)
+    res.status(500).json({ error: 'Error obteniendo datos de barra' })
+  }
+})
+
+// 2. GUARDAR TIEMPO AL TERMINAR LIVE (Para que la barra avance)
+app.post('/api/streamer/session/end', async (req, res) => {
+  const { username, durationMs } = req.body
+  try {
+    // 1. Buscar ID del usuario
+    const user = await prisma.user.findUnique({ where: { nombre: username } })
+    if (!user) return res.status(404).json({ error: 'Usuario no encontrado' })
+
+    const userId = String(user.id)
+    const clientAny = prisma as any
+
+    // 2. Buscar o Crear registro de métricas
+    let m = await clientAny.streamerMetrics.findUnique({ where: { userId } })
+    if (!m) {
+      m = await clientAny.streamerMetrics.create({ data: { userId } })
+    }
+
+    // 3. Sumar el tiempo nuevo al total acumulado
+    const newTotalMs = (m.totalMs || 0) + durationMs
+    await clientAny.streamerMetrics.update({
+      where: { userId },
+      data: { totalMs: newTotalMs }
+    })
+
+    console.log(`[Barra Nivel] ${username} sumó ${durationMs}ms. Total: ${newTotalMs}`)
+    res.json({ success: true, totalMs: newTotalMs })
+
+  } catch (e) {
+    console.error(e)
+    res.status(500).json({ error: 'Error actualizando barra de nivel' })
+  }
+})
+
 // ---- Start server ----
 app.listen(PORT, () => {
   console.log(`[TokTok] API escuchando en http://localhost:${PORT}`)
