@@ -24,10 +24,30 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  */
 export type Video = $Result.DefaultSelection<Prisma.$VideoPayload>
 /**
- * Model Pet
+ * Model StreamSession
  * 
  */
-export type Pet = $Result.DefaultSelection<Prisma.$PetPayload>
+export type StreamSession = $Result.DefaultSelection<Prisma.$StreamSessionPayload>
+/**
+ * Model StreamerMetrics
+ * 
+ */
+export type StreamerMetrics = $Result.DefaultSelection<Prisma.$StreamerMetricsPayload>
+/**
+ * Model AudienceLevel
+ * 
+ */
+export type AudienceLevel = $Result.DefaultSelection<Prisma.$AudienceLevelPayload>
+/**
+ * Model Gift
+ * 
+ */
+export type Gift = $Result.DefaultSelection<Prisma.$GiftPayload>
+/**
+ * Model Comment
+ * 
+ */
+export type Comment = $Result.DefaultSelection<Prisma.$CommentPayload>
 
 /**
  * Enums
@@ -185,14 +205,54 @@ export class PrismaClient<
   get video(): Prisma.VideoDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.pet`: Exposes CRUD operations for the **Pet** model.
+   * `prisma.streamSession`: Exposes CRUD operations for the **StreamSession** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Pets
-    * const pets = await prisma.pet.findMany()
+    * // Fetch zero or more StreamSessions
+    * const streamSessions = await prisma.streamSession.findMany()
     * ```
     */
-  get pet(): Prisma.PetDelegate<ExtArgs, ClientOptions>;
+  get streamSession(): Prisma.StreamSessionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.streamerMetrics`: Exposes CRUD operations for the **StreamerMetrics** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more StreamerMetrics
+    * const streamerMetrics = await prisma.streamerMetrics.findMany()
+    * ```
+    */
+  get streamerMetrics(): Prisma.StreamerMetricsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.audienceLevel`: Exposes CRUD operations for the **AudienceLevel** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AudienceLevels
+    * const audienceLevels = await prisma.audienceLevel.findMany()
+    * ```
+    */
+  get audienceLevel(): Prisma.AudienceLevelDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.gift`: Exposes CRUD operations for the **Gift** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Gifts
+    * const gifts = await prisma.gift.findMany()
+    * ```
+    */
+  get gift(): Prisma.GiftDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.comment`: Exposes CRUD operations for the **Comment** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Comments
+    * const comments = await prisma.comment.findMany()
+    * ```
+    */
+  get comment(): Prisma.CommentDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -636,7 +696,11 @@ export namespace Prisma {
   export const ModelName: {
     User: 'User',
     Video: 'Video',
-    Pet: 'Pet'
+    StreamSession: 'StreamSession',
+    StreamerMetrics: 'StreamerMetrics',
+    AudienceLevel: 'AudienceLevel',
+    Gift: 'Gift',
+    Comment: 'Comment'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -655,7 +719,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "video" | "pet"
+      modelProps: "user" | "video" | "streamSession" | "streamerMetrics" | "audienceLevel" | "gift" | "comment"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -807,77 +871,373 @@ export namespace Prisma {
           }
         }
       }
-      Pet: {
-        payload: Prisma.$PetPayload<ExtArgs>
-        fields: Prisma.PetFieldRefs
+      StreamSession: {
+        payload: Prisma.$StreamSessionPayload<ExtArgs>
+        fields: Prisma.StreamSessionFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.PetFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PetPayload> | null
+            args: Prisma.StreamSessionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreamSessionPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.PetFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PetPayload>
+            args: Prisma.StreamSessionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreamSessionPayload>
           }
           findFirst: {
-            args: Prisma.PetFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PetPayload> | null
+            args: Prisma.StreamSessionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreamSessionPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.PetFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PetPayload>
+            args: Prisma.StreamSessionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreamSessionPayload>
           }
           findMany: {
-            args: Prisma.PetFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PetPayload>[]
+            args: Prisma.StreamSessionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreamSessionPayload>[]
           }
           create: {
-            args: Prisma.PetCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PetPayload>
+            args: Prisma.StreamSessionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreamSessionPayload>
           }
           createMany: {
-            args: Prisma.PetCreateManyArgs<ExtArgs>
+            args: Prisma.StreamSessionCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.PetCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PetPayload>[]
+            args: Prisma.StreamSessionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreamSessionPayload>[]
           }
           delete: {
-            args: Prisma.PetDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PetPayload>
+            args: Prisma.StreamSessionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreamSessionPayload>
           }
           update: {
-            args: Prisma.PetUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PetPayload>
+            args: Prisma.StreamSessionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreamSessionPayload>
           }
           deleteMany: {
-            args: Prisma.PetDeleteManyArgs<ExtArgs>
+            args: Prisma.StreamSessionDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.PetUpdateManyArgs<ExtArgs>
+            args: Prisma.StreamSessionUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.PetUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PetPayload>[]
+            args: Prisma.StreamSessionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreamSessionPayload>[]
           }
           upsert: {
-            args: Prisma.PetUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PetPayload>
+            args: Prisma.StreamSessionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreamSessionPayload>
           }
           aggregate: {
-            args: Prisma.PetAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregatePet>
+            args: Prisma.StreamSessionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateStreamSession>
           }
           groupBy: {
-            args: Prisma.PetGroupByArgs<ExtArgs>
-            result: $Utils.Optional<PetGroupByOutputType>[]
+            args: Prisma.StreamSessionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<StreamSessionGroupByOutputType>[]
           }
           count: {
-            args: Prisma.PetCountArgs<ExtArgs>
-            result: $Utils.Optional<PetCountAggregateOutputType> | number
+            args: Prisma.StreamSessionCountArgs<ExtArgs>
+            result: $Utils.Optional<StreamSessionCountAggregateOutputType> | number
+          }
+        }
+      }
+      StreamerMetrics: {
+        payload: Prisma.$StreamerMetricsPayload<ExtArgs>
+        fields: Prisma.StreamerMetricsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.StreamerMetricsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreamerMetricsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.StreamerMetricsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreamerMetricsPayload>
+          }
+          findFirst: {
+            args: Prisma.StreamerMetricsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreamerMetricsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.StreamerMetricsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreamerMetricsPayload>
+          }
+          findMany: {
+            args: Prisma.StreamerMetricsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreamerMetricsPayload>[]
+          }
+          create: {
+            args: Prisma.StreamerMetricsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreamerMetricsPayload>
+          }
+          createMany: {
+            args: Prisma.StreamerMetricsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.StreamerMetricsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreamerMetricsPayload>[]
+          }
+          delete: {
+            args: Prisma.StreamerMetricsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreamerMetricsPayload>
+          }
+          update: {
+            args: Prisma.StreamerMetricsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreamerMetricsPayload>
+          }
+          deleteMany: {
+            args: Prisma.StreamerMetricsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.StreamerMetricsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.StreamerMetricsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreamerMetricsPayload>[]
+          }
+          upsert: {
+            args: Prisma.StreamerMetricsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StreamerMetricsPayload>
+          }
+          aggregate: {
+            args: Prisma.StreamerMetricsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateStreamerMetrics>
+          }
+          groupBy: {
+            args: Prisma.StreamerMetricsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<StreamerMetricsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.StreamerMetricsCountArgs<ExtArgs>
+            result: $Utils.Optional<StreamerMetricsCountAggregateOutputType> | number
+          }
+        }
+      }
+      AudienceLevel: {
+        payload: Prisma.$AudienceLevelPayload<ExtArgs>
+        fields: Prisma.AudienceLevelFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AudienceLevelFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AudienceLevelPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AudienceLevelFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AudienceLevelPayload>
+          }
+          findFirst: {
+            args: Prisma.AudienceLevelFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AudienceLevelPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AudienceLevelFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AudienceLevelPayload>
+          }
+          findMany: {
+            args: Prisma.AudienceLevelFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AudienceLevelPayload>[]
+          }
+          create: {
+            args: Prisma.AudienceLevelCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AudienceLevelPayload>
+          }
+          createMany: {
+            args: Prisma.AudienceLevelCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AudienceLevelCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AudienceLevelPayload>[]
+          }
+          delete: {
+            args: Prisma.AudienceLevelDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AudienceLevelPayload>
+          }
+          update: {
+            args: Prisma.AudienceLevelUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AudienceLevelPayload>
+          }
+          deleteMany: {
+            args: Prisma.AudienceLevelDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AudienceLevelUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AudienceLevelUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AudienceLevelPayload>[]
+          }
+          upsert: {
+            args: Prisma.AudienceLevelUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AudienceLevelPayload>
+          }
+          aggregate: {
+            args: Prisma.AudienceLevelAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAudienceLevel>
+          }
+          groupBy: {
+            args: Prisma.AudienceLevelGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AudienceLevelGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AudienceLevelCountArgs<ExtArgs>
+            result: $Utils.Optional<AudienceLevelCountAggregateOutputType> | number
+          }
+        }
+      }
+      Gift: {
+        payload: Prisma.$GiftPayload<ExtArgs>
+        fields: Prisma.GiftFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.GiftFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GiftPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.GiftFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GiftPayload>
+          }
+          findFirst: {
+            args: Prisma.GiftFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GiftPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.GiftFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GiftPayload>
+          }
+          findMany: {
+            args: Prisma.GiftFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GiftPayload>[]
+          }
+          create: {
+            args: Prisma.GiftCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GiftPayload>
+          }
+          createMany: {
+            args: Prisma.GiftCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.GiftCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GiftPayload>[]
+          }
+          delete: {
+            args: Prisma.GiftDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GiftPayload>
+          }
+          update: {
+            args: Prisma.GiftUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GiftPayload>
+          }
+          deleteMany: {
+            args: Prisma.GiftDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.GiftUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.GiftUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GiftPayload>[]
+          }
+          upsert: {
+            args: Prisma.GiftUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GiftPayload>
+          }
+          aggregate: {
+            args: Prisma.GiftAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateGift>
+          }
+          groupBy: {
+            args: Prisma.GiftGroupByArgs<ExtArgs>
+            result: $Utils.Optional<GiftGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.GiftCountArgs<ExtArgs>
+            result: $Utils.Optional<GiftCountAggregateOutputType> | number
+          }
+        }
+      }
+      Comment: {
+        payload: Prisma.$CommentPayload<ExtArgs>
+        fields: Prisma.CommentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CommentFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CommentFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentPayload>
+          }
+          findFirst: {
+            args: Prisma.CommentFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CommentFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentPayload>
+          }
+          findMany: {
+            args: Prisma.CommentFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentPayload>[]
+          }
+          create: {
+            args: Prisma.CommentCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentPayload>
+          }
+          createMany: {
+            args: Prisma.CommentCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CommentCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentPayload>[]
+          }
+          delete: {
+            args: Prisma.CommentDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentPayload>
+          }
+          update: {
+            args: Prisma.CommentUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentPayload>
+          }
+          deleteMany: {
+            args: Prisma.CommentDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CommentUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CommentUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentPayload>[]
+          }
+          upsert: {
+            args: Prisma.CommentUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentPayload>
+          }
+          aggregate: {
+            args: Prisma.CommentAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateComment>
+          }
+          groupBy: {
+            args: Prisma.CommentGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CommentGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CommentCountArgs<ExtArgs>
+            result: $Utils.Optional<CommentCountAggregateOutputType> | number
           }
         }
       }
@@ -979,7 +1339,11 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     user?: UserOmit
     video?: VideoOmit
-    pet?: PetOmit
+    streamSession?: StreamSessionOmit
+    streamerMetrics?: StreamerMetricsOmit
+    audienceLevel?: AudienceLevelOmit
+    gift?: GiftOmit
+    comment?: CommentOmit
   }
 
   /* Types for Logging */
@@ -1061,10 +1425,20 @@ export namespace Prisma {
 
   export type UserCountOutputType = {
     videos: number
+    streamSessions: number
+    audienceLevels: number
+    giftsReceived: number
+    giftsSent: number
+    comments: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     videos?: boolean | UserCountOutputTypeCountVideosArgs
+    streamSessions?: boolean | UserCountOutputTypeCountStreamSessionsArgs
+    audienceLevels?: boolean | UserCountOutputTypeCountAudienceLevelsArgs
+    giftsReceived?: boolean | UserCountOutputTypeCountGiftsReceivedArgs
+    giftsSent?: boolean | UserCountOutputTypeCountGiftsSentArgs
+    comments?: boolean | UserCountOutputTypeCountCommentsArgs
   }
 
   // Custom InputTypes
@@ -1083,6 +1457,72 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountVideosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: VideoWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountStreamSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StreamSessionWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountAudienceLevelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AudienceLevelWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountGiftsReceivedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GiftWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountGiftsSentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GiftWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CommentWhereInput
+  }
+
+
+  /**
+   * Count Type StreamSessionCountOutputType
+   */
+
+  export type StreamSessionCountOutputType = {
+    gifts: number
+  }
+
+  export type StreamSessionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    gifts?: boolean | StreamSessionCountOutputTypeCountGiftsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * StreamSessionCountOutputType without action
+   */
+  export type StreamSessionCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StreamSessionCountOutputType
+     */
+    select?: StreamSessionCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * StreamSessionCountOutputType without action
+   */
+  export type StreamSessionCountOutputTypeCountGiftsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GiftWhereInput
   }
 
 
@@ -1255,7 +1695,12 @@ export namespace Prisma {
     password?: boolean
     contacto?: boolean
     videos?: boolean | User$videosArgs<ExtArgs>
-    mascota?: boolean | User$mascotaArgs<ExtArgs>
+    streamSessions?: boolean | User$streamSessionsArgs<ExtArgs>
+    streamerMetrics?: boolean | User$streamerMetricsArgs<ExtArgs>
+    audienceLevels?: boolean | User$audienceLevelsArgs<ExtArgs>
+    giftsReceived?: boolean | User$giftsReceivedArgs<ExtArgs>
+    giftsSent?: boolean | User$giftsSentArgs<ExtArgs>
+    comments?: boolean | User$commentsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1286,7 +1731,12 @@ export namespace Prisma {
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nombre" | "rol" | "password" | "contacto", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     videos?: boolean | User$videosArgs<ExtArgs>
-    mascota?: boolean | User$mascotaArgs<ExtArgs>
+    streamSessions?: boolean | User$streamSessionsArgs<ExtArgs>
+    streamerMetrics?: boolean | User$streamerMetricsArgs<ExtArgs>
+    audienceLevels?: boolean | User$audienceLevelsArgs<ExtArgs>
+    giftsReceived?: boolean | User$giftsReceivedArgs<ExtArgs>
+    giftsSent?: boolean | User$giftsSentArgs<ExtArgs>
+    comments?: boolean | User$commentsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1296,7 +1746,12 @@ export namespace Prisma {
     name: "User"
     objects: {
       videos: Prisma.$VideoPayload<ExtArgs>[]
-      mascota: Prisma.$PetPayload<ExtArgs> | null
+      streamSessions: Prisma.$StreamSessionPayload<ExtArgs>[]
+      streamerMetrics: Prisma.$StreamerMetricsPayload<ExtArgs> | null
+      audienceLevels: Prisma.$AudienceLevelPayload<ExtArgs>[]
+      giftsReceived: Prisma.$GiftPayload<ExtArgs>[]
+      giftsSent: Prisma.$GiftPayload<ExtArgs>[]
+      comments: Prisma.$CommentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1699,7 +2154,12 @@ export namespace Prisma {
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     videos<T extends User$videosArgs<ExtArgs> = {}>(args?: Subset<T, User$videosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VideoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    mascota<T extends User$mascotaArgs<ExtArgs> = {}>(args?: Subset<T, User$mascotaArgs<ExtArgs>>): Prisma__PetClient<$Result.GetResult<Prisma.$PetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    streamSessions<T extends User$streamSessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$streamSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StreamSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    streamerMetrics<T extends User$streamerMetricsArgs<ExtArgs> = {}>(args?: Subset<T, User$streamerMetricsArgs<ExtArgs>>): Prisma__StreamerMetricsClient<$Result.GetResult<Prisma.$StreamerMetricsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    audienceLevels<T extends User$audienceLevelsArgs<ExtArgs> = {}>(args?: Subset<T, User$audienceLevelsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AudienceLevelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    giftsReceived<T extends User$giftsReceivedArgs<ExtArgs> = {}>(args?: Subset<T, User$giftsReceivedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GiftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    giftsSent<T extends User$giftsSentArgs<ExtArgs> = {}>(args?: Subset<T, User$giftsSentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GiftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    comments<T extends User$commentsArgs<ExtArgs> = {}>(args?: Subset<T, User$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2146,22 +2606,142 @@ export namespace Prisma {
   }
 
   /**
-   * User.mascota
+   * User.streamSessions
    */
-  export type User$mascotaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$streamSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Pet
+     * Select specific fields to fetch from the StreamSession
      */
-    select?: PetSelect<ExtArgs> | null
+    select?: StreamSessionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Pet
+     * Omit specific fields from the StreamSession
      */
-    omit?: PetOmit<ExtArgs> | null
+    omit?: StreamSessionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PetInclude<ExtArgs> | null
-    where?: PetWhereInput
+    include?: StreamSessionInclude<ExtArgs> | null
+    where?: StreamSessionWhereInput
+    orderBy?: StreamSessionOrderByWithRelationInput | StreamSessionOrderByWithRelationInput[]
+    cursor?: StreamSessionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: StreamSessionScalarFieldEnum | StreamSessionScalarFieldEnum[]
+  }
+
+  /**
+   * User.streamerMetrics
+   */
+  export type User$streamerMetricsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StreamerMetrics
+     */
+    select?: StreamerMetricsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StreamerMetrics
+     */
+    omit?: StreamerMetricsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreamerMetricsInclude<ExtArgs> | null
+    where?: StreamerMetricsWhereInput
+  }
+
+  /**
+   * User.audienceLevels
+   */
+  export type User$audienceLevelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceLevel
+     */
+    select?: AudienceLevelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceLevel
+     */
+    omit?: AudienceLevelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceLevelInclude<ExtArgs> | null
+    where?: AudienceLevelWhereInput
+    orderBy?: AudienceLevelOrderByWithRelationInput | AudienceLevelOrderByWithRelationInput[]
+    cursor?: AudienceLevelWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AudienceLevelScalarFieldEnum | AudienceLevelScalarFieldEnum[]
+  }
+
+  /**
+   * User.giftsReceived
+   */
+  export type User$giftsReceivedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Gift
+     */
+    select?: GiftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Gift
+     */
+    omit?: GiftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftInclude<ExtArgs> | null
+    where?: GiftWhereInput
+    orderBy?: GiftOrderByWithRelationInput | GiftOrderByWithRelationInput[]
+    cursor?: GiftWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GiftScalarFieldEnum | GiftScalarFieldEnum[]
+  }
+
+  /**
+   * User.giftsSent
+   */
+  export type User$giftsSentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Gift
+     */
+    select?: GiftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Gift
+     */
+    omit?: GiftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftInclude<ExtArgs> | null
+    where?: GiftWhereInput
+    orderBy?: GiftOrderByWithRelationInput | GiftOrderByWithRelationInput[]
+    cursor?: GiftWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GiftScalarFieldEnum | GiftScalarFieldEnum[]
+  }
+
+  /**
+   * User.comments
+   */
+  export type User$commentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    where?: CommentWhereInput
+    orderBy?: CommentOrderByWithRelationInput | CommentOrderByWithRelationInput[]
+    cursor?: CommentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CommentScalarFieldEnum | CommentScalarFieldEnum[]
   }
 
   /**
@@ -3280,376 +3860,413 @@ export namespace Prisma {
 
 
   /**
-   * Model Pet
+   * Model StreamSession
    */
 
-  export type AggregatePet = {
-    _count: PetCountAggregateOutputType | null
-    _avg: PetAvgAggregateOutputType | null
-    _sum: PetSumAggregateOutputType | null
-    _min: PetMinAggregateOutputType | null
-    _max: PetMaxAggregateOutputType | null
+  export type AggregateStreamSession = {
+    _count: StreamSessionCountAggregateOutputType | null
+    _avg: StreamSessionAvgAggregateOutputType | null
+    _sum: StreamSessionSumAggregateOutputType | null
+    _min: StreamSessionMinAggregateOutputType | null
+    _max: StreamSessionMaxAggregateOutputType | null
   }
 
-  export type PetAvgAggregateOutputType = {
-    size: number | null
-    hearts: number | null
+  export type StreamSessionAvgAggregateOutputType = {
+    durationMs: number | null
   }
 
-  export type PetSumAggregateOutputType = {
-    size: number | null
-    hearts: number | null
+  export type StreamSessionSumAggregateOutputType = {
+    durationMs: number | null
   }
 
-  export type PetMinAggregateOutputType = {
+  export type StreamSessionMinAggregateOutputType = {
     id: string | null
-    size: number | null
-    hearts: number | null
     userId: string | null
+    startTime: Date | null
+    endTime: Date | null
+    durationMs: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
-  export type PetMaxAggregateOutputType = {
+  export type StreamSessionMaxAggregateOutputType = {
     id: string | null
-    size: number | null
-    hearts: number | null
     userId: string | null
+    startTime: Date | null
+    endTime: Date | null
+    durationMs: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
-  export type PetCountAggregateOutputType = {
+  export type StreamSessionCountAggregateOutputType = {
     id: number
-    size: number
-    hearts: number
     userId: number
+    startTime: number
+    endTime: number
+    durationMs: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
 
-  export type PetAvgAggregateInputType = {
-    size?: true
-    hearts?: true
+  export type StreamSessionAvgAggregateInputType = {
+    durationMs?: true
   }
 
-  export type PetSumAggregateInputType = {
-    size?: true
-    hearts?: true
+  export type StreamSessionSumAggregateInputType = {
+    durationMs?: true
   }
 
-  export type PetMinAggregateInputType = {
+  export type StreamSessionMinAggregateInputType = {
     id?: true
-    size?: true
-    hearts?: true
     userId?: true
+    startTime?: true
+    endTime?: true
+    durationMs?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
-  export type PetMaxAggregateInputType = {
+  export type StreamSessionMaxAggregateInputType = {
     id?: true
-    size?: true
-    hearts?: true
     userId?: true
+    startTime?: true
+    endTime?: true
+    durationMs?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
-  export type PetCountAggregateInputType = {
+  export type StreamSessionCountAggregateInputType = {
     id?: true
-    size?: true
-    hearts?: true
     userId?: true
+    startTime?: true
+    endTime?: true
+    durationMs?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
-  export type PetAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StreamSessionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Pet to aggregate.
+     * Filter which StreamSession to aggregate.
      */
-    where?: PetWhereInput
+    where?: StreamSessionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Pets to fetch.
+     * Determine the order of StreamSessions to fetch.
      */
-    orderBy?: PetOrderByWithRelationInput | PetOrderByWithRelationInput[]
+    orderBy?: StreamSessionOrderByWithRelationInput | StreamSessionOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: PetWhereUniqueInput
+    cursor?: StreamSessionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Pets from the position of the cursor.
+     * Take `±n` StreamSessions from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Pets.
+     * Skip the first `n` StreamSessions.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Pets
+     * Count returned StreamSessions
     **/
-    _count?: true | PetCountAggregateInputType
+    _count?: true | StreamSessionCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: PetAvgAggregateInputType
+    _avg?: StreamSessionAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: PetSumAggregateInputType
+    _sum?: StreamSessionSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: PetMinAggregateInputType
+    _min?: StreamSessionMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: PetMaxAggregateInputType
+    _max?: StreamSessionMaxAggregateInputType
   }
 
-  export type GetPetAggregateType<T extends PetAggregateArgs> = {
-        [P in keyof T & keyof AggregatePet]: P extends '_count' | 'count'
+  export type GetStreamSessionAggregateType<T extends StreamSessionAggregateArgs> = {
+        [P in keyof T & keyof AggregateStreamSession]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregatePet[P]>
-      : GetScalarType<T[P], AggregatePet[P]>
+        : GetScalarType<T[P], AggregateStreamSession[P]>
+      : GetScalarType<T[P], AggregateStreamSession[P]>
   }
 
 
 
 
-  export type PetGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PetWhereInput
-    orderBy?: PetOrderByWithAggregationInput | PetOrderByWithAggregationInput[]
-    by: PetScalarFieldEnum[] | PetScalarFieldEnum
-    having?: PetScalarWhereWithAggregatesInput
+  export type StreamSessionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StreamSessionWhereInput
+    orderBy?: StreamSessionOrderByWithAggregationInput | StreamSessionOrderByWithAggregationInput[]
+    by: StreamSessionScalarFieldEnum[] | StreamSessionScalarFieldEnum
+    having?: StreamSessionScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: PetCountAggregateInputType | true
-    _avg?: PetAvgAggregateInputType
-    _sum?: PetSumAggregateInputType
-    _min?: PetMinAggregateInputType
-    _max?: PetMaxAggregateInputType
+    _count?: StreamSessionCountAggregateInputType | true
+    _avg?: StreamSessionAvgAggregateInputType
+    _sum?: StreamSessionSumAggregateInputType
+    _min?: StreamSessionMinAggregateInputType
+    _max?: StreamSessionMaxAggregateInputType
   }
 
-  export type PetGroupByOutputType = {
+  export type StreamSessionGroupByOutputType = {
     id: string
-    size: number
-    hearts: number
     userId: string
-    _count: PetCountAggregateOutputType | null
-    _avg: PetAvgAggregateOutputType | null
-    _sum: PetSumAggregateOutputType | null
-    _min: PetMinAggregateOutputType | null
-    _max: PetMaxAggregateOutputType | null
+    startTime: Date
+    endTime: Date | null
+    durationMs: number
+    createdAt: Date
+    updatedAt: Date
+    _count: StreamSessionCountAggregateOutputType | null
+    _avg: StreamSessionAvgAggregateOutputType | null
+    _sum: StreamSessionSumAggregateOutputType | null
+    _min: StreamSessionMinAggregateOutputType | null
+    _max: StreamSessionMaxAggregateOutputType | null
   }
 
-  type GetPetGroupByPayload<T extends PetGroupByArgs> = Prisma.PrismaPromise<
+  type GetStreamSessionGroupByPayload<T extends StreamSessionGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<PetGroupByOutputType, T['by']> &
+      PickEnumerable<StreamSessionGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof PetGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof StreamSessionGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], PetGroupByOutputType[P]>
-            : GetScalarType<T[P], PetGroupByOutputType[P]>
+              : GetScalarType<T[P], StreamSessionGroupByOutputType[P]>
+            : GetScalarType<T[P], StreamSessionGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type PetSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type StreamSessionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    size?: boolean
-    hearts?: boolean
     userId?: boolean
+    startTime?: boolean
+    endTime?: boolean
+    durationMs?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["pet"]>
+    gifts?: boolean | StreamSession$giftsArgs<ExtArgs>
+    _count?: boolean | StreamSessionCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["streamSession"]>
 
-  export type PetSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type StreamSessionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    size?: boolean
-    hearts?: boolean
     userId?: boolean
+    startTime?: boolean
+    endTime?: boolean
+    durationMs?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["pet"]>
+  }, ExtArgs["result"]["streamSession"]>
 
-  export type PetSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type StreamSessionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    size?: boolean
-    hearts?: boolean
     userId?: boolean
+    startTime?: boolean
+    endTime?: boolean
+    durationMs?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["pet"]>
+  }, ExtArgs["result"]["streamSession"]>
 
-  export type PetSelectScalar = {
+  export type StreamSessionSelectScalar = {
     id?: boolean
-    size?: boolean
-    hearts?: boolean
     userId?: boolean
+    startTime?: boolean
+    endTime?: boolean
+    durationMs?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type PetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "size" | "hearts" | "userId", ExtArgs["result"]["pet"]>
-  export type PetInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StreamSessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "startTime" | "endTime" | "durationMs" | "createdAt" | "updatedAt", ExtArgs["result"]["streamSession"]>
+  export type StreamSessionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    gifts?: boolean | StreamSession$giftsArgs<ExtArgs>
+    _count?: boolean | StreamSessionCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type StreamSessionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
-  export type PetIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type PetIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StreamSessionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
-  export type $PetPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Pet"
+  export type $StreamSessionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "StreamSession"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
+      gifts: Prisma.$GiftPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      size: number
-      hearts: number
       userId: string
-    }, ExtArgs["result"]["pet"]>
+      startTime: Date
+      endTime: Date | null
+      durationMs: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["streamSession"]>
     composites: {}
   }
 
-  type PetGetPayload<S extends boolean | null | undefined | PetDefaultArgs> = $Result.GetResult<Prisma.$PetPayload, S>
+  type StreamSessionGetPayload<S extends boolean | null | undefined | StreamSessionDefaultArgs> = $Result.GetResult<Prisma.$StreamSessionPayload, S>
 
-  type PetCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<PetFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: PetCountAggregateInputType | true
+  type StreamSessionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<StreamSessionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: StreamSessionCountAggregateInputType | true
     }
 
-  export interface PetDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Pet'], meta: { name: 'Pet' } }
+  export interface StreamSessionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['StreamSession'], meta: { name: 'StreamSession' } }
     /**
-     * Find zero or one Pet that matches the filter.
-     * @param {PetFindUniqueArgs} args - Arguments to find a Pet
+     * Find zero or one StreamSession that matches the filter.
+     * @param {StreamSessionFindUniqueArgs} args - Arguments to find a StreamSession
      * @example
-     * // Get one Pet
-     * const pet = await prisma.pet.findUnique({
+     * // Get one StreamSession
+     * const streamSession = await prisma.streamSession.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends PetFindUniqueArgs>(args: SelectSubset<T, PetFindUniqueArgs<ExtArgs>>): Prisma__PetClient<$Result.GetResult<Prisma.$PetPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends StreamSessionFindUniqueArgs>(args: SelectSubset<T, StreamSessionFindUniqueArgs<ExtArgs>>): Prisma__StreamSessionClient<$Result.GetResult<Prisma.$StreamSessionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one Pet that matches the filter or throw an error with `error.code='P2025'`
+     * Find one StreamSession that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {PetFindUniqueOrThrowArgs} args - Arguments to find a Pet
+     * @param {StreamSessionFindUniqueOrThrowArgs} args - Arguments to find a StreamSession
      * @example
-     * // Get one Pet
-     * const pet = await prisma.pet.findUniqueOrThrow({
+     * // Get one StreamSession
+     * const streamSession = await prisma.streamSession.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends PetFindUniqueOrThrowArgs>(args: SelectSubset<T, PetFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PetClient<$Result.GetResult<Prisma.$PetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends StreamSessionFindUniqueOrThrowArgs>(args: SelectSubset<T, StreamSessionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__StreamSessionClient<$Result.GetResult<Prisma.$StreamSessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Pet that matches the filter.
+     * Find the first StreamSession that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PetFindFirstArgs} args - Arguments to find a Pet
+     * @param {StreamSessionFindFirstArgs} args - Arguments to find a StreamSession
      * @example
-     * // Get one Pet
-     * const pet = await prisma.pet.findFirst({
+     * // Get one StreamSession
+     * const streamSession = await prisma.streamSession.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends PetFindFirstArgs>(args?: SelectSubset<T, PetFindFirstArgs<ExtArgs>>): Prisma__PetClient<$Result.GetResult<Prisma.$PetPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends StreamSessionFindFirstArgs>(args?: SelectSubset<T, StreamSessionFindFirstArgs<ExtArgs>>): Prisma__StreamSessionClient<$Result.GetResult<Prisma.$StreamSessionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Pet that matches the filter or
+     * Find the first StreamSession that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PetFindFirstOrThrowArgs} args - Arguments to find a Pet
+     * @param {StreamSessionFindFirstOrThrowArgs} args - Arguments to find a StreamSession
      * @example
-     * // Get one Pet
-     * const pet = await prisma.pet.findFirstOrThrow({
+     * // Get one StreamSession
+     * const streamSession = await prisma.streamSession.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends PetFindFirstOrThrowArgs>(args?: SelectSubset<T, PetFindFirstOrThrowArgs<ExtArgs>>): Prisma__PetClient<$Result.GetResult<Prisma.$PetPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends StreamSessionFindFirstOrThrowArgs>(args?: SelectSubset<T, StreamSessionFindFirstOrThrowArgs<ExtArgs>>): Prisma__StreamSessionClient<$Result.GetResult<Prisma.$StreamSessionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more Pets that matches the filter.
+     * Find zero or more StreamSessions that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PetFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {StreamSessionFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Pets
-     * const pets = await prisma.pet.findMany()
+     * // Get all StreamSessions
+     * const streamSessions = await prisma.streamSession.findMany()
      * 
-     * // Get first 10 Pets
-     * const pets = await prisma.pet.findMany({ take: 10 })
+     * // Get first 10 StreamSessions
+     * const streamSessions = await prisma.streamSession.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const petWithIdOnly = await prisma.pet.findMany({ select: { id: true } })
+     * const streamSessionWithIdOnly = await prisma.streamSession.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends PetFindManyArgs>(args?: SelectSubset<T, PetFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends StreamSessionFindManyArgs>(args?: SelectSubset<T, StreamSessionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StreamSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a Pet.
-     * @param {PetCreateArgs} args - Arguments to create a Pet.
+     * Create a StreamSession.
+     * @param {StreamSessionCreateArgs} args - Arguments to create a StreamSession.
      * @example
-     * // Create one Pet
-     * const Pet = await prisma.pet.create({
+     * // Create one StreamSession
+     * const StreamSession = await prisma.streamSession.create({
      *   data: {
-     *     // ... data to create a Pet
+     *     // ... data to create a StreamSession
      *   }
      * })
      * 
      */
-    create<T extends PetCreateArgs>(args: SelectSubset<T, PetCreateArgs<ExtArgs>>): Prisma__PetClient<$Result.GetResult<Prisma.$PetPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends StreamSessionCreateArgs>(args: SelectSubset<T, StreamSessionCreateArgs<ExtArgs>>): Prisma__StreamSessionClient<$Result.GetResult<Prisma.$StreamSessionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many Pets.
-     * @param {PetCreateManyArgs} args - Arguments to create many Pets.
+     * Create many StreamSessions.
+     * @param {StreamSessionCreateManyArgs} args - Arguments to create many StreamSessions.
      * @example
-     * // Create many Pets
-     * const pet = await prisma.pet.createMany({
+     * // Create many StreamSessions
+     * const streamSession = await prisma.streamSession.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends PetCreateManyArgs>(args?: SelectSubset<T, PetCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends StreamSessionCreateManyArgs>(args?: SelectSubset<T, StreamSessionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many Pets and returns the data saved in the database.
-     * @param {PetCreateManyAndReturnArgs} args - Arguments to create many Pets.
+     * Create many StreamSessions and returns the data saved in the database.
+     * @param {StreamSessionCreateManyAndReturnArgs} args - Arguments to create many StreamSessions.
      * @example
-     * // Create many Pets
-     * const pet = await prisma.pet.createManyAndReturn({
+     * // Create many StreamSessions
+     * const streamSession = await prisma.streamSession.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many Pets and only return the `id`
-     * const petWithIdOnly = await prisma.pet.createManyAndReturn({
+     * // Create many StreamSessions and only return the `id`
+     * const streamSessionWithIdOnly = await prisma.streamSession.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -3659,28 +4276,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends PetCreateManyAndReturnArgs>(args?: SelectSubset<T, PetCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PetPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends StreamSessionCreateManyAndReturnArgs>(args?: SelectSubset<T, StreamSessionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StreamSessionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a Pet.
-     * @param {PetDeleteArgs} args - Arguments to delete one Pet.
+     * Delete a StreamSession.
+     * @param {StreamSessionDeleteArgs} args - Arguments to delete one StreamSession.
      * @example
-     * // Delete one Pet
-     * const Pet = await prisma.pet.delete({
+     * // Delete one StreamSession
+     * const StreamSession = await prisma.streamSession.delete({
      *   where: {
-     *     // ... filter to delete one Pet
+     *     // ... filter to delete one StreamSession
      *   }
      * })
      * 
      */
-    delete<T extends PetDeleteArgs>(args: SelectSubset<T, PetDeleteArgs<ExtArgs>>): Prisma__PetClient<$Result.GetResult<Prisma.$PetPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends StreamSessionDeleteArgs>(args: SelectSubset<T, StreamSessionDeleteArgs<ExtArgs>>): Prisma__StreamSessionClient<$Result.GetResult<Prisma.$StreamSessionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one Pet.
-     * @param {PetUpdateArgs} args - Arguments to update one Pet.
+     * Update one StreamSession.
+     * @param {StreamSessionUpdateArgs} args - Arguments to update one StreamSession.
      * @example
-     * // Update one Pet
-     * const pet = await prisma.pet.update({
+     * // Update one StreamSession
+     * const streamSession = await prisma.streamSession.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -3690,30 +4307,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends PetUpdateArgs>(args: SelectSubset<T, PetUpdateArgs<ExtArgs>>): Prisma__PetClient<$Result.GetResult<Prisma.$PetPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends StreamSessionUpdateArgs>(args: SelectSubset<T, StreamSessionUpdateArgs<ExtArgs>>): Prisma__StreamSessionClient<$Result.GetResult<Prisma.$StreamSessionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more Pets.
-     * @param {PetDeleteManyArgs} args - Arguments to filter Pets to delete.
+     * Delete zero or more StreamSessions.
+     * @param {StreamSessionDeleteManyArgs} args - Arguments to filter StreamSessions to delete.
      * @example
-     * // Delete a few Pets
-     * const { count } = await prisma.pet.deleteMany({
+     * // Delete a few StreamSessions
+     * const { count } = await prisma.streamSession.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends PetDeleteManyArgs>(args?: SelectSubset<T, PetDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends StreamSessionDeleteManyArgs>(args?: SelectSubset<T, StreamSessionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Pets.
+     * Update zero or more StreamSessions.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PetUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {StreamSessionUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Pets
-     * const pet = await prisma.pet.updateMany({
+     * // Update many StreamSessions
+     * const streamSession = await prisma.streamSession.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -3723,14 +4340,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends PetUpdateManyArgs>(args: SelectSubset<T, PetUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends StreamSessionUpdateManyArgs>(args: SelectSubset<T, StreamSessionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Pets and returns the data updated in the database.
-     * @param {PetUpdateManyAndReturnArgs} args - Arguments to update many Pets.
+     * Update zero or more StreamSessions and returns the data updated in the database.
+     * @param {StreamSessionUpdateManyAndReturnArgs} args - Arguments to update many StreamSessions.
      * @example
-     * // Update many Pets
-     * const pet = await prisma.pet.updateManyAndReturn({
+     * // Update many StreamSessions
+     * const streamSession = await prisma.streamSession.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -3739,8 +4356,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Pets and only return the `id`
-     * const petWithIdOnly = await prisma.pet.updateManyAndReturn({
+     * // Update zero or more StreamSessions and only return the `id`
+     * const streamSessionWithIdOnly = await prisma.streamSession.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -3753,56 +4370,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends PetUpdateManyAndReturnArgs>(args: SelectSubset<T, PetUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PetPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends StreamSessionUpdateManyAndReturnArgs>(args: SelectSubset<T, StreamSessionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StreamSessionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one Pet.
-     * @param {PetUpsertArgs} args - Arguments to update or create a Pet.
+     * Create or update one StreamSession.
+     * @param {StreamSessionUpsertArgs} args - Arguments to update or create a StreamSession.
      * @example
-     * // Update or create a Pet
-     * const pet = await prisma.pet.upsert({
+     * // Update or create a StreamSession
+     * const streamSession = await prisma.streamSession.upsert({
      *   create: {
-     *     // ... data to create a Pet
+     *     // ... data to create a StreamSession
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Pet we want to update
+     *     // ... the filter for the StreamSession we want to update
      *   }
      * })
      */
-    upsert<T extends PetUpsertArgs>(args: SelectSubset<T, PetUpsertArgs<ExtArgs>>): Prisma__PetClient<$Result.GetResult<Prisma.$PetPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends StreamSessionUpsertArgs>(args: SelectSubset<T, StreamSessionUpsertArgs<ExtArgs>>): Prisma__StreamSessionClient<$Result.GetResult<Prisma.$StreamSessionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of Pets.
+     * Count the number of StreamSessions.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PetCountArgs} args - Arguments to filter Pets to count.
+     * @param {StreamSessionCountArgs} args - Arguments to filter StreamSessions to count.
      * @example
-     * // Count the number of Pets
-     * const count = await prisma.pet.count({
+     * // Count the number of StreamSessions
+     * const count = await prisma.streamSession.count({
      *   where: {
-     *     // ... the filter for the Pets we want to count
+     *     // ... the filter for the StreamSessions we want to count
      *   }
      * })
     **/
-    count<T extends PetCountArgs>(
-      args?: Subset<T, PetCountArgs>,
+    count<T extends StreamSessionCountArgs>(
+      args?: Subset<T, StreamSessionCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], PetCountAggregateOutputType>
+          : GetScalarType<T['select'], StreamSessionCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Pet.
+     * Allows you to perform aggregations operations on a StreamSession.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PetAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {StreamSessionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -3822,13 +4439,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends PetAggregateArgs>(args: Subset<T, PetAggregateArgs>): Prisma.PrismaPromise<GetPetAggregateType<T>>
+    aggregate<T extends StreamSessionAggregateArgs>(args: Subset<T, StreamSessionAggregateArgs>): Prisma.PrismaPromise<GetStreamSessionAggregateType<T>>
 
     /**
-     * Group by Pet.
+     * Group by StreamSession.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PetGroupByArgs} args - Group by arguments.
+     * @param {StreamSessionGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -3843,14 +4460,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends PetGroupByArgs,
+      T extends StreamSessionGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: PetGroupByArgs['orderBy'] }
-        : { orderBy?: PetGroupByArgs['orderBy'] },
+        ? { orderBy: StreamSessionGroupByArgs['orderBy'] }
+        : { orderBy?: StreamSessionGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -3899,20 +4516,1183 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, PetGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPetGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, StreamSessionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStreamSessionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the Pet model
+   * Fields of the StreamSession model
    */
-  readonly fields: PetFieldRefs;
+  readonly fields: StreamSessionFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Pet.
+   * The delegate class that acts as a "Promise-like" for StreamSession.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__PetClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__StreamSessionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    gifts<T extends StreamSession$giftsArgs<ExtArgs> = {}>(args?: Subset<T, StreamSession$giftsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GiftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the StreamSession model
+   */
+  interface StreamSessionFieldRefs {
+    readonly id: FieldRef<"StreamSession", 'String'>
+    readonly userId: FieldRef<"StreamSession", 'String'>
+    readonly startTime: FieldRef<"StreamSession", 'DateTime'>
+    readonly endTime: FieldRef<"StreamSession", 'DateTime'>
+    readonly durationMs: FieldRef<"StreamSession", 'Int'>
+    readonly createdAt: FieldRef<"StreamSession", 'DateTime'>
+    readonly updatedAt: FieldRef<"StreamSession", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * StreamSession findUnique
+   */
+  export type StreamSessionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StreamSession
+     */
+    select?: StreamSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StreamSession
+     */
+    omit?: StreamSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreamSessionInclude<ExtArgs> | null
+    /**
+     * Filter, which StreamSession to fetch.
+     */
+    where: StreamSessionWhereUniqueInput
+  }
+
+  /**
+   * StreamSession findUniqueOrThrow
+   */
+  export type StreamSessionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StreamSession
+     */
+    select?: StreamSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StreamSession
+     */
+    omit?: StreamSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreamSessionInclude<ExtArgs> | null
+    /**
+     * Filter, which StreamSession to fetch.
+     */
+    where: StreamSessionWhereUniqueInput
+  }
+
+  /**
+   * StreamSession findFirst
+   */
+  export type StreamSessionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StreamSession
+     */
+    select?: StreamSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StreamSession
+     */
+    omit?: StreamSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreamSessionInclude<ExtArgs> | null
+    /**
+     * Filter, which StreamSession to fetch.
+     */
+    where?: StreamSessionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StreamSessions to fetch.
+     */
+    orderBy?: StreamSessionOrderByWithRelationInput | StreamSessionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StreamSessions.
+     */
+    cursor?: StreamSessionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StreamSessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StreamSessions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StreamSessions.
+     */
+    distinct?: StreamSessionScalarFieldEnum | StreamSessionScalarFieldEnum[]
+  }
+
+  /**
+   * StreamSession findFirstOrThrow
+   */
+  export type StreamSessionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StreamSession
+     */
+    select?: StreamSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StreamSession
+     */
+    omit?: StreamSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreamSessionInclude<ExtArgs> | null
+    /**
+     * Filter, which StreamSession to fetch.
+     */
+    where?: StreamSessionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StreamSessions to fetch.
+     */
+    orderBy?: StreamSessionOrderByWithRelationInput | StreamSessionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StreamSessions.
+     */
+    cursor?: StreamSessionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StreamSessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StreamSessions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StreamSessions.
+     */
+    distinct?: StreamSessionScalarFieldEnum | StreamSessionScalarFieldEnum[]
+  }
+
+  /**
+   * StreamSession findMany
+   */
+  export type StreamSessionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StreamSession
+     */
+    select?: StreamSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StreamSession
+     */
+    omit?: StreamSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreamSessionInclude<ExtArgs> | null
+    /**
+     * Filter, which StreamSessions to fetch.
+     */
+    where?: StreamSessionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StreamSessions to fetch.
+     */
+    orderBy?: StreamSessionOrderByWithRelationInput | StreamSessionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing StreamSessions.
+     */
+    cursor?: StreamSessionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StreamSessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StreamSessions.
+     */
+    skip?: number
+    distinct?: StreamSessionScalarFieldEnum | StreamSessionScalarFieldEnum[]
+  }
+
+  /**
+   * StreamSession create
+   */
+  export type StreamSessionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StreamSession
+     */
+    select?: StreamSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StreamSession
+     */
+    omit?: StreamSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreamSessionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a StreamSession.
+     */
+    data: XOR<StreamSessionCreateInput, StreamSessionUncheckedCreateInput>
+  }
+
+  /**
+   * StreamSession createMany
+   */
+  export type StreamSessionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many StreamSessions.
+     */
+    data: StreamSessionCreateManyInput | StreamSessionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * StreamSession createManyAndReturn
+   */
+  export type StreamSessionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StreamSession
+     */
+    select?: StreamSessionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the StreamSession
+     */
+    omit?: StreamSessionOmit<ExtArgs> | null
+    /**
+     * The data used to create many StreamSessions.
+     */
+    data: StreamSessionCreateManyInput | StreamSessionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreamSessionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * StreamSession update
+   */
+  export type StreamSessionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StreamSession
+     */
+    select?: StreamSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StreamSession
+     */
+    omit?: StreamSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreamSessionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a StreamSession.
+     */
+    data: XOR<StreamSessionUpdateInput, StreamSessionUncheckedUpdateInput>
+    /**
+     * Choose, which StreamSession to update.
+     */
+    where: StreamSessionWhereUniqueInput
+  }
+
+  /**
+   * StreamSession updateMany
+   */
+  export type StreamSessionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update StreamSessions.
+     */
+    data: XOR<StreamSessionUpdateManyMutationInput, StreamSessionUncheckedUpdateManyInput>
+    /**
+     * Filter which StreamSessions to update
+     */
+    where?: StreamSessionWhereInput
+    /**
+     * Limit how many StreamSessions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * StreamSession updateManyAndReturn
+   */
+  export type StreamSessionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StreamSession
+     */
+    select?: StreamSessionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the StreamSession
+     */
+    omit?: StreamSessionOmit<ExtArgs> | null
+    /**
+     * The data used to update StreamSessions.
+     */
+    data: XOR<StreamSessionUpdateManyMutationInput, StreamSessionUncheckedUpdateManyInput>
+    /**
+     * Filter which StreamSessions to update
+     */
+    where?: StreamSessionWhereInput
+    /**
+     * Limit how many StreamSessions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreamSessionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * StreamSession upsert
+   */
+  export type StreamSessionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StreamSession
+     */
+    select?: StreamSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StreamSession
+     */
+    omit?: StreamSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreamSessionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the StreamSession to update in case it exists.
+     */
+    where: StreamSessionWhereUniqueInput
+    /**
+     * In case the StreamSession found by the `where` argument doesn't exist, create a new StreamSession with this data.
+     */
+    create: XOR<StreamSessionCreateInput, StreamSessionUncheckedCreateInput>
+    /**
+     * In case the StreamSession was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<StreamSessionUpdateInput, StreamSessionUncheckedUpdateInput>
+  }
+
+  /**
+   * StreamSession delete
+   */
+  export type StreamSessionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StreamSession
+     */
+    select?: StreamSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StreamSession
+     */
+    omit?: StreamSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreamSessionInclude<ExtArgs> | null
+    /**
+     * Filter which StreamSession to delete.
+     */
+    where: StreamSessionWhereUniqueInput
+  }
+
+  /**
+   * StreamSession deleteMany
+   */
+  export type StreamSessionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StreamSessions to delete
+     */
+    where?: StreamSessionWhereInput
+    /**
+     * Limit how many StreamSessions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * StreamSession.gifts
+   */
+  export type StreamSession$giftsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Gift
+     */
+    select?: GiftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Gift
+     */
+    omit?: GiftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftInclude<ExtArgs> | null
+    where?: GiftWhereInput
+    orderBy?: GiftOrderByWithRelationInput | GiftOrderByWithRelationInput[]
+    cursor?: GiftWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GiftScalarFieldEnum | GiftScalarFieldEnum[]
+  }
+
+  /**
+   * StreamSession without action
+   */
+  export type StreamSessionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StreamSession
+     */
+    select?: StreamSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StreamSession
+     */
+    omit?: StreamSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreamSessionInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model StreamerMetrics
+   */
+
+  export type AggregateStreamerMetrics = {
+    _count: StreamerMetricsCountAggregateOutputType | null
+    _avg: StreamerMetricsAvgAggregateOutputType | null
+    _sum: StreamerMetricsSumAggregateOutputType | null
+    _min: StreamerMetricsMinAggregateOutputType | null
+    _max: StreamerMetricsMaxAggregateOutputType | null
+  }
+
+  export type StreamerMetricsAvgAggregateOutputType = {
+    totalMs: number | null
+    totalSessions: number | null
+    currentLevel: number | null
+  }
+
+  export type StreamerMetricsSumAggregateOutputType = {
+    totalMs: number | null
+    totalSessions: number | null
+    currentLevel: number | null
+  }
+
+  export type StreamerMetricsMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    totalMs: number | null
+    totalSessions: number | null
+    currentLevel: number | null
+    lastLevelUpAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type StreamerMetricsMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    totalMs: number | null
+    totalSessions: number | null
+    currentLevel: number | null
+    lastLevelUpAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type StreamerMetricsCountAggregateOutputType = {
+    id: number
+    userId: number
+    totalMs: number
+    totalSessions: number
+    currentLevel: number
+    lastLevelUpAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type StreamerMetricsAvgAggregateInputType = {
+    totalMs?: true
+    totalSessions?: true
+    currentLevel?: true
+  }
+
+  export type StreamerMetricsSumAggregateInputType = {
+    totalMs?: true
+    totalSessions?: true
+    currentLevel?: true
+  }
+
+  export type StreamerMetricsMinAggregateInputType = {
+    id?: true
+    userId?: true
+    totalMs?: true
+    totalSessions?: true
+    currentLevel?: true
+    lastLevelUpAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type StreamerMetricsMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    totalMs?: true
+    totalSessions?: true
+    currentLevel?: true
+    lastLevelUpAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type StreamerMetricsCountAggregateInputType = {
+    id?: true
+    userId?: true
+    totalMs?: true
+    totalSessions?: true
+    currentLevel?: true
+    lastLevelUpAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type StreamerMetricsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StreamerMetrics to aggregate.
+     */
+    where?: StreamerMetricsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StreamerMetrics to fetch.
+     */
+    orderBy?: StreamerMetricsOrderByWithRelationInput | StreamerMetricsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: StreamerMetricsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StreamerMetrics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StreamerMetrics.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned StreamerMetrics
+    **/
+    _count?: true | StreamerMetricsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: StreamerMetricsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: StreamerMetricsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: StreamerMetricsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: StreamerMetricsMaxAggregateInputType
+  }
+
+  export type GetStreamerMetricsAggregateType<T extends StreamerMetricsAggregateArgs> = {
+        [P in keyof T & keyof AggregateStreamerMetrics]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateStreamerMetrics[P]>
+      : GetScalarType<T[P], AggregateStreamerMetrics[P]>
+  }
+
+
+
+
+  export type StreamerMetricsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StreamerMetricsWhereInput
+    orderBy?: StreamerMetricsOrderByWithAggregationInput | StreamerMetricsOrderByWithAggregationInput[]
+    by: StreamerMetricsScalarFieldEnum[] | StreamerMetricsScalarFieldEnum
+    having?: StreamerMetricsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: StreamerMetricsCountAggregateInputType | true
+    _avg?: StreamerMetricsAvgAggregateInputType
+    _sum?: StreamerMetricsSumAggregateInputType
+    _min?: StreamerMetricsMinAggregateInputType
+    _max?: StreamerMetricsMaxAggregateInputType
+  }
+
+  export type StreamerMetricsGroupByOutputType = {
+    id: string
+    userId: string
+    totalMs: number
+    totalSessions: number
+    currentLevel: number
+    lastLevelUpAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: StreamerMetricsCountAggregateOutputType | null
+    _avg: StreamerMetricsAvgAggregateOutputType | null
+    _sum: StreamerMetricsSumAggregateOutputType | null
+    _min: StreamerMetricsMinAggregateOutputType | null
+    _max: StreamerMetricsMaxAggregateOutputType | null
+  }
+
+  type GetStreamerMetricsGroupByPayload<T extends StreamerMetricsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<StreamerMetricsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof StreamerMetricsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], StreamerMetricsGroupByOutputType[P]>
+            : GetScalarType<T[P], StreamerMetricsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type StreamerMetricsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    totalMs?: boolean
+    totalSessions?: boolean
+    currentLevel?: boolean
+    lastLevelUpAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["streamerMetrics"]>
+
+  export type StreamerMetricsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    totalMs?: boolean
+    totalSessions?: boolean
+    currentLevel?: boolean
+    lastLevelUpAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["streamerMetrics"]>
+
+  export type StreamerMetricsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    totalMs?: boolean
+    totalSessions?: boolean
+    currentLevel?: boolean
+    lastLevelUpAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["streamerMetrics"]>
+
+  export type StreamerMetricsSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    totalMs?: boolean
+    totalSessions?: boolean
+    currentLevel?: boolean
+    lastLevelUpAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type StreamerMetricsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "totalMs" | "totalSessions" | "currentLevel" | "lastLevelUpAt" | "createdAt" | "updatedAt", ExtArgs["result"]["streamerMetrics"]>
+  export type StreamerMetricsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type StreamerMetricsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type StreamerMetricsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $StreamerMetricsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "StreamerMetrics"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      totalMs: number
+      totalSessions: number
+      currentLevel: number
+      lastLevelUpAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["streamerMetrics"]>
+    composites: {}
+  }
+
+  type StreamerMetricsGetPayload<S extends boolean | null | undefined | StreamerMetricsDefaultArgs> = $Result.GetResult<Prisma.$StreamerMetricsPayload, S>
+
+  type StreamerMetricsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<StreamerMetricsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: StreamerMetricsCountAggregateInputType | true
+    }
+
+  export interface StreamerMetricsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['StreamerMetrics'], meta: { name: 'StreamerMetrics' } }
+    /**
+     * Find zero or one StreamerMetrics that matches the filter.
+     * @param {StreamerMetricsFindUniqueArgs} args - Arguments to find a StreamerMetrics
+     * @example
+     * // Get one StreamerMetrics
+     * const streamerMetrics = await prisma.streamerMetrics.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends StreamerMetricsFindUniqueArgs>(args: SelectSubset<T, StreamerMetricsFindUniqueArgs<ExtArgs>>): Prisma__StreamerMetricsClient<$Result.GetResult<Prisma.$StreamerMetricsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one StreamerMetrics that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {StreamerMetricsFindUniqueOrThrowArgs} args - Arguments to find a StreamerMetrics
+     * @example
+     * // Get one StreamerMetrics
+     * const streamerMetrics = await prisma.streamerMetrics.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends StreamerMetricsFindUniqueOrThrowArgs>(args: SelectSubset<T, StreamerMetricsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__StreamerMetricsClient<$Result.GetResult<Prisma.$StreamerMetricsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first StreamerMetrics that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StreamerMetricsFindFirstArgs} args - Arguments to find a StreamerMetrics
+     * @example
+     * // Get one StreamerMetrics
+     * const streamerMetrics = await prisma.streamerMetrics.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends StreamerMetricsFindFirstArgs>(args?: SelectSubset<T, StreamerMetricsFindFirstArgs<ExtArgs>>): Prisma__StreamerMetricsClient<$Result.GetResult<Prisma.$StreamerMetricsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first StreamerMetrics that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StreamerMetricsFindFirstOrThrowArgs} args - Arguments to find a StreamerMetrics
+     * @example
+     * // Get one StreamerMetrics
+     * const streamerMetrics = await prisma.streamerMetrics.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends StreamerMetricsFindFirstOrThrowArgs>(args?: SelectSubset<T, StreamerMetricsFindFirstOrThrowArgs<ExtArgs>>): Prisma__StreamerMetricsClient<$Result.GetResult<Prisma.$StreamerMetricsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more StreamerMetrics that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StreamerMetricsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all StreamerMetrics
+     * const streamerMetrics = await prisma.streamerMetrics.findMany()
+     * 
+     * // Get first 10 StreamerMetrics
+     * const streamerMetrics = await prisma.streamerMetrics.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const streamerMetricsWithIdOnly = await prisma.streamerMetrics.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends StreamerMetricsFindManyArgs>(args?: SelectSubset<T, StreamerMetricsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StreamerMetricsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a StreamerMetrics.
+     * @param {StreamerMetricsCreateArgs} args - Arguments to create a StreamerMetrics.
+     * @example
+     * // Create one StreamerMetrics
+     * const StreamerMetrics = await prisma.streamerMetrics.create({
+     *   data: {
+     *     // ... data to create a StreamerMetrics
+     *   }
+     * })
+     * 
+     */
+    create<T extends StreamerMetricsCreateArgs>(args: SelectSubset<T, StreamerMetricsCreateArgs<ExtArgs>>): Prisma__StreamerMetricsClient<$Result.GetResult<Prisma.$StreamerMetricsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many StreamerMetrics.
+     * @param {StreamerMetricsCreateManyArgs} args - Arguments to create many StreamerMetrics.
+     * @example
+     * // Create many StreamerMetrics
+     * const streamerMetrics = await prisma.streamerMetrics.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends StreamerMetricsCreateManyArgs>(args?: SelectSubset<T, StreamerMetricsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many StreamerMetrics and returns the data saved in the database.
+     * @param {StreamerMetricsCreateManyAndReturnArgs} args - Arguments to create many StreamerMetrics.
+     * @example
+     * // Create many StreamerMetrics
+     * const streamerMetrics = await prisma.streamerMetrics.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many StreamerMetrics and only return the `id`
+     * const streamerMetricsWithIdOnly = await prisma.streamerMetrics.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends StreamerMetricsCreateManyAndReturnArgs>(args?: SelectSubset<T, StreamerMetricsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StreamerMetricsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a StreamerMetrics.
+     * @param {StreamerMetricsDeleteArgs} args - Arguments to delete one StreamerMetrics.
+     * @example
+     * // Delete one StreamerMetrics
+     * const StreamerMetrics = await prisma.streamerMetrics.delete({
+     *   where: {
+     *     // ... filter to delete one StreamerMetrics
+     *   }
+     * })
+     * 
+     */
+    delete<T extends StreamerMetricsDeleteArgs>(args: SelectSubset<T, StreamerMetricsDeleteArgs<ExtArgs>>): Prisma__StreamerMetricsClient<$Result.GetResult<Prisma.$StreamerMetricsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one StreamerMetrics.
+     * @param {StreamerMetricsUpdateArgs} args - Arguments to update one StreamerMetrics.
+     * @example
+     * // Update one StreamerMetrics
+     * const streamerMetrics = await prisma.streamerMetrics.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends StreamerMetricsUpdateArgs>(args: SelectSubset<T, StreamerMetricsUpdateArgs<ExtArgs>>): Prisma__StreamerMetricsClient<$Result.GetResult<Prisma.$StreamerMetricsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more StreamerMetrics.
+     * @param {StreamerMetricsDeleteManyArgs} args - Arguments to filter StreamerMetrics to delete.
+     * @example
+     * // Delete a few StreamerMetrics
+     * const { count } = await prisma.streamerMetrics.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends StreamerMetricsDeleteManyArgs>(args?: SelectSubset<T, StreamerMetricsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StreamerMetrics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StreamerMetricsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many StreamerMetrics
+     * const streamerMetrics = await prisma.streamerMetrics.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends StreamerMetricsUpdateManyArgs>(args: SelectSubset<T, StreamerMetricsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StreamerMetrics and returns the data updated in the database.
+     * @param {StreamerMetricsUpdateManyAndReturnArgs} args - Arguments to update many StreamerMetrics.
+     * @example
+     * // Update many StreamerMetrics
+     * const streamerMetrics = await prisma.streamerMetrics.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more StreamerMetrics and only return the `id`
+     * const streamerMetricsWithIdOnly = await prisma.streamerMetrics.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends StreamerMetricsUpdateManyAndReturnArgs>(args: SelectSubset<T, StreamerMetricsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StreamerMetricsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one StreamerMetrics.
+     * @param {StreamerMetricsUpsertArgs} args - Arguments to update or create a StreamerMetrics.
+     * @example
+     * // Update or create a StreamerMetrics
+     * const streamerMetrics = await prisma.streamerMetrics.upsert({
+     *   create: {
+     *     // ... data to create a StreamerMetrics
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the StreamerMetrics we want to update
+     *   }
+     * })
+     */
+    upsert<T extends StreamerMetricsUpsertArgs>(args: SelectSubset<T, StreamerMetricsUpsertArgs<ExtArgs>>): Prisma__StreamerMetricsClient<$Result.GetResult<Prisma.$StreamerMetricsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of StreamerMetrics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StreamerMetricsCountArgs} args - Arguments to filter StreamerMetrics to count.
+     * @example
+     * // Count the number of StreamerMetrics
+     * const count = await prisma.streamerMetrics.count({
+     *   where: {
+     *     // ... the filter for the StreamerMetrics we want to count
+     *   }
+     * })
+    **/
+    count<T extends StreamerMetricsCountArgs>(
+      args?: Subset<T, StreamerMetricsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], StreamerMetricsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a StreamerMetrics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StreamerMetricsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends StreamerMetricsAggregateArgs>(args: Subset<T, StreamerMetricsAggregateArgs>): Prisma.PrismaPromise<GetStreamerMetricsAggregateType<T>>
+
+    /**
+     * Group by StreamerMetrics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StreamerMetricsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends StreamerMetricsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: StreamerMetricsGroupByArgs['orderBy'] }
+        : { orderBy?: StreamerMetricsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, StreamerMetricsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStreamerMetricsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the StreamerMetrics model
+   */
+  readonly fields: StreamerMetricsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for StreamerMetrics.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__StreamerMetricsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
@@ -3941,424 +5721,3828 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the Pet model
+   * Fields of the StreamerMetrics model
    */
-  interface PetFieldRefs {
-    readonly id: FieldRef<"Pet", 'String'>
-    readonly size: FieldRef<"Pet", 'Float'>
-    readonly hearts: FieldRef<"Pet", 'Int'>
-    readonly userId: FieldRef<"Pet", 'String'>
+  interface StreamerMetricsFieldRefs {
+    readonly id: FieldRef<"StreamerMetrics", 'String'>
+    readonly userId: FieldRef<"StreamerMetrics", 'String'>
+    readonly totalMs: FieldRef<"StreamerMetrics", 'Int'>
+    readonly totalSessions: FieldRef<"StreamerMetrics", 'Int'>
+    readonly currentLevel: FieldRef<"StreamerMetrics", 'Int'>
+    readonly lastLevelUpAt: FieldRef<"StreamerMetrics", 'DateTime'>
+    readonly createdAt: FieldRef<"StreamerMetrics", 'DateTime'>
+    readonly updatedAt: FieldRef<"StreamerMetrics", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * Pet findUnique
+   * StreamerMetrics findUnique
    */
-  export type PetFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StreamerMetricsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Pet
+     * Select specific fields to fetch from the StreamerMetrics
      */
-    select?: PetSelect<ExtArgs> | null
+    select?: StreamerMetricsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Pet
+     * Omit specific fields from the StreamerMetrics
      */
-    omit?: PetOmit<ExtArgs> | null
+    omit?: StreamerMetricsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PetInclude<ExtArgs> | null
+    include?: StreamerMetricsInclude<ExtArgs> | null
     /**
-     * Filter, which Pet to fetch.
+     * Filter, which StreamerMetrics to fetch.
      */
-    where: PetWhereUniqueInput
+    where: StreamerMetricsWhereUniqueInput
   }
 
   /**
-   * Pet findUniqueOrThrow
+   * StreamerMetrics findUniqueOrThrow
    */
-  export type PetFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StreamerMetricsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Pet
+     * Select specific fields to fetch from the StreamerMetrics
      */
-    select?: PetSelect<ExtArgs> | null
+    select?: StreamerMetricsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Pet
+     * Omit specific fields from the StreamerMetrics
      */
-    omit?: PetOmit<ExtArgs> | null
+    omit?: StreamerMetricsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PetInclude<ExtArgs> | null
+    include?: StreamerMetricsInclude<ExtArgs> | null
     /**
-     * Filter, which Pet to fetch.
+     * Filter, which StreamerMetrics to fetch.
      */
-    where: PetWhereUniqueInput
+    where: StreamerMetricsWhereUniqueInput
   }
 
   /**
-   * Pet findFirst
+   * StreamerMetrics findFirst
    */
-  export type PetFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StreamerMetricsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Pet
+     * Select specific fields to fetch from the StreamerMetrics
      */
-    select?: PetSelect<ExtArgs> | null
+    select?: StreamerMetricsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Pet
+     * Omit specific fields from the StreamerMetrics
      */
-    omit?: PetOmit<ExtArgs> | null
+    omit?: StreamerMetricsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PetInclude<ExtArgs> | null
+    include?: StreamerMetricsInclude<ExtArgs> | null
     /**
-     * Filter, which Pet to fetch.
+     * Filter, which StreamerMetrics to fetch.
      */
-    where?: PetWhereInput
+    where?: StreamerMetricsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Pets to fetch.
+     * Determine the order of StreamerMetrics to fetch.
      */
-    orderBy?: PetOrderByWithRelationInput | PetOrderByWithRelationInput[]
+    orderBy?: StreamerMetricsOrderByWithRelationInput | StreamerMetricsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Pets.
+     * Sets the position for searching for StreamerMetrics.
      */
-    cursor?: PetWhereUniqueInput
+    cursor?: StreamerMetricsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Pets from the position of the cursor.
+     * Take `±n` StreamerMetrics from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Pets.
+     * Skip the first `n` StreamerMetrics.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Pets.
+     * Filter by unique combinations of StreamerMetrics.
      */
-    distinct?: PetScalarFieldEnum | PetScalarFieldEnum[]
+    distinct?: StreamerMetricsScalarFieldEnum | StreamerMetricsScalarFieldEnum[]
   }
 
   /**
-   * Pet findFirstOrThrow
+   * StreamerMetrics findFirstOrThrow
    */
-  export type PetFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StreamerMetricsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Pet
+     * Select specific fields to fetch from the StreamerMetrics
      */
-    select?: PetSelect<ExtArgs> | null
+    select?: StreamerMetricsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Pet
+     * Omit specific fields from the StreamerMetrics
      */
-    omit?: PetOmit<ExtArgs> | null
+    omit?: StreamerMetricsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PetInclude<ExtArgs> | null
+    include?: StreamerMetricsInclude<ExtArgs> | null
     /**
-     * Filter, which Pet to fetch.
+     * Filter, which StreamerMetrics to fetch.
      */
-    where?: PetWhereInput
+    where?: StreamerMetricsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Pets to fetch.
+     * Determine the order of StreamerMetrics to fetch.
      */
-    orderBy?: PetOrderByWithRelationInput | PetOrderByWithRelationInput[]
+    orderBy?: StreamerMetricsOrderByWithRelationInput | StreamerMetricsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Pets.
+     * Sets the position for searching for StreamerMetrics.
      */
-    cursor?: PetWhereUniqueInput
+    cursor?: StreamerMetricsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Pets from the position of the cursor.
+     * Take `±n` StreamerMetrics from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Pets.
+     * Skip the first `n` StreamerMetrics.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Pets.
+     * Filter by unique combinations of StreamerMetrics.
      */
-    distinct?: PetScalarFieldEnum | PetScalarFieldEnum[]
+    distinct?: StreamerMetricsScalarFieldEnum | StreamerMetricsScalarFieldEnum[]
   }
 
   /**
-   * Pet findMany
+   * StreamerMetrics findMany
    */
-  export type PetFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StreamerMetricsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Pet
+     * Select specific fields to fetch from the StreamerMetrics
      */
-    select?: PetSelect<ExtArgs> | null
+    select?: StreamerMetricsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Pet
+     * Omit specific fields from the StreamerMetrics
      */
-    omit?: PetOmit<ExtArgs> | null
+    omit?: StreamerMetricsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PetInclude<ExtArgs> | null
+    include?: StreamerMetricsInclude<ExtArgs> | null
     /**
-     * Filter, which Pets to fetch.
+     * Filter, which StreamerMetrics to fetch.
      */
-    where?: PetWhereInput
+    where?: StreamerMetricsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Pets to fetch.
+     * Determine the order of StreamerMetrics to fetch.
      */
-    orderBy?: PetOrderByWithRelationInput | PetOrderByWithRelationInput[]
+    orderBy?: StreamerMetricsOrderByWithRelationInput | StreamerMetricsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Pets.
+     * Sets the position for listing StreamerMetrics.
      */
-    cursor?: PetWhereUniqueInput
+    cursor?: StreamerMetricsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Pets from the position of the cursor.
+     * Take `±n` StreamerMetrics from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Pets.
+     * Skip the first `n` StreamerMetrics.
      */
     skip?: number
-    distinct?: PetScalarFieldEnum | PetScalarFieldEnum[]
+    distinct?: StreamerMetricsScalarFieldEnum | StreamerMetricsScalarFieldEnum[]
   }
 
   /**
-   * Pet create
+   * StreamerMetrics create
    */
-  export type PetCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StreamerMetricsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Pet
+     * Select specific fields to fetch from the StreamerMetrics
      */
-    select?: PetSelect<ExtArgs> | null
+    select?: StreamerMetricsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Pet
+     * Omit specific fields from the StreamerMetrics
      */
-    omit?: PetOmit<ExtArgs> | null
+    omit?: StreamerMetricsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PetInclude<ExtArgs> | null
+    include?: StreamerMetricsInclude<ExtArgs> | null
     /**
-     * The data needed to create a Pet.
+     * The data needed to create a StreamerMetrics.
      */
-    data: XOR<PetCreateInput, PetUncheckedCreateInput>
+    data: XOR<StreamerMetricsCreateInput, StreamerMetricsUncheckedCreateInput>
   }
 
   /**
-   * Pet createMany
+   * StreamerMetrics createMany
    */
-  export type PetCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StreamerMetricsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many Pets.
+     * The data used to create many StreamerMetrics.
      */
-    data: PetCreateManyInput | PetCreateManyInput[]
+    data: StreamerMetricsCreateManyInput | StreamerMetricsCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * Pet createManyAndReturn
+   * StreamerMetrics createManyAndReturn
    */
-  export type PetCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StreamerMetricsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Pet
+     * Select specific fields to fetch from the StreamerMetrics
      */
-    select?: PetSelectCreateManyAndReturn<ExtArgs> | null
+    select?: StreamerMetricsSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Pet
+     * Omit specific fields from the StreamerMetrics
      */
-    omit?: PetOmit<ExtArgs> | null
+    omit?: StreamerMetricsOmit<ExtArgs> | null
     /**
-     * The data used to create many Pets.
+     * The data used to create many StreamerMetrics.
      */
-    data: PetCreateManyInput | PetCreateManyInput[]
+    data: StreamerMetricsCreateManyInput | StreamerMetricsCreateManyInput[]
     skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PetIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: StreamerMetricsIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * Pet update
+   * StreamerMetrics update
    */
-  export type PetUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StreamerMetricsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Pet
+     * Select specific fields to fetch from the StreamerMetrics
      */
-    select?: PetSelect<ExtArgs> | null
+    select?: StreamerMetricsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Pet
+     * Omit specific fields from the StreamerMetrics
      */
-    omit?: PetOmit<ExtArgs> | null
+    omit?: StreamerMetricsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PetInclude<ExtArgs> | null
+    include?: StreamerMetricsInclude<ExtArgs> | null
     /**
-     * The data needed to update a Pet.
+     * The data needed to update a StreamerMetrics.
      */
-    data: XOR<PetUpdateInput, PetUncheckedUpdateInput>
+    data: XOR<StreamerMetricsUpdateInput, StreamerMetricsUncheckedUpdateInput>
     /**
-     * Choose, which Pet to update.
+     * Choose, which StreamerMetrics to update.
      */
-    where: PetWhereUniqueInput
+    where: StreamerMetricsWhereUniqueInput
   }
 
   /**
-   * Pet updateMany
+   * StreamerMetrics updateMany
    */
-  export type PetUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StreamerMetricsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update Pets.
+     * The data used to update StreamerMetrics.
      */
-    data: XOR<PetUpdateManyMutationInput, PetUncheckedUpdateManyInput>
+    data: XOR<StreamerMetricsUpdateManyMutationInput, StreamerMetricsUncheckedUpdateManyInput>
     /**
-     * Filter which Pets to update
+     * Filter which StreamerMetrics to update
      */
-    where?: PetWhereInput
+    where?: StreamerMetricsWhereInput
     /**
-     * Limit how many Pets to update.
+     * Limit how many StreamerMetrics to update.
      */
     limit?: number
   }
 
   /**
-   * Pet updateManyAndReturn
+   * StreamerMetrics updateManyAndReturn
    */
-  export type PetUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StreamerMetricsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Pet
+     * Select specific fields to fetch from the StreamerMetrics
      */
-    select?: PetSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: StreamerMetricsSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Pet
+     * Omit specific fields from the StreamerMetrics
      */
-    omit?: PetOmit<ExtArgs> | null
+    omit?: StreamerMetricsOmit<ExtArgs> | null
     /**
-     * The data used to update Pets.
+     * The data used to update StreamerMetrics.
      */
-    data: XOR<PetUpdateManyMutationInput, PetUncheckedUpdateManyInput>
+    data: XOR<StreamerMetricsUpdateManyMutationInput, StreamerMetricsUncheckedUpdateManyInput>
     /**
-     * Filter which Pets to update
+     * Filter which StreamerMetrics to update
      */
-    where?: PetWhereInput
+    where?: StreamerMetricsWhereInput
     /**
-     * Limit how many Pets to update.
+     * Limit how many StreamerMetrics to update.
      */
     limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PetIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: StreamerMetricsIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * Pet upsert
+   * StreamerMetrics upsert
    */
-  export type PetUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StreamerMetricsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Pet
+     * Select specific fields to fetch from the StreamerMetrics
      */
-    select?: PetSelect<ExtArgs> | null
+    select?: StreamerMetricsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Pet
+     * Omit specific fields from the StreamerMetrics
      */
-    omit?: PetOmit<ExtArgs> | null
+    omit?: StreamerMetricsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PetInclude<ExtArgs> | null
+    include?: StreamerMetricsInclude<ExtArgs> | null
     /**
-     * The filter to search for the Pet to update in case it exists.
+     * The filter to search for the StreamerMetrics to update in case it exists.
      */
-    where: PetWhereUniqueInput
+    where: StreamerMetricsWhereUniqueInput
     /**
-     * In case the Pet found by the `where` argument doesn't exist, create a new Pet with this data.
+     * In case the StreamerMetrics found by the `where` argument doesn't exist, create a new StreamerMetrics with this data.
      */
-    create: XOR<PetCreateInput, PetUncheckedCreateInput>
+    create: XOR<StreamerMetricsCreateInput, StreamerMetricsUncheckedCreateInput>
     /**
-     * In case the Pet was found with the provided `where` argument, update it with this data.
+     * In case the StreamerMetrics was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<PetUpdateInput, PetUncheckedUpdateInput>
+    update: XOR<StreamerMetricsUpdateInput, StreamerMetricsUncheckedUpdateInput>
   }
 
   /**
-   * Pet delete
+   * StreamerMetrics delete
    */
-  export type PetDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StreamerMetricsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Pet
+     * Select specific fields to fetch from the StreamerMetrics
      */
-    select?: PetSelect<ExtArgs> | null
+    select?: StreamerMetricsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Pet
+     * Omit specific fields from the StreamerMetrics
      */
-    omit?: PetOmit<ExtArgs> | null
+    omit?: StreamerMetricsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PetInclude<ExtArgs> | null
+    include?: StreamerMetricsInclude<ExtArgs> | null
     /**
-     * Filter which Pet to delete.
+     * Filter which StreamerMetrics to delete.
      */
-    where: PetWhereUniqueInput
+    where: StreamerMetricsWhereUniqueInput
   }
 
   /**
-   * Pet deleteMany
+   * StreamerMetrics deleteMany
    */
-  export type PetDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StreamerMetricsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Pets to delete
+     * Filter which StreamerMetrics to delete
      */
-    where?: PetWhereInput
+    where?: StreamerMetricsWhereInput
     /**
-     * Limit how many Pets to delete.
+     * Limit how many StreamerMetrics to delete.
      */
     limit?: number
   }
 
   /**
-   * Pet without action
+   * StreamerMetrics without action
    */
-  export type PetDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type StreamerMetricsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Pet
+     * Select specific fields to fetch from the StreamerMetrics
      */
-    select?: PetSelect<ExtArgs> | null
+    select?: StreamerMetricsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Pet
+     * Omit specific fields from the StreamerMetrics
      */
-    omit?: PetOmit<ExtArgs> | null
+    omit?: StreamerMetricsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PetInclude<ExtArgs> | null
+    include?: StreamerMetricsInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model AudienceLevel
+   */
+
+  export type AggregateAudienceLevel = {
+    _count: AudienceLevelCountAggregateOutputType | null
+    _avg: AudienceLevelAvgAggregateOutputType | null
+    _sum: AudienceLevelSumAggregateOutputType | null
+    _min: AudienceLevelMinAggregateOutputType | null
+    _max: AudienceLevelMaxAggregateOutputType | null
+  }
+
+  export type AudienceLevelAvgAggregateOutputType = {
+    level: number | null
+  }
+
+  export type AudienceLevelSumAggregateOutputType = {
+    level: number | null
+  }
+
+  export type AudienceLevelMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    level: number | null
+    name: string | null
+    description: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AudienceLevelMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    level: number | null
+    name: string | null
+    description: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AudienceLevelCountAggregateOutputType = {
+    id: number
+    userId: number
+    level: number
+    name: number
+    description: number
+    viewPermissions: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type AudienceLevelAvgAggregateInputType = {
+    level?: true
+  }
+
+  export type AudienceLevelSumAggregateInputType = {
+    level?: true
+  }
+
+  export type AudienceLevelMinAggregateInputType = {
+    id?: true
+    userId?: true
+    level?: true
+    name?: true
+    description?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AudienceLevelMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    level?: true
+    name?: true
+    description?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AudienceLevelCountAggregateInputType = {
+    id?: true
+    userId?: true
+    level?: true
+    name?: true
+    description?: true
+    viewPermissions?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type AudienceLevelAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AudienceLevel to aggregate.
+     */
+    where?: AudienceLevelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AudienceLevels to fetch.
+     */
+    orderBy?: AudienceLevelOrderByWithRelationInput | AudienceLevelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AudienceLevelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AudienceLevels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AudienceLevels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AudienceLevels
+    **/
+    _count?: true | AudienceLevelCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AudienceLevelAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AudienceLevelSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AudienceLevelMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AudienceLevelMaxAggregateInputType
+  }
+
+  export type GetAudienceLevelAggregateType<T extends AudienceLevelAggregateArgs> = {
+        [P in keyof T & keyof AggregateAudienceLevel]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAudienceLevel[P]>
+      : GetScalarType<T[P], AggregateAudienceLevel[P]>
+  }
+
+
+
+
+  export type AudienceLevelGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AudienceLevelWhereInput
+    orderBy?: AudienceLevelOrderByWithAggregationInput | AudienceLevelOrderByWithAggregationInput[]
+    by: AudienceLevelScalarFieldEnum[] | AudienceLevelScalarFieldEnum
+    having?: AudienceLevelScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AudienceLevelCountAggregateInputType | true
+    _avg?: AudienceLevelAvgAggregateInputType
+    _sum?: AudienceLevelSumAggregateInputType
+    _min?: AudienceLevelMinAggregateInputType
+    _max?: AudienceLevelMaxAggregateInputType
+  }
+
+  export type AudienceLevelGroupByOutputType = {
+    id: string
+    userId: string
+    level: number
+    name: string
+    description: string | null
+    viewPermissions: JsonValue | null
+    createdAt: Date
+    updatedAt: Date
+    _count: AudienceLevelCountAggregateOutputType | null
+    _avg: AudienceLevelAvgAggregateOutputType | null
+    _sum: AudienceLevelSumAggregateOutputType | null
+    _min: AudienceLevelMinAggregateOutputType | null
+    _max: AudienceLevelMaxAggregateOutputType | null
+  }
+
+  type GetAudienceLevelGroupByPayload<T extends AudienceLevelGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AudienceLevelGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AudienceLevelGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AudienceLevelGroupByOutputType[P]>
+            : GetScalarType<T[P], AudienceLevelGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AudienceLevelSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    level?: boolean
+    name?: boolean
+    description?: boolean
+    viewPermissions?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["audienceLevel"]>
+
+  export type AudienceLevelSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    level?: boolean
+    name?: boolean
+    description?: boolean
+    viewPermissions?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["audienceLevel"]>
+
+  export type AudienceLevelSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    level?: boolean
+    name?: boolean
+    description?: boolean
+    viewPermissions?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["audienceLevel"]>
+
+  export type AudienceLevelSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    level?: boolean
+    name?: boolean
+    description?: boolean
+    viewPermissions?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type AudienceLevelOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "level" | "name" | "description" | "viewPermissions" | "createdAt" | "updatedAt", ExtArgs["result"]["audienceLevel"]>
+  export type AudienceLevelInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type AudienceLevelIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type AudienceLevelIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $AudienceLevelPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AudienceLevel"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      level: number
+      name: string
+      description: string | null
+      viewPermissions: Prisma.JsonValue | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["audienceLevel"]>
+    composites: {}
+  }
+
+  type AudienceLevelGetPayload<S extends boolean | null | undefined | AudienceLevelDefaultArgs> = $Result.GetResult<Prisma.$AudienceLevelPayload, S>
+
+  type AudienceLevelCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AudienceLevelFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AudienceLevelCountAggregateInputType | true
+    }
+
+  export interface AudienceLevelDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AudienceLevel'], meta: { name: 'AudienceLevel' } }
+    /**
+     * Find zero or one AudienceLevel that matches the filter.
+     * @param {AudienceLevelFindUniqueArgs} args - Arguments to find a AudienceLevel
+     * @example
+     * // Get one AudienceLevel
+     * const audienceLevel = await prisma.audienceLevel.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AudienceLevelFindUniqueArgs>(args: SelectSubset<T, AudienceLevelFindUniqueArgs<ExtArgs>>): Prisma__AudienceLevelClient<$Result.GetResult<Prisma.$AudienceLevelPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AudienceLevel that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AudienceLevelFindUniqueOrThrowArgs} args - Arguments to find a AudienceLevel
+     * @example
+     * // Get one AudienceLevel
+     * const audienceLevel = await prisma.audienceLevel.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AudienceLevelFindUniqueOrThrowArgs>(args: SelectSubset<T, AudienceLevelFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AudienceLevelClient<$Result.GetResult<Prisma.$AudienceLevelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AudienceLevel that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AudienceLevelFindFirstArgs} args - Arguments to find a AudienceLevel
+     * @example
+     * // Get one AudienceLevel
+     * const audienceLevel = await prisma.audienceLevel.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AudienceLevelFindFirstArgs>(args?: SelectSubset<T, AudienceLevelFindFirstArgs<ExtArgs>>): Prisma__AudienceLevelClient<$Result.GetResult<Prisma.$AudienceLevelPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AudienceLevel that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AudienceLevelFindFirstOrThrowArgs} args - Arguments to find a AudienceLevel
+     * @example
+     * // Get one AudienceLevel
+     * const audienceLevel = await prisma.audienceLevel.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AudienceLevelFindFirstOrThrowArgs>(args?: SelectSubset<T, AudienceLevelFindFirstOrThrowArgs<ExtArgs>>): Prisma__AudienceLevelClient<$Result.GetResult<Prisma.$AudienceLevelPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AudienceLevels that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AudienceLevelFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AudienceLevels
+     * const audienceLevels = await prisma.audienceLevel.findMany()
+     * 
+     * // Get first 10 AudienceLevels
+     * const audienceLevels = await prisma.audienceLevel.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const audienceLevelWithIdOnly = await prisma.audienceLevel.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AudienceLevelFindManyArgs>(args?: SelectSubset<T, AudienceLevelFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AudienceLevelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AudienceLevel.
+     * @param {AudienceLevelCreateArgs} args - Arguments to create a AudienceLevel.
+     * @example
+     * // Create one AudienceLevel
+     * const AudienceLevel = await prisma.audienceLevel.create({
+     *   data: {
+     *     // ... data to create a AudienceLevel
+     *   }
+     * })
+     * 
+     */
+    create<T extends AudienceLevelCreateArgs>(args: SelectSubset<T, AudienceLevelCreateArgs<ExtArgs>>): Prisma__AudienceLevelClient<$Result.GetResult<Prisma.$AudienceLevelPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AudienceLevels.
+     * @param {AudienceLevelCreateManyArgs} args - Arguments to create many AudienceLevels.
+     * @example
+     * // Create many AudienceLevels
+     * const audienceLevel = await prisma.audienceLevel.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AudienceLevelCreateManyArgs>(args?: SelectSubset<T, AudienceLevelCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AudienceLevels and returns the data saved in the database.
+     * @param {AudienceLevelCreateManyAndReturnArgs} args - Arguments to create many AudienceLevels.
+     * @example
+     * // Create many AudienceLevels
+     * const audienceLevel = await prisma.audienceLevel.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AudienceLevels and only return the `id`
+     * const audienceLevelWithIdOnly = await prisma.audienceLevel.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AudienceLevelCreateManyAndReturnArgs>(args?: SelectSubset<T, AudienceLevelCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AudienceLevelPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AudienceLevel.
+     * @param {AudienceLevelDeleteArgs} args - Arguments to delete one AudienceLevel.
+     * @example
+     * // Delete one AudienceLevel
+     * const AudienceLevel = await prisma.audienceLevel.delete({
+     *   where: {
+     *     // ... filter to delete one AudienceLevel
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AudienceLevelDeleteArgs>(args: SelectSubset<T, AudienceLevelDeleteArgs<ExtArgs>>): Prisma__AudienceLevelClient<$Result.GetResult<Prisma.$AudienceLevelPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AudienceLevel.
+     * @param {AudienceLevelUpdateArgs} args - Arguments to update one AudienceLevel.
+     * @example
+     * // Update one AudienceLevel
+     * const audienceLevel = await prisma.audienceLevel.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AudienceLevelUpdateArgs>(args: SelectSubset<T, AudienceLevelUpdateArgs<ExtArgs>>): Prisma__AudienceLevelClient<$Result.GetResult<Prisma.$AudienceLevelPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AudienceLevels.
+     * @param {AudienceLevelDeleteManyArgs} args - Arguments to filter AudienceLevels to delete.
+     * @example
+     * // Delete a few AudienceLevels
+     * const { count } = await prisma.audienceLevel.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AudienceLevelDeleteManyArgs>(args?: SelectSubset<T, AudienceLevelDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AudienceLevels.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AudienceLevelUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AudienceLevels
+     * const audienceLevel = await prisma.audienceLevel.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AudienceLevelUpdateManyArgs>(args: SelectSubset<T, AudienceLevelUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AudienceLevels and returns the data updated in the database.
+     * @param {AudienceLevelUpdateManyAndReturnArgs} args - Arguments to update many AudienceLevels.
+     * @example
+     * // Update many AudienceLevels
+     * const audienceLevel = await prisma.audienceLevel.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AudienceLevels and only return the `id`
+     * const audienceLevelWithIdOnly = await prisma.audienceLevel.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AudienceLevelUpdateManyAndReturnArgs>(args: SelectSubset<T, AudienceLevelUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AudienceLevelPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AudienceLevel.
+     * @param {AudienceLevelUpsertArgs} args - Arguments to update or create a AudienceLevel.
+     * @example
+     * // Update or create a AudienceLevel
+     * const audienceLevel = await prisma.audienceLevel.upsert({
+     *   create: {
+     *     // ... data to create a AudienceLevel
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AudienceLevel we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AudienceLevelUpsertArgs>(args: SelectSubset<T, AudienceLevelUpsertArgs<ExtArgs>>): Prisma__AudienceLevelClient<$Result.GetResult<Prisma.$AudienceLevelPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AudienceLevels.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AudienceLevelCountArgs} args - Arguments to filter AudienceLevels to count.
+     * @example
+     * // Count the number of AudienceLevels
+     * const count = await prisma.audienceLevel.count({
+     *   where: {
+     *     // ... the filter for the AudienceLevels we want to count
+     *   }
+     * })
+    **/
+    count<T extends AudienceLevelCountArgs>(
+      args?: Subset<T, AudienceLevelCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AudienceLevelCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AudienceLevel.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AudienceLevelAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AudienceLevelAggregateArgs>(args: Subset<T, AudienceLevelAggregateArgs>): Prisma.PrismaPromise<GetAudienceLevelAggregateType<T>>
+
+    /**
+     * Group by AudienceLevel.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AudienceLevelGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AudienceLevelGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AudienceLevelGroupByArgs['orderBy'] }
+        : { orderBy?: AudienceLevelGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AudienceLevelGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAudienceLevelGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AudienceLevel model
+   */
+  readonly fields: AudienceLevelFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AudienceLevel.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AudienceLevelClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AudienceLevel model
+   */
+  interface AudienceLevelFieldRefs {
+    readonly id: FieldRef<"AudienceLevel", 'String'>
+    readonly userId: FieldRef<"AudienceLevel", 'String'>
+    readonly level: FieldRef<"AudienceLevel", 'Int'>
+    readonly name: FieldRef<"AudienceLevel", 'String'>
+    readonly description: FieldRef<"AudienceLevel", 'String'>
+    readonly viewPermissions: FieldRef<"AudienceLevel", 'Json'>
+    readonly createdAt: FieldRef<"AudienceLevel", 'DateTime'>
+    readonly updatedAt: FieldRef<"AudienceLevel", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AudienceLevel findUnique
+   */
+  export type AudienceLevelFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceLevel
+     */
+    select?: AudienceLevelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceLevel
+     */
+    omit?: AudienceLevelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceLevelInclude<ExtArgs> | null
+    /**
+     * Filter, which AudienceLevel to fetch.
+     */
+    where: AudienceLevelWhereUniqueInput
+  }
+
+  /**
+   * AudienceLevel findUniqueOrThrow
+   */
+  export type AudienceLevelFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceLevel
+     */
+    select?: AudienceLevelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceLevel
+     */
+    omit?: AudienceLevelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceLevelInclude<ExtArgs> | null
+    /**
+     * Filter, which AudienceLevel to fetch.
+     */
+    where: AudienceLevelWhereUniqueInput
+  }
+
+  /**
+   * AudienceLevel findFirst
+   */
+  export type AudienceLevelFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceLevel
+     */
+    select?: AudienceLevelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceLevel
+     */
+    omit?: AudienceLevelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceLevelInclude<ExtArgs> | null
+    /**
+     * Filter, which AudienceLevel to fetch.
+     */
+    where?: AudienceLevelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AudienceLevels to fetch.
+     */
+    orderBy?: AudienceLevelOrderByWithRelationInput | AudienceLevelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AudienceLevels.
+     */
+    cursor?: AudienceLevelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AudienceLevels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AudienceLevels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AudienceLevels.
+     */
+    distinct?: AudienceLevelScalarFieldEnum | AudienceLevelScalarFieldEnum[]
+  }
+
+  /**
+   * AudienceLevel findFirstOrThrow
+   */
+  export type AudienceLevelFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceLevel
+     */
+    select?: AudienceLevelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceLevel
+     */
+    omit?: AudienceLevelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceLevelInclude<ExtArgs> | null
+    /**
+     * Filter, which AudienceLevel to fetch.
+     */
+    where?: AudienceLevelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AudienceLevels to fetch.
+     */
+    orderBy?: AudienceLevelOrderByWithRelationInput | AudienceLevelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AudienceLevels.
+     */
+    cursor?: AudienceLevelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AudienceLevels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AudienceLevels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AudienceLevels.
+     */
+    distinct?: AudienceLevelScalarFieldEnum | AudienceLevelScalarFieldEnum[]
+  }
+
+  /**
+   * AudienceLevel findMany
+   */
+  export type AudienceLevelFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceLevel
+     */
+    select?: AudienceLevelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceLevel
+     */
+    omit?: AudienceLevelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceLevelInclude<ExtArgs> | null
+    /**
+     * Filter, which AudienceLevels to fetch.
+     */
+    where?: AudienceLevelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AudienceLevels to fetch.
+     */
+    orderBy?: AudienceLevelOrderByWithRelationInput | AudienceLevelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AudienceLevels.
+     */
+    cursor?: AudienceLevelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AudienceLevels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AudienceLevels.
+     */
+    skip?: number
+    distinct?: AudienceLevelScalarFieldEnum | AudienceLevelScalarFieldEnum[]
+  }
+
+  /**
+   * AudienceLevel create
+   */
+  export type AudienceLevelCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceLevel
+     */
+    select?: AudienceLevelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceLevel
+     */
+    omit?: AudienceLevelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceLevelInclude<ExtArgs> | null
+    /**
+     * The data needed to create a AudienceLevel.
+     */
+    data: XOR<AudienceLevelCreateInput, AudienceLevelUncheckedCreateInput>
+  }
+
+  /**
+   * AudienceLevel createMany
+   */
+  export type AudienceLevelCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AudienceLevels.
+     */
+    data: AudienceLevelCreateManyInput | AudienceLevelCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AudienceLevel createManyAndReturn
+   */
+  export type AudienceLevelCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceLevel
+     */
+    select?: AudienceLevelSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceLevel
+     */
+    omit?: AudienceLevelOmit<ExtArgs> | null
+    /**
+     * The data used to create many AudienceLevels.
+     */
+    data: AudienceLevelCreateManyInput | AudienceLevelCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceLevelIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AudienceLevel update
+   */
+  export type AudienceLevelUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceLevel
+     */
+    select?: AudienceLevelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceLevel
+     */
+    omit?: AudienceLevelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceLevelInclude<ExtArgs> | null
+    /**
+     * The data needed to update a AudienceLevel.
+     */
+    data: XOR<AudienceLevelUpdateInput, AudienceLevelUncheckedUpdateInput>
+    /**
+     * Choose, which AudienceLevel to update.
+     */
+    where: AudienceLevelWhereUniqueInput
+  }
+
+  /**
+   * AudienceLevel updateMany
+   */
+  export type AudienceLevelUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AudienceLevels.
+     */
+    data: XOR<AudienceLevelUpdateManyMutationInput, AudienceLevelUncheckedUpdateManyInput>
+    /**
+     * Filter which AudienceLevels to update
+     */
+    where?: AudienceLevelWhereInput
+    /**
+     * Limit how many AudienceLevels to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AudienceLevel updateManyAndReturn
+   */
+  export type AudienceLevelUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceLevel
+     */
+    select?: AudienceLevelSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceLevel
+     */
+    omit?: AudienceLevelOmit<ExtArgs> | null
+    /**
+     * The data used to update AudienceLevels.
+     */
+    data: XOR<AudienceLevelUpdateManyMutationInput, AudienceLevelUncheckedUpdateManyInput>
+    /**
+     * Filter which AudienceLevels to update
+     */
+    where?: AudienceLevelWhereInput
+    /**
+     * Limit how many AudienceLevels to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceLevelIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AudienceLevel upsert
+   */
+  export type AudienceLevelUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceLevel
+     */
+    select?: AudienceLevelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceLevel
+     */
+    omit?: AudienceLevelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceLevelInclude<ExtArgs> | null
+    /**
+     * The filter to search for the AudienceLevel to update in case it exists.
+     */
+    where: AudienceLevelWhereUniqueInput
+    /**
+     * In case the AudienceLevel found by the `where` argument doesn't exist, create a new AudienceLevel with this data.
+     */
+    create: XOR<AudienceLevelCreateInput, AudienceLevelUncheckedCreateInput>
+    /**
+     * In case the AudienceLevel was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AudienceLevelUpdateInput, AudienceLevelUncheckedUpdateInput>
+  }
+
+  /**
+   * AudienceLevel delete
+   */
+  export type AudienceLevelDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceLevel
+     */
+    select?: AudienceLevelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceLevel
+     */
+    omit?: AudienceLevelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceLevelInclude<ExtArgs> | null
+    /**
+     * Filter which AudienceLevel to delete.
+     */
+    where: AudienceLevelWhereUniqueInput
+  }
+
+  /**
+   * AudienceLevel deleteMany
+   */
+  export type AudienceLevelDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AudienceLevels to delete
+     */
+    where?: AudienceLevelWhereInput
+    /**
+     * Limit how many AudienceLevels to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AudienceLevel without action
+   */
+  export type AudienceLevelDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AudienceLevel
+     */
+    select?: AudienceLevelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AudienceLevel
+     */
+    omit?: AudienceLevelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AudienceLevelInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Gift
+   */
+
+  export type AggregateGift = {
+    _count: GiftCountAggregateOutputType | null
+    _avg: GiftAvgAggregateOutputType | null
+    _sum: GiftSumAggregateOutputType | null
+    _min: GiftMinAggregateOutputType | null
+    _max: GiftMaxAggregateOutputType | null
+  }
+
+  export type GiftAvgAggregateOutputType = {
+    coins: number | null
+    quantity: number | null
+  }
+
+  export type GiftSumAggregateOutputType = {
+    coins: number | null
+    quantity: number | null
+  }
+
+  export type GiftMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    emoji: string | null
+    coins: number | null
+    receiverId: string | null
+    senderId: string | null
+    streamSessionId: string | null
+    message: string | null
+    quantity: number | null
+    createdAt: Date | null
+  }
+
+  export type GiftMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    emoji: string | null
+    coins: number | null
+    receiverId: string | null
+    senderId: string | null
+    streamSessionId: string | null
+    message: string | null
+    quantity: number | null
+    createdAt: Date | null
+  }
+
+  export type GiftCountAggregateOutputType = {
+    id: number
+    name: number
+    emoji: number
+    coins: number
+    receiverId: number
+    senderId: number
+    streamSessionId: number
+    message: number
+    quantity: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type GiftAvgAggregateInputType = {
+    coins?: true
+    quantity?: true
+  }
+
+  export type GiftSumAggregateInputType = {
+    coins?: true
+    quantity?: true
+  }
+
+  export type GiftMinAggregateInputType = {
+    id?: true
+    name?: true
+    emoji?: true
+    coins?: true
+    receiverId?: true
+    senderId?: true
+    streamSessionId?: true
+    message?: true
+    quantity?: true
+    createdAt?: true
+  }
+
+  export type GiftMaxAggregateInputType = {
+    id?: true
+    name?: true
+    emoji?: true
+    coins?: true
+    receiverId?: true
+    senderId?: true
+    streamSessionId?: true
+    message?: true
+    quantity?: true
+    createdAt?: true
+  }
+
+  export type GiftCountAggregateInputType = {
+    id?: true
+    name?: true
+    emoji?: true
+    coins?: true
+    receiverId?: true
+    senderId?: true
+    streamSessionId?: true
+    message?: true
+    quantity?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type GiftAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Gift to aggregate.
+     */
+    where?: GiftWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Gifts to fetch.
+     */
+    orderBy?: GiftOrderByWithRelationInput | GiftOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: GiftWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Gifts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Gifts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Gifts
+    **/
+    _count?: true | GiftCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: GiftAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: GiftSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: GiftMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: GiftMaxAggregateInputType
+  }
+
+  export type GetGiftAggregateType<T extends GiftAggregateArgs> = {
+        [P in keyof T & keyof AggregateGift]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateGift[P]>
+      : GetScalarType<T[P], AggregateGift[P]>
+  }
+
+
+
+
+  export type GiftGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GiftWhereInput
+    orderBy?: GiftOrderByWithAggregationInput | GiftOrderByWithAggregationInput[]
+    by: GiftScalarFieldEnum[] | GiftScalarFieldEnum
+    having?: GiftScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: GiftCountAggregateInputType | true
+    _avg?: GiftAvgAggregateInputType
+    _sum?: GiftSumAggregateInputType
+    _min?: GiftMinAggregateInputType
+    _max?: GiftMaxAggregateInputType
+  }
+
+  export type GiftGroupByOutputType = {
+    id: string
+    name: string
+    emoji: string
+    coins: number
+    receiverId: string
+    senderId: string | null
+    streamSessionId: string | null
+    message: string | null
+    quantity: number
+    createdAt: Date
+    _count: GiftCountAggregateOutputType | null
+    _avg: GiftAvgAggregateOutputType | null
+    _sum: GiftSumAggregateOutputType | null
+    _min: GiftMinAggregateOutputType | null
+    _max: GiftMaxAggregateOutputType | null
+  }
+
+  type GetGiftGroupByPayload<T extends GiftGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<GiftGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof GiftGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], GiftGroupByOutputType[P]>
+            : GetScalarType<T[P], GiftGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type GiftSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    emoji?: boolean
+    coins?: boolean
+    receiverId?: boolean
+    senderId?: boolean
+    streamSessionId?: boolean
+    message?: boolean
+    quantity?: boolean
+    createdAt?: boolean
+    receiver?: boolean | UserDefaultArgs<ExtArgs>
+    sender?: boolean | Gift$senderArgs<ExtArgs>
+    streamSession?: boolean | Gift$streamSessionArgs<ExtArgs>
+  }, ExtArgs["result"]["gift"]>
+
+  export type GiftSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    emoji?: boolean
+    coins?: boolean
+    receiverId?: boolean
+    senderId?: boolean
+    streamSessionId?: boolean
+    message?: boolean
+    quantity?: boolean
+    createdAt?: boolean
+    receiver?: boolean | UserDefaultArgs<ExtArgs>
+    sender?: boolean | Gift$senderArgs<ExtArgs>
+    streamSession?: boolean | Gift$streamSessionArgs<ExtArgs>
+  }, ExtArgs["result"]["gift"]>
+
+  export type GiftSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    emoji?: boolean
+    coins?: boolean
+    receiverId?: boolean
+    senderId?: boolean
+    streamSessionId?: boolean
+    message?: boolean
+    quantity?: boolean
+    createdAt?: boolean
+    receiver?: boolean | UserDefaultArgs<ExtArgs>
+    sender?: boolean | Gift$senderArgs<ExtArgs>
+    streamSession?: boolean | Gift$streamSessionArgs<ExtArgs>
+  }, ExtArgs["result"]["gift"]>
+
+  export type GiftSelectScalar = {
+    id?: boolean
+    name?: boolean
+    emoji?: boolean
+    coins?: boolean
+    receiverId?: boolean
+    senderId?: boolean
+    streamSessionId?: boolean
+    message?: boolean
+    quantity?: boolean
+    createdAt?: boolean
+  }
+
+  export type GiftOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "emoji" | "coins" | "receiverId" | "senderId" | "streamSessionId" | "message" | "quantity" | "createdAt", ExtArgs["result"]["gift"]>
+  export type GiftInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    receiver?: boolean | UserDefaultArgs<ExtArgs>
+    sender?: boolean | Gift$senderArgs<ExtArgs>
+    streamSession?: boolean | Gift$streamSessionArgs<ExtArgs>
+  }
+  export type GiftIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    receiver?: boolean | UserDefaultArgs<ExtArgs>
+    sender?: boolean | Gift$senderArgs<ExtArgs>
+    streamSession?: boolean | Gift$streamSessionArgs<ExtArgs>
+  }
+  export type GiftIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    receiver?: boolean | UserDefaultArgs<ExtArgs>
+    sender?: boolean | Gift$senderArgs<ExtArgs>
+    streamSession?: boolean | Gift$streamSessionArgs<ExtArgs>
+  }
+
+  export type $GiftPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Gift"
+    objects: {
+      receiver: Prisma.$UserPayload<ExtArgs>
+      sender: Prisma.$UserPayload<ExtArgs> | null
+      streamSession: Prisma.$StreamSessionPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      emoji: string
+      coins: number
+      receiverId: string
+      senderId: string | null
+      streamSessionId: string | null
+      message: string | null
+      quantity: number
+      createdAt: Date
+    }, ExtArgs["result"]["gift"]>
+    composites: {}
+  }
+
+  type GiftGetPayload<S extends boolean | null | undefined | GiftDefaultArgs> = $Result.GetResult<Prisma.$GiftPayload, S>
+
+  type GiftCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<GiftFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: GiftCountAggregateInputType | true
+    }
+
+  export interface GiftDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Gift'], meta: { name: 'Gift' } }
+    /**
+     * Find zero or one Gift that matches the filter.
+     * @param {GiftFindUniqueArgs} args - Arguments to find a Gift
+     * @example
+     * // Get one Gift
+     * const gift = await prisma.gift.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends GiftFindUniqueArgs>(args: SelectSubset<T, GiftFindUniqueArgs<ExtArgs>>): Prisma__GiftClient<$Result.GetResult<Prisma.$GiftPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Gift that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {GiftFindUniqueOrThrowArgs} args - Arguments to find a Gift
+     * @example
+     * // Get one Gift
+     * const gift = await prisma.gift.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends GiftFindUniqueOrThrowArgs>(args: SelectSubset<T, GiftFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GiftClient<$Result.GetResult<Prisma.$GiftPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Gift that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GiftFindFirstArgs} args - Arguments to find a Gift
+     * @example
+     * // Get one Gift
+     * const gift = await prisma.gift.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends GiftFindFirstArgs>(args?: SelectSubset<T, GiftFindFirstArgs<ExtArgs>>): Prisma__GiftClient<$Result.GetResult<Prisma.$GiftPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Gift that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GiftFindFirstOrThrowArgs} args - Arguments to find a Gift
+     * @example
+     * // Get one Gift
+     * const gift = await prisma.gift.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends GiftFindFirstOrThrowArgs>(args?: SelectSubset<T, GiftFindFirstOrThrowArgs<ExtArgs>>): Prisma__GiftClient<$Result.GetResult<Prisma.$GiftPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Gifts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GiftFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Gifts
+     * const gifts = await prisma.gift.findMany()
+     * 
+     * // Get first 10 Gifts
+     * const gifts = await prisma.gift.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const giftWithIdOnly = await prisma.gift.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends GiftFindManyArgs>(args?: SelectSubset<T, GiftFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GiftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Gift.
+     * @param {GiftCreateArgs} args - Arguments to create a Gift.
+     * @example
+     * // Create one Gift
+     * const Gift = await prisma.gift.create({
+     *   data: {
+     *     // ... data to create a Gift
+     *   }
+     * })
+     * 
+     */
+    create<T extends GiftCreateArgs>(args: SelectSubset<T, GiftCreateArgs<ExtArgs>>): Prisma__GiftClient<$Result.GetResult<Prisma.$GiftPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Gifts.
+     * @param {GiftCreateManyArgs} args - Arguments to create many Gifts.
+     * @example
+     * // Create many Gifts
+     * const gift = await prisma.gift.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends GiftCreateManyArgs>(args?: SelectSubset<T, GiftCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Gifts and returns the data saved in the database.
+     * @param {GiftCreateManyAndReturnArgs} args - Arguments to create many Gifts.
+     * @example
+     * // Create many Gifts
+     * const gift = await prisma.gift.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Gifts and only return the `id`
+     * const giftWithIdOnly = await prisma.gift.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends GiftCreateManyAndReturnArgs>(args?: SelectSubset<T, GiftCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GiftPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Gift.
+     * @param {GiftDeleteArgs} args - Arguments to delete one Gift.
+     * @example
+     * // Delete one Gift
+     * const Gift = await prisma.gift.delete({
+     *   where: {
+     *     // ... filter to delete one Gift
+     *   }
+     * })
+     * 
+     */
+    delete<T extends GiftDeleteArgs>(args: SelectSubset<T, GiftDeleteArgs<ExtArgs>>): Prisma__GiftClient<$Result.GetResult<Prisma.$GiftPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Gift.
+     * @param {GiftUpdateArgs} args - Arguments to update one Gift.
+     * @example
+     * // Update one Gift
+     * const gift = await prisma.gift.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends GiftUpdateArgs>(args: SelectSubset<T, GiftUpdateArgs<ExtArgs>>): Prisma__GiftClient<$Result.GetResult<Prisma.$GiftPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Gifts.
+     * @param {GiftDeleteManyArgs} args - Arguments to filter Gifts to delete.
+     * @example
+     * // Delete a few Gifts
+     * const { count } = await prisma.gift.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends GiftDeleteManyArgs>(args?: SelectSubset<T, GiftDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Gifts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GiftUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Gifts
+     * const gift = await prisma.gift.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends GiftUpdateManyArgs>(args: SelectSubset<T, GiftUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Gifts and returns the data updated in the database.
+     * @param {GiftUpdateManyAndReturnArgs} args - Arguments to update many Gifts.
+     * @example
+     * // Update many Gifts
+     * const gift = await prisma.gift.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Gifts and only return the `id`
+     * const giftWithIdOnly = await prisma.gift.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends GiftUpdateManyAndReturnArgs>(args: SelectSubset<T, GiftUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GiftPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Gift.
+     * @param {GiftUpsertArgs} args - Arguments to update or create a Gift.
+     * @example
+     * // Update or create a Gift
+     * const gift = await prisma.gift.upsert({
+     *   create: {
+     *     // ... data to create a Gift
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Gift we want to update
+     *   }
+     * })
+     */
+    upsert<T extends GiftUpsertArgs>(args: SelectSubset<T, GiftUpsertArgs<ExtArgs>>): Prisma__GiftClient<$Result.GetResult<Prisma.$GiftPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Gifts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GiftCountArgs} args - Arguments to filter Gifts to count.
+     * @example
+     * // Count the number of Gifts
+     * const count = await prisma.gift.count({
+     *   where: {
+     *     // ... the filter for the Gifts we want to count
+     *   }
+     * })
+    **/
+    count<T extends GiftCountArgs>(
+      args?: Subset<T, GiftCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], GiftCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Gift.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GiftAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends GiftAggregateArgs>(args: Subset<T, GiftAggregateArgs>): Prisma.PrismaPromise<GetGiftAggregateType<T>>
+
+    /**
+     * Group by Gift.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GiftGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends GiftGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: GiftGroupByArgs['orderBy'] }
+        : { orderBy?: GiftGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, GiftGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGiftGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Gift model
+   */
+  readonly fields: GiftFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Gift.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__GiftClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    receiver<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    sender<T extends Gift$senderArgs<ExtArgs> = {}>(args?: Subset<T, Gift$senderArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    streamSession<T extends Gift$streamSessionArgs<ExtArgs> = {}>(args?: Subset<T, Gift$streamSessionArgs<ExtArgs>>): Prisma__StreamSessionClient<$Result.GetResult<Prisma.$StreamSessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Gift model
+   */
+  interface GiftFieldRefs {
+    readonly id: FieldRef<"Gift", 'String'>
+    readonly name: FieldRef<"Gift", 'String'>
+    readonly emoji: FieldRef<"Gift", 'String'>
+    readonly coins: FieldRef<"Gift", 'Int'>
+    readonly receiverId: FieldRef<"Gift", 'String'>
+    readonly senderId: FieldRef<"Gift", 'String'>
+    readonly streamSessionId: FieldRef<"Gift", 'String'>
+    readonly message: FieldRef<"Gift", 'String'>
+    readonly quantity: FieldRef<"Gift", 'Int'>
+    readonly createdAt: FieldRef<"Gift", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Gift findUnique
+   */
+  export type GiftFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Gift
+     */
+    select?: GiftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Gift
+     */
+    omit?: GiftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftInclude<ExtArgs> | null
+    /**
+     * Filter, which Gift to fetch.
+     */
+    where: GiftWhereUniqueInput
+  }
+
+  /**
+   * Gift findUniqueOrThrow
+   */
+  export type GiftFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Gift
+     */
+    select?: GiftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Gift
+     */
+    omit?: GiftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftInclude<ExtArgs> | null
+    /**
+     * Filter, which Gift to fetch.
+     */
+    where: GiftWhereUniqueInput
+  }
+
+  /**
+   * Gift findFirst
+   */
+  export type GiftFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Gift
+     */
+    select?: GiftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Gift
+     */
+    omit?: GiftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftInclude<ExtArgs> | null
+    /**
+     * Filter, which Gift to fetch.
+     */
+    where?: GiftWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Gifts to fetch.
+     */
+    orderBy?: GiftOrderByWithRelationInput | GiftOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Gifts.
+     */
+    cursor?: GiftWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Gifts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Gifts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Gifts.
+     */
+    distinct?: GiftScalarFieldEnum | GiftScalarFieldEnum[]
+  }
+
+  /**
+   * Gift findFirstOrThrow
+   */
+  export type GiftFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Gift
+     */
+    select?: GiftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Gift
+     */
+    omit?: GiftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftInclude<ExtArgs> | null
+    /**
+     * Filter, which Gift to fetch.
+     */
+    where?: GiftWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Gifts to fetch.
+     */
+    orderBy?: GiftOrderByWithRelationInput | GiftOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Gifts.
+     */
+    cursor?: GiftWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Gifts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Gifts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Gifts.
+     */
+    distinct?: GiftScalarFieldEnum | GiftScalarFieldEnum[]
+  }
+
+  /**
+   * Gift findMany
+   */
+  export type GiftFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Gift
+     */
+    select?: GiftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Gift
+     */
+    omit?: GiftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftInclude<ExtArgs> | null
+    /**
+     * Filter, which Gifts to fetch.
+     */
+    where?: GiftWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Gifts to fetch.
+     */
+    orderBy?: GiftOrderByWithRelationInput | GiftOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Gifts.
+     */
+    cursor?: GiftWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Gifts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Gifts.
+     */
+    skip?: number
+    distinct?: GiftScalarFieldEnum | GiftScalarFieldEnum[]
+  }
+
+  /**
+   * Gift create
+   */
+  export type GiftCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Gift
+     */
+    select?: GiftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Gift
+     */
+    omit?: GiftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Gift.
+     */
+    data: XOR<GiftCreateInput, GiftUncheckedCreateInput>
+  }
+
+  /**
+   * Gift createMany
+   */
+  export type GiftCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Gifts.
+     */
+    data: GiftCreateManyInput | GiftCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Gift createManyAndReturn
+   */
+  export type GiftCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Gift
+     */
+    select?: GiftSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Gift
+     */
+    omit?: GiftOmit<ExtArgs> | null
+    /**
+     * The data used to create many Gifts.
+     */
+    data: GiftCreateManyInput | GiftCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Gift update
+   */
+  export type GiftUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Gift
+     */
+    select?: GiftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Gift
+     */
+    omit?: GiftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Gift.
+     */
+    data: XOR<GiftUpdateInput, GiftUncheckedUpdateInput>
+    /**
+     * Choose, which Gift to update.
+     */
+    where: GiftWhereUniqueInput
+  }
+
+  /**
+   * Gift updateMany
+   */
+  export type GiftUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Gifts.
+     */
+    data: XOR<GiftUpdateManyMutationInput, GiftUncheckedUpdateManyInput>
+    /**
+     * Filter which Gifts to update
+     */
+    where?: GiftWhereInput
+    /**
+     * Limit how many Gifts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Gift updateManyAndReturn
+   */
+  export type GiftUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Gift
+     */
+    select?: GiftSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Gift
+     */
+    omit?: GiftOmit<ExtArgs> | null
+    /**
+     * The data used to update Gifts.
+     */
+    data: XOR<GiftUpdateManyMutationInput, GiftUncheckedUpdateManyInput>
+    /**
+     * Filter which Gifts to update
+     */
+    where?: GiftWhereInput
+    /**
+     * Limit how many Gifts to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Gift upsert
+   */
+  export type GiftUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Gift
+     */
+    select?: GiftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Gift
+     */
+    omit?: GiftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Gift to update in case it exists.
+     */
+    where: GiftWhereUniqueInput
+    /**
+     * In case the Gift found by the `where` argument doesn't exist, create a new Gift with this data.
+     */
+    create: XOR<GiftCreateInput, GiftUncheckedCreateInput>
+    /**
+     * In case the Gift was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<GiftUpdateInput, GiftUncheckedUpdateInput>
+  }
+
+  /**
+   * Gift delete
+   */
+  export type GiftDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Gift
+     */
+    select?: GiftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Gift
+     */
+    omit?: GiftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftInclude<ExtArgs> | null
+    /**
+     * Filter which Gift to delete.
+     */
+    where: GiftWhereUniqueInput
+  }
+
+  /**
+   * Gift deleteMany
+   */
+  export type GiftDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Gifts to delete
+     */
+    where?: GiftWhereInput
+    /**
+     * Limit how many Gifts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Gift.sender
+   */
+  export type Gift$senderArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * Gift.streamSession
+   */
+  export type Gift$streamSessionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StreamSession
+     */
+    select?: StreamSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StreamSession
+     */
+    omit?: StreamSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StreamSessionInclude<ExtArgs> | null
+    where?: StreamSessionWhereInput
+  }
+
+  /**
+   * Gift without action
+   */
+  export type GiftDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Gift
+     */
+    select?: GiftSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Gift
+     */
+    omit?: GiftOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Comment
+   */
+
+  export type AggregateComment = {
+    _count: CommentCountAggregateOutputType | null
+    _min: CommentMinAggregateOutputType | null
+    _max: CommentMaxAggregateOutputType | null
+  }
+
+  export type CommentMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    content: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CommentMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    content: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CommentCountAggregateOutputType = {
+    id: number
+    userId: number
+    content: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type CommentMinAggregateInputType = {
+    id?: true
+    userId?: true
+    content?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CommentMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    content?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CommentCountAggregateInputType = {
+    id?: true
+    userId?: true
+    content?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type CommentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Comment to aggregate.
+     */
+    where?: CommentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Comments to fetch.
+     */
+    orderBy?: CommentOrderByWithRelationInput | CommentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CommentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Comments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Comments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Comments
+    **/
+    _count?: true | CommentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CommentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CommentMaxAggregateInputType
+  }
+
+  export type GetCommentAggregateType<T extends CommentAggregateArgs> = {
+        [P in keyof T & keyof AggregateComment]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateComment[P]>
+      : GetScalarType<T[P], AggregateComment[P]>
+  }
+
+
+
+
+  export type CommentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CommentWhereInput
+    orderBy?: CommentOrderByWithAggregationInput | CommentOrderByWithAggregationInput[]
+    by: CommentScalarFieldEnum[] | CommentScalarFieldEnum
+    having?: CommentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CommentCountAggregateInputType | true
+    _min?: CommentMinAggregateInputType
+    _max?: CommentMaxAggregateInputType
+  }
+
+  export type CommentGroupByOutputType = {
+    id: string
+    userId: string
+    content: string
+    createdAt: Date
+    updatedAt: Date
+    _count: CommentCountAggregateOutputType | null
+    _min: CommentMinAggregateOutputType | null
+    _max: CommentMaxAggregateOutputType | null
+  }
+
+  type GetCommentGroupByPayload<T extends CommentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CommentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CommentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CommentGroupByOutputType[P]>
+            : GetScalarType<T[P], CommentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CommentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    content?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["comment"]>
+
+  export type CommentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    content?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["comment"]>
+
+  export type CommentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    content?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["comment"]>
+
+  export type CommentSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    content?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type CommentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "content" | "createdAt" | "updatedAt", ExtArgs["result"]["comment"]>
+  export type CommentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type CommentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type CommentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $CommentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Comment"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      content: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["comment"]>
+    composites: {}
+  }
+
+  type CommentGetPayload<S extends boolean | null | undefined | CommentDefaultArgs> = $Result.GetResult<Prisma.$CommentPayload, S>
+
+  type CommentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CommentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CommentCountAggregateInputType | true
+    }
+
+  export interface CommentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Comment'], meta: { name: 'Comment' } }
+    /**
+     * Find zero or one Comment that matches the filter.
+     * @param {CommentFindUniqueArgs} args - Arguments to find a Comment
+     * @example
+     * // Get one Comment
+     * const comment = await prisma.comment.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CommentFindUniqueArgs>(args: SelectSubset<T, CommentFindUniqueArgs<ExtArgs>>): Prisma__CommentClient<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Comment that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CommentFindUniqueOrThrowArgs} args - Arguments to find a Comment
+     * @example
+     * // Get one Comment
+     * const comment = await prisma.comment.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CommentFindUniqueOrThrowArgs>(args: SelectSubset<T, CommentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CommentClient<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Comment that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommentFindFirstArgs} args - Arguments to find a Comment
+     * @example
+     * // Get one Comment
+     * const comment = await prisma.comment.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CommentFindFirstArgs>(args?: SelectSubset<T, CommentFindFirstArgs<ExtArgs>>): Prisma__CommentClient<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Comment that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommentFindFirstOrThrowArgs} args - Arguments to find a Comment
+     * @example
+     * // Get one Comment
+     * const comment = await prisma.comment.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CommentFindFirstOrThrowArgs>(args?: SelectSubset<T, CommentFindFirstOrThrowArgs<ExtArgs>>): Prisma__CommentClient<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Comments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommentFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Comments
+     * const comments = await prisma.comment.findMany()
+     * 
+     * // Get first 10 Comments
+     * const comments = await prisma.comment.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const commentWithIdOnly = await prisma.comment.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CommentFindManyArgs>(args?: SelectSubset<T, CommentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Comment.
+     * @param {CommentCreateArgs} args - Arguments to create a Comment.
+     * @example
+     * // Create one Comment
+     * const Comment = await prisma.comment.create({
+     *   data: {
+     *     // ... data to create a Comment
+     *   }
+     * })
+     * 
+     */
+    create<T extends CommentCreateArgs>(args: SelectSubset<T, CommentCreateArgs<ExtArgs>>): Prisma__CommentClient<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Comments.
+     * @param {CommentCreateManyArgs} args - Arguments to create many Comments.
+     * @example
+     * // Create many Comments
+     * const comment = await prisma.comment.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CommentCreateManyArgs>(args?: SelectSubset<T, CommentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Comments and returns the data saved in the database.
+     * @param {CommentCreateManyAndReturnArgs} args - Arguments to create many Comments.
+     * @example
+     * // Create many Comments
+     * const comment = await prisma.comment.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Comments and only return the `id`
+     * const commentWithIdOnly = await prisma.comment.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CommentCreateManyAndReturnArgs>(args?: SelectSubset<T, CommentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Comment.
+     * @param {CommentDeleteArgs} args - Arguments to delete one Comment.
+     * @example
+     * // Delete one Comment
+     * const Comment = await prisma.comment.delete({
+     *   where: {
+     *     // ... filter to delete one Comment
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CommentDeleteArgs>(args: SelectSubset<T, CommentDeleteArgs<ExtArgs>>): Prisma__CommentClient<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Comment.
+     * @param {CommentUpdateArgs} args - Arguments to update one Comment.
+     * @example
+     * // Update one Comment
+     * const comment = await prisma.comment.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CommentUpdateArgs>(args: SelectSubset<T, CommentUpdateArgs<ExtArgs>>): Prisma__CommentClient<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Comments.
+     * @param {CommentDeleteManyArgs} args - Arguments to filter Comments to delete.
+     * @example
+     * // Delete a few Comments
+     * const { count } = await prisma.comment.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CommentDeleteManyArgs>(args?: SelectSubset<T, CommentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Comments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Comments
+     * const comment = await prisma.comment.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CommentUpdateManyArgs>(args: SelectSubset<T, CommentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Comments and returns the data updated in the database.
+     * @param {CommentUpdateManyAndReturnArgs} args - Arguments to update many Comments.
+     * @example
+     * // Update many Comments
+     * const comment = await prisma.comment.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Comments and only return the `id`
+     * const commentWithIdOnly = await prisma.comment.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CommentUpdateManyAndReturnArgs>(args: SelectSubset<T, CommentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Comment.
+     * @param {CommentUpsertArgs} args - Arguments to update or create a Comment.
+     * @example
+     * // Update or create a Comment
+     * const comment = await prisma.comment.upsert({
+     *   create: {
+     *     // ... data to create a Comment
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Comment we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CommentUpsertArgs>(args: SelectSubset<T, CommentUpsertArgs<ExtArgs>>): Prisma__CommentClient<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Comments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommentCountArgs} args - Arguments to filter Comments to count.
+     * @example
+     * // Count the number of Comments
+     * const count = await prisma.comment.count({
+     *   where: {
+     *     // ... the filter for the Comments we want to count
+     *   }
+     * })
+    **/
+    count<T extends CommentCountArgs>(
+      args?: Subset<T, CommentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CommentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Comment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CommentAggregateArgs>(args: Subset<T, CommentAggregateArgs>): Prisma.PrismaPromise<GetCommentAggregateType<T>>
+
+    /**
+     * Group by Comment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CommentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CommentGroupByArgs['orderBy'] }
+        : { orderBy?: CommentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CommentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCommentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Comment model
+   */
+  readonly fields: CommentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Comment.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CommentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Comment model
+   */
+  interface CommentFieldRefs {
+    readonly id: FieldRef<"Comment", 'String'>
+    readonly userId: FieldRef<"Comment", 'String'>
+    readonly content: FieldRef<"Comment", 'String'>
+    readonly createdAt: FieldRef<"Comment", 'DateTime'>
+    readonly updatedAt: FieldRef<"Comment", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Comment findUnique
+   */
+  export type CommentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    /**
+     * Filter, which Comment to fetch.
+     */
+    where: CommentWhereUniqueInput
+  }
+
+  /**
+   * Comment findUniqueOrThrow
+   */
+  export type CommentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    /**
+     * Filter, which Comment to fetch.
+     */
+    where: CommentWhereUniqueInput
+  }
+
+  /**
+   * Comment findFirst
+   */
+  export type CommentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    /**
+     * Filter, which Comment to fetch.
+     */
+    where?: CommentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Comments to fetch.
+     */
+    orderBy?: CommentOrderByWithRelationInput | CommentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Comments.
+     */
+    cursor?: CommentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Comments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Comments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Comments.
+     */
+    distinct?: CommentScalarFieldEnum | CommentScalarFieldEnum[]
+  }
+
+  /**
+   * Comment findFirstOrThrow
+   */
+  export type CommentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    /**
+     * Filter, which Comment to fetch.
+     */
+    where?: CommentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Comments to fetch.
+     */
+    orderBy?: CommentOrderByWithRelationInput | CommentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Comments.
+     */
+    cursor?: CommentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Comments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Comments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Comments.
+     */
+    distinct?: CommentScalarFieldEnum | CommentScalarFieldEnum[]
+  }
+
+  /**
+   * Comment findMany
+   */
+  export type CommentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    /**
+     * Filter, which Comments to fetch.
+     */
+    where?: CommentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Comments to fetch.
+     */
+    orderBy?: CommentOrderByWithRelationInput | CommentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Comments.
+     */
+    cursor?: CommentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Comments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Comments.
+     */
+    skip?: number
+    distinct?: CommentScalarFieldEnum | CommentScalarFieldEnum[]
+  }
+
+  /**
+   * Comment create
+   */
+  export type CommentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Comment.
+     */
+    data: XOR<CommentCreateInput, CommentUncheckedCreateInput>
+  }
+
+  /**
+   * Comment createMany
+   */
+  export type CommentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Comments.
+     */
+    data: CommentCreateManyInput | CommentCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Comment createManyAndReturn
+   */
+  export type CommentCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * The data used to create many Comments.
+     */
+    data: CommentCreateManyInput | CommentCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Comment update
+   */
+  export type CommentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Comment.
+     */
+    data: XOR<CommentUpdateInput, CommentUncheckedUpdateInput>
+    /**
+     * Choose, which Comment to update.
+     */
+    where: CommentWhereUniqueInput
+  }
+
+  /**
+   * Comment updateMany
+   */
+  export type CommentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Comments.
+     */
+    data: XOR<CommentUpdateManyMutationInput, CommentUncheckedUpdateManyInput>
+    /**
+     * Filter which Comments to update
+     */
+    where?: CommentWhereInput
+    /**
+     * Limit how many Comments to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Comment updateManyAndReturn
+   */
+  export type CommentUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * The data used to update Comments.
+     */
+    data: XOR<CommentUpdateManyMutationInput, CommentUncheckedUpdateManyInput>
+    /**
+     * Filter which Comments to update
+     */
+    where?: CommentWhereInput
+    /**
+     * Limit how many Comments to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Comment upsert
+   */
+  export type CommentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Comment to update in case it exists.
+     */
+    where: CommentWhereUniqueInput
+    /**
+     * In case the Comment found by the `where` argument doesn't exist, create a new Comment with this data.
+     */
+    create: XOR<CommentCreateInput, CommentUncheckedCreateInput>
+    /**
+     * In case the Comment was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CommentUpdateInput, CommentUncheckedUpdateInput>
+  }
+
+  /**
+   * Comment delete
+   */
+  export type CommentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    /**
+     * Filter which Comment to delete.
+     */
+    where: CommentWhereUniqueInput
+  }
+
+  /**
+   * Comment deleteMany
+   */
+  export type CommentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Comments to delete
+     */
+    where?: CommentWhereInput
+    /**
+     * Limit how many Comments to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Comment without action
+   */
+  export type CommentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
   }
 
 
@@ -4398,14 +9582,72 @@ export namespace Prisma {
   export type VideoScalarFieldEnum = (typeof VideoScalarFieldEnum)[keyof typeof VideoScalarFieldEnum]
 
 
-  export const PetScalarFieldEnum: {
+  export const StreamSessionScalarFieldEnum: {
     id: 'id',
-    size: 'size',
-    hearts: 'hearts',
-    userId: 'userId'
+    userId: 'userId',
+    startTime: 'startTime',
+    endTime: 'endTime',
+    durationMs: 'durationMs',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
-  export type PetScalarFieldEnum = (typeof PetScalarFieldEnum)[keyof typeof PetScalarFieldEnum]
+  export type StreamSessionScalarFieldEnum = (typeof StreamSessionScalarFieldEnum)[keyof typeof StreamSessionScalarFieldEnum]
+
+
+  export const StreamerMetricsScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    totalMs: 'totalMs',
+    totalSessions: 'totalSessions',
+    currentLevel: 'currentLevel',
+    lastLevelUpAt: 'lastLevelUpAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type StreamerMetricsScalarFieldEnum = (typeof StreamerMetricsScalarFieldEnum)[keyof typeof StreamerMetricsScalarFieldEnum]
+
+
+  export const AudienceLevelScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    level: 'level',
+    name: 'name',
+    description: 'description',
+    viewPermissions: 'viewPermissions',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type AudienceLevelScalarFieldEnum = (typeof AudienceLevelScalarFieldEnum)[keyof typeof AudienceLevelScalarFieldEnum]
+
+
+  export const GiftScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    emoji: 'emoji',
+    coins: 'coins',
+    receiverId: 'receiverId',
+    senderId: 'senderId',
+    streamSessionId: 'streamSessionId',
+    message: 'message',
+    quantity: 'quantity',
+    createdAt: 'createdAt'
+  };
+
+  export type GiftScalarFieldEnum = (typeof GiftScalarFieldEnum)[keyof typeof GiftScalarFieldEnum]
+
+
+  export const CommentScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    content: 'content',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeof CommentScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -4414,6 +9656,14 @@ export namespace Prisma {
   };
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+  export const NullableJsonNullValueInput: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull
+  };
+
+  export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
   export const QueryMode: {
@@ -4430,6 +9680,15 @@ export namespace Prisma {
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   /**
@@ -4480,6 +9739,34 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime[]'
+   */
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -4506,7 +9793,12 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     contacto?: StringNullableFilter<"User"> | string | null
     videos?: VideoListRelationFilter
-    mascota?: XOR<PetNullableScalarRelationFilter, PetWhereInput> | null
+    streamSessions?: StreamSessionListRelationFilter
+    streamerMetrics?: XOR<StreamerMetricsNullableScalarRelationFilter, StreamerMetricsWhereInput> | null
+    audienceLevels?: AudienceLevelListRelationFilter
+    giftsReceived?: GiftListRelationFilter
+    giftsSent?: GiftListRelationFilter
+    comments?: CommentListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -4516,7 +9808,12 @@ export namespace Prisma {
     password?: SortOrder
     contacto?: SortOrderInput | SortOrder
     videos?: VideoOrderByRelationAggregateInput
-    mascota?: PetOrderByWithRelationInput
+    streamSessions?: StreamSessionOrderByRelationAggregateInput
+    streamerMetrics?: StreamerMetricsOrderByWithRelationInput
+    audienceLevels?: AudienceLevelOrderByRelationAggregateInput
+    giftsReceived?: GiftOrderByRelationAggregateInput
+    giftsSent?: GiftOrderByRelationAggregateInput
+    comments?: CommentOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -4529,7 +9826,12 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     contacto?: StringNullableFilter<"User"> | string | null
     videos?: VideoListRelationFilter
-    mascota?: XOR<PetNullableScalarRelationFilter, PetWhereInput> | null
+    streamSessions?: StreamSessionListRelationFilter
+    streamerMetrics?: XOR<StreamerMetricsNullableScalarRelationFilter, StreamerMetricsWhereInput> | null
+    audienceLevels?: AudienceLevelListRelationFilter
+    giftsReceived?: GiftListRelationFilter
+    giftsSent?: GiftListRelationFilter
+    comments?: CommentListRelationFilter
   }, "id" | "nombre">
 
   export type UserOrderByWithAggregationInput = {
@@ -4611,56 +9913,362 @@ export namespace Prisma {
     userId?: StringWithAggregatesFilter<"Video"> | string
   }
 
-  export type PetWhereInput = {
-    AND?: PetWhereInput | PetWhereInput[]
-    OR?: PetWhereInput[]
-    NOT?: PetWhereInput | PetWhereInput[]
-    id?: StringFilter<"Pet"> | string
-    size?: FloatFilter<"Pet"> | number
-    hearts?: IntFilter<"Pet"> | number
-    userId?: StringFilter<"Pet"> | string
+  export type StreamSessionWhereInput = {
+    AND?: StreamSessionWhereInput | StreamSessionWhereInput[]
+    OR?: StreamSessionWhereInput[]
+    NOT?: StreamSessionWhereInput | StreamSessionWhereInput[]
+    id?: StringFilter<"StreamSession"> | string
+    userId?: StringFilter<"StreamSession"> | string
+    startTime?: DateTimeFilter<"StreamSession"> | Date | string
+    endTime?: DateTimeNullableFilter<"StreamSession"> | Date | string | null
+    durationMs?: IntFilter<"StreamSession"> | number
+    createdAt?: DateTimeFilter<"StreamSession"> | Date | string
+    updatedAt?: DateTimeFilter<"StreamSession"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    gifts?: GiftListRelationFilter
+  }
+
+  export type StreamSessionOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrderInput | SortOrder
+    durationMs?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    gifts?: GiftOrderByRelationAggregateInput
+  }
+
+  export type StreamSessionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: StreamSessionWhereInput | StreamSessionWhereInput[]
+    OR?: StreamSessionWhereInput[]
+    NOT?: StreamSessionWhereInput | StreamSessionWhereInput[]
+    userId?: StringFilter<"StreamSession"> | string
+    startTime?: DateTimeFilter<"StreamSession"> | Date | string
+    endTime?: DateTimeNullableFilter<"StreamSession"> | Date | string | null
+    durationMs?: IntFilter<"StreamSession"> | number
+    createdAt?: DateTimeFilter<"StreamSession"> | Date | string
+    updatedAt?: DateTimeFilter<"StreamSession"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    gifts?: GiftListRelationFilter
+  }, "id">
+
+  export type StreamSessionOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrderInput | SortOrder
+    durationMs?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: StreamSessionCountOrderByAggregateInput
+    _avg?: StreamSessionAvgOrderByAggregateInput
+    _max?: StreamSessionMaxOrderByAggregateInput
+    _min?: StreamSessionMinOrderByAggregateInput
+    _sum?: StreamSessionSumOrderByAggregateInput
+  }
+
+  export type StreamSessionScalarWhereWithAggregatesInput = {
+    AND?: StreamSessionScalarWhereWithAggregatesInput | StreamSessionScalarWhereWithAggregatesInput[]
+    OR?: StreamSessionScalarWhereWithAggregatesInput[]
+    NOT?: StreamSessionScalarWhereWithAggregatesInput | StreamSessionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"StreamSession"> | string
+    userId?: StringWithAggregatesFilter<"StreamSession"> | string
+    startTime?: DateTimeWithAggregatesFilter<"StreamSession"> | Date | string
+    endTime?: DateTimeNullableWithAggregatesFilter<"StreamSession"> | Date | string | null
+    durationMs?: IntWithAggregatesFilter<"StreamSession"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"StreamSession"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"StreamSession"> | Date | string
+  }
+
+  export type StreamerMetricsWhereInput = {
+    AND?: StreamerMetricsWhereInput | StreamerMetricsWhereInput[]
+    OR?: StreamerMetricsWhereInput[]
+    NOT?: StreamerMetricsWhereInput | StreamerMetricsWhereInput[]
+    id?: StringFilter<"StreamerMetrics"> | string
+    userId?: StringFilter<"StreamerMetrics"> | string
+    totalMs?: IntFilter<"StreamerMetrics"> | number
+    totalSessions?: IntFilter<"StreamerMetrics"> | number
+    currentLevel?: IntFilter<"StreamerMetrics"> | number
+    lastLevelUpAt?: DateTimeNullableFilter<"StreamerMetrics"> | Date | string | null
+    createdAt?: DateTimeFilter<"StreamerMetrics"> | Date | string
+    updatedAt?: DateTimeFilter<"StreamerMetrics"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
-  export type PetOrderByWithRelationInput = {
+  export type StreamerMetricsOrderByWithRelationInput = {
     id?: SortOrder
-    size?: SortOrder
-    hearts?: SortOrder
     userId?: SortOrder
+    totalMs?: SortOrder
+    totalSessions?: SortOrder
+    currentLevel?: SortOrder
+    lastLevelUpAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
   }
 
-  export type PetWhereUniqueInput = Prisma.AtLeast<{
+  export type StreamerMetricsWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     userId?: string
-    AND?: PetWhereInput | PetWhereInput[]
-    OR?: PetWhereInput[]
-    NOT?: PetWhereInput | PetWhereInput[]
-    size?: FloatFilter<"Pet"> | number
-    hearts?: IntFilter<"Pet"> | number
+    AND?: StreamerMetricsWhereInput | StreamerMetricsWhereInput[]
+    OR?: StreamerMetricsWhereInput[]
+    NOT?: StreamerMetricsWhereInput | StreamerMetricsWhereInput[]
+    totalMs?: IntFilter<"StreamerMetrics"> | number
+    totalSessions?: IntFilter<"StreamerMetrics"> | number
+    currentLevel?: IntFilter<"StreamerMetrics"> | number
+    lastLevelUpAt?: DateTimeNullableFilter<"StreamerMetrics"> | Date | string | null
+    createdAt?: DateTimeFilter<"StreamerMetrics"> | Date | string
+    updatedAt?: DateTimeFilter<"StreamerMetrics"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "userId">
 
-  export type PetOrderByWithAggregationInput = {
+  export type StreamerMetricsOrderByWithAggregationInput = {
     id?: SortOrder
-    size?: SortOrder
-    hearts?: SortOrder
     userId?: SortOrder
-    _count?: PetCountOrderByAggregateInput
-    _avg?: PetAvgOrderByAggregateInput
-    _max?: PetMaxOrderByAggregateInput
-    _min?: PetMinOrderByAggregateInput
-    _sum?: PetSumOrderByAggregateInput
+    totalMs?: SortOrder
+    totalSessions?: SortOrder
+    currentLevel?: SortOrder
+    lastLevelUpAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: StreamerMetricsCountOrderByAggregateInput
+    _avg?: StreamerMetricsAvgOrderByAggregateInput
+    _max?: StreamerMetricsMaxOrderByAggregateInput
+    _min?: StreamerMetricsMinOrderByAggregateInput
+    _sum?: StreamerMetricsSumOrderByAggregateInput
   }
 
-  export type PetScalarWhereWithAggregatesInput = {
-    AND?: PetScalarWhereWithAggregatesInput | PetScalarWhereWithAggregatesInput[]
-    OR?: PetScalarWhereWithAggregatesInput[]
-    NOT?: PetScalarWhereWithAggregatesInput | PetScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Pet"> | string
-    size?: FloatWithAggregatesFilter<"Pet"> | number
-    hearts?: IntWithAggregatesFilter<"Pet"> | number
-    userId?: StringWithAggregatesFilter<"Pet"> | string
+  export type StreamerMetricsScalarWhereWithAggregatesInput = {
+    AND?: StreamerMetricsScalarWhereWithAggregatesInput | StreamerMetricsScalarWhereWithAggregatesInput[]
+    OR?: StreamerMetricsScalarWhereWithAggregatesInput[]
+    NOT?: StreamerMetricsScalarWhereWithAggregatesInput | StreamerMetricsScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"StreamerMetrics"> | string
+    userId?: StringWithAggregatesFilter<"StreamerMetrics"> | string
+    totalMs?: IntWithAggregatesFilter<"StreamerMetrics"> | number
+    totalSessions?: IntWithAggregatesFilter<"StreamerMetrics"> | number
+    currentLevel?: IntWithAggregatesFilter<"StreamerMetrics"> | number
+    lastLevelUpAt?: DateTimeNullableWithAggregatesFilter<"StreamerMetrics"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"StreamerMetrics"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"StreamerMetrics"> | Date | string
+  }
+
+  export type AudienceLevelWhereInput = {
+    AND?: AudienceLevelWhereInput | AudienceLevelWhereInput[]
+    OR?: AudienceLevelWhereInput[]
+    NOT?: AudienceLevelWhereInput | AudienceLevelWhereInput[]
+    id?: StringFilter<"AudienceLevel"> | string
+    userId?: StringFilter<"AudienceLevel"> | string
+    level?: IntFilter<"AudienceLevel"> | number
+    name?: StringFilter<"AudienceLevel"> | string
+    description?: StringNullableFilter<"AudienceLevel"> | string | null
+    viewPermissions?: JsonNullableFilter<"AudienceLevel">
+    createdAt?: DateTimeFilter<"AudienceLevel"> | Date | string
+    updatedAt?: DateTimeFilter<"AudienceLevel"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type AudienceLevelOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    level?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    viewPermissions?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type AudienceLevelWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId_level?: AudienceLevelUserIdLevelCompoundUniqueInput
+    AND?: AudienceLevelWhereInput | AudienceLevelWhereInput[]
+    OR?: AudienceLevelWhereInput[]
+    NOT?: AudienceLevelWhereInput | AudienceLevelWhereInput[]
+    userId?: StringFilter<"AudienceLevel"> | string
+    level?: IntFilter<"AudienceLevel"> | number
+    name?: StringFilter<"AudienceLevel"> | string
+    description?: StringNullableFilter<"AudienceLevel"> | string | null
+    viewPermissions?: JsonNullableFilter<"AudienceLevel">
+    createdAt?: DateTimeFilter<"AudienceLevel"> | Date | string
+    updatedAt?: DateTimeFilter<"AudienceLevel"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userId_level">
+
+  export type AudienceLevelOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    level?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    viewPermissions?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: AudienceLevelCountOrderByAggregateInput
+    _avg?: AudienceLevelAvgOrderByAggregateInput
+    _max?: AudienceLevelMaxOrderByAggregateInput
+    _min?: AudienceLevelMinOrderByAggregateInput
+    _sum?: AudienceLevelSumOrderByAggregateInput
+  }
+
+  export type AudienceLevelScalarWhereWithAggregatesInput = {
+    AND?: AudienceLevelScalarWhereWithAggregatesInput | AudienceLevelScalarWhereWithAggregatesInput[]
+    OR?: AudienceLevelScalarWhereWithAggregatesInput[]
+    NOT?: AudienceLevelScalarWhereWithAggregatesInput | AudienceLevelScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"AudienceLevel"> | string
+    userId?: StringWithAggregatesFilter<"AudienceLevel"> | string
+    level?: IntWithAggregatesFilter<"AudienceLevel"> | number
+    name?: StringWithAggregatesFilter<"AudienceLevel"> | string
+    description?: StringNullableWithAggregatesFilter<"AudienceLevel"> | string | null
+    viewPermissions?: JsonNullableWithAggregatesFilter<"AudienceLevel">
+    createdAt?: DateTimeWithAggregatesFilter<"AudienceLevel"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"AudienceLevel"> | Date | string
+  }
+
+  export type GiftWhereInput = {
+    AND?: GiftWhereInput | GiftWhereInput[]
+    OR?: GiftWhereInput[]
+    NOT?: GiftWhereInput | GiftWhereInput[]
+    id?: StringFilter<"Gift"> | string
+    name?: StringFilter<"Gift"> | string
+    emoji?: StringFilter<"Gift"> | string
+    coins?: IntFilter<"Gift"> | number
+    receiverId?: StringFilter<"Gift"> | string
+    senderId?: StringNullableFilter<"Gift"> | string | null
+    streamSessionId?: StringNullableFilter<"Gift"> | string | null
+    message?: StringNullableFilter<"Gift"> | string | null
+    quantity?: IntFilter<"Gift"> | number
+    createdAt?: DateTimeFilter<"Gift"> | Date | string
+    receiver?: XOR<UserScalarRelationFilter, UserWhereInput>
+    sender?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    streamSession?: XOR<StreamSessionNullableScalarRelationFilter, StreamSessionWhereInput> | null
+  }
+
+  export type GiftOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    emoji?: SortOrder
+    coins?: SortOrder
+    receiverId?: SortOrder
+    senderId?: SortOrderInput | SortOrder
+    streamSessionId?: SortOrderInput | SortOrder
+    message?: SortOrderInput | SortOrder
+    quantity?: SortOrder
+    createdAt?: SortOrder
+    receiver?: UserOrderByWithRelationInput
+    sender?: UserOrderByWithRelationInput
+    streamSession?: StreamSessionOrderByWithRelationInput
+  }
+
+  export type GiftWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: GiftWhereInput | GiftWhereInput[]
+    OR?: GiftWhereInput[]
+    NOT?: GiftWhereInput | GiftWhereInput[]
+    name?: StringFilter<"Gift"> | string
+    emoji?: StringFilter<"Gift"> | string
+    coins?: IntFilter<"Gift"> | number
+    receiverId?: StringFilter<"Gift"> | string
+    senderId?: StringNullableFilter<"Gift"> | string | null
+    streamSessionId?: StringNullableFilter<"Gift"> | string | null
+    message?: StringNullableFilter<"Gift"> | string | null
+    quantity?: IntFilter<"Gift"> | number
+    createdAt?: DateTimeFilter<"Gift"> | Date | string
+    receiver?: XOR<UserScalarRelationFilter, UserWhereInput>
+    sender?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    streamSession?: XOR<StreamSessionNullableScalarRelationFilter, StreamSessionWhereInput> | null
+  }, "id">
+
+  export type GiftOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    emoji?: SortOrder
+    coins?: SortOrder
+    receiverId?: SortOrder
+    senderId?: SortOrderInput | SortOrder
+    streamSessionId?: SortOrderInput | SortOrder
+    message?: SortOrderInput | SortOrder
+    quantity?: SortOrder
+    createdAt?: SortOrder
+    _count?: GiftCountOrderByAggregateInput
+    _avg?: GiftAvgOrderByAggregateInput
+    _max?: GiftMaxOrderByAggregateInput
+    _min?: GiftMinOrderByAggregateInput
+    _sum?: GiftSumOrderByAggregateInput
+  }
+
+  export type GiftScalarWhereWithAggregatesInput = {
+    AND?: GiftScalarWhereWithAggregatesInput | GiftScalarWhereWithAggregatesInput[]
+    OR?: GiftScalarWhereWithAggregatesInput[]
+    NOT?: GiftScalarWhereWithAggregatesInput | GiftScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Gift"> | string
+    name?: StringWithAggregatesFilter<"Gift"> | string
+    emoji?: StringWithAggregatesFilter<"Gift"> | string
+    coins?: IntWithAggregatesFilter<"Gift"> | number
+    receiverId?: StringWithAggregatesFilter<"Gift"> | string
+    senderId?: StringNullableWithAggregatesFilter<"Gift"> | string | null
+    streamSessionId?: StringNullableWithAggregatesFilter<"Gift"> | string | null
+    message?: StringNullableWithAggregatesFilter<"Gift"> | string | null
+    quantity?: IntWithAggregatesFilter<"Gift"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"Gift"> | Date | string
+  }
+
+  export type CommentWhereInput = {
+    AND?: CommentWhereInput | CommentWhereInput[]
+    OR?: CommentWhereInput[]
+    NOT?: CommentWhereInput | CommentWhereInput[]
+    id?: StringFilter<"Comment"> | string
+    userId?: StringFilter<"Comment"> | string
+    content?: StringFilter<"Comment"> | string
+    createdAt?: DateTimeFilter<"Comment"> | Date | string
+    updatedAt?: DateTimeFilter<"Comment"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type CommentOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    content?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type CommentWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: CommentWhereInput | CommentWhereInput[]
+    OR?: CommentWhereInput[]
+    NOT?: CommentWhereInput | CommentWhereInput[]
+    userId?: StringFilter<"Comment"> | string
+    content?: StringFilter<"Comment"> | string
+    createdAt?: DateTimeFilter<"Comment"> | Date | string
+    updatedAt?: DateTimeFilter<"Comment"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type CommentOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    content?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: CommentCountOrderByAggregateInput
+    _max?: CommentMaxOrderByAggregateInput
+    _min?: CommentMinOrderByAggregateInput
+  }
+
+  export type CommentScalarWhereWithAggregatesInput = {
+    AND?: CommentScalarWhereWithAggregatesInput | CommentScalarWhereWithAggregatesInput[]
+    OR?: CommentScalarWhereWithAggregatesInput[]
+    NOT?: CommentScalarWhereWithAggregatesInput | CommentScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Comment"> | string
+    userId?: StringWithAggregatesFilter<"Comment"> | string
+    content?: StringWithAggregatesFilter<"Comment"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Comment"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Comment"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -4670,7 +10278,12 @@ export namespace Prisma {
     password: string
     contacto?: string | null
     videos?: VideoCreateNestedManyWithoutUserInput
-    mascota?: PetCreateNestedOneWithoutUserInput
+    streamSessions?: StreamSessionCreateNestedManyWithoutUserInput
+    streamerMetrics?: StreamerMetricsCreateNestedOneWithoutUserInput
+    audienceLevels?: AudienceLevelCreateNestedManyWithoutUserInput
+    giftsReceived?: GiftCreateNestedManyWithoutReceiverInput
+    giftsSent?: GiftCreateNestedManyWithoutSenderInput
+    comments?: CommentCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -4680,7 +10293,12 @@ export namespace Prisma {
     password: string
     contacto?: string | null
     videos?: VideoUncheckedCreateNestedManyWithoutUserInput
-    mascota?: PetUncheckedCreateNestedOneWithoutUserInput
+    streamSessions?: StreamSessionUncheckedCreateNestedManyWithoutUserInput
+    streamerMetrics?: StreamerMetricsUncheckedCreateNestedOneWithoutUserInput
+    audienceLevels?: AudienceLevelUncheckedCreateNestedManyWithoutUserInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutReceiverInput
+    giftsSent?: GiftUncheckedCreateNestedManyWithoutSenderInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -4690,7 +10308,12 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
     videos?: VideoUpdateManyWithoutUserNestedInput
-    mascota?: PetUpdateOneWithoutUserNestedInput
+    streamSessions?: StreamSessionUpdateManyWithoutUserNestedInput
+    streamerMetrics?: StreamerMetricsUpdateOneWithoutUserNestedInput
+    audienceLevels?: AudienceLevelUpdateManyWithoutUserNestedInput
+    giftsReceived?: GiftUpdateManyWithoutReceiverNestedInput
+    giftsSent?: GiftUpdateManyWithoutSenderNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -4700,7 +10323,12 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
     videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
-    mascota?: PetUncheckedUpdateOneWithoutUserNestedInput
+    streamSessions?: StreamSessionUncheckedUpdateManyWithoutUserNestedInput
+    streamerMetrics?: StreamerMetricsUncheckedUpdateOneWithoutUserNestedInput
+    audienceLevels?: AudienceLevelUncheckedUpdateManyWithoutUserNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutReceiverNestedInput
+    giftsSent?: GiftUncheckedUpdateManyWithoutSenderNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -4779,52 +10407,372 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type PetCreateInput = {
+  export type StreamSessionCreateInput = {
     id?: string
-    size?: number
-    hearts?: number
-    user: UserCreateNestedOneWithoutMascotaInput
+    startTime: Date | string
+    endTime?: Date | string | null
+    durationMs?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutStreamSessionsInput
+    gifts?: GiftCreateNestedManyWithoutStreamSessionInput
   }
 
-  export type PetUncheckedCreateInput = {
+  export type StreamSessionUncheckedCreateInput = {
     id?: string
-    size?: number
-    hearts?: number
     userId: string
+    startTime: Date | string
+    endTime?: Date | string | null
+    durationMs?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    gifts?: GiftUncheckedCreateNestedManyWithoutStreamSessionInput
   }
 
-  export type PetUpdateInput = {
+  export type StreamSessionUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    size?: FloatFieldUpdateOperationsInput | number
-    hearts?: IntFieldUpdateOperationsInput | number
-    user?: UserUpdateOneRequiredWithoutMascotaNestedInput
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    durationMs?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutStreamSessionsNestedInput
+    gifts?: GiftUpdateManyWithoutStreamSessionNestedInput
   }
 
-  export type PetUncheckedUpdateInput = {
+  export type StreamSessionUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    size?: FloatFieldUpdateOperationsInput | number
-    hearts?: IntFieldUpdateOperationsInput | number
     userId?: StringFieldUpdateOperationsInput | string
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    durationMs?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    gifts?: GiftUncheckedUpdateManyWithoutStreamSessionNestedInput
   }
 
-  export type PetCreateManyInput = {
+  export type StreamSessionCreateManyInput = {
     id?: string
-    size?: number
-    hearts?: number
     userId: string
+    startTime: Date | string
+    endTime?: Date | string | null
+    durationMs?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
-  export type PetUpdateManyMutationInput = {
+  export type StreamSessionUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    size?: FloatFieldUpdateOperationsInput | number
-    hearts?: IntFieldUpdateOperationsInput | number
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    durationMs?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type PetUncheckedUpdateManyInput = {
+  export type StreamSessionUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    size?: FloatFieldUpdateOperationsInput | number
-    hearts?: IntFieldUpdateOperationsInput | number
     userId?: StringFieldUpdateOperationsInput | string
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    durationMs?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StreamerMetricsCreateInput = {
+    id?: string
+    totalMs?: number
+    totalSessions?: number
+    currentLevel?: number
+    lastLevelUpAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutStreamerMetricsInput
+  }
+
+  export type StreamerMetricsUncheckedCreateInput = {
+    id?: string
+    userId: string
+    totalMs?: number
+    totalSessions?: number
+    currentLevel?: number
+    lastLevelUpAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StreamerMetricsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalMs?: IntFieldUpdateOperationsInput | number
+    totalSessions?: IntFieldUpdateOperationsInput | number
+    currentLevel?: IntFieldUpdateOperationsInput | number
+    lastLevelUpAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutStreamerMetricsNestedInput
+  }
+
+  export type StreamerMetricsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    totalMs?: IntFieldUpdateOperationsInput | number
+    totalSessions?: IntFieldUpdateOperationsInput | number
+    currentLevel?: IntFieldUpdateOperationsInput | number
+    lastLevelUpAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StreamerMetricsCreateManyInput = {
+    id?: string
+    userId: string
+    totalMs?: number
+    totalSessions?: number
+    currentLevel?: number
+    lastLevelUpAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StreamerMetricsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalMs?: IntFieldUpdateOperationsInput | number
+    totalSessions?: IntFieldUpdateOperationsInput | number
+    currentLevel?: IntFieldUpdateOperationsInput | number
+    lastLevelUpAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StreamerMetricsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    totalMs?: IntFieldUpdateOperationsInput | number
+    totalSessions?: IntFieldUpdateOperationsInput | number
+    currentLevel?: IntFieldUpdateOperationsInput | number
+    lastLevelUpAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AudienceLevelCreateInput = {
+    id?: string
+    level?: number
+    name: string
+    description?: string | null
+    viewPermissions?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutAudienceLevelsInput
+  }
+
+  export type AudienceLevelUncheckedCreateInput = {
+    id?: string
+    userId: string
+    level?: number
+    name: string
+    description?: string | null
+    viewPermissions?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AudienceLevelUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    level?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    viewPermissions?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAudienceLevelsNestedInput
+  }
+
+  export type AudienceLevelUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    level?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    viewPermissions?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AudienceLevelCreateManyInput = {
+    id?: string
+    userId: string
+    level?: number
+    name: string
+    description?: string | null
+    viewPermissions?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AudienceLevelUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    level?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    viewPermissions?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AudienceLevelUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    level?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    viewPermissions?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GiftCreateInput = {
+    id?: string
+    name: string
+    emoji: string
+    coins: number
+    message?: string | null
+    quantity?: number
+    createdAt?: Date | string
+    receiver: UserCreateNestedOneWithoutGiftsReceivedInput
+    sender?: UserCreateNestedOneWithoutGiftsSentInput
+    streamSession?: StreamSessionCreateNestedOneWithoutGiftsInput
+  }
+
+  export type GiftUncheckedCreateInput = {
+    id?: string
+    name: string
+    emoji: string
+    coins: number
+    receiverId: string
+    senderId?: string | null
+    streamSessionId?: string | null
+    message?: string | null
+    quantity?: number
+    createdAt?: Date | string
+  }
+
+  export type GiftUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    emoji?: StringFieldUpdateOperationsInput | string
+    coins?: IntFieldUpdateOperationsInput | number
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    receiver?: UserUpdateOneRequiredWithoutGiftsReceivedNestedInput
+    sender?: UserUpdateOneWithoutGiftsSentNestedInput
+    streamSession?: StreamSessionUpdateOneWithoutGiftsNestedInput
+  }
+
+  export type GiftUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    emoji?: StringFieldUpdateOperationsInput | string
+    coins?: IntFieldUpdateOperationsInput | number
+    receiverId?: StringFieldUpdateOperationsInput | string
+    senderId?: NullableStringFieldUpdateOperationsInput | string | null
+    streamSessionId?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GiftCreateManyInput = {
+    id?: string
+    name: string
+    emoji: string
+    coins: number
+    receiverId: string
+    senderId?: string | null
+    streamSessionId?: string | null
+    message?: string | null
+    quantity?: number
+    createdAt?: Date | string
+  }
+
+  export type GiftUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    emoji?: StringFieldUpdateOperationsInput | string
+    coins?: IntFieldUpdateOperationsInput | number
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GiftUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    emoji?: StringFieldUpdateOperationsInput | string
+    coins?: IntFieldUpdateOperationsInput | number
+    receiverId?: StringFieldUpdateOperationsInput | string
+    senderId?: NullableStringFieldUpdateOperationsInput | string | null
+    streamSessionId?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CommentCreateInput = {
+    id?: string
+    content: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutCommentsInput
+  }
+
+  export type CommentUncheckedCreateInput = {
+    id?: string
+    userId: string
+    content: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CommentUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutCommentsNestedInput
+  }
+
+  export type CommentUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CommentCreateManyInput = {
+    id?: string
+    userId: string
+    content: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CommentUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CommentUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -4870,9 +10818,33 @@ export namespace Prisma {
     none?: VideoWhereInput
   }
 
-  export type PetNullableScalarRelationFilter = {
-    is?: PetWhereInput | null
-    isNot?: PetWhereInput | null
+  export type StreamSessionListRelationFilter = {
+    every?: StreamSessionWhereInput
+    some?: StreamSessionWhereInput
+    none?: StreamSessionWhereInput
+  }
+
+  export type StreamerMetricsNullableScalarRelationFilter = {
+    is?: StreamerMetricsWhereInput | null
+    isNot?: StreamerMetricsWhereInput | null
+  }
+
+  export type AudienceLevelListRelationFilter = {
+    every?: AudienceLevelWhereInput
+    some?: AudienceLevelWhereInput
+    none?: AudienceLevelWhereInput
+  }
+
+  export type GiftListRelationFilter = {
+    every?: GiftWhereInput
+    some?: GiftWhereInput
+    none?: GiftWhereInput
+  }
+
+  export type CommentListRelationFilter = {
+    every?: CommentWhereInput
+    some?: CommentWhereInput
+    none?: CommentWhereInput
   }
 
   export type SortOrderInput = {
@@ -4881,6 +10853,22 @@ export namespace Prisma {
   }
 
   export type VideoOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type StreamSessionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AudienceLevelOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type GiftOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CommentOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -5020,62 +11008,313 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type FloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type PetCountOrderByAggregateInput = {
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type StreamSessionCountOrderByAggregateInput = {
     id?: SortOrder
-    size?: SortOrder
-    hearts?: SortOrder
     userId?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrder
+    durationMs?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
-  export type PetAvgOrderByAggregateInput = {
-    size?: SortOrder
-    hearts?: SortOrder
+  export type StreamSessionAvgOrderByAggregateInput = {
+    durationMs?: SortOrder
   }
 
-  export type PetMaxOrderByAggregateInput = {
+  export type StreamSessionMaxOrderByAggregateInput = {
     id?: SortOrder
-    size?: SortOrder
-    hearts?: SortOrder
     userId?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrder
+    durationMs?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
-  export type PetMinOrderByAggregateInput = {
+  export type StreamSessionMinOrderByAggregateInput = {
     id?: SortOrder
-    size?: SortOrder
-    hearts?: SortOrder
     userId?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrder
+    durationMs?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
-  export type PetSumOrderByAggregateInput = {
-    size?: SortOrder
-    hearts?: SortOrder
+  export type StreamSessionSumOrderByAggregateInput = {
+    durationMs?: SortOrder
   }
 
-  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
     _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type StreamerMetricsCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalMs?: SortOrder
+    totalSessions?: SortOrder
+    currentLevel?: SortOrder
+    lastLevelUpAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StreamerMetricsAvgOrderByAggregateInput = {
+    totalMs?: SortOrder
+    totalSessions?: SortOrder
+    currentLevel?: SortOrder
+  }
+
+  export type StreamerMetricsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalMs?: SortOrder
+    totalSessions?: SortOrder
+    currentLevel?: SortOrder
+    lastLevelUpAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StreamerMetricsMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalMs?: SortOrder
+    totalSessions?: SortOrder
+    currentLevel?: SortOrder
+    lastLevelUpAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StreamerMetricsSumOrderByAggregateInput = {
+    totalMs?: SortOrder
+    totalSessions?: SortOrder
+    currentLevel?: SortOrder
+  }
+  export type JsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type AudienceLevelUserIdLevelCompoundUniqueInput = {
+    userId: string
+    level: number
+  }
+
+  export type AudienceLevelCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    level?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    viewPermissions?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AudienceLevelAvgOrderByAggregateInput = {
+    level?: SortOrder
+  }
+
+  export type AudienceLevelMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    level?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AudienceLevelMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    level?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AudienceLevelSumOrderByAggregateInput = {
+    level?: SortOrder
+  }
+  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedJsonNullableFilter<$PrismaModel>
+    _max?: NestedJsonNullableFilter<$PrismaModel>
+  }
+
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
+  }
+
+  export type StreamSessionNullableScalarRelationFilter = {
+    is?: StreamSessionWhereInput | null
+    isNot?: StreamSessionWhereInput | null
+  }
+
+  export type GiftCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    emoji?: SortOrder
+    coins?: SortOrder
+    receiverId?: SortOrder
+    senderId?: SortOrder
+    streamSessionId?: SortOrder
+    message?: SortOrder
+    quantity?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type GiftAvgOrderByAggregateInput = {
+    coins?: SortOrder
+    quantity?: SortOrder
+  }
+
+  export type GiftMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    emoji?: SortOrder
+    coins?: SortOrder
+    receiverId?: SortOrder
+    senderId?: SortOrder
+    streamSessionId?: SortOrder
+    message?: SortOrder
+    quantity?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type GiftMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    emoji?: SortOrder
+    coins?: SortOrder
+    receiverId?: SortOrder
+    senderId?: SortOrder
+    streamSessionId?: SortOrder
+    message?: SortOrder
+    quantity?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type GiftSumOrderByAggregateInput = {
+    coins?: SortOrder
+    quantity?: SortOrder
+  }
+
+  export type CommentCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    content?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CommentMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    content?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CommentMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    content?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type VideoCreateNestedManyWithoutUserInput = {
@@ -5085,10 +11324,45 @@ export namespace Prisma {
     connect?: VideoWhereUniqueInput | VideoWhereUniqueInput[]
   }
 
-  export type PetCreateNestedOneWithoutUserInput = {
-    create?: XOR<PetCreateWithoutUserInput, PetUncheckedCreateWithoutUserInput>
-    connectOrCreate?: PetCreateOrConnectWithoutUserInput
-    connect?: PetWhereUniqueInput
+  export type StreamSessionCreateNestedManyWithoutUserInput = {
+    create?: XOR<StreamSessionCreateWithoutUserInput, StreamSessionUncheckedCreateWithoutUserInput> | StreamSessionCreateWithoutUserInput[] | StreamSessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: StreamSessionCreateOrConnectWithoutUserInput | StreamSessionCreateOrConnectWithoutUserInput[]
+    createMany?: StreamSessionCreateManyUserInputEnvelope
+    connect?: StreamSessionWhereUniqueInput | StreamSessionWhereUniqueInput[]
+  }
+
+  export type StreamerMetricsCreateNestedOneWithoutUserInput = {
+    create?: XOR<StreamerMetricsCreateWithoutUserInput, StreamerMetricsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: StreamerMetricsCreateOrConnectWithoutUserInput
+    connect?: StreamerMetricsWhereUniqueInput
+  }
+
+  export type AudienceLevelCreateNestedManyWithoutUserInput = {
+    create?: XOR<AudienceLevelCreateWithoutUserInput, AudienceLevelUncheckedCreateWithoutUserInput> | AudienceLevelCreateWithoutUserInput[] | AudienceLevelUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AudienceLevelCreateOrConnectWithoutUserInput | AudienceLevelCreateOrConnectWithoutUserInput[]
+    createMany?: AudienceLevelCreateManyUserInputEnvelope
+    connect?: AudienceLevelWhereUniqueInput | AudienceLevelWhereUniqueInput[]
+  }
+
+  export type GiftCreateNestedManyWithoutReceiverInput = {
+    create?: XOR<GiftCreateWithoutReceiverInput, GiftUncheckedCreateWithoutReceiverInput> | GiftCreateWithoutReceiverInput[] | GiftUncheckedCreateWithoutReceiverInput[]
+    connectOrCreate?: GiftCreateOrConnectWithoutReceiverInput | GiftCreateOrConnectWithoutReceiverInput[]
+    createMany?: GiftCreateManyReceiverInputEnvelope
+    connect?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+  }
+
+  export type GiftCreateNestedManyWithoutSenderInput = {
+    create?: XOR<GiftCreateWithoutSenderInput, GiftUncheckedCreateWithoutSenderInput> | GiftCreateWithoutSenderInput[] | GiftUncheckedCreateWithoutSenderInput[]
+    connectOrCreate?: GiftCreateOrConnectWithoutSenderInput | GiftCreateOrConnectWithoutSenderInput[]
+    createMany?: GiftCreateManySenderInputEnvelope
+    connect?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+  }
+
+  export type CommentCreateNestedManyWithoutUserInput = {
+    create?: XOR<CommentCreateWithoutUserInput, CommentUncheckedCreateWithoutUserInput> | CommentCreateWithoutUserInput[] | CommentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutUserInput | CommentCreateOrConnectWithoutUserInput[]
+    createMany?: CommentCreateManyUserInputEnvelope
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
   }
 
   export type VideoUncheckedCreateNestedManyWithoutUserInput = {
@@ -5098,10 +11372,45 @@ export namespace Prisma {
     connect?: VideoWhereUniqueInput | VideoWhereUniqueInput[]
   }
 
-  export type PetUncheckedCreateNestedOneWithoutUserInput = {
-    create?: XOR<PetCreateWithoutUserInput, PetUncheckedCreateWithoutUserInput>
-    connectOrCreate?: PetCreateOrConnectWithoutUserInput
-    connect?: PetWhereUniqueInput
+  export type StreamSessionUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<StreamSessionCreateWithoutUserInput, StreamSessionUncheckedCreateWithoutUserInput> | StreamSessionCreateWithoutUserInput[] | StreamSessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: StreamSessionCreateOrConnectWithoutUserInput | StreamSessionCreateOrConnectWithoutUserInput[]
+    createMany?: StreamSessionCreateManyUserInputEnvelope
+    connect?: StreamSessionWhereUniqueInput | StreamSessionWhereUniqueInput[]
+  }
+
+  export type StreamerMetricsUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<StreamerMetricsCreateWithoutUserInput, StreamerMetricsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: StreamerMetricsCreateOrConnectWithoutUserInput
+    connect?: StreamerMetricsWhereUniqueInput
+  }
+
+  export type AudienceLevelUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<AudienceLevelCreateWithoutUserInput, AudienceLevelUncheckedCreateWithoutUserInput> | AudienceLevelCreateWithoutUserInput[] | AudienceLevelUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AudienceLevelCreateOrConnectWithoutUserInput | AudienceLevelCreateOrConnectWithoutUserInput[]
+    createMany?: AudienceLevelCreateManyUserInputEnvelope
+    connect?: AudienceLevelWhereUniqueInput | AudienceLevelWhereUniqueInput[]
+  }
+
+  export type GiftUncheckedCreateNestedManyWithoutReceiverInput = {
+    create?: XOR<GiftCreateWithoutReceiverInput, GiftUncheckedCreateWithoutReceiverInput> | GiftCreateWithoutReceiverInput[] | GiftUncheckedCreateWithoutReceiverInput[]
+    connectOrCreate?: GiftCreateOrConnectWithoutReceiverInput | GiftCreateOrConnectWithoutReceiverInput[]
+    createMany?: GiftCreateManyReceiverInputEnvelope
+    connect?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+  }
+
+  export type GiftUncheckedCreateNestedManyWithoutSenderInput = {
+    create?: XOR<GiftCreateWithoutSenderInput, GiftUncheckedCreateWithoutSenderInput> | GiftCreateWithoutSenderInput[] | GiftUncheckedCreateWithoutSenderInput[]
+    connectOrCreate?: GiftCreateOrConnectWithoutSenderInput | GiftCreateOrConnectWithoutSenderInput[]
+    createMany?: GiftCreateManySenderInputEnvelope
+    connect?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+  }
+
+  export type CommentUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<CommentCreateWithoutUserInput, CommentUncheckedCreateWithoutUserInput> | CommentCreateWithoutUserInput[] | CommentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutUserInput | CommentCreateOrConnectWithoutUserInput[]
+    createMany?: CommentCreateManyUserInputEnvelope
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -5130,14 +11439,84 @@ export namespace Prisma {
     deleteMany?: VideoScalarWhereInput | VideoScalarWhereInput[]
   }
 
-  export type PetUpdateOneWithoutUserNestedInput = {
-    create?: XOR<PetCreateWithoutUserInput, PetUncheckedCreateWithoutUserInput>
-    connectOrCreate?: PetCreateOrConnectWithoutUserInput
-    upsert?: PetUpsertWithoutUserInput
-    disconnect?: PetWhereInput | boolean
-    delete?: PetWhereInput | boolean
-    connect?: PetWhereUniqueInput
-    update?: XOR<XOR<PetUpdateToOneWithWhereWithoutUserInput, PetUpdateWithoutUserInput>, PetUncheckedUpdateWithoutUserInput>
+  export type StreamSessionUpdateManyWithoutUserNestedInput = {
+    create?: XOR<StreamSessionCreateWithoutUserInput, StreamSessionUncheckedCreateWithoutUserInput> | StreamSessionCreateWithoutUserInput[] | StreamSessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: StreamSessionCreateOrConnectWithoutUserInput | StreamSessionCreateOrConnectWithoutUserInput[]
+    upsert?: StreamSessionUpsertWithWhereUniqueWithoutUserInput | StreamSessionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: StreamSessionCreateManyUserInputEnvelope
+    set?: StreamSessionWhereUniqueInput | StreamSessionWhereUniqueInput[]
+    disconnect?: StreamSessionWhereUniqueInput | StreamSessionWhereUniqueInput[]
+    delete?: StreamSessionWhereUniqueInput | StreamSessionWhereUniqueInput[]
+    connect?: StreamSessionWhereUniqueInput | StreamSessionWhereUniqueInput[]
+    update?: StreamSessionUpdateWithWhereUniqueWithoutUserInput | StreamSessionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: StreamSessionUpdateManyWithWhereWithoutUserInput | StreamSessionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: StreamSessionScalarWhereInput | StreamSessionScalarWhereInput[]
+  }
+
+  export type StreamerMetricsUpdateOneWithoutUserNestedInput = {
+    create?: XOR<StreamerMetricsCreateWithoutUserInput, StreamerMetricsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: StreamerMetricsCreateOrConnectWithoutUserInput
+    upsert?: StreamerMetricsUpsertWithoutUserInput
+    disconnect?: StreamerMetricsWhereInput | boolean
+    delete?: StreamerMetricsWhereInput | boolean
+    connect?: StreamerMetricsWhereUniqueInput
+    update?: XOR<XOR<StreamerMetricsUpdateToOneWithWhereWithoutUserInput, StreamerMetricsUpdateWithoutUserInput>, StreamerMetricsUncheckedUpdateWithoutUserInput>
+  }
+
+  export type AudienceLevelUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AudienceLevelCreateWithoutUserInput, AudienceLevelUncheckedCreateWithoutUserInput> | AudienceLevelCreateWithoutUserInput[] | AudienceLevelUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AudienceLevelCreateOrConnectWithoutUserInput | AudienceLevelCreateOrConnectWithoutUserInput[]
+    upsert?: AudienceLevelUpsertWithWhereUniqueWithoutUserInput | AudienceLevelUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AudienceLevelCreateManyUserInputEnvelope
+    set?: AudienceLevelWhereUniqueInput | AudienceLevelWhereUniqueInput[]
+    disconnect?: AudienceLevelWhereUniqueInput | AudienceLevelWhereUniqueInput[]
+    delete?: AudienceLevelWhereUniqueInput | AudienceLevelWhereUniqueInput[]
+    connect?: AudienceLevelWhereUniqueInput | AudienceLevelWhereUniqueInput[]
+    update?: AudienceLevelUpdateWithWhereUniqueWithoutUserInput | AudienceLevelUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AudienceLevelUpdateManyWithWhereWithoutUserInput | AudienceLevelUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AudienceLevelScalarWhereInput | AudienceLevelScalarWhereInput[]
+  }
+
+  export type GiftUpdateManyWithoutReceiverNestedInput = {
+    create?: XOR<GiftCreateWithoutReceiverInput, GiftUncheckedCreateWithoutReceiverInput> | GiftCreateWithoutReceiverInput[] | GiftUncheckedCreateWithoutReceiverInput[]
+    connectOrCreate?: GiftCreateOrConnectWithoutReceiverInput | GiftCreateOrConnectWithoutReceiverInput[]
+    upsert?: GiftUpsertWithWhereUniqueWithoutReceiverInput | GiftUpsertWithWhereUniqueWithoutReceiverInput[]
+    createMany?: GiftCreateManyReceiverInputEnvelope
+    set?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    disconnect?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    delete?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    connect?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    update?: GiftUpdateWithWhereUniqueWithoutReceiverInput | GiftUpdateWithWhereUniqueWithoutReceiverInput[]
+    updateMany?: GiftUpdateManyWithWhereWithoutReceiverInput | GiftUpdateManyWithWhereWithoutReceiverInput[]
+    deleteMany?: GiftScalarWhereInput | GiftScalarWhereInput[]
+  }
+
+  export type GiftUpdateManyWithoutSenderNestedInput = {
+    create?: XOR<GiftCreateWithoutSenderInput, GiftUncheckedCreateWithoutSenderInput> | GiftCreateWithoutSenderInput[] | GiftUncheckedCreateWithoutSenderInput[]
+    connectOrCreate?: GiftCreateOrConnectWithoutSenderInput | GiftCreateOrConnectWithoutSenderInput[]
+    upsert?: GiftUpsertWithWhereUniqueWithoutSenderInput | GiftUpsertWithWhereUniqueWithoutSenderInput[]
+    createMany?: GiftCreateManySenderInputEnvelope
+    set?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    disconnect?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    delete?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    connect?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    update?: GiftUpdateWithWhereUniqueWithoutSenderInput | GiftUpdateWithWhereUniqueWithoutSenderInput[]
+    updateMany?: GiftUpdateManyWithWhereWithoutSenderInput | GiftUpdateManyWithWhereWithoutSenderInput[]
+    deleteMany?: GiftScalarWhereInput | GiftScalarWhereInput[]
+  }
+
+  export type CommentUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CommentCreateWithoutUserInput, CommentUncheckedCreateWithoutUserInput> | CommentCreateWithoutUserInput[] | CommentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutUserInput | CommentCreateOrConnectWithoutUserInput[]
+    upsert?: CommentUpsertWithWhereUniqueWithoutUserInput | CommentUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CommentCreateManyUserInputEnvelope
+    set?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    disconnect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    delete?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    update?: CommentUpdateWithWhereUniqueWithoutUserInput | CommentUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CommentUpdateManyWithWhereWithoutUserInput | CommentUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
   }
 
   export type VideoUncheckedUpdateManyWithoutUserNestedInput = {
@@ -5154,14 +11533,84 @@ export namespace Prisma {
     deleteMany?: VideoScalarWhereInput | VideoScalarWhereInput[]
   }
 
-  export type PetUncheckedUpdateOneWithoutUserNestedInput = {
-    create?: XOR<PetCreateWithoutUserInput, PetUncheckedCreateWithoutUserInput>
-    connectOrCreate?: PetCreateOrConnectWithoutUserInput
-    upsert?: PetUpsertWithoutUserInput
-    disconnect?: PetWhereInput | boolean
-    delete?: PetWhereInput | boolean
-    connect?: PetWhereUniqueInput
-    update?: XOR<XOR<PetUpdateToOneWithWhereWithoutUserInput, PetUpdateWithoutUserInput>, PetUncheckedUpdateWithoutUserInput>
+  export type StreamSessionUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<StreamSessionCreateWithoutUserInput, StreamSessionUncheckedCreateWithoutUserInput> | StreamSessionCreateWithoutUserInput[] | StreamSessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: StreamSessionCreateOrConnectWithoutUserInput | StreamSessionCreateOrConnectWithoutUserInput[]
+    upsert?: StreamSessionUpsertWithWhereUniqueWithoutUserInput | StreamSessionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: StreamSessionCreateManyUserInputEnvelope
+    set?: StreamSessionWhereUniqueInput | StreamSessionWhereUniqueInput[]
+    disconnect?: StreamSessionWhereUniqueInput | StreamSessionWhereUniqueInput[]
+    delete?: StreamSessionWhereUniqueInput | StreamSessionWhereUniqueInput[]
+    connect?: StreamSessionWhereUniqueInput | StreamSessionWhereUniqueInput[]
+    update?: StreamSessionUpdateWithWhereUniqueWithoutUserInput | StreamSessionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: StreamSessionUpdateManyWithWhereWithoutUserInput | StreamSessionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: StreamSessionScalarWhereInput | StreamSessionScalarWhereInput[]
+  }
+
+  export type StreamerMetricsUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<StreamerMetricsCreateWithoutUserInput, StreamerMetricsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: StreamerMetricsCreateOrConnectWithoutUserInput
+    upsert?: StreamerMetricsUpsertWithoutUserInput
+    disconnect?: StreamerMetricsWhereInput | boolean
+    delete?: StreamerMetricsWhereInput | boolean
+    connect?: StreamerMetricsWhereUniqueInput
+    update?: XOR<XOR<StreamerMetricsUpdateToOneWithWhereWithoutUserInput, StreamerMetricsUpdateWithoutUserInput>, StreamerMetricsUncheckedUpdateWithoutUserInput>
+  }
+
+  export type AudienceLevelUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AudienceLevelCreateWithoutUserInput, AudienceLevelUncheckedCreateWithoutUserInput> | AudienceLevelCreateWithoutUserInput[] | AudienceLevelUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AudienceLevelCreateOrConnectWithoutUserInput | AudienceLevelCreateOrConnectWithoutUserInput[]
+    upsert?: AudienceLevelUpsertWithWhereUniqueWithoutUserInput | AudienceLevelUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AudienceLevelCreateManyUserInputEnvelope
+    set?: AudienceLevelWhereUniqueInput | AudienceLevelWhereUniqueInput[]
+    disconnect?: AudienceLevelWhereUniqueInput | AudienceLevelWhereUniqueInput[]
+    delete?: AudienceLevelWhereUniqueInput | AudienceLevelWhereUniqueInput[]
+    connect?: AudienceLevelWhereUniqueInput | AudienceLevelWhereUniqueInput[]
+    update?: AudienceLevelUpdateWithWhereUniqueWithoutUserInput | AudienceLevelUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AudienceLevelUpdateManyWithWhereWithoutUserInput | AudienceLevelUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AudienceLevelScalarWhereInput | AudienceLevelScalarWhereInput[]
+  }
+
+  export type GiftUncheckedUpdateManyWithoutReceiverNestedInput = {
+    create?: XOR<GiftCreateWithoutReceiverInput, GiftUncheckedCreateWithoutReceiverInput> | GiftCreateWithoutReceiverInput[] | GiftUncheckedCreateWithoutReceiverInput[]
+    connectOrCreate?: GiftCreateOrConnectWithoutReceiverInput | GiftCreateOrConnectWithoutReceiverInput[]
+    upsert?: GiftUpsertWithWhereUniqueWithoutReceiverInput | GiftUpsertWithWhereUniqueWithoutReceiverInput[]
+    createMany?: GiftCreateManyReceiverInputEnvelope
+    set?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    disconnect?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    delete?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    connect?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    update?: GiftUpdateWithWhereUniqueWithoutReceiverInput | GiftUpdateWithWhereUniqueWithoutReceiverInput[]
+    updateMany?: GiftUpdateManyWithWhereWithoutReceiverInput | GiftUpdateManyWithWhereWithoutReceiverInput[]
+    deleteMany?: GiftScalarWhereInput | GiftScalarWhereInput[]
+  }
+
+  export type GiftUncheckedUpdateManyWithoutSenderNestedInput = {
+    create?: XOR<GiftCreateWithoutSenderInput, GiftUncheckedCreateWithoutSenderInput> | GiftCreateWithoutSenderInput[] | GiftUncheckedCreateWithoutSenderInput[]
+    connectOrCreate?: GiftCreateOrConnectWithoutSenderInput | GiftCreateOrConnectWithoutSenderInput[]
+    upsert?: GiftUpsertWithWhereUniqueWithoutSenderInput | GiftUpsertWithWhereUniqueWithoutSenderInput[]
+    createMany?: GiftCreateManySenderInputEnvelope
+    set?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    disconnect?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    delete?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    connect?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    update?: GiftUpdateWithWhereUniqueWithoutSenderInput | GiftUpdateWithWhereUniqueWithoutSenderInput[]
+    updateMany?: GiftUpdateManyWithWhereWithoutSenderInput | GiftUpdateManyWithWhereWithoutSenderInput[]
+    deleteMany?: GiftScalarWhereInput | GiftScalarWhereInput[]
+  }
+
+  export type CommentUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CommentCreateWithoutUserInput, CommentUncheckedCreateWithoutUserInput> | CommentCreateWithoutUserInput[] | CommentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutUserInput | CommentCreateOrConnectWithoutUserInput[]
+    upsert?: CommentUpsertWithWhereUniqueWithoutUserInput | CommentUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CommentCreateManyUserInputEnvelope
+    set?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    disconnect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    delete?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    update?: CommentUpdateWithWhereUniqueWithoutUserInput | CommentUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CommentUpdateManyWithWhereWithoutUserInput | CommentUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutVideosInput = {
@@ -5186,26 +11635,156 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutVideosInput, UserUpdateWithoutVideosInput>, UserUncheckedUpdateWithoutVideosInput>
   }
 
-  export type UserCreateNestedOneWithoutMascotaInput = {
-    create?: XOR<UserCreateWithoutMascotaInput, UserUncheckedCreateWithoutMascotaInput>
-    connectOrCreate?: UserCreateOrConnectWithoutMascotaInput
+  export type UserCreateNestedOneWithoutStreamSessionsInput = {
+    create?: XOR<UserCreateWithoutStreamSessionsInput, UserUncheckedCreateWithoutStreamSessionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutStreamSessionsInput
     connect?: UserWhereUniqueInput
   }
 
-  export type FloatFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
+  export type GiftCreateNestedManyWithoutStreamSessionInput = {
+    create?: XOR<GiftCreateWithoutStreamSessionInput, GiftUncheckedCreateWithoutStreamSessionInput> | GiftCreateWithoutStreamSessionInput[] | GiftUncheckedCreateWithoutStreamSessionInput[]
+    connectOrCreate?: GiftCreateOrConnectWithoutStreamSessionInput | GiftCreateOrConnectWithoutStreamSessionInput[]
+    createMany?: GiftCreateManyStreamSessionInputEnvelope
+    connect?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
   }
 
-  export type UserUpdateOneRequiredWithoutMascotaNestedInput = {
-    create?: XOR<UserCreateWithoutMascotaInput, UserUncheckedCreateWithoutMascotaInput>
-    connectOrCreate?: UserCreateOrConnectWithoutMascotaInput
-    upsert?: UserUpsertWithoutMascotaInput
+  export type GiftUncheckedCreateNestedManyWithoutStreamSessionInput = {
+    create?: XOR<GiftCreateWithoutStreamSessionInput, GiftUncheckedCreateWithoutStreamSessionInput> | GiftCreateWithoutStreamSessionInput[] | GiftUncheckedCreateWithoutStreamSessionInput[]
+    connectOrCreate?: GiftCreateOrConnectWithoutStreamSessionInput | GiftCreateOrConnectWithoutStreamSessionInput[]
+    createMany?: GiftCreateManyStreamSessionInputEnvelope
+    connect?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type UserUpdateOneRequiredWithoutStreamSessionsNestedInput = {
+    create?: XOR<UserCreateWithoutStreamSessionsInput, UserUncheckedCreateWithoutStreamSessionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutStreamSessionsInput
+    upsert?: UserUpsertWithoutStreamSessionsInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMascotaInput, UserUpdateWithoutMascotaInput>, UserUncheckedUpdateWithoutMascotaInput>
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutStreamSessionsInput, UserUpdateWithoutStreamSessionsInput>, UserUncheckedUpdateWithoutStreamSessionsInput>
+  }
+
+  export type GiftUpdateManyWithoutStreamSessionNestedInput = {
+    create?: XOR<GiftCreateWithoutStreamSessionInput, GiftUncheckedCreateWithoutStreamSessionInput> | GiftCreateWithoutStreamSessionInput[] | GiftUncheckedCreateWithoutStreamSessionInput[]
+    connectOrCreate?: GiftCreateOrConnectWithoutStreamSessionInput | GiftCreateOrConnectWithoutStreamSessionInput[]
+    upsert?: GiftUpsertWithWhereUniqueWithoutStreamSessionInput | GiftUpsertWithWhereUniqueWithoutStreamSessionInput[]
+    createMany?: GiftCreateManyStreamSessionInputEnvelope
+    set?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    disconnect?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    delete?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    connect?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    update?: GiftUpdateWithWhereUniqueWithoutStreamSessionInput | GiftUpdateWithWhereUniqueWithoutStreamSessionInput[]
+    updateMany?: GiftUpdateManyWithWhereWithoutStreamSessionInput | GiftUpdateManyWithWhereWithoutStreamSessionInput[]
+    deleteMany?: GiftScalarWhereInput | GiftScalarWhereInput[]
+  }
+
+  export type GiftUncheckedUpdateManyWithoutStreamSessionNestedInput = {
+    create?: XOR<GiftCreateWithoutStreamSessionInput, GiftUncheckedCreateWithoutStreamSessionInput> | GiftCreateWithoutStreamSessionInput[] | GiftUncheckedCreateWithoutStreamSessionInput[]
+    connectOrCreate?: GiftCreateOrConnectWithoutStreamSessionInput | GiftCreateOrConnectWithoutStreamSessionInput[]
+    upsert?: GiftUpsertWithWhereUniqueWithoutStreamSessionInput | GiftUpsertWithWhereUniqueWithoutStreamSessionInput[]
+    createMany?: GiftCreateManyStreamSessionInputEnvelope
+    set?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    disconnect?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    delete?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    connect?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
+    update?: GiftUpdateWithWhereUniqueWithoutStreamSessionInput | GiftUpdateWithWhereUniqueWithoutStreamSessionInput[]
+    updateMany?: GiftUpdateManyWithWhereWithoutStreamSessionInput | GiftUpdateManyWithWhereWithoutStreamSessionInput[]
+    deleteMany?: GiftScalarWhereInput | GiftScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutStreamerMetricsInput = {
+    create?: XOR<UserCreateWithoutStreamerMetricsInput, UserUncheckedCreateWithoutStreamerMetricsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutStreamerMetricsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutStreamerMetricsNestedInput = {
+    create?: XOR<UserCreateWithoutStreamerMetricsInput, UserUncheckedCreateWithoutStreamerMetricsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutStreamerMetricsInput
+    upsert?: UserUpsertWithoutStreamerMetricsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutStreamerMetricsInput, UserUpdateWithoutStreamerMetricsInput>, UserUncheckedUpdateWithoutStreamerMetricsInput>
+  }
+
+  export type UserCreateNestedOneWithoutAudienceLevelsInput = {
+    create?: XOR<UserCreateWithoutAudienceLevelsInput, UserUncheckedCreateWithoutAudienceLevelsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAudienceLevelsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutAudienceLevelsNestedInput = {
+    create?: XOR<UserCreateWithoutAudienceLevelsInput, UserUncheckedCreateWithoutAudienceLevelsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAudienceLevelsInput
+    upsert?: UserUpsertWithoutAudienceLevelsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAudienceLevelsInput, UserUpdateWithoutAudienceLevelsInput>, UserUncheckedUpdateWithoutAudienceLevelsInput>
+  }
+
+  export type UserCreateNestedOneWithoutGiftsReceivedInput = {
+    create?: XOR<UserCreateWithoutGiftsReceivedInput, UserUncheckedCreateWithoutGiftsReceivedInput>
+    connectOrCreate?: UserCreateOrConnectWithoutGiftsReceivedInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutGiftsSentInput = {
+    create?: XOR<UserCreateWithoutGiftsSentInput, UserUncheckedCreateWithoutGiftsSentInput>
+    connectOrCreate?: UserCreateOrConnectWithoutGiftsSentInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type StreamSessionCreateNestedOneWithoutGiftsInput = {
+    create?: XOR<StreamSessionCreateWithoutGiftsInput, StreamSessionUncheckedCreateWithoutGiftsInput>
+    connectOrCreate?: StreamSessionCreateOrConnectWithoutGiftsInput
+    connect?: StreamSessionWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutGiftsReceivedNestedInput = {
+    create?: XOR<UserCreateWithoutGiftsReceivedInput, UserUncheckedCreateWithoutGiftsReceivedInput>
+    connectOrCreate?: UserCreateOrConnectWithoutGiftsReceivedInput
+    upsert?: UserUpsertWithoutGiftsReceivedInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutGiftsReceivedInput, UserUpdateWithoutGiftsReceivedInput>, UserUncheckedUpdateWithoutGiftsReceivedInput>
+  }
+
+  export type UserUpdateOneWithoutGiftsSentNestedInput = {
+    create?: XOR<UserCreateWithoutGiftsSentInput, UserUncheckedCreateWithoutGiftsSentInput>
+    connectOrCreate?: UserCreateOrConnectWithoutGiftsSentInput
+    upsert?: UserUpsertWithoutGiftsSentInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutGiftsSentInput, UserUpdateWithoutGiftsSentInput>, UserUncheckedUpdateWithoutGiftsSentInput>
+  }
+
+  export type StreamSessionUpdateOneWithoutGiftsNestedInput = {
+    create?: XOR<StreamSessionCreateWithoutGiftsInput, StreamSessionUncheckedCreateWithoutGiftsInput>
+    connectOrCreate?: StreamSessionCreateOrConnectWithoutGiftsInput
+    upsert?: StreamSessionUpsertWithoutGiftsInput
+    disconnect?: StreamSessionWhereInput | boolean
+    delete?: StreamSessionWhereInput | boolean
+    connect?: StreamSessionWhereUniqueInput
+    update?: XOR<XOR<StreamSessionUpdateToOneWithWhereWithoutGiftsInput, StreamSessionUpdateWithoutGiftsInput>, StreamSessionUncheckedUpdateWithoutGiftsInput>
+  }
+
+  export type UserCreateNestedOneWithoutCommentsInput = {
+    create?: XOR<UserCreateWithoutCommentsInput, UserUncheckedCreateWithoutCommentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCommentsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutCommentsNestedInput = {
+    create?: XOR<UserCreateWithoutCommentsInput, UserUncheckedCreateWithoutCommentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCommentsInput
+    upsert?: UserUpsertWithoutCommentsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCommentsInput, UserUpdateWithoutCommentsInput>, UserUncheckedUpdateWithoutCommentsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -5336,20 +11915,77 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
     _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+  export type NestedJsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
   export type VideoCreateWithoutUserInput = {
@@ -5375,21 +12011,181 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type PetCreateWithoutUserInput = {
+  export type StreamSessionCreateWithoutUserInput = {
     id?: string
-    size?: number
-    hearts?: number
+    startTime: Date | string
+    endTime?: Date | string | null
+    durationMs?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    gifts?: GiftCreateNestedManyWithoutStreamSessionInput
   }
 
-  export type PetUncheckedCreateWithoutUserInput = {
+  export type StreamSessionUncheckedCreateWithoutUserInput = {
     id?: string
-    size?: number
-    hearts?: number
+    startTime: Date | string
+    endTime?: Date | string | null
+    durationMs?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    gifts?: GiftUncheckedCreateNestedManyWithoutStreamSessionInput
   }
 
-  export type PetCreateOrConnectWithoutUserInput = {
-    where: PetWhereUniqueInput
-    create: XOR<PetCreateWithoutUserInput, PetUncheckedCreateWithoutUserInput>
+  export type StreamSessionCreateOrConnectWithoutUserInput = {
+    where: StreamSessionWhereUniqueInput
+    create: XOR<StreamSessionCreateWithoutUserInput, StreamSessionUncheckedCreateWithoutUserInput>
+  }
+
+  export type StreamSessionCreateManyUserInputEnvelope = {
+    data: StreamSessionCreateManyUserInput | StreamSessionCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type StreamerMetricsCreateWithoutUserInput = {
+    id?: string
+    totalMs?: number
+    totalSessions?: number
+    currentLevel?: number
+    lastLevelUpAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StreamerMetricsUncheckedCreateWithoutUserInput = {
+    id?: string
+    totalMs?: number
+    totalSessions?: number
+    currentLevel?: number
+    lastLevelUpAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StreamerMetricsCreateOrConnectWithoutUserInput = {
+    where: StreamerMetricsWhereUniqueInput
+    create: XOR<StreamerMetricsCreateWithoutUserInput, StreamerMetricsUncheckedCreateWithoutUserInput>
+  }
+
+  export type AudienceLevelCreateWithoutUserInput = {
+    id?: string
+    level?: number
+    name: string
+    description?: string | null
+    viewPermissions?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AudienceLevelUncheckedCreateWithoutUserInput = {
+    id?: string
+    level?: number
+    name: string
+    description?: string | null
+    viewPermissions?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AudienceLevelCreateOrConnectWithoutUserInput = {
+    where: AudienceLevelWhereUniqueInput
+    create: XOR<AudienceLevelCreateWithoutUserInput, AudienceLevelUncheckedCreateWithoutUserInput>
+  }
+
+  export type AudienceLevelCreateManyUserInputEnvelope = {
+    data: AudienceLevelCreateManyUserInput | AudienceLevelCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type GiftCreateWithoutReceiverInput = {
+    id?: string
+    name: string
+    emoji: string
+    coins: number
+    message?: string | null
+    quantity?: number
+    createdAt?: Date | string
+    sender?: UserCreateNestedOneWithoutGiftsSentInput
+    streamSession?: StreamSessionCreateNestedOneWithoutGiftsInput
+  }
+
+  export type GiftUncheckedCreateWithoutReceiverInput = {
+    id?: string
+    name: string
+    emoji: string
+    coins: number
+    senderId?: string | null
+    streamSessionId?: string | null
+    message?: string | null
+    quantity?: number
+    createdAt?: Date | string
+  }
+
+  export type GiftCreateOrConnectWithoutReceiverInput = {
+    where: GiftWhereUniqueInput
+    create: XOR<GiftCreateWithoutReceiverInput, GiftUncheckedCreateWithoutReceiverInput>
+  }
+
+  export type GiftCreateManyReceiverInputEnvelope = {
+    data: GiftCreateManyReceiverInput | GiftCreateManyReceiverInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type GiftCreateWithoutSenderInput = {
+    id?: string
+    name: string
+    emoji: string
+    coins: number
+    message?: string | null
+    quantity?: number
+    createdAt?: Date | string
+    receiver: UserCreateNestedOneWithoutGiftsReceivedInput
+    streamSession?: StreamSessionCreateNestedOneWithoutGiftsInput
+  }
+
+  export type GiftUncheckedCreateWithoutSenderInput = {
+    id?: string
+    name: string
+    emoji: string
+    coins: number
+    receiverId: string
+    streamSessionId?: string | null
+    message?: string | null
+    quantity?: number
+    createdAt?: Date | string
+  }
+
+  export type GiftCreateOrConnectWithoutSenderInput = {
+    where: GiftWhereUniqueInput
+    create: XOR<GiftCreateWithoutSenderInput, GiftUncheckedCreateWithoutSenderInput>
+  }
+
+  export type GiftCreateManySenderInputEnvelope = {
+    data: GiftCreateManySenderInput | GiftCreateManySenderInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CommentCreateWithoutUserInput = {
+    id?: string
+    content: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CommentUncheckedCreateWithoutUserInput = {
+    id?: string
+    content: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CommentCreateOrConnectWithoutUserInput = {
+    where: CommentWhereUniqueInput
+    create: XOR<CommentCreateWithoutUserInput, CommentUncheckedCreateWithoutUserInput>
+  }
+
+  export type CommentCreateManyUserInputEnvelope = {
+    data: CommentCreateManyUserInput | CommentCreateManyUserInput[]
+    skipDuplicates?: boolean
   }
 
   export type VideoUpsertWithWhereUniqueWithoutUserInput = {
@@ -5419,27 +12215,169 @@ export namespace Prisma {
     userId?: StringFilter<"Video"> | string
   }
 
-  export type PetUpsertWithoutUserInput = {
-    update: XOR<PetUpdateWithoutUserInput, PetUncheckedUpdateWithoutUserInput>
-    create: XOR<PetCreateWithoutUserInput, PetUncheckedCreateWithoutUserInput>
-    where?: PetWhereInput
+  export type StreamSessionUpsertWithWhereUniqueWithoutUserInput = {
+    where: StreamSessionWhereUniqueInput
+    update: XOR<StreamSessionUpdateWithoutUserInput, StreamSessionUncheckedUpdateWithoutUserInput>
+    create: XOR<StreamSessionCreateWithoutUserInput, StreamSessionUncheckedCreateWithoutUserInput>
   }
 
-  export type PetUpdateToOneWithWhereWithoutUserInput = {
-    where?: PetWhereInput
-    data: XOR<PetUpdateWithoutUserInput, PetUncheckedUpdateWithoutUserInput>
+  export type StreamSessionUpdateWithWhereUniqueWithoutUserInput = {
+    where: StreamSessionWhereUniqueInput
+    data: XOR<StreamSessionUpdateWithoutUserInput, StreamSessionUncheckedUpdateWithoutUserInput>
   }
 
-  export type PetUpdateWithoutUserInput = {
+  export type StreamSessionUpdateManyWithWhereWithoutUserInput = {
+    where: StreamSessionScalarWhereInput
+    data: XOR<StreamSessionUpdateManyMutationInput, StreamSessionUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type StreamSessionScalarWhereInput = {
+    AND?: StreamSessionScalarWhereInput | StreamSessionScalarWhereInput[]
+    OR?: StreamSessionScalarWhereInput[]
+    NOT?: StreamSessionScalarWhereInput | StreamSessionScalarWhereInput[]
+    id?: StringFilter<"StreamSession"> | string
+    userId?: StringFilter<"StreamSession"> | string
+    startTime?: DateTimeFilter<"StreamSession"> | Date | string
+    endTime?: DateTimeNullableFilter<"StreamSession"> | Date | string | null
+    durationMs?: IntFilter<"StreamSession"> | number
+    createdAt?: DateTimeFilter<"StreamSession"> | Date | string
+    updatedAt?: DateTimeFilter<"StreamSession"> | Date | string
+  }
+
+  export type StreamerMetricsUpsertWithoutUserInput = {
+    update: XOR<StreamerMetricsUpdateWithoutUserInput, StreamerMetricsUncheckedUpdateWithoutUserInput>
+    create: XOR<StreamerMetricsCreateWithoutUserInput, StreamerMetricsUncheckedCreateWithoutUserInput>
+    where?: StreamerMetricsWhereInput
+  }
+
+  export type StreamerMetricsUpdateToOneWithWhereWithoutUserInput = {
+    where?: StreamerMetricsWhereInput
+    data: XOR<StreamerMetricsUpdateWithoutUserInput, StreamerMetricsUncheckedUpdateWithoutUserInput>
+  }
+
+  export type StreamerMetricsUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    size?: FloatFieldUpdateOperationsInput | number
-    hearts?: IntFieldUpdateOperationsInput | number
+    totalMs?: IntFieldUpdateOperationsInput | number
+    totalSessions?: IntFieldUpdateOperationsInput | number
+    currentLevel?: IntFieldUpdateOperationsInput | number
+    lastLevelUpAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type PetUncheckedUpdateWithoutUserInput = {
+  export type StreamerMetricsUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    size?: FloatFieldUpdateOperationsInput | number
-    hearts?: IntFieldUpdateOperationsInput | number
+    totalMs?: IntFieldUpdateOperationsInput | number
+    totalSessions?: IntFieldUpdateOperationsInput | number
+    currentLevel?: IntFieldUpdateOperationsInput | number
+    lastLevelUpAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AudienceLevelUpsertWithWhereUniqueWithoutUserInput = {
+    where: AudienceLevelWhereUniqueInput
+    update: XOR<AudienceLevelUpdateWithoutUserInput, AudienceLevelUncheckedUpdateWithoutUserInput>
+    create: XOR<AudienceLevelCreateWithoutUserInput, AudienceLevelUncheckedCreateWithoutUserInput>
+  }
+
+  export type AudienceLevelUpdateWithWhereUniqueWithoutUserInput = {
+    where: AudienceLevelWhereUniqueInput
+    data: XOR<AudienceLevelUpdateWithoutUserInput, AudienceLevelUncheckedUpdateWithoutUserInput>
+  }
+
+  export type AudienceLevelUpdateManyWithWhereWithoutUserInput = {
+    where: AudienceLevelScalarWhereInput
+    data: XOR<AudienceLevelUpdateManyMutationInput, AudienceLevelUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type AudienceLevelScalarWhereInput = {
+    AND?: AudienceLevelScalarWhereInput | AudienceLevelScalarWhereInput[]
+    OR?: AudienceLevelScalarWhereInput[]
+    NOT?: AudienceLevelScalarWhereInput | AudienceLevelScalarWhereInput[]
+    id?: StringFilter<"AudienceLevel"> | string
+    userId?: StringFilter<"AudienceLevel"> | string
+    level?: IntFilter<"AudienceLevel"> | number
+    name?: StringFilter<"AudienceLevel"> | string
+    description?: StringNullableFilter<"AudienceLevel"> | string | null
+    viewPermissions?: JsonNullableFilter<"AudienceLevel">
+    createdAt?: DateTimeFilter<"AudienceLevel"> | Date | string
+    updatedAt?: DateTimeFilter<"AudienceLevel"> | Date | string
+  }
+
+  export type GiftUpsertWithWhereUniqueWithoutReceiverInput = {
+    where: GiftWhereUniqueInput
+    update: XOR<GiftUpdateWithoutReceiverInput, GiftUncheckedUpdateWithoutReceiverInput>
+    create: XOR<GiftCreateWithoutReceiverInput, GiftUncheckedCreateWithoutReceiverInput>
+  }
+
+  export type GiftUpdateWithWhereUniqueWithoutReceiverInput = {
+    where: GiftWhereUniqueInput
+    data: XOR<GiftUpdateWithoutReceiverInput, GiftUncheckedUpdateWithoutReceiverInput>
+  }
+
+  export type GiftUpdateManyWithWhereWithoutReceiverInput = {
+    where: GiftScalarWhereInput
+    data: XOR<GiftUpdateManyMutationInput, GiftUncheckedUpdateManyWithoutReceiverInput>
+  }
+
+  export type GiftScalarWhereInput = {
+    AND?: GiftScalarWhereInput | GiftScalarWhereInput[]
+    OR?: GiftScalarWhereInput[]
+    NOT?: GiftScalarWhereInput | GiftScalarWhereInput[]
+    id?: StringFilter<"Gift"> | string
+    name?: StringFilter<"Gift"> | string
+    emoji?: StringFilter<"Gift"> | string
+    coins?: IntFilter<"Gift"> | number
+    receiverId?: StringFilter<"Gift"> | string
+    senderId?: StringNullableFilter<"Gift"> | string | null
+    streamSessionId?: StringNullableFilter<"Gift"> | string | null
+    message?: StringNullableFilter<"Gift"> | string | null
+    quantity?: IntFilter<"Gift"> | number
+    createdAt?: DateTimeFilter<"Gift"> | Date | string
+  }
+
+  export type GiftUpsertWithWhereUniqueWithoutSenderInput = {
+    where: GiftWhereUniqueInput
+    update: XOR<GiftUpdateWithoutSenderInput, GiftUncheckedUpdateWithoutSenderInput>
+    create: XOR<GiftCreateWithoutSenderInput, GiftUncheckedCreateWithoutSenderInput>
+  }
+
+  export type GiftUpdateWithWhereUniqueWithoutSenderInput = {
+    where: GiftWhereUniqueInput
+    data: XOR<GiftUpdateWithoutSenderInput, GiftUncheckedUpdateWithoutSenderInput>
+  }
+
+  export type GiftUpdateManyWithWhereWithoutSenderInput = {
+    where: GiftScalarWhereInput
+    data: XOR<GiftUpdateManyMutationInput, GiftUncheckedUpdateManyWithoutSenderInput>
+  }
+
+  export type CommentUpsertWithWhereUniqueWithoutUserInput = {
+    where: CommentWhereUniqueInput
+    update: XOR<CommentUpdateWithoutUserInput, CommentUncheckedUpdateWithoutUserInput>
+    create: XOR<CommentCreateWithoutUserInput, CommentUncheckedCreateWithoutUserInput>
+  }
+
+  export type CommentUpdateWithWhereUniqueWithoutUserInput = {
+    where: CommentWhereUniqueInput
+    data: XOR<CommentUpdateWithoutUserInput, CommentUncheckedUpdateWithoutUserInput>
+  }
+
+  export type CommentUpdateManyWithWhereWithoutUserInput = {
+    where: CommentScalarWhereInput
+    data: XOR<CommentUpdateManyMutationInput, CommentUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type CommentScalarWhereInput = {
+    AND?: CommentScalarWhereInput | CommentScalarWhereInput[]
+    OR?: CommentScalarWhereInput[]
+    NOT?: CommentScalarWhereInput | CommentScalarWhereInput[]
+    id?: StringFilter<"Comment"> | string
+    userId?: StringFilter<"Comment"> | string
+    content?: StringFilter<"Comment"> | string
+    createdAt?: DateTimeFilter<"Comment"> | Date | string
+    updatedAt?: DateTimeFilter<"Comment"> | Date | string
   }
 
   export type UserCreateWithoutVideosInput = {
@@ -5448,7 +12386,12 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
-    mascota?: PetCreateNestedOneWithoutUserInput
+    streamSessions?: StreamSessionCreateNestedManyWithoutUserInput
+    streamerMetrics?: StreamerMetricsCreateNestedOneWithoutUserInput
+    audienceLevels?: AudienceLevelCreateNestedManyWithoutUserInput
+    giftsReceived?: GiftCreateNestedManyWithoutReceiverInput
+    giftsSent?: GiftCreateNestedManyWithoutSenderInput
+    comments?: CommentCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutVideosInput = {
@@ -5457,7 +12400,12 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
-    mascota?: PetUncheckedCreateNestedOneWithoutUserInput
+    streamSessions?: StreamSessionUncheckedCreateNestedManyWithoutUserInput
+    streamerMetrics?: StreamerMetricsUncheckedCreateNestedOneWithoutUserInput
+    audienceLevels?: AudienceLevelUncheckedCreateNestedManyWithoutUserInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutReceiverInput
+    giftsSent?: GiftUncheckedCreateNestedManyWithoutSenderInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutVideosInput = {
@@ -5482,7 +12430,12 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
-    mascota?: PetUpdateOneWithoutUserNestedInput
+    streamSessions?: StreamSessionUpdateManyWithoutUserNestedInput
+    streamerMetrics?: StreamerMetricsUpdateOneWithoutUserNestedInput
+    audienceLevels?: AudienceLevelUpdateManyWithoutUserNestedInput
+    giftsReceived?: GiftUpdateManyWithoutReceiverNestedInput
+    giftsSent?: GiftUpdateManyWithoutSenderNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVideosInput = {
@@ -5491,59 +12444,550 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
-    mascota?: PetUncheckedUpdateOneWithoutUserNestedInput
+    streamSessions?: StreamSessionUncheckedUpdateManyWithoutUserNestedInput
+    streamerMetrics?: StreamerMetricsUncheckedUpdateOneWithoutUserNestedInput
+    audienceLevels?: AudienceLevelUncheckedUpdateManyWithoutUserNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutReceiverNestedInput
+    giftsSent?: GiftUncheckedUpdateManyWithoutSenderNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type UserCreateWithoutMascotaInput = {
+  export type UserCreateWithoutStreamSessionsInput = {
     id?: string
     nombre: string
     rol: $Enums.Rol
     password: string
     contacto?: string | null
     videos?: VideoCreateNestedManyWithoutUserInput
+    streamerMetrics?: StreamerMetricsCreateNestedOneWithoutUserInput
+    audienceLevels?: AudienceLevelCreateNestedManyWithoutUserInput
+    giftsReceived?: GiftCreateNestedManyWithoutReceiverInput
+    giftsSent?: GiftCreateNestedManyWithoutSenderInput
+    comments?: CommentCreateNestedManyWithoutUserInput
   }
 
-  export type UserUncheckedCreateWithoutMascotaInput = {
+  export type UserUncheckedCreateWithoutStreamSessionsInput = {
     id?: string
     nombre: string
     rol: $Enums.Rol
     password: string
     contacto?: string | null
     videos?: VideoUncheckedCreateNestedManyWithoutUserInput
+    streamerMetrics?: StreamerMetricsUncheckedCreateNestedOneWithoutUserInput
+    audienceLevels?: AudienceLevelUncheckedCreateNestedManyWithoutUserInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutReceiverInput
+    giftsSent?: GiftUncheckedCreateNestedManyWithoutSenderInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
   }
 
-  export type UserCreateOrConnectWithoutMascotaInput = {
+  export type UserCreateOrConnectWithoutStreamSessionsInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutMascotaInput, UserUncheckedCreateWithoutMascotaInput>
+    create: XOR<UserCreateWithoutStreamSessionsInput, UserUncheckedCreateWithoutStreamSessionsInput>
   }
 
-  export type UserUpsertWithoutMascotaInput = {
-    update: XOR<UserUpdateWithoutMascotaInput, UserUncheckedUpdateWithoutMascotaInput>
-    create: XOR<UserCreateWithoutMascotaInput, UserUncheckedCreateWithoutMascotaInput>
+  export type GiftCreateWithoutStreamSessionInput = {
+    id?: string
+    name: string
+    emoji: string
+    coins: number
+    message?: string | null
+    quantity?: number
+    createdAt?: Date | string
+    receiver: UserCreateNestedOneWithoutGiftsReceivedInput
+    sender?: UserCreateNestedOneWithoutGiftsSentInput
+  }
+
+  export type GiftUncheckedCreateWithoutStreamSessionInput = {
+    id?: string
+    name: string
+    emoji: string
+    coins: number
+    receiverId: string
+    senderId?: string | null
+    message?: string | null
+    quantity?: number
+    createdAt?: Date | string
+  }
+
+  export type GiftCreateOrConnectWithoutStreamSessionInput = {
+    where: GiftWhereUniqueInput
+    create: XOR<GiftCreateWithoutStreamSessionInput, GiftUncheckedCreateWithoutStreamSessionInput>
+  }
+
+  export type GiftCreateManyStreamSessionInputEnvelope = {
+    data: GiftCreateManyStreamSessionInput | GiftCreateManyStreamSessionInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutStreamSessionsInput = {
+    update: XOR<UserUpdateWithoutStreamSessionsInput, UserUncheckedUpdateWithoutStreamSessionsInput>
+    create: XOR<UserCreateWithoutStreamSessionsInput, UserUncheckedCreateWithoutStreamSessionsInput>
     where?: UserWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutMascotaInput = {
+  export type UserUpdateToOneWithWhereWithoutStreamSessionsInput = {
     where?: UserWhereInput
-    data: XOR<UserUpdateWithoutMascotaInput, UserUncheckedUpdateWithoutMascotaInput>
+    data: XOR<UserUpdateWithoutStreamSessionsInput, UserUncheckedUpdateWithoutStreamSessionsInput>
   }
 
-  export type UserUpdateWithoutMascotaInput = {
+  export type UserUpdateWithoutStreamSessionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     nombre?: StringFieldUpdateOperationsInput | string
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
     videos?: VideoUpdateManyWithoutUserNestedInput
+    streamerMetrics?: StreamerMetricsUpdateOneWithoutUserNestedInput
+    audienceLevels?: AudienceLevelUpdateManyWithoutUserNestedInput
+    giftsReceived?: GiftUpdateManyWithoutReceiverNestedInput
+    giftsSent?: GiftUpdateManyWithoutSenderNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutMascotaInput = {
+  export type UserUncheckedUpdateWithoutStreamSessionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     nombre?: StringFieldUpdateOperationsInput | string
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
     videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
+    streamerMetrics?: StreamerMetricsUncheckedUpdateOneWithoutUserNestedInput
+    audienceLevels?: AudienceLevelUncheckedUpdateManyWithoutUserNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutReceiverNestedInput
+    giftsSent?: GiftUncheckedUpdateManyWithoutSenderNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type GiftUpsertWithWhereUniqueWithoutStreamSessionInput = {
+    where: GiftWhereUniqueInput
+    update: XOR<GiftUpdateWithoutStreamSessionInput, GiftUncheckedUpdateWithoutStreamSessionInput>
+    create: XOR<GiftCreateWithoutStreamSessionInput, GiftUncheckedCreateWithoutStreamSessionInput>
+  }
+
+  export type GiftUpdateWithWhereUniqueWithoutStreamSessionInput = {
+    where: GiftWhereUniqueInput
+    data: XOR<GiftUpdateWithoutStreamSessionInput, GiftUncheckedUpdateWithoutStreamSessionInput>
+  }
+
+  export type GiftUpdateManyWithWhereWithoutStreamSessionInput = {
+    where: GiftScalarWhereInput
+    data: XOR<GiftUpdateManyMutationInput, GiftUncheckedUpdateManyWithoutStreamSessionInput>
+  }
+
+  export type UserCreateWithoutStreamerMetricsInput = {
+    id?: string
+    nombre: string
+    rol: $Enums.Rol
+    password: string
+    contacto?: string | null
+    videos?: VideoCreateNestedManyWithoutUserInput
+    streamSessions?: StreamSessionCreateNestedManyWithoutUserInput
+    audienceLevels?: AudienceLevelCreateNestedManyWithoutUserInput
+    giftsReceived?: GiftCreateNestedManyWithoutReceiverInput
+    giftsSent?: GiftCreateNestedManyWithoutSenderInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutStreamerMetricsInput = {
+    id?: string
+    nombre: string
+    rol: $Enums.Rol
+    password: string
+    contacto?: string | null
+    videos?: VideoUncheckedCreateNestedManyWithoutUserInput
+    streamSessions?: StreamSessionUncheckedCreateNestedManyWithoutUserInput
+    audienceLevels?: AudienceLevelUncheckedCreateNestedManyWithoutUserInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutReceiverInput
+    giftsSent?: GiftUncheckedCreateNestedManyWithoutSenderInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutStreamerMetricsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutStreamerMetricsInput, UserUncheckedCreateWithoutStreamerMetricsInput>
+  }
+
+  export type UserUpsertWithoutStreamerMetricsInput = {
+    update: XOR<UserUpdateWithoutStreamerMetricsInput, UserUncheckedUpdateWithoutStreamerMetricsInput>
+    create: XOR<UserCreateWithoutStreamerMetricsInput, UserUncheckedCreateWithoutStreamerMetricsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutStreamerMetricsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutStreamerMetricsInput, UserUncheckedUpdateWithoutStreamerMetricsInput>
+  }
+
+  export type UserUpdateWithoutStreamerMetricsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
+    password?: StringFieldUpdateOperationsInput | string
+    contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    videos?: VideoUpdateManyWithoutUserNestedInput
+    streamSessions?: StreamSessionUpdateManyWithoutUserNestedInput
+    audienceLevels?: AudienceLevelUpdateManyWithoutUserNestedInput
+    giftsReceived?: GiftUpdateManyWithoutReceiverNestedInput
+    giftsSent?: GiftUpdateManyWithoutSenderNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutStreamerMetricsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
+    password?: StringFieldUpdateOperationsInput | string
+    contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
+    streamSessions?: StreamSessionUncheckedUpdateManyWithoutUserNestedInput
+    audienceLevels?: AudienceLevelUncheckedUpdateManyWithoutUserNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutReceiverNestedInput
+    giftsSent?: GiftUncheckedUpdateManyWithoutSenderNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutAudienceLevelsInput = {
+    id?: string
+    nombre: string
+    rol: $Enums.Rol
+    password: string
+    contacto?: string | null
+    videos?: VideoCreateNestedManyWithoutUserInput
+    streamSessions?: StreamSessionCreateNestedManyWithoutUserInput
+    streamerMetrics?: StreamerMetricsCreateNestedOneWithoutUserInput
+    giftsReceived?: GiftCreateNestedManyWithoutReceiverInput
+    giftsSent?: GiftCreateNestedManyWithoutSenderInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutAudienceLevelsInput = {
+    id?: string
+    nombre: string
+    rol: $Enums.Rol
+    password: string
+    contacto?: string | null
+    videos?: VideoUncheckedCreateNestedManyWithoutUserInput
+    streamSessions?: StreamSessionUncheckedCreateNestedManyWithoutUserInput
+    streamerMetrics?: StreamerMetricsUncheckedCreateNestedOneWithoutUserInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutReceiverInput
+    giftsSent?: GiftUncheckedCreateNestedManyWithoutSenderInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutAudienceLevelsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutAudienceLevelsInput, UserUncheckedCreateWithoutAudienceLevelsInput>
+  }
+
+  export type UserUpsertWithoutAudienceLevelsInput = {
+    update: XOR<UserUpdateWithoutAudienceLevelsInput, UserUncheckedUpdateWithoutAudienceLevelsInput>
+    create: XOR<UserCreateWithoutAudienceLevelsInput, UserUncheckedCreateWithoutAudienceLevelsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutAudienceLevelsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutAudienceLevelsInput, UserUncheckedUpdateWithoutAudienceLevelsInput>
+  }
+
+  export type UserUpdateWithoutAudienceLevelsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
+    password?: StringFieldUpdateOperationsInput | string
+    contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    videos?: VideoUpdateManyWithoutUserNestedInput
+    streamSessions?: StreamSessionUpdateManyWithoutUserNestedInput
+    streamerMetrics?: StreamerMetricsUpdateOneWithoutUserNestedInput
+    giftsReceived?: GiftUpdateManyWithoutReceiverNestedInput
+    giftsSent?: GiftUpdateManyWithoutSenderNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutAudienceLevelsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
+    password?: StringFieldUpdateOperationsInput | string
+    contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
+    streamSessions?: StreamSessionUncheckedUpdateManyWithoutUserNestedInput
+    streamerMetrics?: StreamerMetricsUncheckedUpdateOneWithoutUserNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutReceiverNestedInput
+    giftsSent?: GiftUncheckedUpdateManyWithoutSenderNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutGiftsReceivedInput = {
+    id?: string
+    nombre: string
+    rol: $Enums.Rol
+    password: string
+    contacto?: string | null
+    videos?: VideoCreateNestedManyWithoutUserInput
+    streamSessions?: StreamSessionCreateNestedManyWithoutUserInput
+    streamerMetrics?: StreamerMetricsCreateNestedOneWithoutUserInput
+    audienceLevels?: AudienceLevelCreateNestedManyWithoutUserInput
+    giftsSent?: GiftCreateNestedManyWithoutSenderInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutGiftsReceivedInput = {
+    id?: string
+    nombre: string
+    rol: $Enums.Rol
+    password: string
+    contacto?: string | null
+    videos?: VideoUncheckedCreateNestedManyWithoutUserInput
+    streamSessions?: StreamSessionUncheckedCreateNestedManyWithoutUserInput
+    streamerMetrics?: StreamerMetricsUncheckedCreateNestedOneWithoutUserInput
+    audienceLevels?: AudienceLevelUncheckedCreateNestedManyWithoutUserInput
+    giftsSent?: GiftUncheckedCreateNestedManyWithoutSenderInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutGiftsReceivedInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutGiftsReceivedInput, UserUncheckedCreateWithoutGiftsReceivedInput>
+  }
+
+  export type UserCreateWithoutGiftsSentInput = {
+    id?: string
+    nombre: string
+    rol: $Enums.Rol
+    password: string
+    contacto?: string | null
+    videos?: VideoCreateNestedManyWithoutUserInput
+    streamSessions?: StreamSessionCreateNestedManyWithoutUserInput
+    streamerMetrics?: StreamerMetricsCreateNestedOneWithoutUserInput
+    audienceLevels?: AudienceLevelCreateNestedManyWithoutUserInput
+    giftsReceived?: GiftCreateNestedManyWithoutReceiverInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutGiftsSentInput = {
+    id?: string
+    nombre: string
+    rol: $Enums.Rol
+    password: string
+    contacto?: string | null
+    videos?: VideoUncheckedCreateNestedManyWithoutUserInput
+    streamSessions?: StreamSessionUncheckedCreateNestedManyWithoutUserInput
+    streamerMetrics?: StreamerMetricsUncheckedCreateNestedOneWithoutUserInput
+    audienceLevels?: AudienceLevelUncheckedCreateNestedManyWithoutUserInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutReceiverInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutGiftsSentInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutGiftsSentInput, UserUncheckedCreateWithoutGiftsSentInput>
+  }
+
+  export type StreamSessionCreateWithoutGiftsInput = {
+    id?: string
+    startTime: Date | string
+    endTime?: Date | string | null
+    durationMs?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutStreamSessionsInput
+  }
+
+  export type StreamSessionUncheckedCreateWithoutGiftsInput = {
+    id?: string
+    userId: string
+    startTime: Date | string
+    endTime?: Date | string | null
+    durationMs?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StreamSessionCreateOrConnectWithoutGiftsInput = {
+    where: StreamSessionWhereUniqueInput
+    create: XOR<StreamSessionCreateWithoutGiftsInput, StreamSessionUncheckedCreateWithoutGiftsInput>
+  }
+
+  export type UserUpsertWithoutGiftsReceivedInput = {
+    update: XOR<UserUpdateWithoutGiftsReceivedInput, UserUncheckedUpdateWithoutGiftsReceivedInput>
+    create: XOR<UserCreateWithoutGiftsReceivedInput, UserUncheckedCreateWithoutGiftsReceivedInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutGiftsReceivedInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutGiftsReceivedInput, UserUncheckedUpdateWithoutGiftsReceivedInput>
+  }
+
+  export type UserUpdateWithoutGiftsReceivedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
+    password?: StringFieldUpdateOperationsInput | string
+    contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    videos?: VideoUpdateManyWithoutUserNestedInput
+    streamSessions?: StreamSessionUpdateManyWithoutUserNestedInput
+    streamerMetrics?: StreamerMetricsUpdateOneWithoutUserNestedInput
+    audienceLevels?: AudienceLevelUpdateManyWithoutUserNestedInput
+    giftsSent?: GiftUpdateManyWithoutSenderNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutGiftsReceivedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
+    password?: StringFieldUpdateOperationsInput | string
+    contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
+    streamSessions?: StreamSessionUncheckedUpdateManyWithoutUserNestedInput
+    streamerMetrics?: StreamerMetricsUncheckedUpdateOneWithoutUserNestedInput
+    audienceLevels?: AudienceLevelUncheckedUpdateManyWithoutUserNestedInput
+    giftsSent?: GiftUncheckedUpdateManyWithoutSenderNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUpsertWithoutGiftsSentInput = {
+    update: XOR<UserUpdateWithoutGiftsSentInput, UserUncheckedUpdateWithoutGiftsSentInput>
+    create: XOR<UserCreateWithoutGiftsSentInput, UserUncheckedCreateWithoutGiftsSentInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutGiftsSentInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutGiftsSentInput, UserUncheckedUpdateWithoutGiftsSentInput>
+  }
+
+  export type UserUpdateWithoutGiftsSentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
+    password?: StringFieldUpdateOperationsInput | string
+    contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    videos?: VideoUpdateManyWithoutUserNestedInput
+    streamSessions?: StreamSessionUpdateManyWithoutUserNestedInput
+    streamerMetrics?: StreamerMetricsUpdateOneWithoutUserNestedInput
+    audienceLevels?: AudienceLevelUpdateManyWithoutUserNestedInput
+    giftsReceived?: GiftUpdateManyWithoutReceiverNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutGiftsSentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
+    password?: StringFieldUpdateOperationsInput | string
+    contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
+    streamSessions?: StreamSessionUncheckedUpdateManyWithoutUserNestedInput
+    streamerMetrics?: StreamerMetricsUncheckedUpdateOneWithoutUserNestedInput
+    audienceLevels?: AudienceLevelUncheckedUpdateManyWithoutUserNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutReceiverNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type StreamSessionUpsertWithoutGiftsInput = {
+    update: XOR<StreamSessionUpdateWithoutGiftsInput, StreamSessionUncheckedUpdateWithoutGiftsInput>
+    create: XOR<StreamSessionCreateWithoutGiftsInput, StreamSessionUncheckedCreateWithoutGiftsInput>
+    where?: StreamSessionWhereInput
+  }
+
+  export type StreamSessionUpdateToOneWithWhereWithoutGiftsInput = {
+    where?: StreamSessionWhereInput
+    data: XOR<StreamSessionUpdateWithoutGiftsInput, StreamSessionUncheckedUpdateWithoutGiftsInput>
+  }
+
+  export type StreamSessionUpdateWithoutGiftsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    durationMs?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutStreamSessionsNestedInput
+  }
+
+  export type StreamSessionUncheckedUpdateWithoutGiftsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    durationMs?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserCreateWithoutCommentsInput = {
+    id?: string
+    nombre: string
+    rol: $Enums.Rol
+    password: string
+    contacto?: string | null
+    videos?: VideoCreateNestedManyWithoutUserInput
+    streamSessions?: StreamSessionCreateNestedManyWithoutUserInput
+    streamerMetrics?: StreamerMetricsCreateNestedOneWithoutUserInput
+    audienceLevels?: AudienceLevelCreateNestedManyWithoutUserInput
+    giftsReceived?: GiftCreateNestedManyWithoutReceiverInput
+    giftsSent?: GiftCreateNestedManyWithoutSenderInput
+  }
+
+  export type UserUncheckedCreateWithoutCommentsInput = {
+    id?: string
+    nombre: string
+    rol: $Enums.Rol
+    password: string
+    contacto?: string | null
+    videos?: VideoUncheckedCreateNestedManyWithoutUserInput
+    streamSessions?: StreamSessionUncheckedCreateNestedManyWithoutUserInput
+    streamerMetrics?: StreamerMetricsUncheckedCreateNestedOneWithoutUserInput
+    audienceLevels?: AudienceLevelUncheckedCreateNestedManyWithoutUserInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutReceiverInput
+    giftsSent?: GiftUncheckedCreateNestedManyWithoutSenderInput
+  }
+
+  export type UserCreateOrConnectWithoutCommentsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCommentsInput, UserUncheckedCreateWithoutCommentsInput>
+  }
+
+  export type UserUpsertWithoutCommentsInput = {
+    update: XOR<UserUpdateWithoutCommentsInput, UserUncheckedUpdateWithoutCommentsInput>
+    create: XOR<UserCreateWithoutCommentsInput, UserUncheckedCreateWithoutCommentsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCommentsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCommentsInput, UserUncheckedUpdateWithoutCommentsInput>
+  }
+
+  export type UserUpdateWithoutCommentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
+    password?: StringFieldUpdateOperationsInput | string
+    contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    videos?: VideoUpdateManyWithoutUserNestedInput
+    streamSessions?: StreamSessionUpdateManyWithoutUserNestedInput
+    streamerMetrics?: StreamerMetricsUpdateOneWithoutUserNestedInput
+    audienceLevels?: AudienceLevelUpdateManyWithoutUserNestedInput
+    giftsReceived?: GiftUpdateManyWithoutReceiverNestedInput
+    giftsSent?: GiftUpdateManyWithoutSenderNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCommentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
+    password?: StringFieldUpdateOperationsInput | string
+    contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
+    streamSessions?: StreamSessionUncheckedUpdateManyWithoutUserNestedInput
+    streamerMetrics?: StreamerMetricsUncheckedUpdateOneWithoutUserNestedInput
+    audienceLevels?: AudienceLevelUncheckedUpdateManyWithoutUserNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutReceiverNestedInput
+    giftsSent?: GiftUncheckedUpdateManyWithoutSenderNestedInput
   }
 
   export type VideoCreateManyUserInput = {
@@ -5551,6 +12995,56 @@ export namespace Prisma {
     title: string
     url: string
     likes?: number
+  }
+
+  export type StreamSessionCreateManyUserInput = {
+    id?: string
+    startTime: Date | string
+    endTime?: Date | string | null
+    durationMs?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AudienceLevelCreateManyUserInput = {
+    id?: string
+    level?: number
+    name: string
+    description?: string | null
+    viewPermissions?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GiftCreateManyReceiverInput = {
+    id?: string
+    name: string
+    emoji: string
+    coins: number
+    senderId?: string | null
+    streamSessionId?: string | null
+    message?: string | null
+    quantity?: number
+    createdAt?: Date | string
+  }
+
+  export type GiftCreateManySenderInput = {
+    id?: string
+    name: string
+    emoji: string
+    coins: number
+    receiverId: string
+    streamSessionId?: string | null
+    message?: string | null
+    quantity?: number
+    createdAt?: Date | string
+  }
+
+  export type CommentCreateManyUserInput = {
+    id?: string
+    content: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type VideoUpdateWithoutUserInput = {
@@ -5571,6 +13065,206 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     likes?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type StreamSessionUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    durationMs?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    gifts?: GiftUpdateManyWithoutStreamSessionNestedInput
+  }
+
+  export type StreamSessionUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    durationMs?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    gifts?: GiftUncheckedUpdateManyWithoutStreamSessionNestedInput
+  }
+
+  export type StreamSessionUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    durationMs?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AudienceLevelUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    level?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    viewPermissions?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AudienceLevelUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    level?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    viewPermissions?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AudienceLevelUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    level?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    viewPermissions?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GiftUpdateWithoutReceiverInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    emoji?: StringFieldUpdateOperationsInput | string
+    coins?: IntFieldUpdateOperationsInput | number
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sender?: UserUpdateOneWithoutGiftsSentNestedInput
+    streamSession?: StreamSessionUpdateOneWithoutGiftsNestedInput
+  }
+
+  export type GiftUncheckedUpdateWithoutReceiverInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    emoji?: StringFieldUpdateOperationsInput | string
+    coins?: IntFieldUpdateOperationsInput | number
+    senderId?: NullableStringFieldUpdateOperationsInput | string | null
+    streamSessionId?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GiftUncheckedUpdateManyWithoutReceiverInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    emoji?: StringFieldUpdateOperationsInput | string
+    coins?: IntFieldUpdateOperationsInput | number
+    senderId?: NullableStringFieldUpdateOperationsInput | string | null
+    streamSessionId?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GiftUpdateWithoutSenderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    emoji?: StringFieldUpdateOperationsInput | string
+    coins?: IntFieldUpdateOperationsInput | number
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    receiver?: UserUpdateOneRequiredWithoutGiftsReceivedNestedInput
+    streamSession?: StreamSessionUpdateOneWithoutGiftsNestedInput
+  }
+
+  export type GiftUncheckedUpdateWithoutSenderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    emoji?: StringFieldUpdateOperationsInput | string
+    coins?: IntFieldUpdateOperationsInput | number
+    receiverId?: StringFieldUpdateOperationsInput | string
+    streamSessionId?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GiftUncheckedUpdateManyWithoutSenderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    emoji?: StringFieldUpdateOperationsInput | string
+    coins?: IntFieldUpdateOperationsInput | number
+    receiverId?: StringFieldUpdateOperationsInput | string
+    streamSessionId?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CommentUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CommentUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CommentUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GiftCreateManyStreamSessionInput = {
+    id?: string
+    name: string
+    emoji: string
+    coins: number
+    receiverId: string
+    senderId?: string | null
+    message?: string | null
+    quantity?: number
+    createdAt?: Date | string
+  }
+
+  export type GiftUpdateWithoutStreamSessionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    emoji?: StringFieldUpdateOperationsInput | string
+    coins?: IntFieldUpdateOperationsInput | number
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    receiver?: UserUpdateOneRequiredWithoutGiftsReceivedNestedInput
+    sender?: UserUpdateOneWithoutGiftsSentNestedInput
+  }
+
+  export type GiftUncheckedUpdateWithoutStreamSessionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    emoji?: StringFieldUpdateOperationsInput | string
+    coins?: IntFieldUpdateOperationsInput | number
+    receiverId?: StringFieldUpdateOperationsInput | string
+    senderId?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GiftUncheckedUpdateManyWithoutStreamSessionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    emoji?: StringFieldUpdateOperationsInput | string
+    coins?: IntFieldUpdateOperationsInput | number
+    receiverId?: StringFieldUpdateOperationsInput | string
+    senderId?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

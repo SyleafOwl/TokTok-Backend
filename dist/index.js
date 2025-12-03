@@ -117,6 +117,45 @@ app.delete('/api/videos/:id', async (req, res) => {
         res.status(400).json({ error: e?.message ?? 'Error eliminando video' });
     }
 });
+app.post('/api/videos/:id/like', async (req, res) => {
+    const id = Number(req.params.id);
+    try {
+        const video = await prisma.video.update({
+            where: { id },
+            data: { likes: { increment: 1 } },
+            select: { id: true, likes: true }
+        });
+        res.json(video);
+    }
+    catch (e) {
+        // P2025 es el código de Prisma cuando no existe el registro al actualizar
+        if (e?.code === 'P2025') {
+            return res.status(404).json({ error: 'Video no encontrado' });
+        }
+        res.status(400).json({ error: e?.message ?? 'Error añadiendo like' });
+    }
+});
+// ---- Pets CRUD ----
+app.get('/api/pets/:id', async (req, res) => {
+    const id = String(req.params.id);
+    const pet = await prisma.pet.findUnique({ where: { id }, include: { user: true } });
+    if (!pet)
+        return res.status(404).json({ error: 'Mascota no encontrada' });
+    res.json(pet);
+});
+app.post('/api/pets', async (req, res) => {
+    const { size, hearts, userId } = req.body ?? {};
+    if (!size || !hearts || !userId) {
+        return res.status(400).json({ error: 'size, hearts y userId son requeridos' });
+    }
+    try {
+        const pet = await prisma.pet.create({ data: { size, hearts, userId } });
+        res.status(201).json(pet);
+    }
+    catch (e) {
+        res.status(400).json({ error: e?.message ?? 'Error creando mascota' });
+    }
+});
 // ---- Autenticación ----
 function normalizaRolInterno(input) {
     const v = String(input || '').toLowerCase();
@@ -181,7 +220,207 @@ for (const path of ['/api/autenticacion/ingresar', '/autenticacion/ingresar']) {
         }
     });
 }
-// ---- Server ----
+// ---- Metrics (Streamer) ----
+// Niveles: umbrales en ms para subir de nivel. Ajusta a tu criterio.
+const LEVEL_THRESHOLDS_MS = [0, 1 * 60 * 60 * 1000, 5 * 60 * 60 * 1000, 12 * 60 * 60 * 1000, 24 * 60 * 60 * 1000, 72 * 60 * 60 * 1000, 200 * 60 * 60 * 1000];
+function computeLevelFromMs(totalMs) {
+    // devuelve el mayor nivel cuya threshold <= totalMs
+    let level = 1;
+    for (let i = LEVEL_THRESHOLDS_MS.length - 1; i >= 0; i--) {
+        const threshold = LEVEL_THRESHOLDS_MS[i] ?? 0;
+        if (totalMs >= threshold) {
+            level = i + 1;
+            break;
+        }
+    }
+    // limitar entre 1 y LEVEL_THRESHOLDS_MS.length
+    level = Math.max(1, Math.min(level, LEVEL_THRESHOLDS_MS.length));
+    return level;
+}
+// ---- Stream sessions, Audience levels, Gifts, Comments ----
+// Crear nueva sesión de transmisión
+app.post('/api/stream-session', async (req, res) => {
+    const { userId, startTime } = req.body ?? {};
+    if (!userId || !startTime)
+        return res.status(400).json({ error: 'userId y startTime son requeridos' });
+    try {
+        const clientAny = prisma;
+        const session = await clientAny.streamSession.create({ data: { userId, startTime: new Date(startTime) } });
+        res.status(201).json(session);
+    }
+    catch (e) {
+        console.error('[StreamSession create] Error:', e);
+        res.status(500).json({ error: e?.message ?? 'Error creando sesión' });
+    }
+});
+// Obtener sesiones de un streamer
+app.get('/api/stream-session/:userId', async (req, res) => {
+    const userId = String(req.params.userId);
+    try {
+        const clientAny = prisma;
+        const sessions = await clientAny.streamSession.findMany({ where: { userId }, orderBy: { startTime: 'desc' } });
+        res.json(sessions);
+    }
+    catch (e) {
+        console.error('[StreamSession list] Error:', e);
+        res.status(500).json({ error: e?.message ?? 'Error obteniendo sesiones' });
+    }
+});
+// Configurar niveles de audiencia
+app.post('/api/audience-level', async (req, res) => {
+    const { userId, level, name, description, viewPermissions } = req.body ?? {};
+    if (!userId || !level || !name)
+        return res.status(400).json({ error: 'userId, level y name son requeridos' });
+    try {
+        const clientAny = prisma;
+        const al = await clientAny.audienceLevel.create({ data: { userId, level, name, description, viewPermissions } });
+        res.status(201).json(al);
+    }
+    catch (e) {
+        console.error('[AudienceLevel create] Error:', e);
+        res.status(500).json({ error: e?.message ?? 'Error creando audience level' });
+    }
+});
+app.get('/api/audience-level/:userId', async (req, res) => {
+    const userId = String(req.params.userId);
+    try {
+        const clientAny = prisma;
+        const list = await clientAny.audienceLevel.findMany({ where: { userId }, orderBy: { level: 'asc' } });
+        res.json(list);
+    }
+    catch (e) {
+        console.error('[AudienceLevel list] Error:', e);
+        res.status(500).json({ error: e?.message ?? 'Error obteniendo audience levels' });
+    }
+});
+// Enviar regalo
+app.post('/api/gift', async (req, res) => {
+    const { receiverId, name, emoji, coins, senderId, message, streamSessionId, quantity } = req.body ?? {};
+    if (!receiverId || !name || !emoji || typeof coins !== 'number')
+        return res.status(400).json({ error: 'receiverId, name, emoji y coins son requeridos' });
+    try {
+        const clientAny = prisma;
+        const gift = await clientAny.gift.create({ data: { receiverId, name, emoji, coins, senderId, message, streamSessionId, quantity: quantity ?? 1 } });
+        res.status(201).json(gift);
+    }
+    catch (e) {
+        console.error('[Gift create] Error:', e);
+        res.status(500).json({ error: e?.message ?? 'Error creando regalo' });
+    }
+});
+app.get('/api/gift/received/:receiverId', async (req, res) => {
+    const receiverId = String(req.params.receiverId);
+    try {
+        const clientAny = prisma;
+        const gifts = await clientAny.gift.findMany({ where: { receiverId }, orderBy: { createdAt: 'desc' } });
+        res.json(gifts);
+    }
+    catch (e) {
+        console.error('[Gift received] Error:', e);
+        res.status(500).json({ error: e?.message ?? 'Error obteniendo regalos' });
+    }
+});
+// Comentarios
+app.post('/api/comment', async (req, res) => {
+    const { userId, content } = req.body ?? {};
+    if (!userId || !content)
+        return res.status(400).json({ error: 'userId y content son requeridos' });
+    try {
+        const clientAny = prisma;
+        const comment = await clientAny.comment.create({ data: { userId, content } });
+        res.status(201).json(comment);
+    }
+    catch (e) {
+        console.error('[Comment create] Error:', e);
+        res.status(500).json({ error: e?.message ?? 'Error creando comentario' });
+    }
+});
+app.get('/api/comment', async (req, res) => {
+    const limit = Number(req.query.limit) || 50;
+    try {
+        const clientAny = prisma;
+        const comments = await clientAny.comment.findMany({ orderBy: { createdAt: 'desc' }, take: limit });
+        res.json(comments);
+    }
+    catch (e) {
+        console.error('[Comment list] Error:', e);
+        res.status(500).json({ error: e?.message ?? 'Error obteniendo comentarios' });
+    }
+});
+async function ensureMetricsRecord(userId) {
+    // El cliente Prisma debe regenerarse para reconocer los nuevos modelos.
+    // Para evitar errores de tipado antes de generar, se usa acceso dinámico.
+    const clientAny = prisma;
+    let m = await clientAny.streamerMetrics.findUnique({ where: { userId } });
+    if (!m) {
+        m = await clientAny.streamerMetrics.create({ data: { userId } });
+    }
+    return m;
+}
+// Obtener métricas
+app.get('/api/metrics/:userId', async (req, res) => {
+    const userId = String(req.params.userId);
+    try {
+        const metrics = await ensureMetricsRecord(userId);
+        res.json(metrics);
+    }
+    catch (e) {
+        console.error('[Metrics GET] Error:', e);
+        res.status(500).json({ error: e?.message ?? 'Error obteniendo métricas' });
+    }
+});
+// Finalizar sesión: actualizar totalMs y totalSessions (body: { durationMs: number })
+app.post('/api/metrics/:userId/session-end', async (req, res) => {
+    const userId = String(req.params.userId);
+    const { durationMs } = req.body ?? {};
+    if (typeof durationMs !== 'number' || durationMs < 0)
+        return res.status(400).json({ error: 'durationMs (number >= 0) es requerido' });
+    try {
+        const current = await ensureMetricsRecord(userId);
+        const newTotalMs = (current.totalMs ?? 0) + Math.floor(durationMs);
+        const newTotalSessions = (current.totalSessions ?? 0) + 1;
+        const newLevel = computeLevelFromMs(newTotalMs);
+        const dataToUpdate = { totalMs: newTotalMs, totalSessions: newTotalSessions };
+        if (newLevel !== current.currentLevel) {
+            dataToUpdate.currentLevel = newLevel;
+            dataToUpdate.lastLevelUpAt = new Date();
+        }
+        const updated = await prisma.streamerMetrics.update({ where: { userId }, data: dataToUpdate });
+        res.json(updated);
+    }
+    catch (e) {
+        console.error('[Metrics session-end] Error:', e);
+        res.status(500).json({ error: e?.message ?? 'Error actualizando métricas' });
+    }
+});
+// Recalcular métricas desde StreamSession (agrega/ajusta durationMs en sesiones)
+app.post('/api/metrics/:userId/recalculate', async (req, res) => {
+    const userId = String(req.params.userId);
+    try {
+        // agrega suma y conteo desde StreamSession
+        const agg = await prisma.streamSession.aggregate({
+            where: { userId },
+            _sum: { durationMs: true },
+            _count: { id: true }
+        });
+        const totalMs = agg._sum?.durationMs ?? 0;
+        const totalSessions = agg._count?.id ?? 0;
+        const newLevel = computeLevelFromMs(totalMs);
+        const m = await ensureMetricsRecord(userId);
+        const dataToUpdate = { totalMs, totalSessions };
+        if (newLevel !== m.currentLevel) {
+            dataToUpdate.currentLevel = newLevel;
+            dataToUpdate.lastLevelUpAt = new Date();
+        }
+        const updated = await prisma.streamerMetrics.update({ where: { userId }, data: dataToUpdate });
+        res.json(updated);
+    }
+    catch (e) {
+        console.error('[Metrics recalc] Error:', e);
+        res.status(500).json({ error: e?.message ?? 'Error recalculando métricas' });
+    }
+});
+// ---- Start server ----
 app.listen(PORT, () => {
     console.log(`[TokTok] API escuchando en http://localhost:${PORT}`);
 });
@@ -190,4 +429,5 @@ process.on('SIGINT', async () => {
     await prisma.$disconnect();
     process.exit(0);
 });
+// (El servidor se arranca al final del fichero, después de declarar todas las rutas)
 //# sourceMappingURL=index.js.map
