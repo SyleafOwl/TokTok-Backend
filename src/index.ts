@@ -184,16 +184,7 @@ for (const path of ['/api/autenticacion/ingresar', '/autenticacion/ingresar']) {
   })
 }
 
-// ---- Server ----
-app.listen(PORT, () => {
-  console.log(`[TokTok] API escuchando en http://localhost:${PORT}`)
-})
 
-process.on('SIGINT', async () => {
-  console.log('\n[TOKTOK] Cerrando...')
-  await prisma.$disconnect()
-  process.exit(0)
-})
 
 // ---- Metrics (Streamer) ----
 // Niveles: umbrales en ms para subir de nivel. Ajusta a tu criterio.
@@ -213,6 +204,113 @@ function computeLevelFromMs(totalMs: number) {
   level = Math.max(1, Math.min(level, LEVEL_THRESHOLDS_MS.length))
   return level
 }
+
+// ---- Stream sessions, Audience levels, Gifts, Comments ----
+
+// Crear nueva sesión de transmisión
+app.post('/api/stream-session', async (req, res) => {
+  const { userId, startTime } = req.body ?? {}
+  if (!userId || !startTime) return res.status(400).json({ error: 'userId y startTime son requeridos' })
+  try {
+    const clientAny = prisma as any
+    const session = await clientAny.streamSession.create({ data: { userId, startTime: new Date(startTime) } })
+    res.status(201).json(session)
+  } catch (e: any) {
+    console.error('[StreamSession create] Error:', e)
+    res.status(500).json({ error: e?.message ?? 'Error creando sesión' })
+  }
+})
+
+// Obtener sesiones de un streamer
+app.get('/api/stream-session/:userId', async (req, res) => {
+  const userId = String(req.params.userId)
+  try {
+    const clientAny = prisma as any
+    const sessions = await clientAny.streamSession.findMany({ where: { userId }, orderBy: { startTime: 'desc' } })
+    res.json(sessions)
+  } catch (e: any) {
+    console.error('[StreamSession list] Error:', e)
+    res.status(500).json({ error: e?.message ?? 'Error obteniendo sesiones' })
+  }
+})
+
+// Configurar niveles de audiencia
+app.post('/api/audience-level', async (req, res) => {
+  const { userId, level, name, description, viewPermissions } = req.body ?? {}
+  if (!userId || !level || !name) return res.status(400).json({ error: 'userId, level y name son requeridos' })
+  try {
+    const clientAny = prisma as any
+    const al = await clientAny.audienceLevel.create({ data: { userId, level, name, description, viewPermissions } })
+    res.status(201).json(al)
+  } catch (e: any) {
+    console.error('[AudienceLevel create] Error:', e)
+    res.status(500).json({ error: e?.message ?? 'Error creando audience level' })
+  }
+})
+
+app.get('/api/audience-level/:userId', async (req, res) => {
+  const userId = String(req.params.userId)
+  try {
+    const clientAny = prisma as any
+    const list = await clientAny.audienceLevel.findMany({ where: { userId }, orderBy: { level: 'asc' } })
+    res.json(list)
+  } catch (e: any) {
+    console.error('[AudienceLevel list] Error:', e)
+    res.status(500).json({ error: e?.message ?? 'Error obteniendo audience levels' })
+  }
+})
+
+// Enviar regalo
+app.post('/api/gift', async (req, res) => {
+  const { receiverId, name, emoji, coins, senderId, message, streamSessionId, quantity } = req.body ?? {}
+  if (!receiverId || !name || !emoji || typeof coins !== 'number') return res.status(400).json({ error: 'receiverId, name, emoji y coins son requeridos' })
+  try {
+    const clientAny = prisma as any
+    const gift = await clientAny.gift.create({ data: { receiverId, name, emoji, coins, senderId, message, streamSessionId, quantity: quantity ?? 1 } })
+    res.status(201).json(gift)
+  } catch (e: any) {
+    console.error('[Gift create] Error:', e)
+    res.status(500).json({ error: e?.message ?? 'Error creando regalo' })
+  }
+})
+
+app.get('/api/gift/received/:receiverId', async (req, res) => {
+  const receiverId = String(req.params.receiverId)
+  try {
+    const clientAny = prisma as any
+    const gifts = await clientAny.gift.findMany({ where: { receiverId }, orderBy: { createdAt: 'desc' } })
+    res.json(gifts)
+  } catch (e: any) {
+    console.error('[Gift received] Error:', e)
+    res.status(500).json({ error: e?.message ?? 'Error obteniendo regalos' })
+  }
+})
+
+// Comentarios
+app.post('/api/comment', async (req, res) => {
+  const { userId, content } = req.body ?? {}
+  if (!userId || !content) return res.status(400).json({ error: 'userId y content son requeridos' })
+  try {
+    const clientAny = prisma as any
+    const comment = await clientAny.comment.create({ data: { userId, content } })
+    res.status(201).json(comment)
+  } catch (e: any) {
+    console.error('[Comment create] Error:', e)
+    res.status(500).json({ error: e?.message ?? 'Error creando comentario' })
+  }
+})
+
+app.get('/api/comment', async (req, res) => {
+  const limit = Number(req.query.limit) || 50
+  try {
+    const clientAny = prisma as any
+    const comments = await clientAny.comment.findMany({ orderBy: { createdAt: 'desc' }, take: limit })
+    res.json(comments)
+  } catch (e: any) {
+    console.error('[Comment list] Error:', e)
+    res.status(500).json({ error: e?.message ?? 'Error obteniendo comentarios' })
+  }
+})
 
 async function ensureMetricsRecord(userId: string) {
   // El cliente Prisma debe regenerarse para reconocer los nuevos modelos.
@@ -291,3 +389,16 @@ app.post('/api/metrics/:userId/recalculate', async (req, res) => {
     res.status(500).json({ error: e?.message ?? 'Error recalculando métricas' })
   }
 })
+
+// ---- Start server ----
+app.listen(PORT, () => {
+  console.log(`[TokTok] API escuchando en http://localhost:${PORT}`)
+})
+
+process.on('SIGINT', async () => {
+  console.log('\n[TOKTOK] Cerrando...')
+  await prisma.$disconnect()
+  process.exit(0)
+})
+
+// (El servidor se arranca al final del fichero, después de declarar todas las rutas)
