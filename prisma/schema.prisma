@@ -44,6 +44,15 @@ model Video {
   userId String
   user   User   @relation(fields: [userId], references: [id])
 }
+
+model Pet {
+  id     String @id @default(cuid())
+  size   Float  @default(0.0)
+  hearts Int    @default(0)
+
+  user   User @relation(fields: [userId], references: [id])
+  userId String @unique
+}
  
 
 
@@ -141,7 +150,6 @@ model Comment {
   @@index([userId])
   @@index([createdAt])
 }
-//Holaaaaa
 
 // Nota: En Prisma v6 la URL debe estar en este schema (env(DATABASE_URL)).
 // Nota: En Prisma v6 la URL debía estar en este schema (env(DATABASE_URL)).
