@@ -25,8 +25,14 @@ model User {
   password  String
   contacto  String?
 
-  videos    Video[]
-  mascota   Pet?
+  // Relaciones inversas
+  videos           Video[]
+  streamSessions   StreamSession[]
+  streamerMetrics  StreamerMetrics?
+  audienceLevels   AudienceLevel[]
+  giftsReceived    Gift[] @relation("ReceiverUser")
+  giftsSent        Gift[] @relation("SenderUser")
+  comments         Comment[]
 }
 
 model Video {
@@ -38,14 +44,102 @@ model Video {
   userId String
   user   User   @relation(fields: [userId], references: [id])
 }
+ 
 
-model Pet {
-  id     String @id @default(cuid())
-  size   Float  @default(0.0)
-  hearts Int    @default(0)
 
-  user   User @relation(fields: [userId], references: [id])
-  userId String @unique
+model StreamSession {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  startTime    DateTime
+  endTime      DateTime?
+
+  durationMs   Int      @default(0) // calcular en la app al finalizar
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relación inversa para los regalos asociados a esta sesión
+  gifts        Gift[]
+
+  @@index([userId])
+  @@index([startTime])
+  @@index([userId, startTime])
+
+  //agregado comentario|
+}
+
+model StreamerMetrics {
+  id            String  @id @default(cuid())
+  userId        String  @unique
+  user          User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  totalMs       Int     @default(0)
+  totalSessions Int     @default(0)
+  currentLevel  Int     @default(1)
+  lastLevelUpAt DateTime?
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([userId])
+}
+
+model AudienceLevel {
+  id              String  @id @default(cuid())
+  userId          String
+  user            User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  level           Int     @default(1)
+  name            String
+  description     String?
+  viewPermissions Json?
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@unique([userId, level])
+  @@index([userId])
+}
+
+model Gift {
+  id             String   @id @default(cuid())
+  name           String
+  emoji          String
+  coins          Int
+
+  receiverId     String
+  receiver       User     @relation("ReceiverUser", fields: [receiverId], references: [id], onDelete: Cascade)
+
+  senderId       String?
+  sender         User?    @relation("SenderUser", fields: [senderId], references: [id], onDelete: SetNull)
+
+  streamSessionId String?
+  streamSession   StreamSession? @relation(fields: [streamSessionId], references: [id], onDelete: SetNull)
+
+  message        String?
+  quantity       Int      @default(1)
+
+  createdAt      DateTime @default(now())
+
+  @@index([receiverId])
+  @@index([senderId])
+  @@index([streamSessionId])
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  content   String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([createdAt])
 }
 //Holaaaaa
 
@@ -54,3 +148,4 @@ model Pet {
 // En Prisma v7 elimina `url` del schema.prisma: mueve la URL de conexión para Migrate a prisma.config.ts
 // y, al instanciar PrismaClient, pasa `adapter` para una conexión directa o `accelerateUrl` para Accelerate.
 // Ver: https://pris.ly/d/config-datasource y https://pris.ly/d/prisma7-client-config
+
