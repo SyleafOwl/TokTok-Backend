@@ -139,6 +139,8 @@ model Comment {
   @@index([userId])
   @@index([createdAt])
 }
+//Holaaaaa
+
 // Nota: En Prisma v6 la URL debe estar en este schema (env(DATABASE_URL)).
 // Nota: En Prisma v6 la URL debía estar en este schema (env(DATABASE_URL)).
 // En Prisma v7 elimina `url` del schema.prisma: mueve la URL de conexión para Migrate a prisma.config.ts
