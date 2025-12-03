@@ -137,9 +137,67 @@ exports.Prisma.VideoScalarFieldEnum = {
   userId: 'userId'
 };
 
+exports.Prisma.StreamSessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  durationMs: 'durationMs',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.StreamerMetricsScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  totalMs: 'totalMs',
+  totalSessions: 'totalSessions',
+  currentLevel: 'currentLevel',
+  lastLevelUpAt: 'lastLevelUpAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AudienceLevelScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  level: 'level',
+  name: 'name',
+  description: 'description',
+  viewPermissions: 'viewPermissions',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.GiftScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  emoji: 'emoji',
+  coins: 'coins',
+  receiverId: 'receiverId',
+  senderId: 'senderId',
+  streamSessionId: 'streamSessionId',
+  message: 'message',
+  quantity: 'quantity',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.CommentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  content: 'content',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -151,6 +209,12 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
 exports.Rol = exports.$Enums.Rol = {
   visitante: 'visitante',
   creador: 'creador'
@@ -158,7 +222,12 @@ exports.Rol = exports.$Enums.Rol = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Video: 'Video'
+  Video: 'Video',
+  StreamSession: 'StreamSession',
+  StreamerMetrics: 'StreamerMetrics',
+  AudienceLevel: 'AudienceLevel',
+  Gift: 'Gift',
+  Comment: 'Comment'
 };
 
 /**

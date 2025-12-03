@@ -109,9 +109,67 @@ exports.Prisma.VideoScalarFieldEnum = {
   userId: 'userId'
 };
 
+exports.Prisma.StreamSessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  durationMs: 'durationMs',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.StreamerMetricsScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  totalMs: 'totalMs',
+  totalSessions: 'totalSessions',
+  currentLevel: 'currentLevel',
+  lastLevelUpAt: 'lastLevelUpAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AudienceLevelScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  level: 'level',
+  name: 'name',
+  description: 'description',
+  viewPermissions: 'viewPermissions',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.GiftScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  emoji: 'emoji',
+  coins: 'coins',
+  receiverId: 'receiverId',
+  senderId: 'senderId',
+  streamSessionId: 'streamSessionId',
+  message: 'message',
+  quantity: 'quantity',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.CommentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  content: 'content',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -123,6 +181,12 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
 exports.Rol = exports.$Enums.Rol = {
   visitante: 'visitante',
   creador: 'creador'
@@ -130,7 +194,12 @@ exports.Rol = exports.$Enums.Rol = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Video: 'Video'
+  Video: 'Video',
+  StreamSession: 'StreamSession',
+  StreamerMetrics: 'StreamerMetrics',
+  AudienceLevel: 'AudienceLevel',
+  Gift: 'Gift',
+  Comment: 'Comment'
 };
 /**
  * Create the Client
@@ -143,7 +212,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "D:\\Codes\\GitHub\\TokTok-Backend\\src\\generated\\prisma",
+      "value": "C:\\Users\\jespe\\OneDrive\\Documentos\\TOKTOK\\TokTok-Backend\\src\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -157,7 +226,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "D:\\Codes\\GitHub\\TokTok-Backend\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\jespe\\OneDrive\\Documentos\\TOKTOK\\TokTok-Backend\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -180,13 +249,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// Prisma schema para TokTok\n// Provider: PostgreSQL\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  // Salida obligatoria para el despliegue: genera el cliente en src/generated\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nenum Rol {\n  visitante\n  creador\n}\n\nmodel User {\n  id       String  @id @default(cuid())\n  nombre   String  @unique\n  rol      Rol\n  password String\n  contacto String?\n\n  videos Video[]\n}\n\nmodel Video {\n  id    Int    @id @default(autoincrement())\n  title String\n  url   String\n  likes Int    @default(0)\n\n  userId String\n  user   User   @relation(fields: [userId], references: [id])\n}\n\n// Nota: En Prisma v6 la URL debe estar en este schema (env(DATABASE_URL)).\n// Nota: En Prisma v6 la URL debía estar en este schema (env(DATABASE_URL)).\n// En Prisma v7 elimina `url` del schema.prisma: mueve la URL de conexión para Migrate a prisma.config.ts\n// y, al instanciar PrismaClient, pasa `adapter` para una conexión directa o `accelerateUrl` para Accelerate.\n// Ver: https://pris.ly/d/config-datasource y https://pris.ly/d/prisma7-client-config\n",
-  "inlineSchemaHash": "5f2d54be02979b8f21d5f0df608c7842cddb6ec27cfff85171b820938bb739dc",
+  "inlineSchema": "// Prisma schema para TokTok\n// Provider: PostgreSQL\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  // Salida obligatoria para el despliegue: genera el cliente en src/generated\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nenum Rol {\n  visitante\n  creador\n}\n\nmodel User {\n  id       String  @id @default(cuid())\n  nombre   String  @unique\n  rol      Rol\n  password String\n  contacto String?\n\n  // Relaciones inversas\n  videos          Video[]\n  streamSessions  StreamSession[]\n  streamerMetrics StreamerMetrics?\n  audienceLevels  AudienceLevel[]\n  giftsReceived   Gift[]           @relation(\"ReceiverUser\")\n  giftsSent       Gift[]           @relation(\"SenderUser\")\n  comments        Comment[]\n}\n\nmodel Video {\n  id    Int    @id @default(autoincrement())\n  title String\n  url   String\n  likes Int    @default(0)\n\n  userId String\n  user   User   @relation(fields: [userId], references: [id])\n}\n\nmodel StreamSession {\n  id     String @id @default(cuid())\n  userId String\n  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  startTime DateTime\n  endTime   DateTime?\n\n  durationMs Int @default(0) // calcular en la app al finalizar\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  // Relación inversa para los regalos asociados a esta sesión\n  gifts Gift[]\n\n  @@index([userId])\n  @@index([startTime])\n  @@index([userId, startTime])\n}\n\nmodel StreamerMetrics {\n  id     String @id @default(cuid())\n  userId String @unique\n  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  totalMs       Int       @default(0)\n  totalSessions Int       @default(0)\n  currentLevel  Int       @default(1)\n  lastLevelUpAt DateTime?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@index([userId])\n}\n\nmodel AudienceLevel {\n  id     String @id @default(cuid())\n  userId String\n  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  level           Int     @default(1)\n  name            String\n  description     String?\n  viewPermissions Json?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@unique([userId, level])\n  @@index([userId])\n}\n\nmodel Gift {\n  id    String @id @default(cuid())\n  name  String\n  emoji String\n  coins Int\n\n  receiverId String\n  receiver   User   @relation(\"ReceiverUser\", fields: [receiverId], references: [id], onDelete: Cascade)\n\n  senderId String?\n  sender   User?   @relation(\"SenderUser\", fields: [senderId], references: [id], onDelete: SetNull)\n\n  streamSessionId String?\n  streamSession   StreamSession? @relation(fields: [streamSessionId], references: [id], onDelete: SetNull)\n\n  message  String?\n  quantity Int     @default(1)\n\n  createdAt DateTime @default(now())\n\n  @@index([receiverId])\n  @@index([senderId])\n  @@index([streamSessionId])\n}\n\nmodel Comment {\n  id     String @id @default(cuid())\n  userId String\n  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  content String\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@index([userId])\n  @@index([createdAt])\n}\n\n// Nota: En Prisma v6 la URL debe estar en este schema (env(DATABASE_URL)).\n// Nota: En Prisma v6 la URL debía estar en este schema (env(DATABASE_URL)).\n// En Prisma v7 elimina `url` del schema.prisma: mueve la URL de conexión para Migrate a prisma.config.ts\n// y, al instanciar PrismaClient, pasa `adapter` para una conexión directa o `accelerateUrl` para Accelerate.\n// Ver: https://pris.ly/d/config-datasource y https://pris.ly/d/prisma7-client-config\n",
+  "inlineSchemaHash": "0f86983750f318185374eb6c2e627df4c463b81d6197a335cb0f0a94f9e79555",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"nombre\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"rol\",\"kind\":\"enum\",\"type\":\"Rol\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"contacto\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"videos\",\"kind\":\"object\",\"type\":\"Video\",\"relationName\":\"UserToVideo\"}],\"dbName\":null},\"Video\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"url\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"likes\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"UserToVideo\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"nombre\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"rol\",\"kind\":\"enum\",\"type\":\"Rol\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"contacto\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"videos\",\"kind\":\"object\",\"type\":\"Video\",\"relationName\":\"UserToVideo\"},{\"name\":\"streamSessions\",\"kind\":\"object\",\"type\":\"StreamSession\",\"relationName\":\"StreamSessionToUser\"},{\"name\":\"streamerMetrics\",\"kind\":\"object\",\"type\":\"StreamerMetrics\",\"relationName\":\"StreamerMetricsToUser\"},{\"name\":\"audienceLevels\",\"kind\":\"object\",\"type\":\"AudienceLevel\",\"relationName\":\"AudienceLevelToUser\"},{\"name\":\"giftsReceived\",\"kind\":\"object\",\"type\":\"Gift\",\"relationName\":\"ReceiverUser\"},{\"name\":\"giftsSent\",\"kind\":\"object\",\"type\":\"Gift\",\"relationName\":\"SenderUser\"},{\"name\":\"comments\",\"kind\":\"object\",\"type\":\"Comment\",\"relationName\":\"CommentToUser\"}],\"dbName\":null},\"Video\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"url\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"likes\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"UserToVideo\"}],\"dbName\":null},\"StreamSession\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"StreamSessionToUser\"},{\"name\":\"startTime\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"endTime\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"durationMs\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"gifts\",\"kind\":\"object\",\"type\":\"Gift\",\"relationName\":\"GiftToStreamSession\"}],\"dbName\":null},\"StreamerMetrics\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"StreamerMetricsToUser\"},{\"name\":\"totalMs\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"totalSessions\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"currentLevel\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"lastLevelUpAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"AudienceLevel\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"AudienceLevelToUser\"},{\"name\":\"level\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"viewPermissions\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Gift\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"emoji\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"coins\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"receiverId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"receiver\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"ReceiverUser\"},{\"name\":\"senderId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"sender\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"SenderUser\"},{\"name\":\"streamSessionId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"streamSession\",\"kind\":\"object\",\"type\":\"StreamSession\",\"relationName\":\"GiftToStreamSession\"},{\"name\":\"message\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"quantity\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Comment\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"CommentToUser\"},{\"name\":\"content\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),

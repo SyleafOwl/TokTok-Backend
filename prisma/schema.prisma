@@ -60,6 +60,9 @@ model StreamSession {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
+  // Relación inversa para los regalos asociados a esta sesión
+  gifts        Gift[]
+
   @@index([userId])
   @@index([startTime])
   @@index([userId, startTime])
