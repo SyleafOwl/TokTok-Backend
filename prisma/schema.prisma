@@ -24,6 +24,7 @@ model User {
   rol       Rol
   password  String
   contacto  String?
+  pet       Pet?
 
   // Relaciones inversas
   videos           Video[]
@@ -53,8 +54,6 @@ model Pet {
   user   User @relation(fields: [userId], references: [id])
   userId String @unique
 }
- 
-
 
 model StreamSession {
   id           String   @id @default(cuid())

@@ -24,6 +24,11 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  */
 export type Video = $Result.DefaultSelection<Prisma.$VideoPayload>
 /**
+ * Model Pet
+ * 
+ */
+export type Pet = $Result.DefaultSelection<Prisma.$PetPayload>
+/**
  * Model StreamSession
  * 
  */
@@ -203,6 +208,16 @@ export class PrismaClient<
     * ```
     */
   get video(): Prisma.VideoDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.pet`: Exposes CRUD operations for the **Pet** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Pets
+    * const pets = await prisma.pet.findMany()
+    * ```
+    */
+  get pet(): Prisma.PetDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.streamSession`: Exposes CRUD operations for the **StreamSession** model.
@@ -696,6 +711,7 @@ export namespace Prisma {
   export const ModelName: {
     User: 'User',
     Video: 'Video',
+    Pet: 'Pet',
     StreamSession: 'StreamSession',
     StreamerMetrics: 'StreamerMetrics',
     AudienceLevel: 'AudienceLevel',
@@ -719,7 +735,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "video" | "streamSession" | "streamerMetrics" | "audienceLevel" | "gift" | "comment"
+      modelProps: "user" | "video" | "pet" | "streamSession" | "streamerMetrics" | "audienceLevel" | "gift" | "comment"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -868,6 +884,80 @@ export namespace Prisma {
           count: {
             args: Prisma.VideoCountArgs<ExtArgs>
             result: $Utils.Optional<VideoCountAggregateOutputType> | number
+          }
+        }
+      }
+      Pet: {
+        payload: Prisma.$PetPayload<ExtArgs>
+        fields: Prisma.PetFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PetFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PetPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PetFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PetPayload>
+          }
+          findFirst: {
+            args: Prisma.PetFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PetPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PetFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PetPayload>
+          }
+          findMany: {
+            args: Prisma.PetFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PetPayload>[]
+          }
+          create: {
+            args: Prisma.PetCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PetPayload>
+          }
+          createMany: {
+            args: Prisma.PetCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PetCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PetPayload>[]
+          }
+          delete: {
+            args: Prisma.PetDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PetPayload>
+          }
+          update: {
+            args: Prisma.PetUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PetPayload>
+          }
+          deleteMany: {
+            args: Prisma.PetDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PetUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PetUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PetPayload>[]
+          }
+          upsert: {
+            args: Prisma.PetUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PetPayload>
+          }
+          aggregate: {
+            args: Prisma.PetAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePet>
+          }
+          groupBy: {
+            args: Prisma.PetGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PetGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PetCountArgs<ExtArgs>
+            result: $Utils.Optional<PetCountAggregateOutputType> | number
           }
         }
       }
@@ -1339,6 +1429,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     user?: UserOmit
     video?: VideoOmit
+    pet?: PetOmit
     streamSession?: StreamSessionOmit
     streamerMetrics?: StreamerMetricsOmit
     audienceLevel?: AudienceLevelOmit
@@ -1694,6 +1785,7 @@ export namespace Prisma {
     rol?: boolean
     password?: boolean
     contacto?: boolean
+    pet?: boolean | User$petArgs<ExtArgs>
     videos?: boolean | User$videosArgs<ExtArgs>
     streamSessions?: boolean | User$streamSessionsArgs<ExtArgs>
     streamerMetrics?: boolean | User$streamerMetricsArgs<ExtArgs>
@@ -1730,6 +1822,7 @@ export namespace Prisma {
 
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nombre" | "rol" | "password" | "contacto", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    pet?: boolean | User$petArgs<ExtArgs>
     videos?: boolean | User$videosArgs<ExtArgs>
     streamSessions?: boolean | User$streamSessionsArgs<ExtArgs>
     streamerMetrics?: boolean | User$streamerMetricsArgs<ExtArgs>
@@ -1745,6 +1838,7 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
+      pet: Prisma.$PetPayload<ExtArgs> | null
       videos: Prisma.$VideoPayload<ExtArgs>[]
       streamSessions: Prisma.$StreamSessionPayload<ExtArgs>[]
       streamerMetrics: Prisma.$StreamerMetricsPayload<ExtArgs> | null
@@ -2153,6 +2247,7 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    pet<T extends User$petArgs<ExtArgs> = {}>(args?: Subset<T, User$petArgs<ExtArgs>>): Prisma__PetClient<$Result.GetResult<Prisma.$PetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     videos<T extends User$videosArgs<ExtArgs> = {}>(args?: Subset<T, User$videosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VideoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     streamSessions<T extends User$streamSessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$streamSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StreamSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     streamerMetrics<T extends User$streamerMetricsArgs<ExtArgs> = {}>(args?: Subset<T, User$streamerMetricsArgs<ExtArgs>>): Prisma__StreamerMetricsClient<$Result.GetResult<Prisma.$StreamerMetricsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -2579,6 +2674,25 @@ export namespace Prisma {
      * Limit how many Users to delete.
      */
     limit?: number
+  }
+
+  /**
+   * User.pet
+   */
+  export type User$petArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pet
+     */
+    select?: PetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pet
+     */
+    omit?: PetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PetInclude<ExtArgs> | null
+    where?: PetWhereInput
   }
 
   /**
@@ -3856,6 +3970,1089 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: VideoInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Pet
+   */
+
+  export type AggregatePet = {
+    _count: PetCountAggregateOutputType | null
+    _avg: PetAvgAggregateOutputType | null
+    _sum: PetSumAggregateOutputType | null
+    _min: PetMinAggregateOutputType | null
+    _max: PetMaxAggregateOutputType | null
+  }
+
+  export type PetAvgAggregateOutputType = {
+    size: number | null
+    hearts: number | null
+  }
+
+  export type PetSumAggregateOutputType = {
+    size: number | null
+    hearts: number | null
+  }
+
+  export type PetMinAggregateOutputType = {
+    id: string | null
+    size: number | null
+    hearts: number | null
+    userId: string | null
+  }
+
+  export type PetMaxAggregateOutputType = {
+    id: string | null
+    size: number | null
+    hearts: number | null
+    userId: string | null
+  }
+
+  export type PetCountAggregateOutputType = {
+    id: number
+    size: number
+    hearts: number
+    userId: number
+    _all: number
+  }
+
+
+  export type PetAvgAggregateInputType = {
+    size?: true
+    hearts?: true
+  }
+
+  export type PetSumAggregateInputType = {
+    size?: true
+    hearts?: true
+  }
+
+  export type PetMinAggregateInputType = {
+    id?: true
+    size?: true
+    hearts?: true
+    userId?: true
+  }
+
+  export type PetMaxAggregateInputType = {
+    id?: true
+    size?: true
+    hearts?: true
+    userId?: true
+  }
+
+  export type PetCountAggregateInputType = {
+    id?: true
+    size?: true
+    hearts?: true
+    userId?: true
+    _all?: true
+  }
+
+  export type PetAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Pet to aggregate.
+     */
+    where?: PetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Pets to fetch.
+     */
+    orderBy?: PetOrderByWithRelationInput | PetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Pets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Pets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Pets
+    **/
+    _count?: true | PetCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PetAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PetSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PetMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PetMaxAggregateInputType
+  }
+
+  export type GetPetAggregateType<T extends PetAggregateArgs> = {
+        [P in keyof T & keyof AggregatePet]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePet[P]>
+      : GetScalarType<T[P], AggregatePet[P]>
+  }
+
+
+
+
+  export type PetGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PetWhereInput
+    orderBy?: PetOrderByWithAggregationInput | PetOrderByWithAggregationInput[]
+    by: PetScalarFieldEnum[] | PetScalarFieldEnum
+    having?: PetScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PetCountAggregateInputType | true
+    _avg?: PetAvgAggregateInputType
+    _sum?: PetSumAggregateInputType
+    _min?: PetMinAggregateInputType
+    _max?: PetMaxAggregateInputType
+  }
+
+  export type PetGroupByOutputType = {
+    id: string
+    size: number
+    hearts: number
+    userId: string
+    _count: PetCountAggregateOutputType | null
+    _avg: PetAvgAggregateOutputType | null
+    _sum: PetSumAggregateOutputType | null
+    _min: PetMinAggregateOutputType | null
+    _max: PetMaxAggregateOutputType | null
+  }
+
+  type GetPetGroupByPayload<T extends PetGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PetGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PetGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PetGroupByOutputType[P]>
+            : GetScalarType<T[P], PetGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PetSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    size?: boolean
+    hearts?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pet"]>
+
+  export type PetSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    size?: boolean
+    hearts?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pet"]>
+
+  export type PetSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    size?: boolean
+    hearts?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pet"]>
+
+  export type PetSelectScalar = {
+    id?: boolean
+    size?: boolean
+    hearts?: boolean
+    userId?: boolean
+  }
+
+  export type PetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "size" | "hearts" | "userId", ExtArgs["result"]["pet"]>
+  export type PetInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type PetIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type PetIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $PetPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Pet"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      size: number
+      hearts: number
+      userId: string
+    }, ExtArgs["result"]["pet"]>
+    composites: {}
+  }
+
+  type PetGetPayload<S extends boolean | null | undefined | PetDefaultArgs> = $Result.GetResult<Prisma.$PetPayload, S>
+
+  type PetCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PetFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PetCountAggregateInputType | true
+    }
+
+  export interface PetDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Pet'], meta: { name: 'Pet' } }
+    /**
+     * Find zero or one Pet that matches the filter.
+     * @param {PetFindUniqueArgs} args - Arguments to find a Pet
+     * @example
+     * // Get one Pet
+     * const pet = await prisma.pet.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PetFindUniqueArgs>(args: SelectSubset<T, PetFindUniqueArgs<ExtArgs>>): Prisma__PetClient<$Result.GetResult<Prisma.$PetPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Pet that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PetFindUniqueOrThrowArgs} args - Arguments to find a Pet
+     * @example
+     * // Get one Pet
+     * const pet = await prisma.pet.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PetFindUniqueOrThrowArgs>(args: SelectSubset<T, PetFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PetClient<$Result.GetResult<Prisma.$PetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Pet that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PetFindFirstArgs} args - Arguments to find a Pet
+     * @example
+     * // Get one Pet
+     * const pet = await prisma.pet.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PetFindFirstArgs>(args?: SelectSubset<T, PetFindFirstArgs<ExtArgs>>): Prisma__PetClient<$Result.GetResult<Prisma.$PetPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Pet that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PetFindFirstOrThrowArgs} args - Arguments to find a Pet
+     * @example
+     * // Get one Pet
+     * const pet = await prisma.pet.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PetFindFirstOrThrowArgs>(args?: SelectSubset<T, PetFindFirstOrThrowArgs<ExtArgs>>): Prisma__PetClient<$Result.GetResult<Prisma.$PetPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Pets that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PetFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Pets
+     * const pets = await prisma.pet.findMany()
+     * 
+     * // Get first 10 Pets
+     * const pets = await prisma.pet.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const petWithIdOnly = await prisma.pet.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PetFindManyArgs>(args?: SelectSubset<T, PetFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Pet.
+     * @param {PetCreateArgs} args - Arguments to create a Pet.
+     * @example
+     * // Create one Pet
+     * const Pet = await prisma.pet.create({
+     *   data: {
+     *     // ... data to create a Pet
+     *   }
+     * })
+     * 
+     */
+    create<T extends PetCreateArgs>(args: SelectSubset<T, PetCreateArgs<ExtArgs>>): Prisma__PetClient<$Result.GetResult<Prisma.$PetPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Pets.
+     * @param {PetCreateManyArgs} args - Arguments to create many Pets.
+     * @example
+     * // Create many Pets
+     * const pet = await prisma.pet.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PetCreateManyArgs>(args?: SelectSubset<T, PetCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Pets and returns the data saved in the database.
+     * @param {PetCreateManyAndReturnArgs} args - Arguments to create many Pets.
+     * @example
+     * // Create many Pets
+     * const pet = await prisma.pet.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Pets and only return the `id`
+     * const petWithIdOnly = await prisma.pet.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PetCreateManyAndReturnArgs>(args?: SelectSubset<T, PetCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PetPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Pet.
+     * @param {PetDeleteArgs} args - Arguments to delete one Pet.
+     * @example
+     * // Delete one Pet
+     * const Pet = await prisma.pet.delete({
+     *   where: {
+     *     // ... filter to delete one Pet
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PetDeleteArgs>(args: SelectSubset<T, PetDeleteArgs<ExtArgs>>): Prisma__PetClient<$Result.GetResult<Prisma.$PetPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Pet.
+     * @param {PetUpdateArgs} args - Arguments to update one Pet.
+     * @example
+     * // Update one Pet
+     * const pet = await prisma.pet.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PetUpdateArgs>(args: SelectSubset<T, PetUpdateArgs<ExtArgs>>): Prisma__PetClient<$Result.GetResult<Prisma.$PetPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Pets.
+     * @param {PetDeleteManyArgs} args - Arguments to filter Pets to delete.
+     * @example
+     * // Delete a few Pets
+     * const { count } = await prisma.pet.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PetDeleteManyArgs>(args?: SelectSubset<T, PetDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Pets.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PetUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Pets
+     * const pet = await prisma.pet.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PetUpdateManyArgs>(args: SelectSubset<T, PetUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Pets and returns the data updated in the database.
+     * @param {PetUpdateManyAndReturnArgs} args - Arguments to update many Pets.
+     * @example
+     * // Update many Pets
+     * const pet = await prisma.pet.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Pets and only return the `id`
+     * const petWithIdOnly = await prisma.pet.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PetUpdateManyAndReturnArgs>(args: SelectSubset<T, PetUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PetPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Pet.
+     * @param {PetUpsertArgs} args - Arguments to update or create a Pet.
+     * @example
+     * // Update or create a Pet
+     * const pet = await prisma.pet.upsert({
+     *   create: {
+     *     // ... data to create a Pet
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Pet we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PetUpsertArgs>(args: SelectSubset<T, PetUpsertArgs<ExtArgs>>): Prisma__PetClient<$Result.GetResult<Prisma.$PetPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Pets.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PetCountArgs} args - Arguments to filter Pets to count.
+     * @example
+     * // Count the number of Pets
+     * const count = await prisma.pet.count({
+     *   where: {
+     *     // ... the filter for the Pets we want to count
+     *   }
+     * })
+    **/
+    count<T extends PetCountArgs>(
+      args?: Subset<T, PetCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PetCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Pet.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PetAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PetAggregateArgs>(args: Subset<T, PetAggregateArgs>): Prisma.PrismaPromise<GetPetAggregateType<T>>
+
+    /**
+     * Group by Pet.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PetGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PetGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PetGroupByArgs['orderBy'] }
+        : { orderBy?: PetGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PetGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPetGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Pet model
+   */
+  readonly fields: PetFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Pet.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PetClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Pet model
+   */
+  interface PetFieldRefs {
+    readonly id: FieldRef<"Pet", 'String'>
+    readonly size: FieldRef<"Pet", 'Float'>
+    readonly hearts: FieldRef<"Pet", 'Int'>
+    readonly userId: FieldRef<"Pet", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Pet findUnique
+   */
+  export type PetFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pet
+     */
+    select?: PetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pet
+     */
+    omit?: PetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PetInclude<ExtArgs> | null
+    /**
+     * Filter, which Pet to fetch.
+     */
+    where: PetWhereUniqueInput
+  }
+
+  /**
+   * Pet findUniqueOrThrow
+   */
+  export type PetFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pet
+     */
+    select?: PetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pet
+     */
+    omit?: PetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PetInclude<ExtArgs> | null
+    /**
+     * Filter, which Pet to fetch.
+     */
+    where: PetWhereUniqueInput
+  }
+
+  /**
+   * Pet findFirst
+   */
+  export type PetFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pet
+     */
+    select?: PetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pet
+     */
+    omit?: PetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PetInclude<ExtArgs> | null
+    /**
+     * Filter, which Pet to fetch.
+     */
+    where?: PetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Pets to fetch.
+     */
+    orderBy?: PetOrderByWithRelationInput | PetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Pets.
+     */
+    cursor?: PetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Pets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Pets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Pets.
+     */
+    distinct?: PetScalarFieldEnum | PetScalarFieldEnum[]
+  }
+
+  /**
+   * Pet findFirstOrThrow
+   */
+  export type PetFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pet
+     */
+    select?: PetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pet
+     */
+    omit?: PetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PetInclude<ExtArgs> | null
+    /**
+     * Filter, which Pet to fetch.
+     */
+    where?: PetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Pets to fetch.
+     */
+    orderBy?: PetOrderByWithRelationInput | PetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Pets.
+     */
+    cursor?: PetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Pets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Pets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Pets.
+     */
+    distinct?: PetScalarFieldEnum | PetScalarFieldEnum[]
+  }
+
+  /**
+   * Pet findMany
+   */
+  export type PetFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pet
+     */
+    select?: PetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pet
+     */
+    omit?: PetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PetInclude<ExtArgs> | null
+    /**
+     * Filter, which Pets to fetch.
+     */
+    where?: PetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Pets to fetch.
+     */
+    orderBy?: PetOrderByWithRelationInput | PetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Pets.
+     */
+    cursor?: PetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Pets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Pets.
+     */
+    skip?: number
+    distinct?: PetScalarFieldEnum | PetScalarFieldEnum[]
+  }
+
+  /**
+   * Pet create
+   */
+  export type PetCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pet
+     */
+    select?: PetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pet
+     */
+    omit?: PetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PetInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Pet.
+     */
+    data: XOR<PetCreateInput, PetUncheckedCreateInput>
+  }
+
+  /**
+   * Pet createMany
+   */
+  export type PetCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Pets.
+     */
+    data: PetCreateManyInput | PetCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Pet createManyAndReturn
+   */
+  export type PetCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pet
+     */
+    select?: PetSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pet
+     */
+    omit?: PetOmit<ExtArgs> | null
+    /**
+     * The data used to create many Pets.
+     */
+    data: PetCreateManyInput | PetCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PetIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Pet update
+   */
+  export type PetUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pet
+     */
+    select?: PetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pet
+     */
+    omit?: PetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PetInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Pet.
+     */
+    data: XOR<PetUpdateInput, PetUncheckedUpdateInput>
+    /**
+     * Choose, which Pet to update.
+     */
+    where: PetWhereUniqueInput
+  }
+
+  /**
+   * Pet updateMany
+   */
+  export type PetUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Pets.
+     */
+    data: XOR<PetUpdateManyMutationInput, PetUncheckedUpdateManyInput>
+    /**
+     * Filter which Pets to update
+     */
+    where?: PetWhereInput
+    /**
+     * Limit how many Pets to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Pet updateManyAndReturn
+   */
+  export type PetUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pet
+     */
+    select?: PetSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pet
+     */
+    omit?: PetOmit<ExtArgs> | null
+    /**
+     * The data used to update Pets.
+     */
+    data: XOR<PetUpdateManyMutationInput, PetUncheckedUpdateManyInput>
+    /**
+     * Filter which Pets to update
+     */
+    where?: PetWhereInput
+    /**
+     * Limit how many Pets to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PetIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Pet upsert
+   */
+  export type PetUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pet
+     */
+    select?: PetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pet
+     */
+    omit?: PetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PetInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Pet to update in case it exists.
+     */
+    where: PetWhereUniqueInput
+    /**
+     * In case the Pet found by the `where` argument doesn't exist, create a new Pet with this data.
+     */
+    create: XOR<PetCreateInput, PetUncheckedCreateInput>
+    /**
+     * In case the Pet was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PetUpdateInput, PetUncheckedUpdateInput>
+  }
+
+  /**
+   * Pet delete
+   */
+  export type PetDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pet
+     */
+    select?: PetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pet
+     */
+    omit?: PetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PetInclude<ExtArgs> | null
+    /**
+     * Filter which Pet to delete.
+     */
+    where: PetWhereUniqueInput
+  }
+
+  /**
+   * Pet deleteMany
+   */
+  export type PetDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Pets to delete
+     */
+    where?: PetWhereInput
+    /**
+     * Limit how many Pets to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Pet without action
+   */
+  export type PetDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pet
+     */
+    select?: PetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pet
+     */
+    omit?: PetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PetInclude<ExtArgs> | null
   }
 
 
@@ -9582,6 +10779,16 @@ export namespace Prisma {
   export type VideoScalarFieldEnum = (typeof VideoScalarFieldEnum)[keyof typeof VideoScalarFieldEnum]
 
 
+  export const PetScalarFieldEnum: {
+    id: 'id',
+    size: 'size',
+    hearts: 'hearts',
+    userId: 'userId'
+  };
+
+  export type PetScalarFieldEnum = (typeof PetScalarFieldEnum)[keyof typeof PetScalarFieldEnum]
+
+
   export const StreamSessionScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
@@ -9739,6 +10946,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -9764,20 +10985,6 @@ export namespace Prisma {
    */
   export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
-
-
-  /**
-   * Reference to a field of type 'Float'
-   */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
-
-
-  /**
-   * Reference to a field of type 'Float[]'
-   */
-  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
-    
   /**
    * Deep Input Types
    */
@@ -9792,6 +10999,7 @@ export namespace Prisma {
     rol?: EnumRolFilter<"User"> | $Enums.Rol
     password?: StringFilter<"User"> | string
     contacto?: StringNullableFilter<"User"> | string | null
+    pet?: XOR<PetNullableScalarRelationFilter, PetWhereInput> | null
     videos?: VideoListRelationFilter
     streamSessions?: StreamSessionListRelationFilter
     streamerMetrics?: XOR<StreamerMetricsNullableScalarRelationFilter, StreamerMetricsWhereInput> | null
@@ -9807,6 +11015,7 @@ export namespace Prisma {
     rol?: SortOrder
     password?: SortOrder
     contacto?: SortOrderInput | SortOrder
+    pet?: PetOrderByWithRelationInput
     videos?: VideoOrderByRelationAggregateInput
     streamSessions?: StreamSessionOrderByRelationAggregateInput
     streamerMetrics?: StreamerMetricsOrderByWithRelationInput
@@ -9825,6 +11034,7 @@ export namespace Prisma {
     rol?: EnumRolFilter<"User"> | $Enums.Rol
     password?: StringFilter<"User"> | string
     contacto?: StringNullableFilter<"User"> | string | null
+    pet?: XOR<PetNullableScalarRelationFilter, PetWhereInput> | null
     videos?: VideoListRelationFilter
     streamSessions?: StreamSessionListRelationFilter
     streamerMetrics?: XOR<StreamerMetricsNullableScalarRelationFilter, StreamerMetricsWhereInput> | null
@@ -9911,6 +11121,58 @@ export namespace Prisma {
     url?: StringWithAggregatesFilter<"Video"> | string
     likes?: IntWithAggregatesFilter<"Video"> | number
     userId?: StringWithAggregatesFilter<"Video"> | string
+  }
+
+  export type PetWhereInput = {
+    AND?: PetWhereInput | PetWhereInput[]
+    OR?: PetWhereInput[]
+    NOT?: PetWhereInput | PetWhereInput[]
+    id?: StringFilter<"Pet"> | string
+    size?: FloatFilter<"Pet"> | number
+    hearts?: IntFilter<"Pet"> | number
+    userId?: StringFilter<"Pet"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type PetOrderByWithRelationInput = {
+    id?: SortOrder
+    size?: SortOrder
+    hearts?: SortOrder
+    userId?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type PetWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId?: string
+    AND?: PetWhereInput | PetWhereInput[]
+    OR?: PetWhereInput[]
+    NOT?: PetWhereInput | PetWhereInput[]
+    size?: FloatFilter<"Pet"> | number
+    hearts?: IntFilter<"Pet"> | number
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userId">
+
+  export type PetOrderByWithAggregationInput = {
+    id?: SortOrder
+    size?: SortOrder
+    hearts?: SortOrder
+    userId?: SortOrder
+    _count?: PetCountOrderByAggregateInput
+    _avg?: PetAvgOrderByAggregateInput
+    _max?: PetMaxOrderByAggregateInput
+    _min?: PetMinOrderByAggregateInput
+    _sum?: PetSumOrderByAggregateInput
+  }
+
+  export type PetScalarWhereWithAggregatesInput = {
+    AND?: PetScalarWhereWithAggregatesInput | PetScalarWhereWithAggregatesInput[]
+    OR?: PetScalarWhereWithAggregatesInput[]
+    NOT?: PetScalarWhereWithAggregatesInput | PetScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Pet"> | string
+    size?: FloatWithAggregatesFilter<"Pet"> | number
+    hearts?: IntWithAggregatesFilter<"Pet"> | number
+    userId?: StringWithAggregatesFilter<"Pet"> | string
   }
 
   export type StreamSessionWhereInput = {
@@ -10277,6 +11539,7 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    pet?: PetCreateNestedOneWithoutUserInput
     videos?: VideoCreateNestedManyWithoutUserInput
     streamSessions?: StreamSessionCreateNestedManyWithoutUserInput
     streamerMetrics?: StreamerMetricsCreateNestedOneWithoutUserInput
@@ -10292,6 +11555,7 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    pet?: PetUncheckedCreateNestedOneWithoutUserInput
     videos?: VideoUncheckedCreateNestedManyWithoutUserInput
     streamSessions?: StreamSessionUncheckedCreateNestedManyWithoutUserInput
     streamerMetrics?: StreamerMetricsUncheckedCreateNestedOneWithoutUserInput
@@ -10307,6 +11571,7 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    pet?: PetUpdateOneWithoutUserNestedInput
     videos?: VideoUpdateManyWithoutUserNestedInput
     streamSessions?: StreamSessionUpdateManyWithoutUserNestedInput
     streamerMetrics?: StreamerMetricsUpdateOneWithoutUserNestedInput
@@ -10322,6 +11587,7 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    pet?: PetUncheckedUpdateOneWithoutUserNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
     streamSessions?: StreamSessionUncheckedUpdateManyWithoutUserNestedInput
     streamerMetrics?: StreamerMetricsUncheckedUpdateOneWithoutUserNestedInput
@@ -10404,6 +11670,54 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     likes?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PetCreateInput = {
+    id?: string
+    size?: number
+    hearts?: number
+    user: UserCreateNestedOneWithoutPetInput
+  }
+
+  export type PetUncheckedCreateInput = {
+    id?: string
+    size?: number
+    hearts?: number
+    userId: string
+  }
+
+  export type PetUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    size?: FloatFieldUpdateOperationsInput | number
+    hearts?: IntFieldUpdateOperationsInput | number
+    user?: UserUpdateOneRequiredWithoutPetNestedInput
+  }
+
+  export type PetUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    size?: FloatFieldUpdateOperationsInput | number
+    hearts?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PetCreateManyInput = {
+    id?: string
+    size?: number
+    hearts?: number
+    userId: string
+  }
+
+  export type PetUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    size?: FloatFieldUpdateOperationsInput | number
+    hearts?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type PetUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    size?: FloatFieldUpdateOperationsInput | number
+    hearts?: IntFieldUpdateOperationsInput | number
     userId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -10812,6 +12126,11 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type PetNullableScalarRelationFilter = {
+    is?: PetWhereInput | null
+    isNot?: PetWhereInput | null
+  }
+
   export type VideoListRelationFilter = {
     every?: VideoWhereInput
     some?: VideoWhereInput
@@ -11006,6 +12325,64 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type PetCountOrderByAggregateInput = {
+    id?: SortOrder
+    size?: SortOrder
+    hearts?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type PetAvgOrderByAggregateInput = {
+    size?: SortOrder
+    hearts?: SortOrder
+  }
+
+  export type PetMaxOrderByAggregateInput = {
+    id?: SortOrder
+    size?: SortOrder
+    hearts?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type PetMinOrderByAggregateInput = {
+    id?: SortOrder
+    size?: SortOrder
+    hearts?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type PetSumOrderByAggregateInput = {
+    size?: SortOrder
+    hearts?: SortOrder
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type DateTimeFilter<$PrismaModel = never> = {
@@ -11317,6 +12694,12 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type PetCreateNestedOneWithoutUserInput = {
+    create?: XOR<PetCreateWithoutUserInput, PetUncheckedCreateWithoutUserInput>
+    connectOrCreate?: PetCreateOrConnectWithoutUserInput
+    connect?: PetWhereUniqueInput
+  }
+
   export type VideoCreateNestedManyWithoutUserInput = {
     create?: XOR<VideoCreateWithoutUserInput, VideoUncheckedCreateWithoutUserInput> | VideoCreateWithoutUserInput[] | VideoUncheckedCreateWithoutUserInput[]
     connectOrCreate?: VideoCreateOrConnectWithoutUserInput | VideoCreateOrConnectWithoutUserInput[]
@@ -11363,6 +12746,12 @@ export namespace Prisma {
     connectOrCreate?: CommentCreateOrConnectWithoutUserInput | CommentCreateOrConnectWithoutUserInput[]
     createMany?: CommentCreateManyUserInputEnvelope
     connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+  }
+
+  export type PetUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<PetCreateWithoutUserInput, PetUncheckedCreateWithoutUserInput>
+    connectOrCreate?: PetCreateOrConnectWithoutUserInput
+    connect?: PetWhereUniqueInput
   }
 
   export type VideoUncheckedCreateNestedManyWithoutUserInput = {
@@ -11423,6 +12812,16 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type PetUpdateOneWithoutUserNestedInput = {
+    create?: XOR<PetCreateWithoutUserInput, PetUncheckedCreateWithoutUserInput>
+    connectOrCreate?: PetCreateOrConnectWithoutUserInput
+    upsert?: PetUpsertWithoutUserInput
+    disconnect?: PetWhereInput | boolean
+    delete?: PetWhereInput | boolean
+    connect?: PetWhereUniqueInput
+    update?: XOR<XOR<PetUpdateToOneWithWhereWithoutUserInput, PetUpdateWithoutUserInput>, PetUncheckedUpdateWithoutUserInput>
   }
 
   export type VideoUpdateManyWithoutUserNestedInput = {
@@ -11517,6 +12916,16 @@ export namespace Prisma {
     update?: CommentUpdateWithWhereUniqueWithoutUserInput | CommentUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: CommentUpdateManyWithWhereWithoutUserInput | CommentUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
+  }
+
+  export type PetUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<PetCreateWithoutUserInput, PetUncheckedCreateWithoutUserInput>
+    connectOrCreate?: PetCreateOrConnectWithoutUserInput
+    upsert?: PetUpsertWithoutUserInput
+    disconnect?: PetWhereInput | boolean
+    delete?: PetWhereInput | boolean
+    connect?: PetWhereUniqueInput
+    update?: XOR<XOR<PetUpdateToOneWithWhereWithoutUserInput, PetUpdateWithoutUserInput>, PetUncheckedUpdateWithoutUserInput>
   }
 
   export type VideoUncheckedUpdateManyWithoutUserNestedInput = {
@@ -11633,6 +13042,28 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutVideosInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutVideosInput, UserUpdateWithoutVideosInput>, UserUncheckedUpdateWithoutVideosInput>
+  }
+
+  export type UserCreateNestedOneWithoutPetInput = {
+    create?: XOR<UserCreateWithoutPetInput, UserUncheckedCreateWithoutPetInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPetInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type UserUpdateOneRequiredWithoutPetNestedInput = {
+    create?: XOR<UserCreateWithoutPetInput, UserUncheckedCreateWithoutPetInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPetInput
+    upsert?: UserUpsertWithoutPetInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPetInput, UserUpdateWithoutPetInput>, UserUncheckedUpdateWithoutPetInput>
   }
 
   export type UserCreateNestedOneWithoutStreamSessionsInput = {
@@ -11915,6 +13346,22 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -11986,6 +13433,23 @@ export namespace Prisma {
     gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type PetCreateWithoutUserInput = {
+    id?: string
+    size?: number
+    hearts?: number
+  }
+
+  export type PetUncheckedCreateWithoutUserInput = {
+    id?: string
+    size?: number
+    hearts?: number
+  }
+
+  export type PetCreateOrConnectWithoutUserInput = {
+    where: PetWhereUniqueInput
+    create: XOR<PetCreateWithoutUserInput, PetUncheckedCreateWithoutUserInput>
   }
 
   export type VideoCreateWithoutUserInput = {
@@ -12188,6 +13652,29 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type PetUpsertWithoutUserInput = {
+    update: XOR<PetUpdateWithoutUserInput, PetUncheckedUpdateWithoutUserInput>
+    create: XOR<PetCreateWithoutUserInput, PetUncheckedCreateWithoutUserInput>
+    where?: PetWhereInput
+  }
+
+  export type PetUpdateToOneWithWhereWithoutUserInput = {
+    where?: PetWhereInput
+    data: XOR<PetUpdateWithoutUserInput, PetUncheckedUpdateWithoutUserInput>
+  }
+
+  export type PetUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    size?: FloatFieldUpdateOperationsInput | number
+    hearts?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type PetUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    size?: FloatFieldUpdateOperationsInput | number
+    hearts?: IntFieldUpdateOperationsInput | number
+  }
+
   export type VideoUpsertWithWhereUniqueWithoutUserInput = {
     where: VideoWhereUniqueInput
     update: XOR<VideoUpdateWithoutUserInput, VideoUncheckedUpdateWithoutUserInput>
@@ -12386,6 +13873,7 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    pet?: PetCreateNestedOneWithoutUserInput
     streamSessions?: StreamSessionCreateNestedManyWithoutUserInput
     streamerMetrics?: StreamerMetricsCreateNestedOneWithoutUserInput
     audienceLevels?: AudienceLevelCreateNestedManyWithoutUserInput
@@ -12400,6 +13888,7 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    pet?: PetUncheckedCreateNestedOneWithoutUserInput
     streamSessions?: StreamSessionUncheckedCreateNestedManyWithoutUserInput
     streamerMetrics?: StreamerMetricsUncheckedCreateNestedOneWithoutUserInput
     audienceLevels?: AudienceLevelUncheckedCreateNestedManyWithoutUserInput
@@ -12430,6 +13919,7 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    pet?: PetUpdateOneWithoutUserNestedInput
     streamSessions?: StreamSessionUpdateManyWithoutUserNestedInput
     streamerMetrics?: StreamerMetricsUpdateOneWithoutUserNestedInput
     audienceLevels?: AudienceLevelUpdateManyWithoutUserNestedInput
@@ -12444,6 +13934,83 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    pet?: PetUncheckedUpdateOneWithoutUserNestedInput
+    streamSessions?: StreamSessionUncheckedUpdateManyWithoutUserNestedInput
+    streamerMetrics?: StreamerMetricsUncheckedUpdateOneWithoutUserNestedInput
+    audienceLevels?: AudienceLevelUncheckedUpdateManyWithoutUserNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutReceiverNestedInput
+    giftsSent?: GiftUncheckedUpdateManyWithoutSenderNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutPetInput = {
+    id?: string
+    nombre: string
+    rol: $Enums.Rol
+    password: string
+    contacto?: string | null
+    videos?: VideoCreateNestedManyWithoutUserInput
+    streamSessions?: StreamSessionCreateNestedManyWithoutUserInput
+    streamerMetrics?: StreamerMetricsCreateNestedOneWithoutUserInput
+    audienceLevels?: AudienceLevelCreateNestedManyWithoutUserInput
+    giftsReceived?: GiftCreateNestedManyWithoutReceiverInput
+    giftsSent?: GiftCreateNestedManyWithoutSenderInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutPetInput = {
+    id?: string
+    nombre: string
+    rol: $Enums.Rol
+    password: string
+    contacto?: string | null
+    videos?: VideoUncheckedCreateNestedManyWithoutUserInput
+    streamSessions?: StreamSessionUncheckedCreateNestedManyWithoutUserInput
+    streamerMetrics?: StreamerMetricsUncheckedCreateNestedOneWithoutUserInput
+    audienceLevels?: AudienceLevelUncheckedCreateNestedManyWithoutUserInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutReceiverInput
+    giftsSent?: GiftUncheckedCreateNestedManyWithoutSenderInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutPetInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutPetInput, UserUncheckedCreateWithoutPetInput>
+  }
+
+  export type UserUpsertWithoutPetInput = {
+    update: XOR<UserUpdateWithoutPetInput, UserUncheckedUpdateWithoutPetInput>
+    create: XOR<UserCreateWithoutPetInput, UserUncheckedCreateWithoutPetInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutPetInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutPetInput, UserUncheckedUpdateWithoutPetInput>
+  }
+
+  export type UserUpdateWithoutPetInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
+    password?: StringFieldUpdateOperationsInput | string
+    contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    videos?: VideoUpdateManyWithoutUserNestedInput
+    streamSessions?: StreamSessionUpdateManyWithoutUserNestedInput
+    streamerMetrics?: StreamerMetricsUpdateOneWithoutUserNestedInput
+    audienceLevels?: AudienceLevelUpdateManyWithoutUserNestedInput
+    giftsReceived?: GiftUpdateManyWithoutReceiverNestedInput
+    giftsSent?: GiftUpdateManyWithoutSenderNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutPetInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
+    password?: StringFieldUpdateOperationsInput | string
+    contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
     streamSessions?: StreamSessionUncheckedUpdateManyWithoutUserNestedInput
     streamerMetrics?: StreamerMetricsUncheckedUpdateOneWithoutUserNestedInput
     audienceLevels?: AudienceLevelUncheckedUpdateManyWithoutUserNestedInput
@@ -12458,6 +14025,7 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    pet?: PetCreateNestedOneWithoutUserInput
     videos?: VideoCreateNestedManyWithoutUserInput
     streamerMetrics?: StreamerMetricsCreateNestedOneWithoutUserInput
     audienceLevels?: AudienceLevelCreateNestedManyWithoutUserInput
@@ -12472,6 +14040,7 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    pet?: PetUncheckedCreateNestedOneWithoutUserInput
     videos?: VideoUncheckedCreateNestedManyWithoutUserInput
     streamerMetrics?: StreamerMetricsUncheckedCreateNestedOneWithoutUserInput
     audienceLevels?: AudienceLevelUncheckedCreateNestedManyWithoutUserInput
@@ -12536,6 +14105,7 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    pet?: PetUpdateOneWithoutUserNestedInput
     videos?: VideoUpdateManyWithoutUserNestedInput
     streamerMetrics?: StreamerMetricsUpdateOneWithoutUserNestedInput
     audienceLevels?: AudienceLevelUpdateManyWithoutUserNestedInput
@@ -12550,6 +14120,7 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    pet?: PetUncheckedUpdateOneWithoutUserNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
     streamerMetrics?: StreamerMetricsUncheckedUpdateOneWithoutUserNestedInput
     audienceLevels?: AudienceLevelUncheckedUpdateManyWithoutUserNestedInput
@@ -12580,6 +14151,7 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    pet?: PetCreateNestedOneWithoutUserInput
     videos?: VideoCreateNestedManyWithoutUserInput
     streamSessions?: StreamSessionCreateNestedManyWithoutUserInput
     audienceLevels?: AudienceLevelCreateNestedManyWithoutUserInput
@@ -12594,6 +14166,7 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    pet?: PetUncheckedCreateNestedOneWithoutUserInput
     videos?: VideoUncheckedCreateNestedManyWithoutUserInput
     streamSessions?: StreamSessionUncheckedCreateNestedManyWithoutUserInput
     audienceLevels?: AudienceLevelUncheckedCreateNestedManyWithoutUserInput
@@ -12624,6 +14197,7 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    pet?: PetUpdateOneWithoutUserNestedInput
     videos?: VideoUpdateManyWithoutUserNestedInput
     streamSessions?: StreamSessionUpdateManyWithoutUserNestedInput
     audienceLevels?: AudienceLevelUpdateManyWithoutUserNestedInput
@@ -12638,6 +14212,7 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    pet?: PetUncheckedUpdateOneWithoutUserNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
     streamSessions?: StreamSessionUncheckedUpdateManyWithoutUserNestedInput
     audienceLevels?: AudienceLevelUncheckedUpdateManyWithoutUserNestedInput
@@ -12652,6 +14227,7 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    pet?: PetCreateNestedOneWithoutUserInput
     videos?: VideoCreateNestedManyWithoutUserInput
     streamSessions?: StreamSessionCreateNestedManyWithoutUserInput
     streamerMetrics?: StreamerMetricsCreateNestedOneWithoutUserInput
@@ -12666,6 +14242,7 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    pet?: PetUncheckedCreateNestedOneWithoutUserInput
     videos?: VideoUncheckedCreateNestedManyWithoutUserInput
     streamSessions?: StreamSessionUncheckedCreateNestedManyWithoutUserInput
     streamerMetrics?: StreamerMetricsUncheckedCreateNestedOneWithoutUserInput
@@ -12696,6 +14273,7 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    pet?: PetUpdateOneWithoutUserNestedInput
     videos?: VideoUpdateManyWithoutUserNestedInput
     streamSessions?: StreamSessionUpdateManyWithoutUserNestedInput
     streamerMetrics?: StreamerMetricsUpdateOneWithoutUserNestedInput
@@ -12710,6 +14288,7 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    pet?: PetUncheckedUpdateOneWithoutUserNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
     streamSessions?: StreamSessionUncheckedUpdateManyWithoutUserNestedInput
     streamerMetrics?: StreamerMetricsUncheckedUpdateOneWithoutUserNestedInput
@@ -12724,6 +14303,7 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    pet?: PetCreateNestedOneWithoutUserInput
     videos?: VideoCreateNestedManyWithoutUserInput
     streamSessions?: StreamSessionCreateNestedManyWithoutUserInput
     streamerMetrics?: StreamerMetricsCreateNestedOneWithoutUserInput
@@ -12738,6 +14318,7 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    pet?: PetUncheckedCreateNestedOneWithoutUserInput
     videos?: VideoUncheckedCreateNestedManyWithoutUserInput
     streamSessions?: StreamSessionUncheckedCreateNestedManyWithoutUserInput
     streamerMetrics?: StreamerMetricsUncheckedCreateNestedOneWithoutUserInput
@@ -12757,6 +14338,7 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    pet?: PetCreateNestedOneWithoutUserInput
     videos?: VideoCreateNestedManyWithoutUserInput
     streamSessions?: StreamSessionCreateNestedManyWithoutUserInput
     streamerMetrics?: StreamerMetricsCreateNestedOneWithoutUserInput
@@ -12771,6 +14353,7 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    pet?: PetUncheckedCreateNestedOneWithoutUserInput
     videos?: VideoUncheckedCreateNestedManyWithoutUserInput
     streamSessions?: StreamSessionUncheckedCreateNestedManyWithoutUserInput
     streamerMetrics?: StreamerMetricsUncheckedCreateNestedOneWithoutUserInput
@@ -12826,6 +14409,7 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    pet?: PetUpdateOneWithoutUserNestedInput
     videos?: VideoUpdateManyWithoutUserNestedInput
     streamSessions?: StreamSessionUpdateManyWithoutUserNestedInput
     streamerMetrics?: StreamerMetricsUpdateOneWithoutUserNestedInput
@@ -12840,6 +14424,7 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    pet?: PetUncheckedUpdateOneWithoutUserNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
     streamSessions?: StreamSessionUncheckedUpdateManyWithoutUserNestedInput
     streamerMetrics?: StreamerMetricsUncheckedUpdateOneWithoutUserNestedInput
@@ -12865,6 +14450,7 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    pet?: PetUpdateOneWithoutUserNestedInput
     videos?: VideoUpdateManyWithoutUserNestedInput
     streamSessions?: StreamSessionUpdateManyWithoutUserNestedInput
     streamerMetrics?: StreamerMetricsUpdateOneWithoutUserNestedInput
@@ -12879,6 +14465,7 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    pet?: PetUncheckedUpdateOneWithoutUserNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
     streamSessions?: StreamSessionUncheckedUpdateManyWithoutUserNestedInput
     streamerMetrics?: StreamerMetricsUncheckedUpdateOneWithoutUserNestedInput
@@ -12924,6 +14511,7 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    pet?: PetCreateNestedOneWithoutUserInput
     videos?: VideoCreateNestedManyWithoutUserInput
     streamSessions?: StreamSessionCreateNestedManyWithoutUserInput
     streamerMetrics?: StreamerMetricsCreateNestedOneWithoutUserInput
@@ -12938,6 +14526,7 @@ export namespace Prisma {
     rol: $Enums.Rol
     password: string
     contacto?: string | null
+    pet?: PetUncheckedCreateNestedOneWithoutUserInput
     videos?: VideoUncheckedCreateNestedManyWithoutUserInput
     streamSessions?: StreamSessionUncheckedCreateNestedManyWithoutUserInput
     streamerMetrics?: StreamerMetricsUncheckedCreateNestedOneWithoutUserInput
@@ -12968,6 +14557,7 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    pet?: PetUpdateOneWithoutUserNestedInput
     videos?: VideoUpdateManyWithoutUserNestedInput
     streamSessions?: StreamSessionUpdateManyWithoutUserNestedInput
     streamerMetrics?: StreamerMetricsUpdateOneWithoutUserNestedInput
@@ -12982,6 +14572,7 @@ export namespace Prisma {
     rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
     password?: StringFieldUpdateOperationsInput | string
     contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    pet?: PetUncheckedUpdateOneWithoutUserNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
     streamSessions?: StreamSessionUncheckedUpdateManyWithoutUserNestedInput
     streamerMetrics?: StreamerMetricsUncheckedUpdateOneWithoutUserNestedInput

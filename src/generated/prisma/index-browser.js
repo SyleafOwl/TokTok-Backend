@@ -137,6 +137,13 @@ exports.Prisma.VideoScalarFieldEnum = {
   userId: 'userId'
 };
 
+exports.Prisma.PetScalarFieldEnum = {
+  id: 'id',
+  size: 'size',
+  hearts: 'hearts',
+  userId: 'userId'
+};
+
 exports.Prisma.StreamSessionScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -223,6 +230,7 @@ exports.Rol = exports.$Enums.Rol = {
 exports.Prisma.ModelName = {
   User: 'User',
   Video: 'Video',
+  Pet: 'Pet',
   StreamSession: 'StreamSession',
   StreamerMetrics: 'StreamerMetrics',
   AudienceLevel: 'AudienceLevel',
