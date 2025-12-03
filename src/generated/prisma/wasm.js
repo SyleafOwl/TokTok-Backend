@@ -109,6 +109,13 @@ exports.Prisma.VideoScalarFieldEnum = {
   userId: 'userId'
 };
 
+exports.Prisma.PetScalarFieldEnum = {
+  id: 'id',
+  size: 'size',
+  hearts: 'hearts',
+  userId: 'userId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -130,7 +137,8 @@ exports.Rol = exports.$Enums.Rol = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Video: 'Video'
+  Video: 'Video',
+  Pet: 'Pet'
 };
 /**
  * Create the Client
@@ -143,7 +151,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "D:\\Codes\\GitHub\\TokTok-Backend\\src\\generated\\prisma",
+      "value": "C:\\_repos0\\proyecto_progra_web_back\\TokTok-Backend\\src\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -157,7 +165,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "D:\\Codes\\GitHub\\TokTok-Backend\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\_repos0\\proyecto_progra_web_back\\TokTok-Backend\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -180,13 +188,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// Prisma schema para TokTok\n// Provider: PostgreSQL\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  // Salida obligatoria para el despliegue: genera el cliente en src/generated\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nenum Rol {\n  visitante\n  creador\n}\n\nmodel User {\n  id       String  @id @default(cuid())\n  nombre   String  @unique\n  rol      Rol\n  password String\n  contacto String?\n\n  videos Video[]\n}\n\nmodel Video {\n  id    Int    @id @default(autoincrement())\n  title String\n  url   String\n  likes Int    @default(0)\n\n  userId String\n  user   User   @relation(fields: [userId], references: [id])\n}\n\n// Nota: En Prisma v6 la URL debe estar en este schema (env(DATABASE_URL)).\n// Nota: En Prisma v6 la URL debía estar en este schema (env(DATABASE_URL)).\n// En Prisma v7 elimina `url` del schema.prisma: mueve la URL de conexión para Migrate a prisma.config.ts\n// y, al instanciar PrismaClient, pasa `adapter` para una conexión directa o `accelerateUrl` para Accelerate.\n// Ver: https://pris.ly/d/config-datasource y https://pris.ly/d/prisma7-client-config\n",
-  "inlineSchemaHash": "5f2d54be02979b8f21d5f0df608c7842cddb6ec27cfff85171b820938bb739dc",
+  "inlineSchema": "// Prisma schema para TokTok\n// Provider: PostgreSQL\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  // Salida obligatoria para el despliegue: genera el cliente en src/generated\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nenum Rol {\n  visitante\n  creador\n}\n\nmodel User {\n  id       String  @id @default(cuid())\n  nombre   String  @unique\n  rol      Rol\n  password String\n  contacto String?\n\n  videos  Video[]\n  mascota Pet?\n}\n\nmodel Video {\n  id    Int    @id @default(autoincrement())\n  title String\n  url   String\n  likes Int    @default(0)\n\n  userId String\n  user   User   @relation(fields: [userId], references: [id])\n}\n\nmodel Pet {\n  id     String @id @default(cuid())\n  size   Float  @default(0.0)\n  hearts Int    @default(0)\n\n  user   User   @relation(fields: [userId], references: [id])\n  userId String @unique\n}\n\n// Nota: En Prisma v6 la URL debe estar en este schema (env(DATABASE_URL)).\n// Nota: En Prisma v6 la URL debía estar en este schema (env(DATABASE_URL)).\n// En Prisma v7 elimina `url` del schema.prisma: mueve la URL de conexión para Migrate a prisma.config.ts\n// y, al instanciar PrismaClient, pasa `adapter` para una conexión directa o `accelerateUrl` para Accelerate.\n// Ver: https://pris.ly/d/config-datasource y https://pris.ly/d/prisma7-client-config\n",
+  "inlineSchemaHash": "1c10225544b14dfe8f74245960a5f4555407384581b2cfaef0e0c933b6887634",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"nombre\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"rol\",\"kind\":\"enum\",\"type\":\"Rol\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"contacto\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"videos\",\"kind\":\"object\",\"type\":\"Video\",\"relationName\":\"UserToVideo\"}],\"dbName\":null},\"Video\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"url\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"likes\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"UserToVideo\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"nombre\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"rol\",\"kind\":\"enum\",\"type\":\"Rol\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"contacto\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"videos\",\"kind\":\"object\",\"type\":\"Video\",\"relationName\":\"UserToVideo\"},{\"name\":\"mascota\",\"kind\":\"object\",\"type\":\"Pet\",\"relationName\":\"PetToUser\"}],\"dbName\":null},\"Video\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"url\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"likes\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"UserToVideo\"}],\"dbName\":null},\"Pet\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"size\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"hearts\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"PetToUser\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),

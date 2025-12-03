@@ -137,6 +137,13 @@ exports.Prisma.VideoScalarFieldEnum = {
   userId: 'userId'
 };
 
+exports.Prisma.PetScalarFieldEnum = {
+  id: 'id',
+  size: 'size',
+  hearts: 'hearts',
+  userId: 'userId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -158,7 +165,8 @@ exports.Rol = exports.$Enums.Rol = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Video: 'Video'
+  Video: 'Video',
+  Pet: 'Pet'
 };
 
 /**
