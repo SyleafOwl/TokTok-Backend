@@ -220,7 +220,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "D:\\Codes\\GitHub\\TokTok-Backend\\src\\generated\\prisma",
+      "value": "C:\\Syleaf\\Codes\\GitHub\\TokTok-Backend\\src\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -234,7 +234,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "D:\\Codes\\GitHub\\TokTok-Backend\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Syleaf\\Codes\\GitHub\\TokTok-Backend\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
