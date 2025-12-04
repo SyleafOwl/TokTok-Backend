@@ -159,6 +159,12 @@ app.post('/api/pets', async (req, res) => {
   if (!userId || typeof size !== 'number' || typeof hearts !== 'number') {
     return res.status(400).json({ error: 'userId, size (number), hearts (number) son requeridos' })
   }
+  if (size <= 0) {
+    return res.status(400).json({ error: 'size debe ser > 0' })
+  }
+  if (hearts < 0) {
+    return res.status(400).json({ error: 'hearts debe ser >= 0' })
+  }
   try {
     // Upsert por userId; si se actualiza, setear lastFed = now
     const existing = await (prisma as any).pet.findUnique({ where: { userId } })
@@ -190,14 +196,42 @@ app.get('/api/intis/:userId', async (req, res) => {
 
 app.post('/api/intis/:userId/adjust', async (req, res) => {
   const userId = String(req.params.userId)
-  const { amount, reason } = req.body ?? {}
+  const { amount, reason, operationId, clampToZero } = req.body ?? {}
   if (typeof amount !== 'number') return res.status(400).json({ error: 'amount (number) es requerido' })
   try {
-    const bal = await (prisma as any).intisBalance.upsert({ where: { userId }, update: {}, create: { userId, balance: 0 } })
-    let newBalance = bal.balance + Math.floor(amount)
-    if (newBalance < 0) newBalance = 0
-    const updated = await (prisma as any).intisBalance.update({ where: { userId }, data: { balance: newBalance, updatedAt: new Date() } })
-    await (prisma as any).intisLedger.create({ data: { userId, amount: Math.floor(amount), reason } })
+    const clientAny = prisma as any
+    // Idempotencia opcional por operationId
+    if (operationId && typeof operationId === 'string') {
+      const bucketKey = `intis:${userId}:${operationId}:${Math.floor(amount)}`
+      const r = await clientAny.metricsReceipt.upsert({
+        where: { userId_bucketKey: { userId, bucketKey } },
+        update: {},
+        create: { userId, bucketKey }
+      })
+      if (r.applied) {
+        const bal = await clientAny.intisBalance.findUnique({ where: { userId } })
+        const balance = bal?.balance ?? 0
+        const updatedAt = bal ? new Date(bal.updatedAt).toISOString() : new Date().toISOString()
+        return res.json({ userId, balance, updatedAt })
+      }
+    }
+
+    const bal = await clientAny.intisBalance.upsert({ where: { userId }, update: {}, create: { userId, balance: 0 } })
+    let tentative = bal.balance + Math.floor(amount)
+    if (clampToZero) {
+      if (tentative < 0) tentative = 0
+    } else if (tentative < 0) {
+      return res.status(400).json({ error: 'El ajuste produciría saldo negativo' })
+    }
+
+    const updated = await clientAny.intisBalance.update({ where: { userId }, data: { balance: tentative, updatedAt: new Date() } })
+    await clientAny.intisLedger.create({ data: { userId, amount: Math.floor(amount), reason } })
+
+    if (operationId && typeof operationId === 'string') {
+      const bucketKey = `intis:${userId}:${operationId}:${Math.floor(amount)}`
+      await clientAny.metricsReceipt.update({ where: { userId_bucketKey: { userId, bucketKey } }, data: { applied: true, appliedAt: new Date() } })
+    }
+
     return res.json({ userId, balance: updated.balance, updatedAt: new Date(updated.updatedAt).toISOString() })
   } catch (e: any) {
     res.status(500).json({ error: e?.message ?? 'Error ajustando balance' })
