@@ -451,19 +451,21 @@ app.get('/api/metrics/:userId', async (req, res) => {
   const userId = String(req.params.userId)
   try {
     const clientAny = prisma as any
-    // Usar UserMetrics unificado; si no existe, construir desde agregados
-    let m = await clientAny.userMetrics.findUnique({ where: { userId } })
-    if (!m) {
-      const sessAgg = await clientAny.streamSession.aggregate({ where: { userId }, _sum: { durationMs: true }, _count: { id: true } } as any)
-      const watchAgg = await clientAny.viewerWatchEvent.aggregate({ where: { userId }, _sum: { msWatched: true } } as any)
-      const totalMs = (sessAgg._sum?.durationMs as number) ?? 0
-      const totalSessions = (sessAgg._count?.id as number) ?? 0
-      const watchTotalMs = (watchAgg._sum?.msWatched as number) ?? 0
-      const baseMs = watchTotalMs > 0 ? watchTotalMs : totalMs
-      const { level, progressPct } = computeUnifiedLevelAndProgress(baseMs)
-      m = await clientAny.userMetrics.create({ data: { userId, totalMs, totalSessions, watchTotalMs, currentLevel: level, progressPct } })
-    }
-    res.json(m)
+    // Métricas del streamer basadas en stream_sessions para garantizar consistencia
+    const sessAgg = await clientAny.streamSession.aggregate({ where: { userId }, _sum: { durationMs: true }, _count: { id: true } } as any)
+    const totalMs = (sessAgg._sum?.durationMs as number) ?? 0
+    const totalSessions = (sessAgg._count?.id as number) ?? 0
+    const { level, progressPct } = computeUnifiedLevelAndProgress(totalMs)
+
+    // Persistir en user_metrics para referencia cruzada
+    await clientAny.userMetrics.upsert({
+      where: { userId },
+      update: { totalMs, totalSessions, currentLevel: level, progressPct },
+      create: { userId, totalMs, totalSessions, currentLevel: level, progressPct }
+    })
+
+    // Responder sólo los campos esperados por el front
+    return res.json({ totalMs, totalSessions, currentLevel: level, progressPct })
   } catch (e: any) {
     console.error('[Metrics GET] Error:', e)
     res.status(500).json({ error: e?.message ?? 'Error obteniendo métricas' })
