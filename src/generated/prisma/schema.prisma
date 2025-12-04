@@ -26,14 +26,16 @@ model User {
   pet      Pet?
 
   // Relaciones inversas
-  videos          Video[]
-  streamSessions  StreamSession[]
-  streamerMetrics StreamerMetrics?
-  audienceLevels  AudienceLevel[]
-  giftsReceived   Gift[]           @relation("ReceiverUser")
-  giftsSent       Gift[]           @relation("SenderUser")
-  comments        Comment[]
-  metricsReceipts MetricsReceipt[]
+  videos            Video[]
+  streamSessions    StreamSession[]
+  streamerMetrics   StreamerMetrics?
+  audienceLevels    AudienceLevel[]
+  giftsReceived     Gift[]             @relation("ReceiverUser")
+  giftsSent         Gift[]             @relation("SenderUser")
+  comments          Comment[]
+  metricsReceipts   MetricsReceipt[]
+  userMetrics       UserMetrics?
+  viewerWatchEvents ViewerWatchEvent[]
 }
 
 model Video {
@@ -92,6 +94,43 @@ model StreamerMetrics {
   updatedAt DateTime @updatedAt
 
   @@index([userId])
+}
+
+// Métricas unificadas por usuario (viewer/streamer)
+model UserMetrics {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // acumulados de streamer
+  totalMs       Int @default(0)
+  totalSessions Int @default(0)
+
+  // acumulados de viewer
+  watchTotalMs Int @default(0)
+
+  // nivel y progreso (0-100)
+  currentLevel  Int       @default(1)
+  progressPct   Int       @default(0)
+  lastLevelUpAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
+// Eventos de visualización del viewer (para recálculo)
+model ViewerWatchEvent {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  msWatched  Int
+  occurredAt DateTime @default(now())
+  createdAt  DateTime @default(now())
+
+  @@index([userId])
+  @@index([occurredAt])
 }
 
 // Recibos/idempotencia para cierres de sesión

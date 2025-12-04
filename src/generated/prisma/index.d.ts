@@ -39,6 +39,16 @@ export type StreamSession = $Result.DefaultSelection<Prisma.$StreamSessionPayloa
  */
 export type StreamerMetrics = $Result.DefaultSelection<Prisma.$StreamerMetricsPayload>
 /**
+ * Model UserMetrics
+ * 
+ */
+export type UserMetrics = $Result.DefaultSelection<Prisma.$UserMetricsPayload>
+/**
+ * Model ViewerWatchEvent
+ * 
+ */
+export type ViewerWatchEvent = $Result.DefaultSelection<Prisma.$ViewerWatchEventPayload>
+/**
  * Model MetricsReceipt
  * 
  */
@@ -243,6 +253,26 @@ export class PrismaClient<
     * ```
     */
   get streamerMetrics(): Prisma.StreamerMetricsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.userMetrics`: Exposes CRUD operations for the **UserMetrics** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserMetrics
+    * const userMetrics = await prisma.userMetrics.findMany()
+    * ```
+    */
+  get userMetrics(): Prisma.UserMetricsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.viewerWatchEvent`: Exposes CRUD operations for the **ViewerWatchEvent** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ViewerWatchEvents
+    * const viewerWatchEvents = await prisma.viewerWatchEvent.findMany()
+    * ```
+    */
+  get viewerWatchEvent(): Prisma.ViewerWatchEventDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.metricsReceipt`: Exposes CRUD operations for the **MetricsReceipt** model.
@@ -729,6 +759,8 @@ export namespace Prisma {
     Pet: 'Pet',
     StreamSession: 'StreamSession',
     StreamerMetrics: 'StreamerMetrics',
+    UserMetrics: 'UserMetrics',
+    ViewerWatchEvent: 'ViewerWatchEvent',
     MetricsReceipt: 'MetricsReceipt',
     AudienceLevel: 'AudienceLevel',
     Gift: 'Gift',
@@ -751,7 +783,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "video" | "pet" | "streamSession" | "streamerMetrics" | "metricsReceipt" | "audienceLevel" | "gift" | "comment"
+      modelProps: "user" | "video" | "pet" | "streamSession" | "streamerMetrics" | "userMetrics" | "viewerWatchEvent" | "metricsReceipt" | "audienceLevel" | "gift" | "comment"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1122,6 +1154,154 @@ export namespace Prisma {
           count: {
             args: Prisma.StreamerMetricsCountArgs<ExtArgs>
             result: $Utils.Optional<StreamerMetricsCountAggregateOutputType> | number
+          }
+        }
+      }
+      UserMetrics: {
+        payload: Prisma.$UserMetricsPayload<ExtArgs>
+        fields: Prisma.UserMetricsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserMetricsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserMetricsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserMetricsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserMetricsPayload>
+          }
+          findFirst: {
+            args: Prisma.UserMetricsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserMetricsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserMetricsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserMetricsPayload>
+          }
+          findMany: {
+            args: Prisma.UserMetricsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserMetricsPayload>[]
+          }
+          create: {
+            args: Prisma.UserMetricsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserMetricsPayload>
+          }
+          createMany: {
+            args: Prisma.UserMetricsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UserMetricsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserMetricsPayload>[]
+          }
+          delete: {
+            args: Prisma.UserMetricsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserMetricsPayload>
+          }
+          update: {
+            args: Prisma.UserMetricsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserMetricsPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserMetricsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserMetricsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UserMetricsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserMetricsPayload>[]
+          }
+          upsert: {
+            args: Prisma.UserMetricsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserMetricsPayload>
+          }
+          aggregate: {
+            args: Prisma.UserMetricsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserMetrics>
+          }
+          groupBy: {
+            args: Prisma.UserMetricsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserMetricsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserMetricsCountArgs<ExtArgs>
+            result: $Utils.Optional<UserMetricsCountAggregateOutputType> | number
+          }
+        }
+      }
+      ViewerWatchEvent: {
+        payload: Prisma.$ViewerWatchEventPayload<ExtArgs>
+        fields: Prisma.ViewerWatchEventFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ViewerWatchEventFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ViewerWatchEventPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ViewerWatchEventFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ViewerWatchEventPayload>
+          }
+          findFirst: {
+            args: Prisma.ViewerWatchEventFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ViewerWatchEventPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ViewerWatchEventFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ViewerWatchEventPayload>
+          }
+          findMany: {
+            args: Prisma.ViewerWatchEventFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ViewerWatchEventPayload>[]
+          }
+          create: {
+            args: Prisma.ViewerWatchEventCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ViewerWatchEventPayload>
+          }
+          createMany: {
+            args: Prisma.ViewerWatchEventCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ViewerWatchEventCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ViewerWatchEventPayload>[]
+          }
+          delete: {
+            args: Prisma.ViewerWatchEventDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ViewerWatchEventPayload>
+          }
+          update: {
+            args: Prisma.ViewerWatchEventUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ViewerWatchEventPayload>
+          }
+          deleteMany: {
+            args: Prisma.ViewerWatchEventDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ViewerWatchEventUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ViewerWatchEventUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ViewerWatchEventPayload>[]
+          }
+          upsert: {
+            args: Prisma.ViewerWatchEventUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ViewerWatchEventPayload>
+          }
+          aggregate: {
+            args: Prisma.ViewerWatchEventAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateViewerWatchEvent>
+          }
+          groupBy: {
+            args: Prisma.ViewerWatchEventGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ViewerWatchEventGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ViewerWatchEventCountArgs<ExtArgs>
+            result: $Utils.Optional<ViewerWatchEventCountAggregateOutputType> | number
           }
         }
       }
@@ -1522,6 +1702,8 @@ export namespace Prisma {
     pet?: PetOmit
     streamSession?: StreamSessionOmit
     streamerMetrics?: StreamerMetricsOmit
+    userMetrics?: UserMetricsOmit
+    viewerWatchEvent?: ViewerWatchEventOmit
     metricsReceipt?: MetricsReceiptOmit
     audienceLevel?: AudienceLevelOmit
     gift?: GiftOmit
@@ -1613,6 +1795,7 @@ export namespace Prisma {
     giftsSent: number
     comments: number
     metricsReceipts: number
+    viewerWatchEvents: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1623,6 +1806,7 @@ export namespace Prisma {
     giftsSent?: boolean | UserCountOutputTypeCountGiftsSentArgs
     comments?: boolean | UserCountOutputTypeCountCommentsArgs
     metricsReceipts?: boolean | UserCountOutputTypeCountMetricsReceiptsArgs
+    viewerWatchEvents?: boolean | UserCountOutputTypeCountViewerWatchEventsArgs
   }
 
   // Custom InputTypes
@@ -1683,6 +1867,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountMetricsReceiptsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MetricsReceiptWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountViewerWatchEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ViewerWatchEventWhereInput
   }
 
 
@@ -1894,6 +2085,8 @@ export namespace Prisma {
     giftsSent?: boolean | User$giftsSentArgs<ExtArgs>
     comments?: boolean | User$commentsArgs<ExtArgs>
     metricsReceipts?: boolean | User$metricsReceiptsArgs<ExtArgs>
+    userMetrics?: boolean | User$userMetricsArgs<ExtArgs>
+    viewerWatchEvents?: boolean | User$viewerWatchEventsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1932,6 +2125,8 @@ export namespace Prisma {
     giftsSent?: boolean | User$giftsSentArgs<ExtArgs>
     comments?: boolean | User$commentsArgs<ExtArgs>
     metricsReceipts?: boolean | User$metricsReceiptsArgs<ExtArgs>
+    userMetrics?: boolean | User$userMetricsArgs<ExtArgs>
+    viewerWatchEvents?: boolean | User$viewerWatchEventsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1949,6 +2144,8 @@ export namespace Prisma {
       giftsSent: Prisma.$GiftPayload<ExtArgs>[]
       comments: Prisma.$CommentPayload<ExtArgs>[]
       metricsReceipts: Prisma.$MetricsReceiptPayload<ExtArgs>[]
+      userMetrics: Prisma.$UserMetricsPayload<ExtArgs> | null
+      viewerWatchEvents: Prisma.$ViewerWatchEventPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2359,6 +2556,8 @@ export namespace Prisma {
     giftsSent<T extends User$giftsSentArgs<ExtArgs> = {}>(args?: Subset<T, User$giftsSentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GiftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     comments<T extends User$commentsArgs<ExtArgs> = {}>(args?: Subset<T, User$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     metricsReceipts<T extends User$metricsReceiptsArgs<ExtArgs> = {}>(args?: Subset<T, User$metricsReceiptsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MetricsReceiptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    userMetrics<T extends User$userMetricsArgs<ExtArgs> = {}>(args?: Subset<T, User$userMetricsArgs<ExtArgs>>): Prisma__UserMetricsClient<$Result.GetResult<Prisma.$UserMetricsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    viewerWatchEvents<T extends User$viewerWatchEventsArgs<ExtArgs> = {}>(args?: Subset<T, User$viewerWatchEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ViewerWatchEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2984,6 +3183,49 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: MetricsReceiptScalarFieldEnum | MetricsReceiptScalarFieldEnum[]
+  }
+
+  /**
+   * User.userMetrics
+   */
+  export type User$userMetricsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserMetrics
+     */
+    select?: UserMetricsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserMetrics
+     */
+    omit?: UserMetricsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserMetricsInclude<ExtArgs> | null
+    where?: UserMetricsWhereInput
+  }
+
+  /**
+   * User.viewerWatchEvents
+   */
+  export type User$viewerWatchEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ViewerWatchEvent
+     */
+    select?: ViewerWatchEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ViewerWatchEvent
+     */
+    omit?: ViewerWatchEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ViewerWatchEventInclude<ExtArgs> | null
+    where?: ViewerWatchEventWhereInput
+    orderBy?: ViewerWatchEventOrderByWithRelationInput | ViewerWatchEventOrderByWithRelationInput[]
+    cursor?: ViewerWatchEventWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ViewerWatchEventScalarFieldEnum | ViewerWatchEventScalarFieldEnum[]
   }
 
   /**
@@ -7468,6 +7710,2271 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: StreamerMetricsInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model UserMetrics
+   */
+
+  export type AggregateUserMetrics = {
+    _count: UserMetricsCountAggregateOutputType | null
+    _avg: UserMetricsAvgAggregateOutputType | null
+    _sum: UserMetricsSumAggregateOutputType | null
+    _min: UserMetricsMinAggregateOutputType | null
+    _max: UserMetricsMaxAggregateOutputType | null
+  }
+
+  export type UserMetricsAvgAggregateOutputType = {
+    totalMs: number | null
+    totalSessions: number | null
+    watchTotalMs: number | null
+    currentLevel: number | null
+    progressPct: number | null
+  }
+
+  export type UserMetricsSumAggregateOutputType = {
+    totalMs: number | null
+    totalSessions: number | null
+    watchTotalMs: number | null
+    currentLevel: number | null
+    progressPct: number | null
+  }
+
+  export type UserMetricsMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    totalMs: number | null
+    totalSessions: number | null
+    watchTotalMs: number | null
+    currentLevel: number | null
+    progressPct: number | null
+    lastLevelUpAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type UserMetricsMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    totalMs: number | null
+    totalSessions: number | null
+    watchTotalMs: number | null
+    currentLevel: number | null
+    progressPct: number | null
+    lastLevelUpAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type UserMetricsCountAggregateOutputType = {
+    id: number
+    userId: number
+    totalMs: number
+    totalSessions: number
+    watchTotalMs: number
+    currentLevel: number
+    progressPct: number
+    lastLevelUpAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type UserMetricsAvgAggregateInputType = {
+    totalMs?: true
+    totalSessions?: true
+    watchTotalMs?: true
+    currentLevel?: true
+    progressPct?: true
+  }
+
+  export type UserMetricsSumAggregateInputType = {
+    totalMs?: true
+    totalSessions?: true
+    watchTotalMs?: true
+    currentLevel?: true
+    progressPct?: true
+  }
+
+  export type UserMetricsMinAggregateInputType = {
+    id?: true
+    userId?: true
+    totalMs?: true
+    totalSessions?: true
+    watchTotalMs?: true
+    currentLevel?: true
+    progressPct?: true
+    lastLevelUpAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type UserMetricsMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    totalMs?: true
+    totalSessions?: true
+    watchTotalMs?: true
+    currentLevel?: true
+    progressPct?: true
+    lastLevelUpAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type UserMetricsCountAggregateInputType = {
+    id?: true
+    userId?: true
+    totalMs?: true
+    totalSessions?: true
+    watchTotalMs?: true
+    currentLevel?: true
+    progressPct?: true
+    lastLevelUpAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type UserMetricsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserMetrics to aggregate.
+     */
+    where?: UserMetricsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserMetrics to fetch.
+     */
+    orderBy?: UserMetricsOrderByWithRelationInput | UserMetricsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserMetricsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserMetrics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserMetrics.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserMetrics
+    **/
+    _count?: true | UserMetricsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: UserMetricsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserMetricsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserMetricsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserMetricsMaxAggregateInputType
+  }
+
+  export type GetUserMetricsAggregateType<T extends UserMetricsAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserMetrics]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserMetrics[P]>
+      : GetScalarType<T[P], AggregateUserMetrics[P]>
+  }
+
+
+
+
+  export type UserMetricsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserMetricsWhereInput
+    orderBy?: UserMetricsOrderByWithAggregationInput | UserMetricsOrderByWithAggregationInput[]
+    by: UserMetricsScalarFieldEnum[] | UserMetricsScalarFieldEnum
+    having?: UserMetricsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserMetricsCountAggregateInputType | true
+    _avg?: UserMetricsAvgAggregateInputType
+    _sum?: UserMetricsSumAggregateInputType
+    _min?: UserMetricsMinAggregateInputType
+    _max?: UserMetricsMaxAggregateInputType
+  }
+
+  export type UserMetricsGroupByOutputType = {
+    id: string
+    userId: string
+    totalMs: number
+    totalSessions: number
+    watchTotalMs: number
+    currentLevel: number
+    progressPct: number
+    lastLevelUpAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: UserMetricsCountAggregateOutputType | null
+    _avg: UserMetricsAvgAggregateOutputType | null
+    _sum: UserMetricsSumAggregateOutputType | null
+    _min: UserMetricsMinAggregateOutputType | null
+    _max: UserMetricsMaxAggregateOutputType | null
+  }
+
+  type GetUserMetricsGroupByPayload<T extends UserMetricsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserMetricsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserMetricsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserMetricsGroupByOutputType[P]>
+            : GetScalarType<T[P], UserMetricsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserMetricsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    totalMs?: boolean
+    totalSessions?: boolean
+    watchTotalMs?: boolean
+    currentLevel?: boolean
+    progressPct?: boolean
+    lastLevelUpAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userMetrics"]>
+
+  export type UserMetricsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    totalMs?: boolean
+    totalSessions?: boolean
+    watchTotalMs?: boolean
+    currentLevel?: boolean
+    progressPct?: boolean
+    lastLevelUpAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userMetrics"]>
+
+  export type UserMetricsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    totalMs?: boolean
+    totalSessions?: boolean
+    watchTotalMs?: boolean
+    currentLevel?: boolean
+    progressPct?: boolean
+    lastLevelUpAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userMetrics"]>
+
+  export type UserMetricsSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    totalMs?: boolean
+    totalSessions?: boolean
+    watchTotalMs?: boolean
+    currentLevel?: boolean
+    progressPct?: boolean
+    lastLevelUpAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type UserMetricsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "totalMs" | "totalSessions" | "watchTotalMs" | "currentLevel" | "progressPct" | "lastLevelUpAt" | "createdAt" | "updatedAt", ExtArgs["result"]["userMetrics"]>
+  export type UserMetricsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type UserMetricsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type UserMetricsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $UserMetricsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserMetrics"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      totalMs: number
+      totalSessions: number
+      watchTotalMs: number
+      currentLevel: number
+      progressPct: number
+      lastLevelUpAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["userMetrics"]>
+    composites: {}
+  }
+
+  type UserMetricsGetPayload<S extends boolean | null | undefined | UserMetricsDefaultArgs> = $Result.GetResult<Prisma.$UserMetricsPayload, S>
+
+  type UserMetricsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UserMetricsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserMetricsCountAggregateInputType | true
+    }
+
+  export interface UserMetricsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserMetrics'], meta: { name: 'UserMetrics' } }
+    /**
+     * Find zero or one UserMetrics that matches the filter.
+     * @param {UserMetricsFindUniqueArgs} args - Arguments to find a UserMetrics
+     * @example
+     * // Get one UserMetrics
+     * const userMetrics = await prisma.userMetrics.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserMetricsFindUniqueArgs>(args: SelectSubset<T, UserMetricsFindUniqueArgs<ExtArgs>>): Prisma__UserMetricsClient<$Result.GetResult<Prisma.$UserMetricsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one UserMetrics that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UserMetricsFindUniqueOrThrowArgs} args - Arguments to find a UserMetrics
+     * @example
+     * // Get one UserMetrics
+     * const userMetrics = await prisma.userMetrics.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserMetricsFindUniqueOrThrowArgs>(args: SelectSubset<T, UserMetricsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserMetricsClient<$Result.GetResult<Prisma.$UserMetricsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserMetrics that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserMetricsFindFirstArgs} args - Arguments to find a UserMetrics
+     * @example
+     * // Get one UserMetrics
+     * const userMetrics = await prisma.userMetrics.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserMetricsFindFirstArgs>(args?: SelectSubset<T, UserMetricsFindFirstArgs<ExtArgs>>): Prisma__UserMetricsClient<$Result.GetResult<Prisma.$UserMetricsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserMetrics that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserMetricsFindFirstOrThrowArgs} args - Arguments to find a UserMetrics
+     * @example
+     * // Get one UserMetrics
+     * const userMetrics = await prisma.userMetrics.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserMetricsFindFirstOrThrowArgs>(args?: SelectSubset<T, UserMetricsFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserMetricsClient<$Result.GetResult<Prisma.$UserMetricsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UserMetrics that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserMetricsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserMetrics
+     * const userMetrics = await prisma.userMetrics.findMany()
+     * 
+     * // Get first 10 UserMetrics
+     * const userMetrics = await prisma.userMetrics.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const userMetricsWithIdOnly = await prisma.userMetrics.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UserMetricsFindManyArgs>(args?: SelectSubset<T, UserMetricsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserMetricsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a UserMetrics.
+     * @param {UserMetricsCreateArgs} args - Arguments to create a UserMetrics.
+     * @example
+     * // Create one UserMetrics
+     * const UserMetrics = await prisma.userMetrics.create({
+     *   data: {
+     *     // ... data to create a UserMetrics
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserMetricsCreateArgs>(args: SelectSubset<T, UserMetricsCreateArgs<ExtArgs>>): Prisma__UserMetricsClient<$Result.GetResult<Prisma.$UserMetricsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many UserMetrics.
+     * @param {UserMetricsCreateManyArgs} args - Arguments to create many UserMetrics.
+     * @example
+     * // Create many UserMetrics
+     * const userMetrics = await prisma.userMetrics.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserMetricsCreateManyArgs>(args?: SelectSubset<T, UserMetricsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UserMetrics and returns the data saved in the database.
+     * @param {UserMetricsCreateManyAndReturnArgs} args - Arguments to create many UserMetrics.
+     * @example
+     * // Create many UserMetrics
+     * const userMetrics = await prisma.userMetrics.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UserMetrics and only return the `id`
+     * const userMetricsWithIdOnly = await prisma.userMetrics.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserMetricsCreateManyAndReturnArgs>(args?: SelectSubset<T, UserMetricsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserMetricsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a UserMetrics.
+     * @param {UserMetricsDeleteArgs} args - Arguments to delete one UserMetrics.
+     * @example
+     * // Delete one UserMetrics
+     * const UserMetrics = await prisma.userMetrics.delete({
+     *   where: {
+     *     // ... filter to delete one UserMetrics
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserMetricsDeleteArgs>(args: SelectSubset<T, UserMetricsDeleteArgs<ExtArgs>>): Prisma__UserMetricsClient<$Result.GetResult<Prisma.$UserMetricsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one UserMetrics.
+     * @param {UserMetricsUpdateArgs} args - Arguments to update one UserMetrics.
+     * @example
+     * // Update one UserMetrics
+     * const userMetrics = await prisma.userMetrics.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserMetricsUpdateArgs>(args: SelectSubset<T, UserMetricsUpdateArgs<ExtArgs>>): Prisma__UserMetricsClient<$Result.GetResult<Prisma.$UserMetricsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more UserMetrics.
+     * @param {UserMetricsDeleteManyArgs} args - Arguments to filter UserMetrics to delete.
+     * @example
+     * // Delete a few UserMetrics
+     * const { count } = await prisma.userMetrics.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserMetricsDeleteManyArgs>(args?: SelectSubset<T, UserMetricsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserMetrics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserMetricsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserMetrics
+     * const userMetrics = await prisma.userMetrics.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserMetricsUpdateManyArgs>(args: SelectSubset<T, UserMetricsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserMetrics and returns the data updated in the database.
+     * @param {UserMetricsUpdateManyAndReturnArgs} args - Arguments to update many UserMetrics.
+     * @example
+     * // Update many UserMetrics
+     * const userMetrics = await prisma.userMetrics.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more UserMetrics and only return the `id`
+     * const userMetricsWithIdOnly = await prisma.userMetrics.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends UserMetricsUpdateManyAndReturnArgs>(args: SelectSubset<T, UserMetricsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserMetricsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one UserMetrics.
+     * @param {UserMetricsUpsertArgs} args - Arguments to update or create a UserMetrics.
+     * @example
+     * // Update or create a UserMetrics
+     * const userMetrics = await prisma.userMetrics.upsert({
+     *   create: {
+     *     // ... data to create a UserMetrics
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserMetrics we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserMetricsUpsertArgs>(args: SelectSubset<T, UserMetricsUpsertArgs<ExtArgs>>): Prisma__UserMetricsClient<$Result.GetResult<Prisma.$UserMetricsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of UserMetrics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserMetricsCountArgs} args - Arguments to filter UserMetrics to count.
+     * @example
+     * // Count the number of UserMetrics
+     * const count = await prisma.userMetrics.count({
+     *   where: {
+     *     // ... the filter for the UserMetrics we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserMetricsCountArgs>(
+      args?: Subset<T, UserMetricsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserMetricsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserMetrics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserMetricsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserMetricsAggregateArgs>(args: Subset<T, UserMetricsAggregateArgs>): Prisma.PrismaPromise<GetUserMetricsAggregateType<T>>
+
+    /**
+     * Group by UserMetrics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserMetricsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserMetricsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserMetricsGroupByArgs['orderBy'] }
+        : { orderBy?: UserMetricsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserMetricsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserMetricsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserMetrics model
+   */
+  readonly fields: UserMetricsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserMetrics.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserMetricsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserMetrics model
+   */
+  interface UserMetricsFieldRefs {
+    readonly id: FieldRef<"UserMetrics", 'String'>
+    readonly userId: FieldRef<"UserMetrics", 'String'>
+    readonly totalMs: FieldRef<"UserMetrics", 'Int'>
+    readonly totalSessions: FieldRef<"UserMetrics", 'Int'>
+    readonly watchTotalMs: FieldRef<"UserMetrics", 'Int'>
+    readonly currentLevel: FieldRef<"UserMetrics", 'Int'>
+    readonly progressPct: FieldRef<"UserMetrics", 'Int'>
+    readonly lastLevelUpAt: FieldRef<"UserMetrics", 'DateTime'>
+    readonly createdAt: FieldRef<"UserMetrics", 'DateTime'>
+    readonly updatedAt: FieldRef<"UserMetrics", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserMetrics findUnique
+   */
+  export type UserMetricsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserMetrics
+     */
+    select?: UserMetricsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserMetrics
+     */
+    omit?: UserMetricsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserMetricsInclude<ExtArgs> | null
+    /**
+     * Filter, which UserMetrics to fetch.
+     */
+    where: UserMetricsWhereUniqueInput
+  }
+
+  /**
+   * UserMetrics findUniqueOrThrow
+   */
+  export type UserMetricsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserMetrics
+     */
+    select?: UserMetricsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserMetrics
+     */
+    omit?: UserMetricsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserMetricsInclude<ExtArgs> | null
+    /**
+     * Filter, which UserMetrics to fetch.
+     */
+    where: UserMetricsWhereUniqueInput
+  }
+
+  /**
+   * UserMetrics findFirst
+   */
+  export type UserMetricsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserMetrics
+     */
+    select?: UserMetricsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserMetrics
+     */
+    omit?: UserMetricsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserMetricsInclude<ExtArgs> | null
+    /**
+     * Filter, which UserMetrics to fetch.
+     */
+    where?: UserMetricsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserMetrics to fetch.
+     */
+    orderBy?: UserMetricsOrderByWithRelationInput | UserMetricsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserMetrics.
+     */
+    cursor?: UserMetricsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserMetrics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserMetrics.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserMetrics.
+     */
+    distinct?: UserMetricsScalarFieldEnum | UserMetricsScalarFieldEnum[]
+  }
+
+  /**
+   * UserMetrics findFirstOrThrow
+   */
+  export type UserMetricsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserMetrics
+     */
+    select?: UserMetricsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserMetrics
+     */
+    omit?: UserMetricsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserMetricsInclude<ExtArgs> | null
+    /**
+     * Filter, which UserMetrics to fetch.
+     */
+    where?: UserMetricsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserMetrics to fetch.
+     */
+    orderBy?: UserMetricsOrderByWithRelationInput | UserMetricsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserMetrics.
+     */
+    cursor?: UserMetricsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserMetrics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserMetrics.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserMetrics.
+     */
+    distinct?: UserMetricsScalarFieldEnum | UserMetricsScalarFieldEnum[]
+  }
+
+  /**
+   * UserMetrics findMany
+   */
+  export type UserMetricsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserMetrics
+     */
+    select?: UserMetricsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserMetrics
+     */
+    omit?: UserMetricsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserMetricsInclude<ExtArgs> | null
+    /**
+     * Filter, which UserMetrics to fetch.
+     */
+    where?: UserMetricsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserMetrics to fetch.
+     */
+    orderBy?: UserMetricsOrderByWithRelationInput | UserMetricsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserMetrics.
+     */
+    cursor?: UserMetricsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserMetrics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserMetrics.
+     */
+    skip?: number
+    distinct?: UserMetricsScalarFieldEnum | UserMetricsScalarFieldEnum[]
+  }
+
+  /**
+   * UserMetrics create
+   */
+  export type UserMetricsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserMetrics
+     */
+    select?: UserMetricsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserMetrics
+     */
+    omit?: UserMetricsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserMetricsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UserMetrics.
+     */
+    data: XOR<UserMetricsCreateInput, UserMetricsUncheckedCreateInput>
+  }
+
+  /**
+   * UserMetrics createMany
+   */
+  export type UserMetricsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserMetrics.
+     */
+    data: UserMetricsCreateManyInput | UserMetricsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UserMetrics createManyAndReturn
+   */
+  export type UserMetricsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserMetrics
+     */
+    select?: UserMetricsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserMetrics
+     */
+    omit?: UserMetricsOmit<ExtArgs> | null
+    /**
+     * The data used to create many UserMetrics.
+     */
+    data: UserMetricsCreateManyInput | UserMetricsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserMetricsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserMetrics update
+   */
+  export type UserMetricsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserMetrics
+     */
+    select?: UserMetricsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserMetrics
+     */
+    omit?: UserMetricsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserMetricsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UserMetrics.
+     */
+    data: XOR<UserMetricsUpdateInput, UserMetricsUncheckedUpdateInput>
+    /**
+     * Choose, which UserMetrics to update.
+     */
+    where: UserMetricsWhereUniqueInput
+  }
+
+  /**
+   * UserMetrics updateMany
+   */
+  export type UserMetricsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserMetrics.
+     */
+    data: XOR<UserMetricsUpdateManyMutationInput, UserMetricsUncheckedUpdateManyInput>
+    /**
+     * Filter which UserMetrics to update
+     */
+    where?: UserMetricsWhereInput
+    /**
+     * Limit how many UserMetrics to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserMetrics updateManyAndReturn
+   */
+  export type UserMetricsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserMetrics
+     */
+    select?: UserMetricsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserMetrics
+     */
+    omit?: UserMetricsOmit<ExtArgs> | null
+    /**
+     * The data used to update UserMetrics.
+     */
+    data: XOR<UserMetricsUpdateManyMutationInput, UserMetricsUncheckedUpdateManyInput>
+    /**
+     * Filter which UserMetrics to update
+     */
+    where?: UserMetricsWhereInput
+    /**
+     * Limit how many UserMetrics to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserMetricsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserMetrics upsert
+   */
+  export type UserMetricsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserMetrics
+     */
+    select?: UserMetricsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserMetrics
+     */
+    omit?: UserMetricsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserMetricsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UserMetrics to update in case it exists.
+     */
+    where: UserMetricsWhereUniqueInput
+    /**
+     * In case the UserMetrics found by the `where` argument doesn't exist, create a new UserMetrics with this data.
+     */
+    create: XOR<UserMetricsCreateInput, UserMetricsUncheckedCreateInput>
+    /**
+     * In case the UserMetrics was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserMetricsUpdateInput, UserMetricsUncheckedUpdateInput>
+  }
+
+  /**
+   * UserMetrics delete
+   */
+  export type UserMetricsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserMetrics
+     */
+    select?: UserMetricsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserMetrics
+     */
+    omit?: UserMetricsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserMetricsInclude<ExtArgs> | null
+    /**
+     * Filter which UserMetrics to delete.
+     */
+    where: UserMetricsWhereUniqueInput
+  }
+
+  /**
+   * UserMetrics deleteMany
+   */
+  export type UserMetricsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserMetrics to delete
+     */
+    where?: UserMetricsWhereInput
+    /**
+     * Limit how many UserMetrics to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserMetrics without action
+   */
+  export type UserMetricsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserMetrics
+     */
+    select?: UserMetricsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserMetrics
+     */
+    omit?: UserMetricsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserMetricsInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ViewerWatchEvent
+   */
+
+  export type AggregateViewerWatchEvent = {
+    _count: ViewerWatchEventCountAggregateOutputType | null
+    _avg: ViewerWatchEventAvgAggregateOutputType | null
+    _sum: ViewerWatchEventSumAggregateOutputType | null
+    _min: ViewerWatchEventMinAggregateOutputType | null
+    _max: ViewerWatchEventMaxAggregateOutputType | null
+  }
+
+  export type ViewerWatchEventAvgAggregateOutputType = {
+    msWatched: number | null
+  }
+
+  export type ViewerWatchEventSumAggregateOutputType = {
+    msWatched: number | null
+  }
+
+  export type ViewerWatchEventMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    msWatched: number | null
+    occurredAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type ViewerWatchEventMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    msWatched: number | null
+    occurredAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type ViewerWatchEventCountAggregateOutputType = {
+    id: number
+    userId: number
+    msWatched: number
+    occurredAt: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type ViewerWatchEventAvgAggregateInputType = {
+    msWatched?: true
+  }
+
+  export type ViewerWatchEventSumAggregateInputType = {
+    msWatched?: true
+  }
+
+  export type ViewerWatchEventMinAggregateInputType = {
+    id?: true
+    userId?: true
+    msWatched?: true
+    occurredAt?: true
+    createdAt?: true
+  }
+
+  export type ViewerWatchEventMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    msWatched?: true
+    occurredAt?: true
+    createdAt?: true
+  }
+
+  export type ViewerWatchEventCountAggregateInputType = {
+    id?: true
+    userId?: true
+    msWatched?: true
+    occurredAt?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type ViewerWatchEventAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ViewerWatchEvent to aggregate.
+     */
+    where?: ViewerWatchEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ViewerWatchEvents to fetch.
+     */
+    orderBy?: ViewerWatchEventOrderByWithRelationInput | ViewerWatchEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ViewerWatchEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ViewerWatchEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ViewerWatchEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ViewerWatchEvents
+    **/
+    _count?: true | ViewerWatchEventCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ViewerWatchEventAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ViewerWatchEventSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ViewerWatchEventMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ViewerWatchEventMaxAggregateInputType
+  }
+
+  export type GetViewerWatchEventAggregateType<T extends ViewerWatchEventAggregateArgs> = {
+        [P in keyof T & keyof AggregateViewerWatchEvent]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateViewerWatchEvent[P]>
+      : GetScalarType<T[P], AggregateViewerWatchEvent[P]>
+  }
+
+
+
+
+  export type ViewerWatchEventGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ViewerWatchEventWhereInput
+    orderBy?: ViewerWatchEventOrderByWithAggregationInput | ViewerWatchEventOrderByWithAggregationInput[]
+    by: ViewerWatchEventScalarFieldEnum[] | ViewerWatchEventScalarFieldEnum
+    having?: ViewerWatchEventScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ViewerWatchEventCountAggregateInputType | true
+    _avg?: ViewerWatchEventAvgAggregateInputType
+    _sum?: ViewerWatchEventSumAggregateInputType
+    _min?: ViewerWatchEventMinAggregateInputType
+    _max?: ViewerWatchEventMaxAggregateInputType
+  }
+
+  export type ViewerWatchEventGroupByOutputType = {
+    id: string
+    userId: string
+    msWatched: number
+    occurredAt: Date
+    createdAt: Date
+    _count: ViewerWatchEventCountAggregateOutputType | null
+    _avg: ViewerWatchEventAvgAggregateOutputType | null
+    _sum: ViewerWatchEventSumAggregateOutputType | null
+    _min: ViewerWatchEventMinAggregateOutputType | null
+    _max: ViewerWatchEventMaxAggregateOutputType | null
+  }
+
+  type GetViewerWatchEventGroupByPayload<T extends ViewerWatchEventGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ViewerWatchEventGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ViewerWatchEventGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ViewerWatchEventGroupByOutputType[P]>
+            : GetScalarType<T[P], ViewerWatchEventGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ViewerWatchEventSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    msWatched?: boolean
+    occurredAt?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["viewerWatchEvent"]>
+
+  export type ViewerWatchEventSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    msWatched?: boolean
+    occurredAt?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["viewerWatchEvent"]>
+
+  export type ViewerWatchEventSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    msWatched?: boolean
+    occurredAt?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["viewerWatchEvent"]>
+
+  export type ViewerWatchEventSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    msWatched?: boolean
+    occurredAt?: boolean
+    createdAt?: boolean
+  }
+
+  export type ViewerWatchEventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "msWatched" | "occurredAt" | "createdAt", ExtArgs["result"]["viewerWatchEvent"]>
+  export type ViewerWatchEventInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ViewerWatchEventIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ViewerWatchEventIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $ViewerWatchEventPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ViewerWatchEvent"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      msWatched: number
+      occurredAt: Date
+      createdAt: Date
+    }, ExtArgs["result"]["viewerWatchEvent"]>
+    composites: {}
+  }
+
+  type ViewerWatchEventGetPayload<S extends boolean | null | undefined | ViewerWatchEventDefaultArgs> = $Result.GetResult<Prisma.$ViewerWatchEventPayload, S>
+
+  type ViewerWatchEventCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ViewerWatchEventFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ViewerWatchEventCountAggregateInputType | true
+    }
+
+  export interface ViewerWatchEventDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ViewerWatchEvent'], meta: { name: 'ViewerWatchEvent' } }
+    /**
+     * Find zero or one ViewerWatchEvent that matches the filter.
+     * @param {ViewerWatchEventFindUniqueArgs} args - Arguments to find a ViewerWatchEvent
+     * @example
+     * // Get one ViewerWatchEvent
+     * const viewerWatchEvent = await prisma.viewerWatchEvent.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ViewerWatchEventFindUniqueArgs>(args: SelectSubset<T, ViewerWatchEventFindUniqueArgs<ExtArgs>>): Prisma__ViewerWatchEventClient<$Result.GetResult<Prisma.$ViewerWatchEventPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ViewerWatchEvent that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ViewerWatchEventFindUniqueOrThrowArgs} args - Arguments to find a ViewerWatchEvent
+     * @example
+     * // Get one ViewerWatchEvent
+     * const viewerWatchEvent = await prisma.viewerWatchEvent.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ViewerWatchEventFindUniqueOrThrowArgs>(args: SelectSubset<T, ViewerWatchEventFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ViewerWatchEventClient<$Result.GetResult<Prisma.$ViewerWatchEventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ViewerWatchEvent that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ViewerWatchEventFindFirstArgs} args - Arguments to find a ViewerWatchEvent
+     * @example
+     * // Get one ViewerWatchEvent
+     * const viewerWatchEvent = await prisma.viewerWatchEvent.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ViewerWatchEventFindFirstArgs>(args?: SelectSubset<T, ViewerWatchEventFindFirstArgs<ExtArgs>>): Prisma__ViewerWatchEventClient<$Result.GetResult<Prisma.$ViewerWatchEventPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ViewerWatchEvent that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ViewerWatchEventFindFirstOrThrowArgs} args - Arguments to find a ViewerWatchEvent
+     * @example
+     * // Get one ViewerWatchEvent
+     * const viewerWatchEvent = await prisma.viewerWatchEvent.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ViewerWatchEventFindFirstOrThrowArgs>(args?: SelectSubset<T, ViewerWatchEventFindFirstOrThrowArgs<ExtArgs>>): Prisma__ViewerWatchEventClient<$Result.GetResult<Prisma.$ViewerWatchEventPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ViewerWatchEvents that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ViewerWatchEventFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ViewerWatchEvents
+     * const viewerWatchEvents = await prisma.viewerWatchEvent.findMany()
+     * 
+     * // Get first 10 ViewerWatchEvents
+     * const viewerWatchEvents = await prisma.viewerWatchEvent.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const viewerWatchEventWithIdOnly = await prisma.viewerWatchEvent.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ViewerWatchEventFindManyArgs>(args?: SelectSubset<T, ViewerWatchEventFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ViewerWatchEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ViewerWatchEvent.
+     * @param {ViewerWatchEventCreateArgs} args - Arguments to create a ViewerWatchEvent.
+     * @example
+     * // Create one ViewerWatchEvent
+     * const ViewerWatchEvent = await prisma.viewerWatchEvent.create({
+     *   data: {
+     *     // ... data to create a ViewerWatchEvent
+     *   }
+     * })
+     * 
+     */
+    create<T extends ViewerWatchEventCreateArgs>(args: SelectSubset<T, ViewerWatchEventCreateArgs<ExtArgs>>): Prisma__ViewerWatchEventClient<$Result.GetResult<Prisma.$ViewerWatchEventPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ViewerWatchEvents.
+     * @param {ViewerWatchEventCreateManyArgs} args - Arguments to create many ViewerWatchEvents.
+     * @example
+     * // Create many ViewerWatchEvents
+     * const viewerWatchEvent = await prisma.viewerWatchEvent.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ViewerWatchEventCreateManyArgs>(args?: SelectSubset<T, ViewerWatchEventCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ViewerWatchEvents and returns the data saved in the database.
+     * @param {ViewerWatchEventCreateManyAndReturnArgs} args - Arguments to create many ViewerWatchEvents.
+     * @example
+     * // Create many ViewerWatchEvents
+     * const viewerWatchEvent = await prisma.viewerWatchEvent.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ViewerWatchEvents and only return the `id`
+     * const viewerWatchEventWithIdOnly = await prisma.viewerWatchEvent.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ViewerWatchEventCreateManyAndReturnArgs>(args?: SelectSubset<T, ViewerWatchEventCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ViewerWatchEventPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ViewerWatchEvent.
+     * @param {ViewerWatchEventDeleteArgs} args - Arguments to delete one ViewerWatchEvent.
+     * @example
+     * // Delete one ViewerWatchEvent
+     * const ViewerWatchEvent = await prisma.viewerWatchEvent.delete({
+     *   where: {
+     *     // ... filter to delete one ViewerWatchEvent
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ViewerWatchEventDeleteArgs>(args: SelectSubset<T, ViewerWatchEventDeleteArgs<ExtArgs>>): Prisma__ViewerWatchEventClient<$Result.GetResult<Prisma.$ViewerWatchEventPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ViewerWatchEvent.
+     * @param {ViewerWatchEventUpdateArgs} args - Arguments to update one ViewerWatchEvent.
+     * @example
+     * // Update one ViewerWatchEvent
+     * const viewerWatchEvent = await prisma.viewerWatchEvent.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ViewerWatchEventUpdateArgs>(args: SelectSubset<T, ViewerWatchEventUpdateArgs<ExtArgs>>): Prisma__ViewerWatchEventClient<$Result.GetResult<Prisma.$ViewerWatchEventPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ViewerWatchEvents.
+     * @param {ViewerWatchEventDeleteManyArgs} args - Arguments to filter ViewerWatchEvents to delete.
+     * @example
+     * // Delete a few ViewerWatchEvents
+     * const { count } = await prisma.viewerWatchEvent.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ViewerWatchEventDeleteManyArgs>(args?: SelectSubset<T, ViewerWatchEventDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ViewerWatchEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ViewerWatchEventUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ViewerWatchEvents
+     * const viewerWatchEvent = await prisma.viewerWatchEvent.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ViewerWatchEventUpdateManyArgs>(args: SelectSubset<T, ViewerWatchEventUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ViewerWatchEvents and returns the data updated in the database.
+     * @param {ViewerWatchEventUpdateManyAndReturnArgs} args - Arguments to update many ViewerWatchEvents.
+     * @example
+     * // Update many ViewerWatchEvents
+     * const viewerWatchEvent = await prisma.viewerWatchEvent.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ViewerWatchEvents and only return the `id`
+     * const viewerWatchEventWithIdOnly = await prisma.viewerWatchEvent.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ViewerWatchEventUpdateManyAndReturnArgs>(args: SelectSubset<T, ViewerWatchEventUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ViewerWatchEventPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ViewerWatchEvent.
+     * @param {ViewerWatchEventUpsertArgs} args - Arguments to update or create a ViewerWatchEvent.
+     * @example
+     * // Update or create a ViewerWatchEvent
+     * const viewerWatchEvent = await prisma.viewerWatchEvent.upsert({
+     *   create: {
+     *     // ... data to create a ViewerWatchEvent
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ViewerWatchEvent we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ViewerWatchEventUpsertArgs>(args: SelectSubset<T, ViewerWatchEventUpsertArgs<ExtArgs>>): Prisma__ViewerWatchEventClient<$Result.GetResult<Prisma.$ViewerWatchEventPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ViewerWatchEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ViewerWatchEventCountArgs} args - Arguments to filter ViewerWatchEvents to count.
+     * @example
+     * // Count the number of ViewerWatchEvents
+     * const count = await prisma.viewerWatchEvent.count({
+     *   where: {
+     *     // ... the filter for the ViewerWatchEvents we want to count
+     *   }
+     * })
+    **/
+    count<T extends ViewerWatchEventCountArgs>(
+      args?: Subset<T, ViewerWatchEventCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ViewerWatchEventCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ViewerWatchEvent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ViewerWatchEventAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ViewerWatchEventAggregateArgs>(args: Subset<T, ViewerWatchEventAggregateArgs>): Prisma.PrismaPromise<GetViewerWatchEventAggregateType<T>>
+
+    /**
+     * Group by ViewerWatchEvent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ViewerWatchEventGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ViewerWatchEventGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ViewerWatchEventGroupByArgs['orderBy'] }
+        : { orderBy?: ViewerWatchEventGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ViewerWatchEventGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetViewerWatchEventGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ViewerWatchEvent model
+   */
+  readonly fields: ViewerWatchEventFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ViewerWatchEvent.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ViewerWatchEventClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ViewerWatchEvent model
+   */
+  interface ViewerWatchEventFieldRefs {
+    readonly id: FieldRef<"ViewerWatchEvent", 'String'>
+    readonly userId: FieldRef<"ViewerWatchEvent", 'String'>
+    readonly msWatched: FieldRef<"ViewerWatchEvent", 'Int'>
+    readonly occurredAt: FieldRef<"ViewerWatchEvent", 'DateTime'>
+    readonly createdAt: FieldRef<"ViewerWatchEvent", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ViewerWatchEvent findUnique
+   */
+  export type ViewerWatchEventFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ViewerWatchEvent
+     */
+    select?: ViewerWatchEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ViewerWatchEvent
+     */
+    omit?: ViewerWatchEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ViewerWatchEventInclude<ExtArgs> | null
+    /**
+     * Filter, which ViewerWatchEvent to fetch.
+     */
+    where: ViewerWatchEventWhereUniqueInput
+  }
+
+  /**
+   * ViewerWatchEvent findUniqueOrThrow
+   */
+  export type ViewerWatchEventFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ViewerWatchEvent
+     */
+    select?: ViewerWatchEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ViewerWatchEvent
+     */
+    omit?: ViewerWatchEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ViewerWatchEventInclude<ExtArgs> | null
+    /**
+     * Filter, which ViewerWatchEvent to fetch.
+     */
+    where: ViewerWatchEventWhereUniqueInput
+  }
+
+  /**
+   * ViewerWatchEvent findFirst
+   */
+  export type ViewerWatchEventFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ViewerWatchEvent
+     */
+    select?: ViewerWatchEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ViewerWatchEvent
+     */
+    omit?: ViewerWatchEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ViewerWatchEventInclude<ExtArgs> | null
+    /**
+     * Filter, which ViewerWatchEvent to fetch.
+     */
+    where?: ViewerWatchEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ViewerWatchEvents to fetch.
+     */
+    orderBy?: ViewerWatchEventOrderByWithRelationInput | ViewerWatchEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ViewerWatchEvents.
+     */
+    cursor?: ViewerWatchEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ViewerWatchEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ViewerWatchEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ViewerWatchEvents.
+     */
+    distinct?: ViewerWatchEventScalarFieldEnum | ViewerWatchEventScalarFieldEnum[]
+  }
+
+  /**
+   * ViewerWatchEvent findFirstOrThrow
+   */
+  export type ViewerWatchEventFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ViewerWatchEvent
+     */
+    select?: ViewerWatchEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ViewerWatchEvent
+     */
+    omit?: ViewerWatchEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ViewerWatchEventInclude<ExtArgs> | null
+    /**
+     * Filter, which ViewerWatchEvent to fetch.
+     */
+    where?: ViewerWatchEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ViewerWatchEvents to fetch.
+     */
+    orderBy?: ViewerWatchEventOrderByWithRelationInput | ViewerWatchEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ViewerWatchEvents.
+     */
+    cursor?: ViewerWatchEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ViewerWatchEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ViewerWatchEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ViewerWatchEvents.
+     */
+    distinct?: ViewerWatchEventScalarFieldEnum | ViewerWatchEventScalarFieldEnum[]
+  }
+
+  /**
+   * ViewerWatchEvent findMany
+   */
+  export type ViewerWatchEventFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ViewerWatchEvent
+     */
+    select?: ViewerWatchEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ViewerWatchEvent
+     */
+    omit?: ViewerWatchEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ViewerWatchEventInclude<ExtArgs> | null
+    /**
+     * Filter, which ViewerWatchEvents to fetch.
+     */
+    where?: ViewerWatchEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ViewerWatchEvents to fetch.
+     */
+    orderBy?: ViewerWatchEventOrderByWithRelationInput | ViewerWatchEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ViewerWatchEvents.
+     */
+    cursor?: ViewerWatchEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ViewerWatchEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ViewerWatchEvents.
+     */
+    skip?: number
+    distinct?: ViewerWatchEventScalarFieldEnum | ViewerWatchEventScalarFieldEnum[]
+  }
+
+  /**
+   * ViewerWatchEvent create
+   */
+  export type ViewerWatchEventCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ViewerWatchEvent
+     */
+    select?: ViewerWatchEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ViewerWatchEvent
+     */
+    omit?: ViewerWatchEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ViewerWatchEventInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ViewerWatchEvent.
+     */
+    data: XOR<ViewerWatchEventCreateInput, ViewerWatchEventUncheckedCreateInput>
+  }
+
+  /**
+   * ViewerWatchEvent createMany
+   */
+  export type ViewerWatchEventCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ViewerWatchEvents.
+     */
+    data: ViewerWatchEventCreateManyInput | ViewerWatchEventCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ViewerWatchEvent createManyAndReturn
+   */
+  export type ViewerWatchEventCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ViewerWatchEvent
+     */
+    select?: ViewerWatchEventSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ViewerWatchEvent
+     */
+    omit?: ViewerWatchEventOmit<ExtArgs> | null
+    /**
+     * The data used to create many ViewerWatchEvents.
+     */
+    data: ViewerWatchEventCreateManyInput | ViewerWatchEventCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ViewerWatchEventIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ViewerWatchEvent update
+   */
+  export type ViewerWatchEventUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ViewerWatchEvent
+     */
+    select?: ViewerWatchEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ViewerWatchEvent
+     */
+    omit?: ViewerWatchEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ViewerWatchEventInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ViewerWatchEvent.
+     */
+    data: XOR<ViewerWatchEventUpdateInput, ViewerWatchEventUncheckedUpdateInput>
+    /**
+     * Choose, which ViewerWatchEvent to update.
+     */
+    where: ViewerWatchEventWhereUniqueInput
+  }
+
+  /**
+   * ViewerWatchEvent updateMany
+   */
+  export type ViewerWatchEventUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ViewerWatchEvents.
+     */
+    data: XOR<ViewerWatchEventUpdateManyMutationInput, ViewerWatchEventUncheckedUpdateManyInput>
+    /**
+     * Filter which ViewerWatchEvents to update
+     */
+    where?: ViewerWatchEventWhereInput
+    /**
+     * Limit how many ViewerWatchEvents to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ViewerWatchEvent updateManyAndReturn
+   */
+  export type ViewerWatchEventUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ViewerWatchEvent
+     */
+    select?: ViewerWatchEventSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ViewerWatchEvent
+     */
+    omit?: ViewerWatchEventOmit<ExtArgs> | null
+    /**
+     * The data used to update ViewerWatchEvents.
+     */
+    data: XOR<ViewerWatchEventUpdateManyMutationInput, ViewerWatchEventUncheckedUpdateManyInput>
+    /**
+     * Filter which ViewerWatchEvents to update
+     */
+    where?: ViewerWatchEventWhereInput
+    /**
+     * Limit how many ViewerWatchEvents to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ViewerWatchEventIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ViewerWatchEvent upsert
+   */
+  export type ViewerWatchEventUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ViewerWatchEvent
+     */
+    select?: ViewerWatchEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ViewerWatchEvent
+     */
+    omit?: ViewerWatchEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ViewerWatchEventInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ViewerWatchEvent to update in case it exists.
+     */
+    where: ViewerWatchEventWhereUniqueInput
+    /**
+     * In case the ViewerWatchEvent found by the `where` argument doesn't exist, create a new ViewerWatchEvent with this data.
+     */
+    create: XOR<ViewerWatchEventCreateInput, ViewerWatchEventUncheckedCreateInput>
+    /**
+     * In case the ViewerWatchEvent was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ViewerWatchEventUpdateInput, ViewerWatchEventUncheckedUpdateInput>
+  }
+
+  /**
+   * ViewerWatchEvent delete
+   */
+  export type ViewerWatchEventDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ViewerWatchEvent
+     */
+    select?: ViewerWatchEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ViewerWatchEvent
+     */
+    omit?: ViewerWatchEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ViewerWatchEventInclude<ExtArgs> | null
+    /**
+     * Filter which ViewerWatchEvent to delete.
+     */
+    where: ViewerWatchEventWhereUniqueInput
+  }
+
+  /**
+   * ViewerWatchEvent deleteMany
+   */
+  export type ViewerWatchEventDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ViewerWatchEvents to delete
+     */
+    where?: ViewerWatchEventWhereInput
+    /**
+     * Limit how many ViewerWatchEvents to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ViewerWatchEvent without action
+   */
+  export type ViewerWatchEventDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ViewerWatchEvent
+     */
+    select?: ViewerWatchEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ViewerWatchEvent
+     */
+    omit?: ViewerWatchEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ViewerWatchEventInclude<ExtArgs> | null
   }
 
 
@@ -12015,6 +14522,33 @@ export namespace Prisma {
   export type StreamerMetricsScalarFieldEnum = (typeof StreamerMetricsScalarFieldEnum)[keyof typeof StreamerMetricsScalarFieldEnum]
 
 
+  export const UserMetricsScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    totalMs: 'totalMs',
+    totalSessions: 'totalSessions',
+    watchTotalMs: 'watchTotalMs',
+    currentLevel: 'currentLevel',
+    progressPct: 'progressPct',
+    lastLevelUpAt: 'lastLevelUpAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type UserMetricsScalarFieldEnum = (typeof UserMetricsScalarFieldEnum)[keyof typeof UserMetricsScalarFieldEnum]
+
+
+  export const ViewerWatchEventScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    msWatched: 'msWatched',
+    occurredAt: 'occurredAt',
+    createdAt: 'createdAt'
+  };
+
+  export type ViewerWatchEventScalarFieldEnum = (typeof ViewerWatchEventScalarFieldEnum)[keyof typeof ViewerWatchEventScalarFieldEnum]
+
+
   export const MetricsReceiptScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
@@ -12226,6 +14760,8 @@ export namespace Prisma {
     giftsSent?: GiftListRelationFilter
     comments?: CommentListRelationFilter
     metricsReceipts?: MetricsReceiptListRelationFilter
+    userMetrics?: XOR<UserMetricsNullableScalarRelationFilter, UserMetricsWhereInput> | null
+    viewerWatchEvents?: ViewerWatchEventListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -12243,6 +14779,8 @@ export namespace Prisma {
     giftsSent?: GiftOrderByRelationAggregateInput
     comments?: CommentOrderByRelationAggregateInput
     metricsReceipts?: MetricsReceiptOrderByRelationAggregateInput
+    userMetrics?: UserMetricsOrderByWithRelationInput
+    viewerWatchEvents?: ViewerWatchEventOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -12263,6 +14801,8 @@ export namespace Prisma {
     giftsSent?: GiftListRelationFilter
     comments?: CommentListRelationFilter
     metricsReceipts?: MetricsReceiptListRelationFilter
+    userMetrics?: XOR<UserMetricsNullableScalarRelationFilter, UserMetricsWhereInput> | null
+    viewerWatchEvents?: ViewerWatchEventListRelationFilter
   }, "id" | "nombre">
 
   export type UserOrderByWithAggregationInput = {
@@ -12536,6 +15076,145 @@ export namespace Prisma {
     lastLevelUpAt?: DateTimeNullableWithAggregatesFilter<"StreamerMetrics"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"StreamerMetrics"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"StreamerMetrics"> | Date | string
+  }
+
+  export type UserMetricsWhereInput = {
+    AND?: UserMetricsWhereInput | UserMetricsWhereInput[]
+    OR?: UserMetricsWhereInput[]
+    NOT?: UserMetricsWhereInput | UserMetricsWhereInput[]
+    id?: StringFilter<"UserMetrics"> | string
+    userId?: StringFilter<"UserMetrics"> | string
+    totalMs?: IntFilter<"UserMetrics"> | number
+    totalSessions?: IntFilter<"UserMetrics"> | number
+    watchTotalMs?: IntFilter<"UserMetrics"> | number
+    currentLevel?: IntFilter<"UserMetrics"> | number
+    progressPct?: IntFilter<"UserMetrics"> | number
+    lastLevelUpAt?: DateTimeNullableFilter<"UserMetrics"> | Date | string | null
+    createdAt?: DateTimeFilter<"UserMetrics"> | Date | string
+    updatedAt?: DateTimeFilter<"UserMetrics"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type UserMetricsOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalMs?: SortOrder
+    totalSessions?: SortOrder
+    watchTotalMs?: SortOrder
+    currentLevel?: SortOrder
+    progressPct?: SortOrder
+    lastLevelUpAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type UserMetricsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId?: string
+    AND?: UserMetricsWhereInput | UserMetricsWhereInput[]
+    OR?: UserMetricsWhereInput[]
+    NOT?: UserMetricsWhereInput | UserMetricsWhereInput[]
+    totalMs?: IntFilter<"UserMetrics"> | number
+    totalSessions?: IntFilter<"UserMetrics"> | number
+    watchTotalMs?: IntFilter<"UserMetrics"> | number
+    currentLevel?: IntFilter<"UserMetrics"> | number
+    progressPct?: IntFilter<"UserMetrics"> | number
+    lastLevelUpAt?: DateTimeNullableFilter<"UserMetrics"> | Date | string | null
+    createdAt?: DateTimeFilter<"UserMetrics"> | Date | string
+    updatedAt?: DateTimeFilter<"UserMetrics"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userId">
+
+  export type UserMetricsOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalMs?: SortOrder
+    totalSessions?: SortOrder
+    watchTotalMs?: SortOrder
+    currentLevel?: SortOrder
+    progressPct?: SortOrder
+    lastLevelUpAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: UserMetricsCountOrderByAggregateInput
+    _avg?: UserMetricsAvgOrderByAggregateInput
+    _max?: UserMetricsMaxOrderByAggregateInput
+    _min?: UserMetricsMinOrderByAggregateInput
+    _sum?: UserMetricsSumOrderByAggregateInput
+  }
+
+  export type UserMetricsScalarWhereWithAggregatesInput = {
+    AND?: UserMetricsScalarWhereWithAggregatesInput | UserMetricsScalarWhereWithAggregatesInput[]
+    OR?: UserMetricsScalarWhereWithAggregatesInput[]
+    NOT?: UserMetricsScalarWhereWithAggregatesInput | UserMetricsScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"UserMetrics"> | string
+    userId?: StringWithAggregatesFilter<"UserMetrics"> | string
+    totalMs?: IntWithAggregatesFilter<"UserMetrics"> | number
+    totalSessions?: IntWithAggregatesFilter<"UserMetrics"> | number
+    watchTotalMs?: IntWithAggregatesFilter<"UserMetrics"> | number
+    currentLevel?: IntWithAggregatesFilter<"UserMetrics"> | number
+    progressPct?: IntWithAggregatesFilter<"UserMetrics"> | number
+    lastLevelUpAt?: DateTimeNullableWithAggregatesFilter<"UserMetrics"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"UserMetrics"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"UserMetrics"> | Date | string
+  }
+
+  export type ViewerWatchEventWhereInput = {
+    AND?: ViewerWatchEventWhereInput | ViewerWatchEventWhereInput[]
+    OR?: ViewerWatchEventWhereInput[]
+    NOT?: ViewerWatchEventWhereInput | ViewerWatchEventWhereInput[]
+    id?: StringFilter<"ViewerWatchEvent"> | string
+    userId?: StringFilter<"ViewerWatchEvent"> | string
+    msWatched?: IntFilter<"ViewerWatchEvent"> | number
+    occurredAt?: DateTimeFilter<"ViewerWatchEvent"> | Date | string
+    createdAt?: DateTimeFilter<"ViewerWatchEvent"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type ViewerWatchEventOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    msWatched?: SortOrder
+    occurredAt?: SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type ViewerWatchEventWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ViewerWatchEventWhereInput | ViewerWatchEventWhereInput[]
+    OR?: ViewerWatchEventWhereInput[]
+    NOT?: ViewerWatchEventWhereInput | ViewerWatchEventWhereInput[]
+    userId?: StringFilter<"ViewerWatchEvent"> | string
+    msWatched?: IntFilter<"ViewerWatchEvent"> | number
+    occurredAt?: DateTimeFilter<"ViewerWatchEvent"> | Date | string
+    createdAt?: DateTimeFilter<"ViewerWatchEvent"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type ViewerWatchEventOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    msWatched?: SortOrder
+    occurredAt?: SortOrder
+    createdAt?: SortOrder
+    _count?: ViewerWatchEventCountOrderByAggregateInput
+    _avg?: ViewerWatchEventAvgOrderByAggregateInput
+    _max?: ViewerWatchEventMaxOrderByAggregateInput
+    _min?: ViewerWatchEventMinOrderByAggregateInput
+    _sum?: ViewerWatchEventSumOrderByAggregateInput
+  }
+
+  export type ViewerWatchEventScalarWhereWithAggregatesInput = {
+    AND?: ViewerWatchEventScalarWhereWithAggregatesInput | ViewerWatchEventScalarWhereWithAggregatesInput[]
+    OR?: ViewerWatchEventScalarWhereWithAggregatesInput[]
+    NOT?: ViewerWatchEventScalarWhereWithAggregatesInput | ViewerWatchEventScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ViewerWatchEvent"> | string
+    userId?: StringWithAggregatesFilter<"ViewerWatchEvent"> | string
+    msWatched?: IntWithAggregatesFilter<"ViewerWatchEvent"> | number
+    occurredAt?: DateTimeWithAggregatesFilter<"ViewerWatchEvent"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"ViewerWatchEvent"> | Date | string
   }
 
   export type MetricsReceiptWhereInput = {
@@ -12830,6 +15509,8 @@ export namespace Prisma {
     giftsSent?: GiftCreateNestedManyWithoutSenderInput
     comments?: CommentCreateNestedManyWithoutUserInput
     metricsReceipts?: MetricsReceiptCreateNestedManyWithoutUserInput
+    userMetrics?: UserMetricsCreateNestedOneWithoutUserInput
+    viewerWatchEvents?: ViewerWatchEventCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -12847,6 +15528,8 @@ export namespace Prisma {
     giftsSent?: GiftUncheckedCreateNestedManyWithoutSenderInput
     comments?: CommentUncheckedCreateNestedManyWithoutUserInput
     metricsReceipts?: MetricsReceiptUncheckedCreateNestedManyWithoutUserInput
+    userMetrics?: UserMetricsUncheckedCreateNestedOneWithoutUserInput
+    viewerWatchEvents?: ViewerWatchEventUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -12864,6 +15547,8 @@ export namespace Prisma {
     giftsSent?: GiftUpdateManyWithoutSenderNestedInput
     comments?: CommentUpdateManyWithoutUserNestedInput
     metricsReceipts?: MetricsReceiptUpdateManyWithoutUserNestedInput
+    userMetrics?: UserMetricsUpdateOneWithoutUserNestedInput
+    viewerWatchEvents?: ViewerWatchEventUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -12881,6 +15566,8 @@ export namespace Prisma {
     giftsSent?: GiftUncheckedUpdateManyWithoutSenderNestedInput
     comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
     metricsReceipts?: MetricsReceiptUncheckedUpdateManyWithoutUserNestedInput
+    userMetrics?: UserMetricsUncheckedUpdateOneWithoutUserNestedInput
+    viewerWatchEvents?: ViewerWatchEventUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -13154,6 +15841,151 @@ export namespace Prisma {
     lastLevelUpAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserMetricsCreateInput = {
+    id?: string
+    totalMs?: number
+    totalSessions?: number
+    watchTotalMs?: number
+    currentLevel?: number
+    progressPct?: number
+    lastLevelUpAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutUserMetricsInput
+  }
+
+  export type UserMetricsUncheckedCreateInput = {
+    id?: string
+    userId: string
+    totalMs?: number
+    totalSessions?: number
+    watchTotalMs?: number
+    currentLevel?: number
+    progressPct?: number
+    lastLevelUpAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserMetricsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalMs?: IntFieldUpdateOperationsInput | number
+    totalSessions?: IntFieldUpdateOperationsInput | number
+    watchTotalMs?: IntFieldUpdateOperationsInput | number
+    currentLevel?: IntFieldUpdateOperationsInput | number
+    progressPct?: IntFieldUpdateOperationsInput | number
+    lastLevelUpAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutUserMetricsNestedInput
+  }
+
+  export type UserMetricsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    totalMs?: IntFieldUpdateOperationsInput | number
+    totalSessions?: IntFieldUpdateOperationsInput | number
+    watchTotalMs?: IntFieldUpdateOperationsInput | number
+    currentLevel?: IntFieldUpdateOperationsInput | number
+    progressPct?: IntFieldUpdateOperationsInput | number
+    lastLevelUpAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserMetricsCreateManyInput = {
+    id?: string
+    userId: string
+    totalMs?: number
+    totalSessions?: number
+    watchTotalMs?: number
+    currentLevel?: number
+    progressPct?: number
+    lastLevelUpAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserMetricsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalMs?: IntFieldUpdateOperationsInput | number
+    totalSessions?: IntFieldUpdateOperationsInput | number
+    watchTotalMs?: IntFieldUpdateOperationsInput | number
+    currentLevel?: IntFieldUpdateOperationsInput | number
+    progressPct?: IntFieldUpdateOperationsInput | number
+    lastLevelUpAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserMetricsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    totalMs?: IntFieldUpdateOperationsInput | number
+    totalSessions?: IntFieldUpdateOperationsInput | number
+    watchTotalMs?: IntFieldUpdateOperationsInput | number
+    currentLevel?: IntFieldUpdateOperationsInput | number
+    progressPct?: IntFieldUpdateOperationsInput | number
+    lastLevelUpAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ViewerWatchEventCreateInput = {
+    id?: string
+    msWatched: number
+    occurredAt?: Date | string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutViewerWatchEventsInput
+  }
+
+  export type ViewerWatchEventUncheckedCreateInput = {
+    id?: string
+    userId: string
+    msWatched: number
+    occurredAt?: Date | string
+    createdAt?: Date | string
+  }
+
+  export type ViewerWatchEventUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    msWatched?: IntFieldUpdateOperationsInput | number
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutViewerWatchEventsNestedInput
+  }
+
+  export type ViewerWatchEventUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    msWatched?: IntFieldUpdateOperationsInput | number
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ViewerWatchEventCreateManyInput = {
+    id?: string
+    userId: string
+    msWatched: number
+    occurredAt?: Date | string
+    createdAt?: Date | string
+  }
+
+  export type ViewerWatchEventUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    msWatched?: IntFieldUpdateOperationsInput | number
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ViewerWatchEventUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    msWatched?: IntFieldUpdateOperationsInput | number
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MetricsReceiptCreateInput = {
@@ -13520,6 +16352,17 @@ export namespace Prisma {
     none?: MetricsReceiptWhereInput
   }
 
+  export type UserMetricsNullableScalarRelationFilter = {
+    is?: UserMetricsWhereInput | null
+    isNot?: UserMetricsWhereInput | null
+  }
+
+  export type ViewerWatchEventListRelationFilter = {
+    every?: ViewerWatchEventWhereInput
+    some?: ViewerWatchEventWhereInput
+    none?: ViewerWatchEventWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -13546,6 +16389,10 @@ export namespace Prisma {
   }
 
   export type MetricsReceiptOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ViewerWatchEventOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -13876,6 +16723,93 @@ export namespace Prisma {
     currentLevel?: SortOrder
   }
 
+  export type UserMetricsCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalMs?: SortOrder
+    totalSessions?: SortOrder
+    watchTotalMs?: SortOrder
+    currentLevel?: SortOrder
+    progressPct?: SortOrder
+    lastLevelUpAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserMetricsAvgOrderByAggregateInput = {
+    totalMs?: SortOrder
+    totalSessions?: SortOrder
+    watchTotalMs?: SortOrder
+    currentLevel?: SortOrder
+    progressPct?: SortOrder
+  }
+
+  export type UserMetricsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalMs?: SortOrder
+    totalSessions?: SortOrder
+    watchTotalMs?: SortOrder
+    currentLevel?: SortOrder
+    progressPct?: SortOrder
+    lastLevelUpAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserMetricsMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    totalMs?: SortOrder
+    totalSessions?: SortOrder
+    watchTotalMs?: SortOrder
+    currentLevel?: SortOrder
+    progressPct?: SortOrder
+    lastLevelUpAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserMetricsSumOrderByAggregateInput = {
+    totalMs?: SortOrder
+    totalSessions?: SortOrder
+    watchTotalMs?: SortOrder
+    currentLevel?: SortOrder
+    progressPct?: SortOrder
+  }
+
+  export type ViewerWatchEventCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    msWatched?: SortOrder
+    occurredAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ViewerWatchEventAvgOrderByAggregateInput = {
+    msWatched?: SortOrder
+  }
+
+  export type ViewerWatchEventMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    msWatched?: SortOrder
+    occurredAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ViewerWatchEventMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    msWatched?: SortOrder
+    occurredAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ViewerWatchEventSumOrderByAggregateInput = {
+    msWatched?: SortOrder
+  }
+
   export type BoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
@@ -14158,6 +17092,19 @@ export namespace Prisma {
     connect?: MetricsReceiptWhereUniqueInput | MetricsReceiptWhereUniqueInput[]
   }
 
+  export type UserMetricsCreateNestedOneWithoutUserInput = {
+    create?: XOR<UserMetricsCreateWithoutUserInput, UserMetricsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserMetricsCreateOrConnectWithoutUserInput
+    connect?: UserMetricsWhereUniqueInput
+  }
+
+  export type ViewerWatchEventCreateNestedManyWithoutUserInput = {
+    create?: XOR<ViewerWatchEventCreateWithoutUserInput, ViewerWatchEventUncheckedCreateWithoutUserInput> | ViewerWatchEventCreateWithoutUserInput[] | ViewerWatchEventUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ViewerWatchEventCreateOrConnectWithoutUserInput | ViewerWatchEventCreateOrConnectWithoutUserInput[]
+    createMany?: ViewerWatchEventCreateManyUserInputEnvelope
+    connect?: ViewerWatchEventWhereUniqueInput | ViewerWatchEventWhereUniqueInput[]
+  }
+
   export type PetUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<PetCreateWithoutUserInput, PetUncheckedCreateWithoutUserInput>
     connectOrCreate?: PetCreateOrConnectWithoutUserInput
@@ -14217,6 +17164,19 @@ export namespace Prisma {
     connectOrCreate?: MetricsReceiptCreateOrConnectWithoutUserInput | MetricsReceiptCreateOrConnectWithoutUserInput[]
     createMany?: MetricsReceiptCreateManyUserInputEnvelope
     connect?: MetricsReceiptWhereUniqueInput | MetricsReceiptWhereUniqueInput[]
+  }
+
+  export type UserMetricsUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<UserMetricsCreateWithoutUserInput, UserMetricsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserMetricsCreateOrConnectWithoutUserInput
+    connect?: UserMetricsWhereUniqueInput
+  }
+
+  export type ViewerWatchEventUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ViewerWatchEventCreateWithoutUserInput, ViewerWatchEventUncheckedCreateWithoutUserInput> | ViewerWatchEventCreateWithoutUserInput[] | ViewerWatchEventUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ViewerWatchEventCreateOrConnectWithoutUserInput | ViewerWatchEventCreateOrConnectWithoutUserInput[]
+    createMany?: ViewerWatchEventCreateManyUserInputEnvelope
+    connect?: ViewerWatchEventWhereUniqueInput | ViewerWatchEventWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -14349,6 +17309,30 @@ export namespace Prisma {
     deleteMany?: MetricsReceiptScalarWhereInput | MetricsReceiptScalarWhereInput[]
   }
 
+  export type UserMetricsUpdateOneWithoutUserNestedInput = {
+    create?: XOR<UserMetricsCreateWithoutUserInput, UserMetricsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserMetricsCreateOrConnectWithoutUserInput
+    upsert?: UserMetricsUpsertWithoutUserInput
+    disconnect?: UserMetricsWhereInput | boolean
+    delete?: UserMetricsWhereInput | boolean
+    connect?: UserMetricsWhereUniqueInput
+    update?: XOR<XOR<UserMetricsUpdateToOneWithWhereWithoutUserInput, UserMetricsUpdateWithoutUserInput>, UserMetricsUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ViewerWatchEventUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ViewerWatchEventCreateWithoutUserInput, ViewerWatchEventUncheckedCreateWithoutUserInput> | ViewerWatchEventCreateWithoutUserInput[] | ViewerWatchEventUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ViewerWatchEventCreateOrConnectWithoutUserInput | ViewerWatchEventCreateOrConnectWithoutUserInput[]
+    upsert?: ViewerWatchEventUpsertWithWhereUniqueWithoutUserInput | ViewerWatchEventUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ViewerWatchEventCreateManyUserInputEnvelope
+    set?: ViewerWatchEventWhereUniqueInput | ViewerWatchEventWhereUniqueInput[]
+    disconnect?: ViewerWatchEventWhereUniqueInput | ViewerWatchEventWhereUniqueInput[]
+    delete?: ViewerWatchEventWhereUniqueInput | ViewerWatchEventWhereUniqueInput[]
+    connect?: ViewerWatchEventWhereUniqueInput | ViewerWatchEventWhereUniqueInput[]
+    update?: ViewerWatchEventUpdateWithWhereUniqueWithoutUserInput | ViewerWatchEventUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ViewerWatchEventUpdateManyWithWhereWithoutUserInput | ViewerWatchEventUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ViewerWatchEventScalarWhereInput | ViewerWatchEventScalarWhereInput[]
+  }
+
   export type PetUncheckedUpdateOneWithoutUserNestedInput = {
     create?: XOR<PetCreateWithoutUserInput, PetUncheckedCreateWithoutUserInput>
     connectOrCreate?: PetCreateOrConnectWithoutUserInput
@@ -14465,6 +17449,30 @@ export namespace Prisma {
     update?: MetricsReceiptUpdateWithWhereUniqueWithoutUserInput | MetricsReceiptUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: MetricsReceiptUpdateManyWithWhereWithoutUserInput | MetricsReceiptUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: MetricsReceiptScalarWhereInput | MetricsReceiptScalarWhereInput[]
+  }
+
+  export type UserMetricsUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<UserMetricsCreateWithoutUserInput, UserMetricsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserMetricsCreateOrConnectWithoutUserInput
+    upsert?: UserMetricsUpsertWithoutUserInput
+    disconnect?: UserMetricsWhereInput | boolean
+    delete?: UserMetricsWhereInput | boolean
+    connect?: UserMetricsWhereUniqueInput
+    update?: XOR<XOR<UserMetricsUpdateToOneWithWhereWithoutUserInput, UserMetricsUpdateWithoutUserInput>, UserMetricsUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ViewerWatchEventUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ViewerWatchEventCreateWithoutUserInput, ViewerWatchEventUncheckedCreateWithoutUserInput> | ViewerWatchEventCreateWithoutUserInput[] | ViewerWatchEventUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ViewerWatchEventCreateOrConnectWithoutUserInput | ViewerWatchEventCreateOrConnectWithoutUserInput[]
+    upsert?: ViewerWatchEventUpsertWithWhereUniqueWithoutUserInput | ViewerWatchEventUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ViewerWatchEventCreateManyUserInputEnvelope
+    set?: ViewerWatchEventWhereUniqueInput | ViewerWatchEventWhereUniqueInput[]
+    disconnect?: ViewerWatchEventWhereUniqueInput | ViewerWatchEventWhereUniqueInput[]
+    delete?: ViewerWatchEventWhereUniqueInput | ViewerWatchEventWhereUniqueInput[]
+    connect?: ViewerWatchEventWhereUniqueInput | ViewerWatchEventWhereUniqueInput[]
+    update?: ViewerWatchEventUpdateWithWhereUniqueWithoutUserInput | ViewerWatchEventUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ViewerWatchEventUpdateManyWithWhereWithoutUserInput | ViewerWatchEventUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ViewerWatchEventScalarWhereInput | ViewerWatchEventScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutVideosInput = {
@@ -14587,6 +17595,34 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutStreamerMetricsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutStreamerMetricsInput, UserUpdateWithoutStreamerMetricsInput>, UserUncheckedUpdateWithoutStreamerMetricsInput>
+  }
+
+  export type UserCreateNestedOneWithoutUserMetricsInput = {
+    create?: XOR<UserCreateWithoutUserMetricsInput, UserUncheckedCreateWithoutUserMetricsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUserMetricsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutUserMetricsNestedInput = {
+    create?: XOR<UserCreateWithoutUserMetricsInput, UserUncheckedCreateWithoutUserMetricsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUserMetricsInput
+    upsert?: UserUpsertWithoutUserMetricsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUserMetricsInput, UserUpdateWithoutUserMetricsInput>, UserUncheckedUpdateWithoutUserMetricsInput>
+  }
+
+  export type UserCreateNestedOneWithoutViewerWatchEventsInput = {
+    create?: XOR<UserCreateWithoutViewerWatchEventsInput, UserUncheckedCreateWithoutViewerWatchEventsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutViewerWatchEventsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutViewerWatchEventsNestedInput = {
+    create?: XOR<UserCreateWithoutViewerWatchEventsInput, UserUncheckedCreateWithoutViewerWatchEventsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutViewerWatchEventsInput
+    upsert?: UserUpsertWithoutViewerWatchEventsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutViewerWatchEventsInput, UserUpdateWithoutViewerWatchEventsInput>, UserUncheckedUpdateWithoutViewerWatchEventsInput>
   }
 
   export type UserCreateNestedOneWithoutMetricsReceiptsInput = {
@@ -15154,6 +18190,59 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type UserMetricsCreateWithoutUserInput = {
+    id?: string
+    totalMs?: number
+    totalSessions?: number
+    watchTotalMs?: number
+    currentLevel?: number
+    progressPct?: number
+    lastLevelUpAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserMetricsUncheckedCreateWithoutUserInput = {
+    id?: string
+    totalMs?: number
+    totalSessions?: number
+    watchTotalMs?: number
+    currentLevel?: number
+    progressPct?: number
+    lastLevelUpAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserMetricsCreateOrConnectWithoutUserInput = {
+    where: UserMetricsWhereUniqueInput
+    create: XOR<UserMetricsCreateWithoutUserInput, UserMetricsUncheckedCreateWithoutUserInput>
+  }
+
+  export type ViewerWatchEventCreateWithoutUserInput = {
+    id?: string
+    msWatched: number
+    occurredAt?: Date | string
+    createdAt?: Date | string
+  }
+
+  export type ViewerWatchEventUncheckedCreateWithoutUserInput = {
+    id?: string
+    msWatched: number
+    occurredAt?: Date | string
+    createdAt?: Date | string
+  }
+
+  export type ViewerWatchEventCreateOrConnectWithoutUserInput = {
+    where: ViewerWatchEventWhereUniqueInput
+    create: XOR<ViewerWatchEventCreateWithoutUserInput, ViewerWatchEventUncheckedCreateWithoutUserInput>
+  }
+
+  export type ViewerWatchEventCreateManyUserInputEnvelope = {
+    data: ViewerWatchEventCreateManyUserInput | ViewerWatchEventCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type PetUpsertWithoutUserInput = {
     update: XOR<PetUpdateWithoutUserInput, PetUncheckedUpdateWithoutUserInput>
     create: XOR<PetCreateWithoutUserInput, PetUncheckedCreateWithoutUserInput>
@@ -15397,6 +18486,68 @@ export namespace Prisma {
     appliedAt?: DateTimeNullableFilter<"MetricsReceipt"> | Date | string | null
   }
 
+  export type UserMetricsUpsertWithoutUserInput = {
+    update: XOR<UserMetricsUpdateWithoutUserInput, UserMetricsUncheckedUpdateWithoutUserInput>
+    create: XOR<UserMetricsCreateWithoutUserInput, UserMetricsUncheckedCreateWithoutUserInput>
+    where?: UserMetricsWhereInput
+  }
+
+  export type UserMetricsUpdateToOneWithWhereWithoutUserInput = {
+    where?: UserMetricsWhereInput
+    data: XOR<UserMetricsUpdateWithoutUserInput, UserMetricsUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserMetricsUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalMs?: IntFieldUpdateOperationsInput | number
+    totalSessions?: IntFieldUpdateOperationsInput | number
+    watchTotalMs?: IntFieldUpdateOperationsInput | number
+    currentLevel?: IntFieldUpdateOperationsInput | number
+    progressPct?: IntFieldUpdateOperationsInput | number
+    lastLevelUpAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserMetricsUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    totalMs?: IntFieldUpdateOperationsInput | number
+    totalSessions?: IntFieldUpdateOperationsInput | number
+    watchTotalMs?: IntFieldUpdateOperationsInput | number
+    currentLevel?: IntFieldUpdateOperationsInput | number
+    progressPct?: IntFieldUpdateOperationsInput | number
+    lastLevelUpAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ViewerWatchEventUpsertWithWhereUniqueWithoutUserInput = {
+    where: ViewerWatchEventWhereUniqueInput
+    update: XOR<ViewerWatchEventUpdateWithoutUserInput, ViewerWatchEventUncheckedUpdateWithoutUserInput>
+    create: XOR<ViewerWatchEventCreateWithoutUserInput, ViewerWatchEventUncheckedCreateWithoutUserInput>
+  }
+
+  export type ViewerWatchEventUpdateWithWhereUniqueWithoutUserInput = {
+    where: ViewerWatchEventWhereUniqueInput
+    data: XOR<ViewerWatchEventUpdateWithoutUserInput, ViewerWatchEventUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ViewerWatchEventUpdateManyWithWhereWithoutUserInput = {
+    where: ViewerWatchEventScalarWhereInput
+    data: XOR<ViewerWatchEventUpdateManyMutationInput, ViewerWatchEventUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ViewerWatchEventScalarWhereInput = {
+    AND?: ViewerWatchEventScalarWhereInput | ViewerWatchEventScalarWhereInput[]
+    OR?: ViewerWatchEventScalarWhereInput[]
+    NOT?: ViewerWatchEventScalarWhereInput | ViewerWatchEventScalarWhereInput[]
+    id?: StringFilter<"ViewerWatchEvent"> | string
+    userId?: StringFilter<"ViewerWatchEvent"> | string
+    msWatched?: IntFilter<"ViewerWatchEvent"> | number
+    occurredAt?: DateTimeFilter<"ViewerWatchEvent"> | Date | string
+    createdAt?: DateTimeFilter<"ViewerWatchEvent"> | Date | string
+  }
+
   export type UserCreateWithoutVideosInput = {
     id?: string
     nombre: string
@@ -15411,6 +18562,8 @@ export namespace Prisma {
     giftsSent?: GiftCreateNestedManyWithoutSenderInput
     comments?: CommentCreateNestedManyWithoutUserInput
     metricsReceipts?: MetricsReceiptCreateNestedManyWithoutUserInput
+    userMetrics?: UserMetricsCreateNestedOneWithoutUserInput
+    viewerWatchEvents?: ViewerWatchEventCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutVideosInput = {
@@ -15427,6 +18580,8 @@ export namespace Prisma {
     giftsSent?: GiftUncheckedCreateNestedManyWithoutSenderInput
     comments?: CommentUncheckedCreateNestedManyWithoutUserInput
     metricsReceipts?: MetricsReceiptUncheckedCreateNestedManyWithoutUserInput
+    userMetrics?: UserMetricsUncheckedCreateNestedOneWithoutUserInput
+    viewerWatchEvents?: ViewerWatchEventUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutVideosInput = {
@@ -15459,6 +18614,8 @@ export namespace Prisma {
     giftsSent?: GiftUpdateManyWithoutSenderNestedInput
     comments?: CommentUpdateManyWithoutUserNestedInput
     metricsReceipts?: MetricsReceiptUpdateManyWithoutUserNestedInput
+    userMetrics?: UserMetricsUpdateOneWithoutUserNestedInput
+    viewerWatchEvents?: ViewerWatchEventUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVideosInput = {
@@ -15475,6 +18632,8 @@ export namespace Prisma {
     giftsSent?: GiftUncheckedUpdateManyWithoutSenderNestedInput
     comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
     metricsReceipts?: MetricsReceiptUncheckedUpdateManyWithoutUserNestedInput
+    userMetrics?: UserMetricsUncheckedUpdateOneWithoutUserNestedInput
+    viewerWatchEvents?: ViewerWatchEventUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutPetInput = {
@@ -15491,6 +18650,8 @@ export namespace Prisma {
     giftsSent?: GiftCreateNestedManyWithoutSenderInput
     comments?: CommentCreateNestedManyWithoutUserInput
     metricsReceipts?: MetricsReceiptCreateNestedManyWithoutUserInput
+    userMetrics?: UserMetricsCreateNestedOneWithoutUserInput
+    viewerWatchEvents?: ViewerWatchEventCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPetInput = {
@@ -15507,6 +18668,8 @@ export namespace Prisma {
     giftsSent?: GiftUncheckedCreateNestedManyWithoutSenderInput
     comments?: CommentUncheckedCreateNestedManyWithoutUserInput
     metricsReceipts?: MetricsReceiptUncheckedCreateNestedManyWithoutUserInput
+    userMetrics?: UserMetricsUncheckedCreateNestedOneWithoutUserInput
+    viewerWatchEvents?: ViewerWatchEventUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPetInput = {
@@ -15539,6 +18702,8 @@ export namespace Prisma {
     giftsSent?: GiftUpdateManyWithoutSenderNestedInput
     comments?: CommentUpdateManyWithoutUserNestedInput
     metricsReceipts?: MetricsReceiptUpdateManyWithoutUserNestedInput
+    userMetrics?: UserMetricsUpdateOneWithoutUserNestedInput
+    viewerWatchEvents?: ViewerWatchEventUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPetInput = {
@@ -15555,6 +18720,8 @@ export namespace Prisma {
     giftsSent?: GiftUncheckedUpdateManyWithoutSenderNestedInput
     comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
     metricsReceipts?: MetricsReceiptUncheckedUpdateManyWithoutUserNestedInput
+    userMetrics?: UserMetricsUncheckedUpdateOneWithoutUserNestedInput
+    viewerWatchEvents?: ViewerWatchEventUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutStreamSessionsInput = {
@@ -15571,6 +18738,8 @@ export namespace Prisma {
     giftsSent?: GiftCreateNestedManyWithoutSenderInput
     comments?: CommentCreateNestedManyWithoutUserInput
     metricsReceipts?: MetricsReceiptCreateNestedManyWithoutUserInput
+    userMetrics?: UserMetricsCreateNestedOneWithoutUserInput
+    viewerWatchEvents?: ViewerWatchEventCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutStreamSessionsInput = {
@@ -15587,6 +18756,8 @@ export namespace Prisma {
     giftsSent?: GiftUncheckedCreateNestedManyWithoutSenderInput
     comments?: CommentUncheckedCreateNestedManyWithoutUserInput
     metricsReceipts?: MetricsReceiptUncheckedCreateNestedManyWithoutUserInput
+    userMetrics?: UserMetricsUncheckedCreateNestedOneWithoutUserInput
+    viewerWatchEvents?: ViewerWatchEventUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutStreamSessionsInput = {
@@ -15653,6 +18824,8 @@ export namespace Prisma {
     giftsSent?: GiftUpdateManyWithoutSenderNestedInput
     comments?: CommentUpdateManyWithoutUserNestedInput
     metricsReceipts?: MetricsReceiptUpdateManyWithoutUserNestedInput
+    userMetrics?: UserMetricsUpdateOneWithoutUserNestedInput
+    viewerWatchEvents?: ViewerWatchEventUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutStreamSessionsInput = {
@@ -15669,6 +18842,8 @@ export namespace Prisma {
     giftsSent?: GiftUncheckedUpdateManyWithoutSenderNestedInput
     comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
     metricsReceipts?: MetricsReceiptUncheckedUpdateManyWithoutUserNestedInput
+    userMetrics?: UserMetricsUncheckedUpdateOneWithoutUserNestedInput
+    viewerWatchEvents?: ViewerWatchEventUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type GiftUpsertWithWhereUniqueWithoutStreamSessionInput = {
@@ -15701,6 +18876,8 @@ export namespace Prisma {
     giftsSent?: GiftCreateNestedManyWithoutSenderInput
     comments?: CommentCreateNestedManyWithoutUserInput
     metricsReceipts?: MetricsReceiptCreateNestedManyWithoutUserInput
+    userMetrics?: UserMetricsCreateNestedOneWithoutUserInput
+    viewerWatchEvents?: ViewerWatchEventCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutStreamerMetricsInput = {
@@ -15717,6 +18894,8 @@ export namespace Prisma {
     giftsSent?: GiftUncheckedCreateNestedManyWithoutSenderInput
     comments?: CommentUncheckedCreateNestedManyWithoutUserInput
     metricsReceipts?: MetricsReceiptUncheckedCreateNestedManyWithoutUserInput
+    userMetrics?: UserMetricsUncheckedCreateNestedOneWithoutUserInput
+    viewerWatchEvents?: ViewerWatchEventUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutStreamerMetricsInput = {
@@ -15749,6 +18928,8 @@ export namespace Prisma {
     giftsSent?: GiftUpdateManyWithoutSenderNestedInput
     comments?: CommentUpdateManyWithoutUserNestedInput
     metricsReceipts?: MetricsReceiptUpdateManyWithoutUserNestedInput
+    userMetrics?: UserMetricsUpdateOneWithoutUserNestedInput
+    viewerWatchEvents?: ViewerWatchEventUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutStreamerMetricsInput = {
@@ -15765,6 +18946,184 @@ export namespace Prisma {
     giftsSent?: GiftUncheckedUpdateManyWithoutSenderNestedInput
     comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
     metricsReceipts?: MetricsReceiptUncheckedUpdateManyWithoutUserNestedInput
+    userMetrics?: UserMetricsUncheckedUpdateOneWithoutUserNestedInput
+    viewerWatchEvents?: ViewerWatchEventUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutUserMetricsInput = {
+    id?: string
+    nombre: string
+    rol: $Enums.Rol
+    password: string
+    contacto?: string | null
+    pet?: PetCreateNestedOneWithoutUserInput
+    videos?: VideoCreateNestedManyWithoutUserInput
+    streamSessions?: StreamSessionCreateNestedManyWithoutUserInput
+    streamerMetrics?: StreamerMetricsCreateNestedOneWithoutUserInput
+    audienceLevels?: AudienceLevelCreateNestedManyWithoutUserInput
+    giftsReceived?: GiftCreateNestedManyWithoutReceiverInput
+    giftsSent?: GiftCreateNestedManyWithoutSenderInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    metricsReceipts?: MetricsReceiptCreateNestedManyWithoutUserInput
+    viewerWatchEvents?: ViewerWatchEventCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutUserMetricsInput = {
+    id?: string
+    nombre: string
+    rol: $Enums.Rol
+    password: string
+    contacto?: string | null
+    pet?: PetUncheckedCreateNestedOneWithoutUserInput
+    videos?: VideoUncheckedCreateNestedManyWithoutUserInput
+    streamSessions?: StreamSessionUncheckedCreateNestedManyWithoutUserInput
+    streamerMetrics?: StreamerMetricsUncheckedCreateNestedOneWithoutUserInput
+    audienceLevels?: AudienceLevelUncheckedCreateNestedManyWithoutUserInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutReceiverInput
+    giftsSent?: GiftUncheckedCreateNestedManyWithoutSenderInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    metricsReceipts?: MetricsReceiptUncheckedCreateNestedManyWithoutUserInput
+    viewerWatchEvents?: ViewerWatchEventUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutUserMetricsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutUserMetricsInput, UserUncheckedCreateWithoutUserMetricsInput>
+  }
+
+  export type UserUpsertWithoutUserMetricsInput = {
+    update: XOR<UserUpdateWithoutUserMetricsInput, UserUncheckedUpdateWithoutUserMetricsInput>
+    create: XOR<UserCreateWithoutUserMetricsInput, UserUncheckedCreateWithoutUserMetricsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutUserMetricsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutUserMetricsInput, UserUncheckedUpdateWithoutUserMetricsInput>
+  }
+
+  export type UserUpdateWithoutUserMetricsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
+    password?: StringFieldUpdateOperationsInput | string
+    contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    pet?: PetUpdateOneWithoutUserNestedInput
+    videos?: VideoUpdateManyWithoutUserNestedInput
+    streamSessions?: StreamSessionUpdateManyWithoutUserNestedInput
+    streamerMetrics?: StreamerMetricsUpdateOneWithoutUserNestedInput
+    audienceLevels?: AudienceLevelUpdateManyWithoutUserNestedInput
+    giftsReceived?: GiftUpdateManyWithoutReceiverNestedInput
+    giftsSent?: GiftUpdateManyWithoutSenderNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    metricsReceipts?: MetricsReceiptUpdateManyWithoutUserNestedInput
+    viewerWatchEvents?: ViewerWatchEventUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutUserMetricsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
+    password?: StringFieldUpdateOperationsInput | string
+    contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    pet?: PetUncheckedUpdateOneWithoutUserNestedInput
+    videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
+    streamSessions?: StreamSessionUncheckedUpdateManyWithoutUserNestedInput
+    streamerMetrics?: StreamerMetricsUncheckedUpdateOneWithoutUserNestedInput
+    audienceLevels?: AudienceLevelUncheckedUpdateManyWithoutUserNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutReceiverNestedInput
+    giftsSent?: GiftUncheckedUpdateManyWithoutSenderNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    metricsReceipts?: MetricsReceiptUncheckedUpdateManyWithoutUserNestedInput
+    viewerWatchEvents?: ViewerWatchEventUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutViewerWatchEventsInput = {
+    id?: string
+    nombre: string
+    rol: $Enums.Rol
+    password: string
+    contacto?: string | null
+    pet?: PetCreateNestedOneWithoutUserInput
+    videos?: VideoCreateNestedManyWithoutUserInput
+    streamSessions?: StreamSessionCreateNestedManyWithoutUserInput
+    streamerMetrics?: StreamerMetricsCreateNestedOneWithoutUserInput
+    audienceLevels?: AudienceLevelCreateNestedManyWithoutUserInput
+    giftsReceived?: GiftCreateNestedManyWithoutReceiverInput
+    giftsSent?: GiftCreateNestedManyWithoutSenderInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    metricsReceipts?: MetricsReceiptCreateNestedManyWithoutUserInput
+    userMetrics?: UserMetricsCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutViewerWatchEventsInput = {
+    id?: string
+    nombre: string
+    rol: $Enums.Rol
+    password: string
+    contacto?: string | null
+    pet?: PetUncheckedCreateNestedOneWithoutUserInput
+    videos?: VideoUncheckedCreateNestedManyWithoutUserInput
+    streamSessions?: StreamSessionUncheckedCreateNestedManyWithoutUserInput
+    streamerMetrics?: StreamerMetricsUncheckedCreateNestedOneWithoutUserInput
+    audienceLevels?: AudienceLevelUncheckedCreateNestedManyWithoutUserInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutReceiverInput
+    giftsSent?: GiftUncheckedCreateNestedManyWithoutSenderInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    metricsReceipts?: MetricsReceiptUncheckedCreateNestedManyWithoutUserInput
+    userMetrics?: UserMetricsUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutViewerWatchEventsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutViewerWatchEventsInput, UserUncheckedCreateWithoutViewerWatchEventsInput>
+  }
+
+  export type UserUpsertWithoutViewerWatchEventsInput = {
+    update: XOR<UserUpdateWithoutViewerWatchEventsInput, UserUncheckedUpdateWithoutViewerWatchEventsInput>
+    create: XOR<UserCreateWithoutViewerWatchEventsInput, UserUncheckedCreateWithoutViewerWatchEventsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutViewerWatchEventsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutViewerWatchEventsInput, UserUncheckedUpdateWithoutViewerWatchEventsInput>
+  }
+
+  export type UserUpdateWithoutViewerWatchEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
+    password?: StringFieldUpdateOperationsInput | string
+    contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    pet?: PetUpdateOneWithoutUserNestedInput
+    videos?: VideoUpdateManyWithoutUserNestedInput
+    streamSessions?: StreamSessionUpdateManyWithoutUserNestedInput
+    streamerMetrics?: StreamerMetricsUpdateOneWithoutUserNestedInput
+    audienceLevels?: AudienceLevelUpdateManyWithoutUserNestedInput
+    giftsReceived?: GiftUpdateManyWithoutReceiverNestedInput
+    giftsSent?: GiftUpdateManyWithoutSenderNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    metricsReceipts?: MetricsReceiptUpdateManyWithoutUserNestedInput
+    userMetrics?: UserMetricsUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutViewerWatchEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
+    password?: StringFieldUpdateOperationsInput | string
+    contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    pet?: PetUncheckedUpdateOneWithoutUserNestedInput
+    videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
+    streamSessions?: StreamSessionUncheckedUpdateManyWithoutUserNestedInput
+    streamerMetrics?: StreamerMetricsUncheckedUpdateOneWithoutUserNestedInput
+    audienceLevels?: AudienceLevelUncheckedUpdateManyWithoutUserNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutReceiverNestedInput
+    giftsSent?: GiftUncheckedUpdateManyWithoutSenderNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    metricsReceipts?: MetricsReceiptUncheckedUpdateManyWithoutUserNestedInput
+    userMetrics?: UserMetricsUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateWithoutMetricsReceiptsInput = {
@@ -15781,6 +19140,8 @@ export namespace Prisma {
     giftsReceived?: GiftCreateNestedManyWithoutReceiverInput
     giftsSent?: GiftCreateNestedManyWithoutSenderInput
     comments?: CommentCreateNestedManyWithoutUserInput
+    userMetrics?: UserMetricsCreateNestedOneWithoutUserInput
+    viewerWatchEvents?: ViewerWatchEventCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMetricsReceiptsInput = {
@@ -15797,6 +19158,8 @@ export namespace Prisma {
     giftsReceived?: GiftUncheckedCreateNestedManyWithoutReceiverInput
     giftsSent?: GiftUncheckedCreateNestedManyWithoutSenderInput
     comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    userMetrics?: UserMetricsUncheckedCreateNestedOneWithoutUserInput
+    viewerWatchEvents?: ViewerWatchEventUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMetricsReceiptsInput = {
@@ -15829,6 +19192,8 @@ export namespace Prisma {
     giftsReceived?: GiftUpdateManyWithoutReceiverNestedInput
     giftsSent?: GiftUpdateManyWithoutSenderNestedInput
     comments?: CommentUpdateManyWithoutUserNestedInput
+    userMetrics?: UserMetricsUpdateOneWithoutUserNestedInput
+    viewerWatchEvents?: ViewerWatchEventUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMetricsReceiptsInput = {
@@ -15845,6 +19210,8 @@ export namespace Prisma {
     giftsReceived?: GiftUncheckedUpdateManyWithoutReceiverNestedInput
     giftsSent?: GiftUncheckedUpdateManyWithoutSenderNestedInput
     comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    userMetrics?: UserMetricsUncheckedUpdateOneWithoutUserNestedInput
+    viewerWatchEvents?: ViewerWatchEventUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAudienceLevelsInput = {
@@ -15861,6 +19228,8 @@ export namespace Prisma {
     giftsSent?: GiftCreateNestedManyWithoutSenderInput
     comments?: CommentCreateNestedManyWithoutUserInput
     metricsReceipts?: MetricsReceiptCreateNestedManyWithoutUserInput
+    userMetrics?: UserMetricsCreateNestedOneWithoutUserInput
+    viewerWatchEvents?: ViewerWatchEventCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAudienceLevelsInput = {
@@ -15877,6 +19246,8 @@ export namespace Prisma {
     giftsSent?: GiftUncheckedCreateNestedManyWithoutSenderInput
     comments?: CommentUncheckedCreateNestedManyWithoutUserInput
     metricsReceipts?: MetricsReceiptUncheckedCreateNestedManyWithoutUserInput
+    userMetrics?: UserMetricsUncheckedCreateNestedOneWithoutUserInput
+    viewerWatchEvents?: ViewerWatchEventUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAudienceLevelsInput = {
@@ -15909,6 +19280,8 @@ export namespace Prisma {
     giftsSent?: GiftUpdateManyWithoutSenderNestedInput
     comments?: CommentUpdateManyWithoutUserNestedInput
     metricsReceipts?: MetricsReceiptUpdateManyWithoutUserNestedInput
+    userMetrics?: UserMetricsUpdateOneWithoutUserNestedInput
+    viewerWatchEvents?: ViewerWatchEventUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAudienceLevelsInput = {
@@ -15925,6 +19298,8 @@ export namespace Prisma {
     giftsSent?: GiftUncheckedUpdateManyWithoutSenderNestedInput
     comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
     metricsReceipts?: MetricsReceiptUncheckedUpdateManyWithoutUserNestedInput
+    userMetrics?: UserMetricsUncheckedUpdateOneWithoutUserNestedInput
+    viewerWatchEvents?: ViewerWatchEventUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutGiftsReceivedInput = {
@@ -15941,6 +19316,8 @@ export namespace Prisma {
     giftsSent?: GiftCreateNestedManyWithoutSenderInput
     comments?: CommentCreateNestedManyWithoutUserInput
     metricsReceipts?: MetricsReceiptCreateNestedManyWithoutUserInput
+    userMetrics?: UserMetricsCreateNestedOneWithoutUserInput
+    viewerWatchEvents?: ViewerWatchEventCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutGiftsReceivedInput = {
@@ -15957,6 +19334,8 @@ export namespace Prisma {
     giftsSent?: GiftUncheckedCreateNestedManyWithoutSenderInput
     comments?: CommentUncheckedCreateNestedManyWithoutUserInput
     metricsReceipts?: MetricsReceiptUncheckedCreateNestedManyWithoutUserInput
+    userMetrics?: UserMetricsUncheckedCreateNestedOneWithoutUserInput
+    viewerWatchEvents?: ViewerWatchEventUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutGiftsReceivedInput = {
@@ -15978,6 +19357,8 @@ export namespace Prisma {
     giftsReceived?: GiftCreateNestedManyWithoutReceiverInput
     comments?: CommentCreateNestedManyWithoutUserInput
     metricsReceipts?: MetricsReceiptCreateNestedManyWithoutUserInput
+    userMetrics?: UserMetricsCreateNestedOneWithoutUserInput
+    viewerWatchEvents?: ViewerWatchEventCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutGiftsSentInput = {
@@ -15994,6 +19375,8 @@ export namespace Prisma {
     giftsReceived?: GiftUncheckedCreateNestedManyWithoutReceiverInput
     comments?: CommentUncheckedCreateNestedManyWithoutUserInput
     metricsReceipts?: MetricsReceiptUncheckedCreateNestedManyWithoutUserInput
+    userMetrics?: UserMetricsUncheckedCreateNestedOneWithoutUserInput
+    viewerWatchEvents?: ViewerWatchEventUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutGiftsSentInput = {
@@ -16051,6 +19434,8 @@ export namespace Prisma {
     giftsSent?: GiftUpdateManyWithoutSenderNestedInput
     comments?: CommentUpdateManyWithoutUserNestedInput
     metricsReceipts?: MetricsReceiptUpdateManyWithoutUserNestedInput
+    userMetrics?: UserMetricsUpdateOneWithoutUserNestedInput
+    viewerWatchEvents?: ViewerWatchEventUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutGiftsReceivedInput = {
@@ -16067,6 +19452,8 @@ export namespace Prisma {
     giftsSent?: GiftUncheckedUpdateManyWithoutSenderNestedInput
     comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
     metricsReceipts?: MetricsReceiptUncheckedUpdateManyWithoutUserNestedInput
+    userMetrics?: UserMetricsUncheckedUpdateOneWithoutUserNestedInput
+    viewerWatchEvents?: ViewerWatchEventUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutGiftsSentInput = {
@@ -16094,6 +19481,8 @@ export namespace Prisma {
     giftsReceived?: GiftUpdateManyWithoutReceiverNestedInput
     comments?: CommentUpdateManyWithoutUserNestedInput
     metricsReceipts?: MetricsReceiptUpdateManyWithoutUserNestedInput
+    userMetrics?: UserMetricsUpdateOneWithoutUserNestedInput
+    viewerWatchEvents?: ViewerWatchEventUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutGiftsSentInput = {
@@ -16110,6 +19499,8 @@ export namespace Prisma {
     giftsReceived?: GiftUncheckedUpdateManyWithoutReceiverNestedInput
     comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
     metricsReceipts?: MetricsReceiptUncheckedUpdateManyWithoutUserNestedInput
+    userMetrics?: UserMetricsUncheckedUpdateOneWithoutUserNestedInput
+    viewerWatchEvents?: ViewerWatchEventUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type StreamSessionUpsertWithoutGiftsInput = {
@@ -16157,6 +19548,8 @@ export namespace Prisma {
     giftsReceived?: GiftCreateNestedManyWithoutReceiverInput
     giftsSent?: GiftCreateNestedManyWithoutSenderInput
     metricsReceipts?: MetricsReceiptCreateNestedManyWithoutUserInput
+    userMetrics?: UserMetricsCreateNestedOneWithoutUserInput
+    viewerWatchEvents?: ViewerWatchEventCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCommentsInput = {
@@ -16173,6 +19566,8 @@ export namespace Prisma {
     giftsReceived?: GiftUncheckedCreateNestedManyWithoutReceiverInput
     giftsSent?: GiftUncheckedCreateNestedManyWithoutSenderInput
     metricsReceipts?: MetricsReceiptUncheckedCreateNestedManyWithoutUserInput
+    userMetrics?: UserMetricsUncheckedCreateNestedOneWithoutUserInput
+    viewerWatchEvents?: ViewerWatchEventUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCommentsInput = {
@@ -16205,6 +19600,8 @@ export namespace Prisma {
     giftsReceived?: GiftUpdateManyWithoutReceiverNestedInput
     giftsSent?: GiftUpdateManyWithoutSenderNestedInput
     metricsReceipts?: MetricsReceiptUpdateManyWithoutUserNestedInput
+    userMetrics?: UserMetricsUpdateOneWithoutUserNestedInput
+    viewerWatchEvents?: ViewerWatchEventUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -16221,6 +19618,8 @@ export namespace Prisma {
     giftsReceived?: GiftUncheckedUpdateManyWithoutReceiverNestedInput
     giftsSent?: GiftUncheckedUpdateManyWithoutSenderNestedInput
     metricsReceipts?: MetricsReceiptUncheckedUpdateManyWithoutUserNestedInput
+    userMetrics?: UserMetricsUncheckedUpdateOneWithoutUserNestedInput
+    viewerWatchEvents?: ViewerWatchEventUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type VideoCreateManyUserInput = {
@@ -16286,6 +19685,13 @@ export namespace Prisma {
     applied?: boolean
     createdAt?: Date | string
     appliedAt?: Date | string | null
+  }
+
+  export type ViewerWatchEventCreateManyUserInput = {
+    id?: string
+    msWatched: number
+    occurredAt?: Date | string
+    createdAt?: Date | string
   }
 
   export type VideoUpdateWithoutUserInput = {
@@ -16482,6 +19888,27 @@ export namespace Prisma {
     applied?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     appliedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type ViewerWatchEventUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    msWatched?: IntFieldUpdateOperationsInput | number
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ViewerWatchEventUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    msWatched?: IntFieldUpdateOperationsInput | number
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ViewerWatchEventUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    msWatched?: IntFieldUpdateOperationsInput | number
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GiftCreateManyStreamSessionInput = {

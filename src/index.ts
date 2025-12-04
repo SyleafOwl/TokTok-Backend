@@ -244,6 +244,14 @@ function computeLevelFromMs(totalMs: number) {
   return level
 }
 
+// Calculadora unificada (60 minutos por nivel)
+function computeUnifiedLevelAndProgress(totalMs: number) {
+  const totalMinutes = Math.floor(totalMs / 60000)
+  const level = Math.floor(totalMinutes / 60) + 1
+  const progressPct = Math.floor(((totalMinutes % 60) / 60) * 100)
+  return { level: Math.max(1, level), progressPct: Math.max(0, Math.min(100, progressPct)) }
+}
+
 // ---- Stream sessions, Audience levels, Gifts, Comments ----
 
 // Crear nueva sesión de transmisión
@@ -366,8 +374,20 @@ async function ensureMetricsRecord(userId: string) {
 app.get('/api/metrics/:userId', async (req, res) => {
   const userId = String(req.params.userId)
   try {
-    const metrics = await ensureMetricsRecord(userId)
-    res.json(metrics)
+    const clientAny = prisma as any
+    // Usar UserMetrics unificado; si no existe, construir desde agregados
+    let m = await clientAny.userMetrics.findUnique({ where: { userId } })
+    if (!m) {
+      const sessAgg = await clientAny.streamSession.aggregate({ where: { userId }, _sum: { durationMs: true }, _count: { id: true } } as any)
+      const watchAgg = await clientAny.viewerWatchEvent.aggregate({ where: { userId }, _sum: { msWatched: true } } as any)
+      const totalMs = (sessAgg._sum?.durationMs as number) ?? 0
+      const totalSessions = (sessAgg._count?.id as number) ?? 0
+      const watchTotalMs = (watchAgg._sum?.msWatched as number) ?? 0
+      const baseMs = watchTotalMs > 0 ? watchTotalMs : totalMs
+      const { level, progressPct } = computeUnifiedLevelAndProgress(baseMs)
+      m = await clientAny.userMetrics.create({ data: { userId, totalMs, totalSessions, watchTotalMs, currentLevel: level, progressPct } })
+    }
+    res.json(m)
   } catch (e: any) {
     console.error('[Metrics GET] Error:', e)
     res.status(500).json({ error: e?.message ?? 'Error obteniendo métricas' })
@@ -427,7 +447,18 @@ app.post('/api/metrics/:userId/session-end', async (req, res) => {
       dataToUpdate.lastLevelUpAt = new Date()
     }
 
-    const updated = await clientAny.streamerMetrics.update({ where: { userId }, data: dataToUpdate })
+    // Actualizar UserMetrics también (unificado)
+    const um = await clientAny.userMetrics.upsert({
+      where: { userId },
+      update: {},
+      create: { userId },
+    })
+    const umNewTotalMs = (um.totalMs ?? 0) + Math.floor(durationMs)
+    const umNewTotalSessions = (um.totalSessions ?? 0) + 1
+    const { level, progressPct } = computeUnifiedLevelAndProgress(umNewTotalMs)
+    const umUpdate: any = { totalMs: umNewTotalMs, totalSessions: umNewTotalSessions, currentLevel: level, progressPct }
+    if (level !== um.currentLevel) umUpdate.lastLevelUpAt = new Date()
+    const updated = await clientAny.userMetrics.update({ where: { userId }, data: umUpdate })
 
     // Marcar recibo como aplicado
     await clientAny.metricsReceipt.update({ where: { userId_bucketKey: { userId, bucketKey } }, data: { applied: true, appliedAt: new Date() } })
@@ -450,22 +481,63 @@ app.post('/api/metrics/:userId/recalculate', async (req, res) => {
       _count: { id: true }
     } as any)
 
-    const totalMs = (agg._sum?.durationMs as number) ?? 0
-    const totalSessions = (agg._count?.id as number) ?? 0
-    const newLevel = computeLevelFromMs(totalMs)
+    const totalMsAgg = (agg._sum?.durationMs as number) ?? 0
+    const totalSessionsAgg = (agg._count?.id as number) ?? 0
+    const newLevel = computeLevelFromMs(totalMsAgg)
 
     const m = await ensureMetricsRecord(userId)
-    const dataToUpdate: any = { totalMs, totalSessions }
+    const dataToUpdate: any = { totalMs: totalMsAgg, totalSessions: totalSessionsAgg }
     if (newLevel !== m.currentLevel) {
       dataToUpdate.currentLevel = newLevel
       dataToUpdate.lastLevelUpAt = new Date()
     }
 
-    const updated = await (prisma as any).streamerMetrics.update({ where: { userId }, data: dataToUpdate })
+    const sessAgg = await (prisma as any).streamSession.aggregate({ where: { userId }, _sum: { durationMs: true }, _count: { id: true } } as any)
+    const totalMsSess = (sessAgg._sum?.durationMs as number) ?? 0
+    const totalSessionsSess = (sessAgg._count?.id as number) ?? 0
+    const watchAgg = await (prisma as any).viewerWatchEvent.aggregate({ where: { userId }, _sum: { msWatched: true } } as any)
+    const watchTotalMs = (watchAgg._sum?.msWatched as number) ?? 0
+    const baseMs = watchTotalMs > 0 ? watchTotalMs : totalMsSess
+    const { level, progressPct } = computeUnifiedLevelAndProgress(baseMs)
+    const updated = await (prisma as any).userMetrics.upsert({
+      where: { userId },
+      update: { totalMs: totalMsSess, totalSessions: totalSessionsSess, watchTotalMs, currentLevel: level, progressPct },
+      create: { userId, totalMs: totalMsSess, totalSessions: totalSessionsSess, watchTotalMs, currentLevel: level, progressPct },
+    })
     res.json(updated)
   } catch (e: any) {
     console.error('[Metrics recalc] Error:', e)
     res.status(500).json({ error: e?.message ?? 'Error recalculando métricas' })
+  }
+})
+
+// Incremento de watch para viewer
+app.post('/api/viewer-watch/:userId/increment', async (req, res) => {
+  const userId = String(req.params.userId)
+  const { msWatched } = req.body ?? {}
+  if (typeof msWatched !== 'number' || msWatched <= 0) return res.status(400).json({ error: 'msWatched (number > 0) es requerido' })
+  try {
+    const clientAny = prisma as any
+    // Idempotencia por bucket 5m
+    const now = Date.now()
+    const bucketWindowMs = 5 * 60 * 1000
+    const minBucket = Math.floor(now / bucketWindowMs)
+    const bucketKey = `${userId}:watch:${minBucket}:${Math.floor(msWatched)}`
+    const r = await clientAny.metricsReceipt.upsert({ where: { userId_bucketKey: { userId, bucketKey } }, update: {}, create: { userId, bucketKey } })
+    if (r.applied) {
+      const m = await clientAny.userMetrics.findUnique({ where: { userId } })
+      return res.json(m ?? {})
+    }
+    await clientAny.viewerWatchEvent.create({ data: { userId, msWatched: Math.floor(msWatched) } })
+    const um = await clientAny.userMetrics.upsert({ where: { userId }, update: {}, create: { userId } })
+    const newWatch = (um.watchTotalMs ?? 0) + Math.floor(msWatched)
+    const { level, progressPct } = computeUnifiedLevelAndProgress(newWatch)
+    const updated = await clientAny.userMetrics.update({ where: { userId }, data: { watchTotalMs: newWatch, currentLevel: level, progressPct, lastLevelUpAt: level !== um.currentLevel ? new Date() : um.lastLevelUpAt } })
+    await clientAny.metricsReceipt.update({ where: { userId_bucketKey: { userId, bucketKey } }, data: { applied: true, appliedAt: new Date() } })
+    res.json(updated)
+  } catch (e: any) {
+    console.error('[Viewer watch increment] Error:', e)
+    res.status(500).json({ error: e?.message ?? 'Error incrementando watch' })
   }
 })
 
