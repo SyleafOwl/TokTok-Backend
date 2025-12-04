@@ -141,7 +141,10 @@ exports.Prisma.PetScalarFieldEnum = {
   id: 'id',
   size: 'size',
   hearts: 'hearts',
-  userId: 'userId'
+  lastFed: 'lastFed',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.StreamSessionScalarFieldEnum = {
@@ -183,6 +186,20 @@ exports.Prisma.ViewerWatchEventScalarFieldEnum = {
   userId: 'userId',
   msWatched: 'msWatched',
   occurredAt: 'occurredAt',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.IntisBalanceScalarFieldEnum = {
+  userId: 'userId',
+  balance: 'balance',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.IntisLedgerScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  amount: 'amount',
+  reason: 'reason',
   createdAt: 'createdAt'
 };
 
@@ -265,6 +282,8 @@ exports.Prisma.ModelName = {
   StreamerMetrics: 'StreamerMetrics',
   UserMetrics: 'UserMetrics',
   ViewerWatchEvent: 'ViewerWatchEvent',
+  IntisBalance: 'IntisBalance',
+  IntisLedger: 'IntisLedger',
   MetricsReceipt: 'MetricsReceipt',
   AudienceLevel: 'AudienceLevel',
   Gift: 'Gift',

@@ -144,21 +144,63 @@ app.post('/api/videos/:id/like', async (req, res) => {
 // ---- Pets CRUD ----
 app.get('/api/pets/:id', async (req, res) => {
   const id = String(req.params.id)
-  const pet = await prisma.pet.findUnique({ where: { id }, include: { user: true } })
-  if (!pet) return res.status(404).json({ error: 'Mascota no encontrada' })
-  res.json(pet)
+  // Interpretamos :id como userId para coherencia con requerimiento
+  const byUser = await (prisma as any).pet.findUnique({ where: { userId: id } })
+  if (!byUser) {
+    // crear por defecto
+    const created = await (prisma as any).pet.create({ data: { userId: id, size: 1.0, hearts: 1 } })
+    return res.json({ userId: created.userId, size: created.size, hearts: created.hearts, lastFed: created.lastFed ?? null })
+  }
+  return res.json({ userId: byUser.userId, size: byUser.size, hearts: byUser.hearts, lastFed: byUser.lastFed ?? null })
 })
 
 app.post('/api/pets', async (req, res) => {
   const { size, hearts, userId } = req.body ?? {}
-  if (!size || !hearts || !userId) {
-    return res.status(400).json({ error: 'size, hearts y userId son requeridos' })
+  if (!userId || typeof size !== 'number' || typeof hearts !== 'number') {
+    return res.status(400).json({ error: 'userId, size (number), hearts (number) son requeridos' })
   }
   try {
-    const pet = await prisma.pet.create({ data: { size, hearts, userId } })
-    res.status(201).json(pet)
+    // Upsert por userId; si se actualiza, setear lastFed = now
+    const existing = await (prisma as any).pet.findUnique({ where: { userId } })
+    if (!existing) {
+      const created = await (prisma as any).pet.create({ data: { userId, size, hearts, lastFed: new Date() } })
+      return res.status(201).json({ userId: created.userId, size: created.size, hearts: created.hearts, lastFed: created.lastFed?.toISOString() })
+    }
+    const updated = await (prisma as any).pet.update({ where: { userId }, data: { size, hearts, lastFed: new Date() } })
+    return res.json({ userId: updated.userId, size: updated.size, hearts: updated.hearts, lastFed: updated.lastFed?.toISOString() })
   } catch (e: any) {
-    res.status(400).json({ error: e?.message ?? 'Error creando mascota' })
+    res.status(400).json({ error: e?.message ?? 'Error creando/actualizando mascota' })
+  }
+})
+
+// ---- Intis endpoints ----
+app.get('/api/intis/:userId', async (req, res) => {
+  const userId = String(req.params.userId)
+  try {
+    const bal = await (prisma as any).intisBalance.findUnique({ where: { userId } })
+    if (!bal) {
+      const created = await (prisma as any).intisBalance.create({ data: { userId, balance: 0 } })
+      return res.json({ userId, balance: created.balance, updatedAt: new Date(created.updatedAt).toISOString() })
+    }
+    return res.json({ userId, balance: bal.balance, updatedAt: new Date(bal.updatedAt).toISOString() })
+  } catch (e: any) {
+    res.status(500).json({ error: e?.message ?? 'Error obteniendo balance' })
+  }
+})
+
+app.post('/api/intis/:userId/adjust', async (req, res) => {
+  const userId = String(req.params.userId)
+  const { amount, reason } = req.body ?? {}
+  if (typeof amount !== 'number') return res.status(400).json({ error: 'amount (number) es requerido' })
+  try {
+    const bal = await (prisma as any).intisBalance.upsert({ where: { userId }, update: {}, create: { userId, balance: 0 } })
+    let newBalance = bal.balance + Math.floor(amount)
+    if (newBalance < 0) newBalance = 0
+    const updated = await (prisma as any).intisBalance.update({ where: { userId }, data: { balance: newBalance, updatedAt: new Date() } })
+    await (prisma as any).intisLedger.create({ data: { userId, amount: Math.floor(amount), reason } })
+    return res.json({ userId, balance: updated.balance, updatedAt: new Date(updated.updatedAt).toISOString() })
+  } catch (e: any) {
+    res.status(500).json({ error: e?.message ?? 'Error ajustando balance' })
   }
 })
 

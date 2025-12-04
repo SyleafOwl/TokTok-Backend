@@ -49,6 +49,16 @@ export type UserMetrics = $Result.DefaultSelection<Prisma.$UserMetricsPayload>
  */
 export type ViewerWatchEvent = $Result.DefaultSelection<Prisma.$ViewerWatchEventPayload>
 /**
+ * Model IntisBalance
+ * 
+ */
+export type IntisBalance = $Result.DefaultSelection<Prisma.$IntisBalancePayload>
+/**
+ * Model IntisLedger
+ * 
+ */
+export type IntisLedger = $Result.DefaultSelection<Prisma.$IntisLedgerPayload>
+/**
  * Model MetricsReceipt
  * 
  */
@@ -273,6 +283,26 @@ export class PrismaClient<
     * ```
     */
   get viewerWatchEvent(): Prisma.ViewerWatchEventDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.intisBalance`: Exposes CRUD operations for the **IntisBalance** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more IntisBalances
+    * const intisBalances = await prisma.intisBalance.findMany()
+    * ```
+    */
+  get intisBalance(): Prisma.IntisBalanceDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.intisLedger`: Exposes CRUD operations for the **IntisLedger** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more IntisLedgers
+    * const intisLedgers = await prisma.intisLedger.findMany()
+    * ```
+    */
+  get intisLedger(): Prisma.IntisLedgerDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.metricsReceipt`: Exposes CRUD operations for the **MetricsReceipt** model.
@@ -761,6 +791,8 @@ export namespace Prisma {
     StreamerMetrics: 'StreamerMetrics',
     UserMetrics: 'UserMetrics',
     ViewerWatchEvent: 'ViewerWatchEvent',
+    IntisBalance: 'IntisBalance',
+    IntisLedger: 'IntisLedger',
     MetricsReceipt: 'MetricsReceipt',
     AudienceLevel: 'AudienceLevel',
     Gift: 'Gift',
@@ -783,7 +815,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "video" | "pet" | "streamSession" | "streamerMetrics" | "userMetrics" | "viewerWatchEvent" | "metricsReceipt" | "audienceLevel" | "gift" | "comment"
+      modelProps: "user" | "video" | "pet" | "streamSession" | "streamerMetrics" | "userMetrics" | "viewerWatchEvent" | "intisBalance" | "intisLedger" | "metricsReceipt" | "audienceLevel" | "gift" | "comment"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1305,6 +1337,154 @@ export namespace Prisma {
           }
         }
       }
+      IntisBalance: {
+        payload: Prisma.$IntisBalancePayload<ExtArgs>
+        fields: Prisma.IntisBalanceFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.IntisBalanceFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntisBalancePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.IntisBalanceFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntisBalancePayload>
+          }
+          findFirst: {
+            args: Prisma.IntisBalanceFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntisBalancePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.IntisBalanceFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntisBalancePayload>
+          }
+          findMany: {
+            args: Prisma.IntisBalanceFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntisBalancePayload>[]
+          }
+          create: {
+            args: Prisma.IntisBalanceCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntisBalancePayload>
+          }
+          createMany: {
+            args: Prisma.IntisBalanceCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.IntisBalanceCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntisBalancePayload>[]
+          }
+          delete: {
+            args: Prisma.IntisBalanceDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntisBalancePayload>
+          }
+          update: {
+            args: Prisma.IntisBalanceUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntisBalancePayload>
+          }
+          deleteMany: {
+            args: Prisma.IntisBalanceDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.IntisBalanceUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.IntisBalanceUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntisBalancePayload>[]
+          }
+          upsert: {
+            args: Prisma.IntisBalanceUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntisBalancePayload>
+          }
+          aggregate: {
+            args: Prisma.IntisBalanceAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateIntisBalance>
+          }
+          groupBy: {
+            args: Prisma.IntisBalanceGroupByArgs<ExtArgs>
+            result: $Utils.Optional<IntisBalanceGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.IntisBalanceCountArgs<ExtArgs>
+            result: $Utils.Optional<IntisBalanceCountAggregateOutputType> | number
+          }
+        }
+      }
+      IntisLedger: {
+        payload: Prisma.$IntisLedgerPayload<ExtArgs>
+        fields: Prisma.IntisLedgerFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.IntisLedgerFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntisLedgerPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.IntisLedgerFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntisLedgerPayload>
+          }
+          findFirst: {
+            args: Prisma.IntisLedgerFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntisLedgerPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.IntisLedgerFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntisLedgerPayload>
+          }
+          findMany: {
+            args: Prisma.IntisLedgerFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntisLedgerPayload>[]
+          }
+          create: {
+            args: Prisma.IntisLedgerCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntisLedgerPayload>
+          }
+          createMany: {
+            args: Prisma.IntisLedgerCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.IntisLedgerCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntisLedgerPayload>[]
+          }
+          delete: {
+            args: Prisma.IntisLedgerDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntisLedgerPayload>
+          }
+          update: {
+            args: Prisma.IntisLedgerUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntisLedgerPayload>
+          }
+          deleteMany: {
+            args: Prisma.IntisLedgerDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.IntisLedgerUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.IntisLedgerUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntisLedgerPayload>[]
+          }
+          upsert: {
+            args: Prisma.IntisLedgerUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IntisLedgerPayload>
+          }
+          aggregate: {
+            args: Prisma.IntisLedgerAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateIntisLedger>
+          }
+          groupBy: {
+            args: Prisma.IntisLedgerGroupByArgs<ExtArgs>
+            result: $Utils.Optional<IntisLedgerGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.IntisLedgerCountArgs<ExtArgs>
+            result: $Utils.Optional<IntisLedgerCountAggregateOutputType> | number
+          }
+        }
+      }
       MetricsReceipt: {
         payload: Prisma.$MetricsReceiptPayload<ExtArgs>
         fields: Prisma.MetricsReceiptFieldRefs
@@ -1704,6 +1884,8 @@ export namespace Prisma {
     streamerMetrics?: StreamerMetricsOmit
     userMetrics?: UserMetricsOmit
     viewerWatchEvent?: ViewerWatchEventOmit
+    intisBalance?: IntisBalanceOmit
+    intisLedger?: IntisLedgerOmit
     metricsReceipt?: MetricsReceiptOmit
     audienceLevel?: AudienceLevelOmit
     gift?: GiftOmit
@@ -1796,6 +1978,7 @@ export namespace Prisma {
     comments: number
     metricsReceipts: number
     viewerWatchEvents: number
+    intisLedgers: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1807,6 +1990,7 @@ export namespace Prisma {
     comments?: boolean | UserCountOutputTypeCountCommentsArgs
     metricsReceipts?: boolean | UserCountOutputTypeCountMetricsReceiptsArgs
     viewerWatchEvents?: boolean | UserCountOutputTypeCountViewerWatchEventsArgs
+    intisLedgers?: boolean | UserCountOutputTypeCountIntisLedgersArgs
   }
 
   // Custom InputTypes
@@ -1874,6 +2058,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountViewerWatchEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ViewerWatchEventWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountIntisLedgersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IntisLedgerWhereInput
   }
 
 
@@ -2087,6 +2278,8 @@ export namespace Prisma {
     metricsReceipts?: boolean | User$metricsReceiptsArgs<ExtArgs>
     userMetrics?: boolean | User$userMetricsArgs<ExtArgs>
     viewerWatchEvents?: boolean | User$viewerWatchEventsArgs<ExtArgs>
+    intisBalance?: boolean | User$intisBalanceArgs<ExtArgs>
+    intisLedgers?: boolean | User$intisLedgersArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2127,6 +2320,8 @@ export namespace Prisma {
     metricsReceipts?: boolean | User$metricsReceiptsArgs<ExtArgs>
     userMetrics?: boolean | User$userMetricsArgs<ExtArgs>
     viewerWatchEvents?: boolean | User$viewerWatchEventsArgs<ExtArgs>
+    intisBalance?: boolean | User$intisBalanceArgs<ExtArgs>
+    intisLedgers?: boolean | User$intisLedgersArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2146,6 +2341,8 @@ export namespace Prisma {
       metricsReceipts: Prisma.$MetricsReceiptPayload<ExtArgs>[]
       userMetrics: Prisma.$UserMetricsPayload<ExtArgs> | null
       viewerWatchEvents: Prisma.$ViewerWatchEventPayload<ExtArgs>[]
+      intisBalance: Prisma.$IntisBalancePayload<ExtArgs> | null
+      intisLedgers: Prisma.$IntisLedgerPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2558,6 +2755,8 @@ export namespace Prisma {
     metricsReceipts<T extends User$metricsReceiptsArgs<ExtArgs> = {}>(args?: Subset<T, User$metricsReceiptsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MetricsReceiptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     userMetrics<T extends User$userMetricsArgs<ExtArgs> = {}>(args?: Subset<T, User$userMetricsArgs<ExtArgs>>): Prisma__UserMetricsClient<$Result.GetResult<Prisma.$UserMetricsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     viewerWatchEvents<T extends User$viewerWatchEventsArgs<ExtArgs> = {}>(args?: Subset<T, User$viewerWatchEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ViewerWatchEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    intisBalance<T extends User$intisBalanceArgs<ExtArgs> = {}>(args?: Subset<T, User$intisBalanceArgs<ExtArgs>>): Prisma__IntisBalanceClient<$Result.GetResult<Prisma.$IntisBalancePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    intisLedgers<T extends User$intisLedgersArgs<ExtArgs> = {}>(args?: Subset<T, User$intisLedgersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntisLedgerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3226,6 +3425,49 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ViewerWatchEventScalarFieldEnum | ViewerWatchEventScalarFieldEnum[]
+  }
+
+  /**
+   * User.intisBalance
+   */
+  export type User$intisBalanceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntisBalance
+     */
+    select?: IntisBalanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntisBalance
+     */
+    omit?: IntisBalanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntisBalanceInclude<ExtArgs> | null
+    where?: IntisBalanceWhereInput
+  }
+
+  /**
+   * User.intisLedgers
+   */
+  export type User$intisLedgersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntisLedger
+     */
+    select?: IntisLedgerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntisLedger
+     */
+    omit?: IntisLedgerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntisLedgerInclude<ExtArgs> | null
+    where?: IntisLedgerWhereInput
+    orderBy?: IntisLedgerOrderByWithRelationInput | IntisLedgerOrderByWithRelationInput[]
+    cursor?: IntisLedgerWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: IntisLedgerScalarFieldEnum | IntisLedgerScalarFieldEnum[]
   }
 
   /**
@@ -4369,21 +4611,30 @@ export namespace Prisma {
     id: string | null
     size: number | null
     hearts: number | null
+    lastFed: Date | null
     userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type PetMaxAggregateOutputType = {
     id: string | null
     size: number | null
     hearts: number | null
+    lastFed: Date | null
     userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type PetCountAggregateOutputType = {
     id: number
     size: number
     hearts: number
+    lastFed: number
     userId: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -4402,21 +4653,30 @@ export namespace Prisma {
     id?: true
     size?: true
     hearts?: true
+    lastFed?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type PetMaxAggregateInputType = {
     id?: true
     size?: true
     hearts?: true
+    lastFed?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type PetCountAggregateInputType = {
     id?: true
     size?: true
     hearts?: true
+    lastFed?: true
     userId?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -4510,7 +4770,10 @@ export namespace Prisma {
     id: string
     size: number
     hearts: number
+    lastFed: Date | null
     userId: string
+    createdAt: Date
+    updatedAt: Date
     _count: PetCountAggregateOutputType | null
     _avg: PetAvgAggregateOutputType | null
     _sum: PetSumAggregateOutputType | null
@@ -4536,7 +4799,10 @@ export namespace Prisma {
     id?: boolean
     size?: boolean
     hearts?: boolean
+    lastFed?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["pet"]>
 
@@ -4544,7 +4810,10 @@ export namespace Prisma {
     id?: boolean
     size?: boolean
     hearts?: boolean
+    lastFed?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["pet"]>
 
@@ -4552,7 +4821,10 @@ export namespace Prisma {
     id?: boolean
     size?: boolean
     hearts?: boolean
+    lastFed?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["pet"]>
 
@@ -4560,10 +4832,13 @@ export namespace Prisma {
     id?: boolean
     size?: boolean
     hearts?: boolean
+    lastFed?: boolean
     userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type PetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "size" | "hearts" | "userId", ExtArgs["result"]["pet"]>
+  export type PetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "size" | "hearts" | "lastFed" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["pet"]>
   export type PetInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -4583,7 +4858,10 @@ export namespace Prisma {
       id: string
       size: number
       hearts: number
+      lastFed: Date | null
       userId: string
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["pet"]>
     composites: {}
   }
@@ -5011,7 +5289,10 @@ export namespace Prisma {
     readonly id: FieldRef<"Pet", 'String'>
     readonly size: FieldRef<"Pet", 'Float'>
     readonly hearts: FieldRef<"Pet", 'Int'>
+    readonly lastFed: FieldRef<"Pet", 'DateTime'>
     readonly userId: FieldRef<"Pet", 'String'>
+    readonly createdAt: FieldRef<"Pet", 'DateTime'>
+    readonly updatedAt: FieldRef<"Pet", 'DateTime'>
   }
     
 
@@ -9979,6 +10260,2164 @@ export namespace Prisma {
 
 
   /**
+   * Model IntisBalance
+   */
+
+  export type AggregateIntisBalance = {
+    _count: IntisBalanceCountAggregateOutputType | null
+    _avg: IntisBalanceAvgAggregateOutputType | null
+    _sum: IntisBalanceSumAggregateOutputType | null
+    _min: IntisBalanceMinAggregateOutputType | null
+    _max: IntisBalanceMaxAggregateOutputType | null
+  }
+
+  export type IntisBalanceAvgAggregateOutputType = {
+    balance: number | null
+  }
+
+  export type IntisBalanceSumAggregateOutputType = {
+    balance: number | null
+  }
+
+  export type IntisBalanceMinAggregateOutputType = {
+    userId: string | null
+    balance: number | null
+    updatedAt: Date | null
+  }
+
+  export type IntisBalanceMaxAggregateOutputType = {
+    userId: string | null
+    balance: number | null
+    updatedAt: Date | null
+  }
+
+  export type IntisBalanceCountAggregateOutputType = {
+    userId: number
+    balance: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type IntisBalanceAvgAggregateInputType = {
+    balance?: true
+  }
+
+  export type IntisBalanceSumAggregateInputType = {
+    balance?: true
+  }
+
+  export type IntisBalanceMinAggregateInputType = {
+    userId?: true
+    balance?: true
+    updatedAt?: true
+  }
+
+  export type IntisBalanceMaxAggregateInputType = {
+    userId?: true
+    balance?: true
+    updatedAt?: true
+  }
+
+  export type IntisBalanceCountAggregateInputType = {
+    userId?: true
+    balance?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type IntisBalanceAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which IntisBalance to aggregate.
+     */
+    where?: IntisBalanceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IntisBalances to fetch.
+     */
+    orderBy?: IntisBalanceOrderByWithRelationInput | IntisBalanceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: IntisBalanceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IntisBalances from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IntisBalances.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned IntisBalances
+    **/
+    _count?: true | IntisBalanceCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: IntisBalanceAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: IntisBalanceSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: IntisBalanceMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: IntisBalanceMaxAggregateInputType
+  }
+
+  export type GetIntisBalanceAggregateType<T extends IntisBalanceAggregateArgs> = {
+        [P in keyof T & keyof AggregateIntisBalance]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateIntisBalance[P]>
+      : GetScalarType<T[P], AggregateIntisBalance[P]>
+  }
+
+
+
+
+  export type IntisBalanceGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IntisBalanceWhereInput
+    orderBy?: IntisBalanceOrderByWithAggregationInput | IntisBalanceOrderByWithAggregationInput[]
+    by: IntisBalanceScalarFieldEnum[] | IntisBalanceScalarFieldEnum
+    having?: IntisBalanceScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: IntisBalanceCountAggregateInputType | true
+    _avg?: IntisBalanceAvgAggregateInputType
+    _sum?: IntisBalanceSumAggregateInputType
+    _min?: IntisBalanceMinAggregateInputType
+    _max?: IntisBalanceMaxAggregateInputType
+  }
+
+  export type IntisBalanceGroupByOutputType = {
+    userId: string
+    balance: number
+    updatedAt: Date
+    _count: IntisBalanceCountAggregateOutputType | null
+    _avg: IntisBalanceAvgAggregateOutputType | null
+    _sum: IntisBalanceSumAggregateOutputType | null
+    _min: IntisBalanceMinAggregateOutputType | null
+    _max: IntisBalanceMaxAggregateOutputType | null
+  }
+
+  type GetIntisBalanceGroupByPayload<T extends IntisBalanceGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<IntisBalanceGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof IntisBalanceGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], IntisBalanceGroupByOutputType[P]>
+            : GetScalarType<T[P], IntisBalanceGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type IntisBalanceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    userId?: boolean
+    balance?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["intisBalance"]>
+
+  export type IntisBalanceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    userId?: boolean
+    balance?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["intisBalance"]>
+
+  export type IntisBalanceSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    userId?: boolean
+    balance?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["intisBalance"]>
+
+  export type IntisBalanceSelectScalar = {
+    userId?: boolean
+    balance?: boolean
+    updatedAt?: boolean
+  }
+
+  export type IntisBalanceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userId" | "balance" | "updatedAt", ExtArgs["result"]["intisBalance"]>
+  export type IntisBalanceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type IntisBalanceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type IntisBalanceIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $IntisBalancePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "IntisBalance"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      userId: string
+      balance: number
+      updatedAt: Date
+    }, ExtArgs["result"]["intisBalance"]>
+    composites: {}
+  }
+
+  type IntisBalanceGetPayload<S extends boolean | null | undefined | IntisBalanceDefaultArgs> = $Result.GetResult<Prisma.$IntisBalancePayload, S>
+
+  type IntisBalanceCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<IntisBalanceFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: IntisBalanceCountAggregateInputType | true
+    }
+
+  export interface IntisBalanceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['IntisBalance'], meta: { name: 'IntisBalance' } }
+    /**
+     * Find zero or one IntisBalance that matches the filter.
+     * @param {IntisBalanceFindUniqueArgs} args - Arguments to find a IntisBalance
+     * @example
+     * // Get one IntisBalance
+     * const intisBalance = await prisma.intisBalance.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends IntisBalanceFindUniqueArgs>(args: SelectSubset<T, IntisBalanceFindUniqueArgs<ExtArgs>>): Prisma__IntisBalanceClient<$Result.GetResult<Prisma.$IntisBalancePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one IntisBalance that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {IntisBalanceFindUniqueOrThrowArgs} args - Arguments to find a IntisBalance
+     * @example
+     * // Get one IntisBalance
+     * const intisBalance = await prisma.intisBalance.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends IntisBalanceFindUniqueOrThrowArgs>(args: SelectSubset<T, IntisBalanceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__IntisBalanceClient<$Result.GetResult<Prisma.$IntisBalancePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first IntisBalance that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntisBalanceFindFirstArgs} args - Arguments to find a IntisBalance
+     * @example
+     * // Get one IntisBalance
+     * const intisBalance = await prisma.intisBalance.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends IntisBalanceFindFirstArgs>(args?: SelectSubset<T, IntisBalanceFindFirstArgs<ExtArgs>>): Prisma__IntisBalanceClient<$Result.GetResult<Prisma.$IntisBalancePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first IntisBalance that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntisBalanceFindFirstOrThrowArgs} args - Arguments to find a IntisBalance
+     * @example
+     * // Get one IntisBalance
+     * const intisBalance = await prisma.intisBalance.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends IntisBalanceFindFirstOrThrowArgs>(args?: SelectSubset<T, IntisBalanceFindFirstOrThrowArgs<ExtArgs>>): Prisma__IntisBalanceClient<$Result.GetResult<Prisma.$IntisBalancePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more IntisBalances that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntisBalanceFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all IntisBalances
+     * const intisBalances = await prisma.intisBalance.findMany()
+     * 
+     * // Get first 10 IntisBalances
+     * const intisBalances = await prisma.intisBalance.findMany({ take: 10 })
+     * 
+     * // Only select the `userId`
+     * const intisBalanceWithUserIdOnly = await prisma.intisBalance.findMany({ select: { userId: true } })
+     * 
+     */
+    findMany<T extends IntisBalanceFindManyArgs>(args?: SelectSubset<T, IntisBalanceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntisBalancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a IntisBalance.
+     * @param {IntisBalanceCreateArgs} args - Arguments to create a IntisBalance.
+     * @example
+     * // Create one IntisBalance
+     * const IntisBalance = await prisma.intisBalance.create({
+     *   data: {
+     *     // ... data to create a IntisBalance
+     *   }
+     * })
+     * 
+     */
+    create<T extends IntisBalanceCreateArgs>(args: SelectSubset<T, IntisBalanceCreateArgs<ExtArgs>>): Prisma__IntisBalanceClient<$Result.GetResult<Prisma.$IntisBalancePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many IntisBalances.
+     * @param {IntisBalanceCreateManyArgs} args - Arguments to create many IntisBalances.
+     * @example
+     * // Create many IntisBalances
+     * const intisBalance = await prisma.intisBalance.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends IntisBalanceCreateManyArgs>(args?: SelectSubset<T, IntisBalanceCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many IntisBalances and returns the data saved in the database.
+     * @param {IntisBalanceCreateManyAndReturnArgs} args - Arguments to create many IntisBalances.
+     * @example
+     * // Create many IntisBalances
+     * const intisBalance = await prisma.intisBalance.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many IntisBalances and only return the `userId`
+     * const intisBalanceWithUserIdOnly = await prisma.intisBalance.createManyAndReturn({
+     *   select: { userId: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends IntisBalanceCreateManyAndReturnArgs>(args?: SelectSubset<T, IntisBalanceCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntisBalancePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a IntisBalance.
+     * @param {IntisBalanceDeleteArgs} args - Arguments to delete one IntisBalance.
+     * @example
+     * // Delete one IntisBalance
+     * const IntisBalance = await prisma.intisBalance.delete({
+     *   where: {
+     *     // ... filter to delete one IntisBalance
+     *   }
+     * })
+     * 
+     */
+    delete<T extends IntisBalanceDeleteArgs>(args: SelectSubset<T, IntisBalanceDeleteArgs<ExtArgs>>): Prisma__IntisBalanceClient<$Result.GetResult<Prisma.$IntisBalancePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one IntisBalance.
+     * @param {IntisBalanceUpdateArgs} args - Arguments to update one IntisBalance.
+     * @example
+     * // Update one IntisBalance
+     * const intisBalance = await prisma.intisBalance.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends IntisBalanceUpdateArgs>(args: SelectSubset<T, IntisBalanceUpdateArgs<ExtArgs>>): Prisma__IntisBalanceClient<$Result.GetResult<Prisma.$IntisBalancePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more IntisBalances.
+     * @param {IntisBalanceDeleteManyArgs} args - Arguments to filter IntisBalances to delete.
+     * @example
+     * // Delete a few IntisBalances
+     * const { count } = await prisma.intisBalance.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends IntisBalanceDeleteManyArgs>(args?: SelectSubset<T, IntisBalanceDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more IntisBalances.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntisBalanceUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many IntisBalances
+     * const intisBalance = await prisma.intisBalance.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends IntisBalanceUpdateManyArgs>(args: SelectSubset<T, IntisBalanceUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more IntisBalances and returns the data updated in the database.
+     * @param {IntisBalanceUpdateManyAndReturnArgs} args - Arguments to update many IntisBalances.
+     * @example
+     * // Update many IntisBalances
+     * const intisBalance = await prisma.intisBalance.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more IntisBalances and only return the `userId`
+     * const intisBalanceWithUserIdOnly = await prisma.intisBalance.updateManyAndReturn({
+     *   select: { userId: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends IntisBalanceUpdateManyAndReturnArgs>(args: SelectSubset<T, IntisBalanceUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntisBalancePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one IntisBalance.
+     * @param {IntisBalanceUpsertArgs} args - Arguments to update or create a IntisBalance.
+     * @example
+     * // Update or create a IntisBalance
+     * const intisBalance = await prisma.intisBalance.upsert({
+     *   create: {
+     *     // ... data to create a IntisBalance
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the IntisBalance we want to update
+     *   }
+     * })
+     */
+    upsert<T extends IntisBalanceUpsertArgs>(args: SelectSubset<T, IntisBalanceUpsertArgs<ExtArgs>>): Prisma__IntisBalanceClient<$Result.GetResult<Prisma.$IntisBalancePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of IntisBalances.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntisBalanceCountArgs} args - Arguments to filter IntisBalances to count.
+     * @example
+     * // Count the number of IntisBalances
+     * const count = await prisma.intisBalance.count({
+     *   where: {
+     *     // ... the filter for the IntisBalances we want to count
+     *   }
+     * })
+    **/
+    count<T extends IntisBalanceCountArgs>(
+      args?: Subset<T, IntisBalanceCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], IntisBalanceCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a IntisBalance.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntisBalanceAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends IntisBalanceAggregateArgs>(args: Subset<T, IntisBalanceAggregateArgs>): Prisma.PrismaPromise<GetIntisBalanceAggregateType<T>>
+
+    /**
+     * Group by IntisBalance.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntisBalanceGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends IntisBalanceGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: IntisBalanceGroupByArgs['orderBy'] }
+        : { orderBy?: IntisBalanceGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, IntisBalanceGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetIntisBalanceGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the IntisBalance model
+   */
+  readonly fields: IntisBalanceFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for IntisBalance.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__IntisBalanceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the IntisBalance model
+   */
+  interface IntisBalanceFieldRefs {
+    readonly userId: FieldRef<"IntisBalance", 'String'>
+    readonly balance: FieldRef<"IntisBalance", 'Int'>
+    readonly updatedAt: FieldRef<"IntisBalance", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * IntisBalance findUnique
+   */
+  export type IntisBalanceFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntisBalance
+     */
+    select?: IntisBalanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntisBalance
+     */
+    omit?: IntisBalanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntisBalanceInclude<ExtArgs> | null
+    /**
+     * Filter, which IntisBalance to fetch.
+     */
+    where: IntisBalanceWhereUniqueInput
+  }
+
+  /**
+   * IntisBalance findUniqueOrThrow
+   */
+  export type IntisBalanceFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntisBalance
+     */
+    select?: IntisBalanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntisBalance
+     */
+    omit?: IntisBalanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntisBalanceInclude<ExtArgs> | null
+    /**
+     * Filter, which IntisBalance to fetch.
+     */
+    where: IntisBalanceWhereUniqueInput
+  }
+
+  /**
+   * IntisBalance findFirst
+   */
+  export type IntisBalanceFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntisBalance
+     */
+    select?: IntisBalanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntisBalance
+     */
+    omit?: IntisBalanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntisBalanceInclude<ExtArgs> | null
+    /**
+     * Filter, which IntisBalance to fetch.
+     */
+    where?: IntisBalanceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IntisBalances to fetch.
+     */
+    orderBy?: IntisBalanceOrderByWithRelationInput | IntisBalanceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for IntisBalances.
+     */
+    cursor?: IntisBalanceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IntisBalances from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IntisBalances.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of IntisBalances.
+     */
+    distinct?: IntisBalanceScalarFieldEnum | IntisBalanceScalarFieldEnum[]
+  }
+
+  /**
+   * IntisBalance findFirstOrThrow
+   */
+  export type IntisBalanceFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntisBalance
+     */
+    select?: IntisBalanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntisBalance
+     */
+    omit?: IntisBalanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntisBalanceInclude<ExtArgs> | null
+    /**
+     * Filter, which IntisBalance to fetch.
+     */
+    where?: IntisBalanceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IntisBalances to fetch.
+     */
+    orderBy?: IntisBalanceOrderByWithRelationInput | IntisBalanceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for IntisBalances.
+     */
+    cursor?: IntisBalanceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IntisBalances from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IntisBalances.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of IntisBalances.
+     */
+    distinct?: IntisBalanceScalarFieldEnum | IntisBalanceScalarFieldEnum[]
+  }
+
+  /**
+   * IntisBalance findMany
+   */
+  export type IntisBalanceFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntisBalance
+     */
+    select?: IntisBalanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntisBalance
+     */
+    omit?: IntisBalanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntisBalanceInclude<ExtArgs> | null
+    /**
+     * Filter, which IntisBalances to fetch.
+     */
+    where?: IntisBalanceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IntisBalances to fetch.
+     */
+    orderBy?: IntisBalanceOrderByWithRelationInput | IntisBalanceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing IntisBalances.
+     */
+    cursor?: IntisBalanceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IntisBalances from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IntisBalances.
+     */
+    skip?: number
+    distinct?: IntisBalanceScalarFieldEnum | IntisBalanceScalarFieldEnum[]
+  }
+
+  /**
+   * IntisBalance create
+   */
+  export type IntisBalanceCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntisBalance
+     */
+    select?: IntisBalanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntisBalance
+     */
+    omit?: IntisBalanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntisBalanceInclude<ExtArgs> | null
+    /**
+     * The data needed to create a IntisBalance.
+     */
+    data: XOR<IntisBalanceCreateInput, IntisBalanceUncheckedCreateInput>
+  }
+
+  /**
+   * IntisBalance createMany
+   */
+  export type IntisBalanceCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many IntisBalances.
+     */
+    data: IntisBalanceCreateManyInput | IntisBalanceCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * IntisBalance createManyAndReturn
+   */
+  export type IntisBalanceCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntisBalance
+     */
+    select?: IntisBalanceSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntisBalance
+     */
+    omit?: IntisBalanceOmit<ExtArgs> | null
+    /**
+     * The data used to create many IntisBalances.
+     */
+    data: IntisBalanceCreateManyInput | IntisBalanceCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntisBalanceIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * IntisBalance update
+   */
+  export type IntisBalanceUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntisBalance
+     */
+    select?: IntisBalanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntisBalance
+     */
+    omit?: IntisBalanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntisBalanceInclude<ExtArgs> | null
+    /**
+     * The data needed to update a IntisBalance.
+     */
+    data: XOR<IntisBalanceUpdateInput, IntisBalanceUncheckedUpdateInput>
+    /**
+     * Choose, which IntisBalance to update.
+     */
+    where: IntisBalanceWhereUniqueInput
+  }
+
+  /**
+   * IntisBalance updateMany
+   */
+  export type IntisBalanceUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update IntisBalances.
+     */
+    data: XOR<IntisBalanceUpdateManyMutationInput, IntisBalanceUncheckedUpdateManyInput>
+    /**
+     * Filter which IntisBalances to update
+     */
+    where?: IntisBalanceWhereInput
+    /**
+     * Limit how many IntisBalances to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * IntisBalance updateManyAndReturn
+   */
+  export type IntisBalanceUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntisBalance
+     */
+    select?: IntisBalanceSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntisBalance
+     */
+    omit?: IntisBalanceOmit<ExtArgs> | null
+    /**
+     * The data used to update IntisBalances.
+     */
+    data: XOR<IntisBalanceUpdateManyMutationInput, IntisBalanceUncheckedUpdateManyInput>
+    /**
+     * Filter which IntisBalances to update
+     */
+    where?: IntisBalanceWhereInput
+    /**
+     * Limit how many IntisBalances to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntisBalanceIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * IntisBalance upsert
+   */
+  export type IntisBalanceUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntisBalance
+     */
+    select?: IntisBalanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntisBalance
+     */
+    omit?: IntisBalanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntisBalanceInclude<ExtArgs> | null
+    /**
+     * The filter to search for the IntisBalance to update in case it exists.
+     */
+    where: IntisBalanceWhereUniqueInput
+    /**
+     * In case the IntisBalance found by the `where` argument doesn't exist, create a new IntisBalance with this data.
+     */
+    create: XOR<IntisBalanceCreateInput, IntisBalanceUncheckedCreateInput>
+    /**
+     * In case the IntisBalance was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<IntisBalanceUpdateInput, IntisBalanceUncheckedUpdateInput>
+  }
+
+  /**
+   * IntisBalance delete
+   */
+  export type IntisBalanceDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntisBalance
+     */
+    select?: IntisBalanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntisBalance
+     */
+    omit?: IntisBalanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntisBalanceInclude<ExtArgs> | null
+    /**
+     * Filter which IntisBalance to delete.
+     */
+    where: IntisBalanceWhereUniqueInput
+  }
+
+  /**
+   * IntisBalance deleteMany
+   */
+  export type IntisBalanceDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which IntisBalances to delete
+     */
+    where?: IntisBalanceWhereInput
+    /**
+     * Limit how many IntisBalances to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * IntisBalance without action
+   */
+  export type IntisBalanceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntisBalance
+     */
+    select?: IntisBalanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntisBalance
+     */
+    omit?: IntisBalanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntisBalanceInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model IntisLedger
+   */
+
+  export type AggregateIntisLedger = {
+    _count: IntisLedgerCountAggregateOutputType | null
+    _avg: IntisLedgerAvgAggregateOutputType | null
+    _sum: IntisLedgerSumAggregateOutputType | null
+    _min: IntisLedgerMinAggregateOutputType | null
+    _max: IntisLedgerMaxAggregateOutputType | null
+  }
+
+  export type IntisLedgerAvgAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type IntisLedgerSumAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type IntisLedgerMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    amount: number | null
+    reason: string | null
+    createdAt: Date | null
+  }
+
+  export type IntisLedgerMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    amount: number | null
+    reason: string | null
+    createdAt: Date | null
+  }
+
+  export type IntisLedgerCountAggregateOutputType = {
+    id: number
+    userId: number
+    amount: number
+    reason: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type IntisLedgerAvgAggregateInputType = {
+    amount?: true
+  }
+
+  export type IntisLedgerSumAggregateInputType = {
+    amount?: true
+  }
+
+  export type IntisLedgerMinAggregateInputType = {
+    id?: true
+    userId?: true
+    amount?: true
+    reason?: true
+    createdAt?: true
+  }
+
+  export type IntisLedgerMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    amount?: true
+    reason?: true
+    createdAt?: true
+  }
+
+  export type IntisLedgerCountAggregateInputType = {
+    id?: true
+    userId?: true
+    amount?: true
+    reason?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type IntisLedgerAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which IntisLedger to aggregate.
+     */
+    where?: IntisLedgerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IntisLedgers to fetch.
+     */
+    orderBy?: IntisLedgerOrderByWithRelationInput | IntisLedgerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: IntisLedgerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IntisLedgers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IntisLedgers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned IntisLedgers
+    **/
+    _count?: true | IntisLedgerCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: IntisLedgerAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: IntisLedgerSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: IntisLedgerMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: IntisLedgerMaxAggregateInputType
+  }
+
+  export type GetIntisLedgerAggregateType<T extends IntisLedgerAggregateArgs> = {
+        [P in keyof T & keyof AggregateIntisLedger]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateIntisLedger[P]>
+      : GetScalarType<T[P], AggregateIntisLedger[P]>
+  }
+
+
+
+
+  export type IntisLedgerGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IntisLedgerWhereInput
+    orderBy?: IntisLedgerOrderByWithAggregationInput | IntisLedgerOrderByWithAggregationInput[]
+    by: IntisLedgerScalarFieldEnum[] | IntisLedgerScalarFieldEnum
+    having?: IntisLedgerScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: IntisLedgerCountAggregateInputType | true
+    _avg?: IntisLedgerAvgAggregateInputType
+    _sum?: IntisLedgerSumAggregateInputType
+    _min?: IntisLedgerMinAggregateInputType
+    _max?: IntisLedgerMaxAggregateInputType
+  }
+
+  export type IntisLedgerGroupByOutputType = {
+    id: string
+    userId: string
+    amount: number
+    reason: string | null
+    createdAt: Date
+    _count: IntisLedgerCountAggregateOutputType | null
+    _avg: IntisLedgerAvgAggregateOutputType | null
+    _sum: IntisLedgerSumAggregateOutputType | null
+    _min: IntisLedgerMinAggregateOutputType | null
+    _max: IntisLedgerMaxAggregateOutputType | null
+  }
+
+  type GetIntisLedgerGroupByPayload<T extends IntisLedgerGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<IntisLedgerGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof IntisLedgerGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], IntisLedgerGroupByOutputType[P]>
+            : GetScalarType<T[P], IntisLedgerGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type IntisLedgerSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    amount?: boolean
+    reason?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["intisLedger"]>
+
+  export type IntisLedgerSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    amount?: boolean
+    reason?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["intisLedger"]>
+
+  export type IntisLedgerSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    amount?: boolean
+    reason?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["intisLedger"]>
+
+  export type IntisLedgerSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    amount?: boolean
+    reason?: boolean
+    createdAt?: boolean
+  }
+
+  export type IntisLedgerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "amount" | "reason" | "createdAt", ExtArgs["result"]["intisLedger"]>
+  export type IntisLedgerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type IntisLedgerIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type IntisLedgerIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $IntisLedgerPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "IntisLedger"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      amount: number
+      reason: string | null
+      createdAt: Date
+    }, ExtArgs["result"]["intisLedger"]>
+    composites: {}
+  }
+
+  type IntisLedgerGetPayload<S extends boolean | null | undefined | IntisLedgerDefaultArgs> = $Result.GetResult<Prisma.$IntisLedgerPayload, S>
+
+  type IntisLedgerCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<IntisLedgerFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: IntisLedgerCountAggregateInputType | true
+    }
+
+  export interface IntisLedgerDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['IntisLedger'], meta: { name: 'IntisLedger' } }
+    /**
+     * Find zero or one IntisLedger that matches the filter.
+     * @param {IntisLedgerFindUniqueArgs} args - Arguments to find a IntisLedger
+     * @example
+     * // Get one IntisLedger
+     * const intisLedger = await prisma.intisLedger.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends IntisLedgerFindUniqueArgs>(args: SelectSubset<T, IntisLedgerFindUniqueArgs<ExtArgs>>): Prisma__IntisLedgerClient<$Result.GetResult<Prisma.$IntisLedgerPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one IntisLedger that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {IntisLedgerFindUniqueOrThrowArgs} args - Arguments to find a IntisLedger
+     * @example
+     * // Get one IntisLedger
+     * const intisLedger = await prisma.intisLedger.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends IntisLedgerFindUniqueOrThrowArgs>(args: SelectSubset<T, IntisLedgerFindUniqueOrThrowArgs<ExtArgs>>): Prisma__IntisLedgerClient<$Result.GetResult<Prisma.$IntisLedgerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first IntisLedger that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntisLedgerFindFirstArgs} args - Arguments to find a IntisLedger
+     * @example
+     * // Get one IntisLedger
+     * const intisLedger = await prisma.intisLedger.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends IntisLedgerFindFirstArgs>(args?: SelectSubset<T, IntisLedgerFindFirstArgs<ExtArgs>>): Prisma__IntisLedgerClient<$Result.GetResult<Prisma.$IntisLedgerPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first IntisLedger that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntisLedgerFindFirstOrThrowArgs} args - Arguments to find a IntisLedger
+     * @example
+     * // Get one IntisLedger
+     * const intisLedger = await prisma.intisLedger.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends IntisLedgerFindFirstOrThrowArgs>(args?: SelectSubset<T, IntisLedgerFindFirstOrThrowArgs<ExtArgs>>): Prisma__IntisLedgerClient<$Result.GetResult<Prisma.$IntisLedgerPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more IntisLedgers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntisLedgerFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all IntisLedgers
+     * const intisLedgers = await prisma.intisLedger.findMany()
+     * 
+     * // Get first 10 IntisLedgers
+     * const intisLedgers = await prisma.intisLedger.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const intisLedgerWithIdOnly = await prisma.intisLedger.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends IntisLedgerFindManyArgs>(args?: SelectSubset<T, IntisLedgerFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntisLedgerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a IntisLedger.
+     * @param {IntisLedgerCreateArgs} args - Arguments to create a IntisLedger.
+     * @example
+     * // Create one IntisLedger
+     * const IntisLedger = await prisma.intisLedger.create({
+     *   data: {
+     *     // ... data to create a IntisLedger
+     *   }
+     * })
+     * 
+     */
+    create<T extends IntisLedgerCreateArgs>(args: SelectSubset<T, IntisLedgerCreateArgs<ExtArgs>>): Prisma__IntisLedgerClient<$Result.GetResult<Prisma.$IntisLedgerPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many IntisLedgers.
+     * @param {IntisLedgerCreateManyArgs} args - Arguments to create many IntisLedgers.
+     * @example
+     * // Create many IntisLedgers
+     * const intisLedger = await prisma.intisLedger.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends IntisLedgerCreateManyArgs>(args?: SelectSubset<T, IntisLedgerCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many IntisLedgers and returns the data saved in the database.
+     * @param {IntisLedgerCreateManyAndReturnArgs} args - Arguments to create many IntisLedgers.
+     * @example
+     * // Create many IntisLedgers
+     * const intisLedger = await prisma.intisLedger.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many IntisLedgers and only return the `id`
+     * const intisLedgerWithIdOnly = await prisma.intisLedger.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends IntisLedgerCreateManyAndReturnArgs>(args?: SelectSubset<T, IntisLedgerCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntisLedgerPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a IntisLedger.
+     * @param {IntisLedgerDeleteArgs} args - Arguments to delete one IntisLedger.
+     * @example
+     * // Delete one IntisLedger
+     * const IntisLedger = await prisma.intisLedger.delete({
+     *   where: {
+     *     // ... filter to delete one IntisLedger
+     *   }
+     * })
+     * 
+     */
+    delete<T extends IntisLedgerDeleteArgs>(args: SelectSubset<T, IntisLedgerDeleteArgs<ExtArgs>>): Prisma__IntisLedgerClient<$Result.GetResult<Prisma.$IntisLedgerPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one IntisLedger.
+     * @param {IntisLedgerUpdateArgs} args - Arguments to update one IntisLedger.
+     * @example
+     * // Update one IntisLedger
+     * const intisLedger = await prisma.intisLedger.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends IntisLedgerUpdateArgs>(args: SelectSubset<T, IntisLedgerUpdateArgs<ExtArgs>>): Prisma__IntisLedgerClient<$Result.GetResult<Prisma.$IntisLedgerPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more IntisLedgers.
+     * @param {IntisLedgerDeleteManyArgs} args - Arguments to filter IntisLedgers to delete.
+     * @example
+     * // Delete a few IntisLedgers
+     * const { count } = await prisma.intisLedger.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends IntisLedgerDeleteManyArgs>(args?: SelectSubset<T, IntisLedgerDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more IntisLedgers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntisLedgerUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many IntisLedgers
+     * const intisLedger = await prisma.intisLedger.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends IntisLedgerUpdateManyArgs>(args: SelectSubset<T, IntisLedgerUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more IntisLedgers and returns the data updated in the database.
+     * @param {IntisLedgerUpdateManyAndReturnArgs} args - Arguments to update many IntisLedgers.
+     * @example
+     * // Update many IntisLedgers
+     * const intisLedger = await prisma.intisLedger.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more IntisLedgers and only return the `id`
+     * const intisLedgerWithIdOnly = await prisma.intisLedger.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends IntisLedgerUpdateManyAndReturnArgs>(args: SelectSubset<T, IntisLedgerUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IntisLedgerPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one IntisLedger.
+     * @param {IntisLedgerUpsertArgs} args - Arguments to update or create a IntisLedger.
+     * @example
+     * // Update or create a IntisLedger
+     * const intisLedger = await prisma.intisLedger.upsert({
+     *   create: {
+     *     // ... data to create a IntisLedger
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the IntisLedger we want to update
+     *   }
+     * })
+     */
+    upsert<T extends IntisLedgerUpsertArgs>(args: SelectSubset<T, IntisLedgerUpsertArgs<ExtArgs>>): Prisma__IntisLedgerClient<$Result.GetResult<Prisma.$IntisLedgerPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of IntisLedgers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntisLedgerCountArgs} args - Arguments to filter IntisLedgers to count.
+     * @example
+     * // Count the number of IntisLedgers
+     * const count = await prisma.intisLedger.count({
+     *   where: {
+     *     // ... the filter for the IntisLedgers we want to count
+     *   }
+     * })
+    **/
+    count<T extends IntisLedgerCountArgs>(
+      args?: Subset<T, IntisLedgerCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], IntisLedgerCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a IntisLedger.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntisLedgerAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends IntisLedgerAggregateArgs>(args: Subset<T, IntisLedgerAggregateArgs>): Prisma.PrismaPromise<GetIntisLedgerAggregateType<T>>
+
+    /**
+     * Group by IntisLedger.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntisLedgerGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends IntisLedgerGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: IntisLedgerGroupByArgs['orderBy'] }
+        : { orderBy?: IntisLedgerGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, IntisLedgerGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetIntisLedgerGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the IntisLedger model
+   */
+  readonly fields: IntisLedgerFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for IntisLedger.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__IntisLedgerClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the IntisLedger model
+   */
+  interface IntisLedgerFieldRefs {
+    readonly id: FieldRef<"IntisLedger", 'String'>
+    readonly userId: FieldRef<"IntisLedger", 'String'>
+    readonly amount: FieldRef<"IntisLedger", 'Int'>
+    readonly reason: FieldRef<"IntisLedger", 'String'>
+    readonly createdAt: FieldRef<"IntisLedger", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * IntisLedger findUnique
+   */
+  export type IntisLedgerFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntisLedger
+     */
+    select?: IntisLedgerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntisLedger
+     */
+    omit?: IntisLedgerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntisLedgerInclude<ExtArgs> | null
+    /**
+     * Filter, which IntisLedger to fetch.
+     */
+    where: IntisLedgerWhereUniqueInput
+  }
+
+  /**
+   * IntisLedger findUniqueOrThrow
+   */
+  export type IntisLedgerFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntisLedger
+     */
+    select?: IntisLedgerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntisLedger
+     */
+    omit?: IntisLedgerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntisLedgerInclude<ExtArgs> | null
+    /**
+     * Filter, which IntisLedger to fetch.
+     */
+    where: IntisLedgerWhereUniqueInput
+  }
+
+  /**
+   * IntisLedger findFirst
+   */
+  export type IntisLedgerFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntisLedger
+     */
+    select?: IntisLedgerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntisLedger
+     */
+    omit?: IntisLedgerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntisLedgerInclude<ExtArgs> | null
+    /**
+     * Filter, which IntisLedger to fetch.
+     */
+    where?: IntisLedgerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IntisLedgers to fetch.
+     */
+    orderBy?: IntisLedgerOrderByWithRelationInput | IntisLedgerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for IntisLedgers.
+     */
+    cursor?: IntisLedgerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IntisLedgers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IntisLedgers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of IntisLedgers.
+     */
+    distinct?: IntisLedgerScalarFieldEnum | IntisLedgerScalarFieldEnum[]
+  }
+
+  /**
+   * IntisLedger findFirstOrThrow
+   */
+  export type IntisLedgerFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntisLedger
+     */
+    select?: IntisLedgerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntisLedger
+     */
+    omit?: IntisLedgerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntisLedgerInclude<ExtArgs> | null
+    /**
+     * Filter, which IntisLedger to fetch.
+     */
+    where?: IntisLedgerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IntisLedgers to fetch.
+     */
+    orderBy?: IntisLedgerOrderByWithRelationInput | IntisLedgerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for IntisLedgers.
+     */
+    cursor?: IntisLedgerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IntisLedgers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IntisLedgers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of IntisLedgers.
+     */
+    distinct?: IntisLedgerScalarFieldEnum | IntisLedgerScalarFieldEnum[]
+  }
+
+  /**
+   * IntisLedger findMany
+   */
+  export type IntisLedgerFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntisLedger
+     */
+    select?: IntisLedgerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntisLedger
+     */
+    omit?: IntisLedgerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntisLedgerInclude<ExtArgs> | null
+    /**
+     * Filter, which IntisLedgers to fetch.
+     */
+    where?: IntisLedgerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IntisLedgers to fetch.
+     */
+    orderBy?: IntisLedgerOrderByWithRelationInput | IntisLedgerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing IntisLedgers.
+     */
+    cursor?: IntisLedgerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IntisLedgers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IntisLedgers.
+     */
+    skip?: number
+    distinct?: IntisLedgerScalarFieldEnum | IntisLedgerScalarFieldEnum[]
+  }
+
+  /**
+   * IntisLedger create
+   */
+  export type IntisLedgerCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntisLedger
+     */
+    select?: IntisLedgerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntisLedger
+     */
+    omit?: IntisLedgerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntisLedgerInclude<ExtArgs> | null
+    /**
+     * The data needed to create a IntisLedger.
+     */
+    data: XOR<IntisLedgerCreateInput, IntisLedgerUncheckedCreateInput>
+  }
+
+  /**
+   * IntisLedger createMany
+   */
+  export type IntisLedgerCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many IntisLedgers.
+     */
+    data: IntisLedgerCreateManyInput | IntisLedgerCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * IntisLedger createManyAndReturn
+   */
+  export type IntisLedgerCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntisLedger
+     */
+    select?: IntisLedgerSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntisLedger
+     */
+    omit?: IntisLedgerOmit<ExtArgs> | null
+    /**
+     * The data used to create many IntisLedgers.
+     */
+    data: IntisLedgerCreateManyInput | IntisLedgerCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntisLedgerIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * IntisLedger update
+   */
+  export type IntisLedgerUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntisLedger
+     */
+    select?: IntisLedgerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntisLedger
+     */
+    omit?: IntisLedgerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntisLedgerInclude<ExtArgs> | null
+    /**
+     * The data needed to update a IntisLedger.
+     */
+    data: XOR<IntisLedgerUpdateInput, IntisLedgerUncheckedUpdateInput>
+    /**
+     * Choose, which IntisLedger to update.
+     */
+    where: IntisLedgerWhereUniqueInput
+  }
+
+  /**
+   * IntisLedger updateMany
+   */
+  export type IntisLedgerUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update IntisLedgers.
+     */
+    data: XOR<IntisLedgerUpdateManyMutationInput, IntisLedgerUncheckedUpdateManyInput>
+    /**
+     * Filter which IntisLedgers to update
+     */
+    where?: IntisLedgerWhereInput
+    /**
+     * Limit how many IntisLedgers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * IntisLedger updateManyAndReturn
+   */
+  export type IntisLedgerUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntisLedger
+     */
+    select?: IntisLedgerSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntisLedger
+     */
+    omit?: IntisLedgerOmit<ExtArgs> | null
+    /**
+     * The data used to update IntisLedgers.
+     */
+    data: XOR<IntisLedgerUpdateManyMutationInput, IntisLedgerUncheckedUpdateManyInput>
+    /**
+     * Filter which IntisLedgers to update
+     */
+    where?: IntisLedgerWhereInput
+    /**
+     * Limit how many IntisLedgers to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntisLedgerIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * IntisLedger upsert
+   */
+  export type IntisLedgerUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntisLedger
+     */
+    select?: IntisLedgerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntisLedger
+     */
+    omit?: IntisLedgerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntisLedgerInclude<ExtArgs> | null
+    /**
+     * The filter to search for the IntisLedger to update in case it exists.
+     */
+    where: IntisLedgerWhereUniqueInput
+    /**
+     * In case the IntisLedger found by the `where` argument doesn't exist, create a new IntisLedger with this data.
+     */
+    create: XOR<IntisLedgerCreateInput, IntisLedgerUncheckedCreateInput>
+    /**
+     * In case the IntisLedger was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<IntisLedgerUpdateInput, IntisLedgerUncheckedUpdateInput>
+  }
+
+  /**
+   * IntisLedger delete
+   */
+  export type IntisLedgerDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntisLedger
+     */
+    select?: IntisLedgerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntisLedger
+     */
+    omit?: IntisLedgerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntisLedgerInclude<ExtArgs> | null
+    /**
+     * Filter which IntisLedger to delete.
+     */
+    where: IntisLedgerWhereUniqueInput
+  }
+
+  /**
+   * IntisLedger deleteMany
+   */
+  export type IntisLedgerDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which IntisLedgers to delete
+     */
+    where?: IntisLedgerWhereInput
+    /**
+     * Limit how many IntisLedgers to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * IntisLedger without action
+   */
+  export type IntisLedgerDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IntisLedger
+     */
+    select?: IntisLedgerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IntisLedger
+     */
+    omit?: IntisLedgerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IntisLedgerInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model MetricsReceipt
    */
 
@@ -14489,7 +16928,10 @@ export namespace Prisma {
     id: 'id',
     size: 'size',
     hearts: 'hearts',
-    userId: 'userId'
+    lastFed: 'lastFed',
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type PetScalarFieldEnum = (typeof PetScalarFieldEnum)[keyof typeof PetScalarFieldEnum]
@@ -14547,6 +16989,26 @@ export namespace Prisma {
   };
 
   export type ViewerWatchEventScalarFieldEnum = (typeof ViewerWatchEventScalarFieldEnum)[keyof typeof ViewerWatchEventScalarFieldEnum]
+
+
+  export const IntisBalanceScalarFieldEnum: {
+    userId: 'userId',
+    balance: 'balance',
+    updatedAt: 'updatedAt'
+  };
+
+  export type IntisBalanceScalarFieldEnum = (typeof IntisBalanceScalarFieldEnum)[keyof typeof IntisBalanceScalarFieldEnum]
+
+
+  export const IntisLedgerScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    amount: 'amount',
+    reason: 'reason',
+    createdAt: 'createdAt'
+  };
+
+  export type IntisLedgerScalarFieldEnum = (typeof IntisLedgerScalarFieldEnum)[keyof typeof IntisLedgerScalarFieldEnum]
 
 
   export const MetricsReceiptScalarFieldEnum: {
@@ -14762,6 +17224,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptListRelationFilter
     userMetrics?: XOR<UserMetricsNullableScalarRelationFilter, UserMetricsWhereInput> | null
     viewerWatchEvents?: ViewerWatchEventListRelationFilter
+    intisBalance?: XOR<IntisBalanceNullableScalarRelationFilter, IntisBalanceWhereInput> | null
+    intisLedgers?: IntisLedgerListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -14781,6 +17245,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptOrderByRelationAggregateInput
     userMetrics?: UserMetricsOrderByWithRelationInput
     viewerWatchEvents?: ViewerWatchEventOrderByRelationAggregateInput
+    intisBalance?: IntisBalanceOrderByWithRelationInput
+    intisLedgers?: IntisLedgerOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -14803,6 +17269,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptListRelationFilter
     userMetrics?: XOR<UserMetricsNullableScalarRelationFilter, UserMetricsWhereInput> | null
     viewerWatchEvents?: ViewerWatchEventListRelationFilter
+    intisBalance?: XOR<IntisBalanceNullableScalarRelationFilter, IntisBalanceWhereInput> | null
+    intisLedgers?: IntisLedgerListRelationFilter
   }, "id" | "nombre">
 
   export type UserOrderByWithAggregationInput = {
@@ -14891,7 +17359,10 @@ export namespace Prisma {
     id?: StringFilter<"Pet"> | string
     size?: FloatFilter<"Pet"> | number
     hearts?: IntFilter<"Pet"> | number
+    lastFed?: DateTimeNullableFilter<"Pet"> | Date | string | null
     userId?: StringFilter<"Pet"> | string
+    createdAt?: DateTimeFilter<"Pet"> | Date | string
+    updatedAt?: DateTimeFilter<"Pet"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -14899,7 +17370,10 @@ export namespace Prisma {
     id?: SortOrder
     size?: SortOrder
     hearts?: SortOrder
+    lastFed?: SortOrderInput | SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
   }
 
@@ -14911,6 +17385,9 @@ export namespace Prisma {
     NOT?: PetWhereInput | PetWhereInput[]
     size?: FloatFilter<"Pet"> | number
     hearts?: IntFilter<"Pet"> | number
+    lastFed?: DateTimeNullableFilter<"Pet"> | Date | string | null
+    createdAt?: DateTimeFilter<"Pet"> | Date | string
+    updatedAt?: DateTimeFilter<"Pet"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "userId">
 
@@ -14918,7 +17395,10 @@ export namespace Prisma {
     id?: SortOrder
     size?: SortOrder
     hearts?: SortOrder
+    lastFed?: SortOrderInput | SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: PetCountOrderByAggregateInput
     _avg?: PetAvgOrderByAggregateInput
     _max?: PetMaxOrderByAggregateInput
@@ -14933,7 +17413,10 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Pet"> | string
     size?: FloatWithAggregatesFilter<"Pet"> | number
     hearts?: IntWithAggregatesFilter<"Pet"> | number
+    lastFed?: DateTimeNullableWithAggregatesFilter<"Pet"> | Date | string | null
     userId?: StringWithAggregatesFilter<"Pet"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Pet"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Pet"> | Date | string
   }
 
   export type StreamSessionWhereInput = {
@@ -15215,6 +17698,110 @@ export namespace Prisma {
     msWatched?: IntWithAggregatesFilter<"ViewerWatchEvent"> | number
     occurredAt?: DateTimeWithAggregatesFilter<"ViewerWatchEvent"> | Date | string
     createdAt?: DateTimeWithAggregatesFilter<"ViewerWatchEvent"> | Date | string
+  }
+
+  export type IntisBalanceWhereInput = {
+    AND?: IntisBalanceWhereInput | IntisBalanceWhereInput[]
+    OR?: IntisBalanceWhereInput[]
+    NOT?: IntisBalanceWhereInput | IntisBalanceWhereInput[]
+    userId?: StringFilter<"IntisBalance"> | string
+    balance?: IntFilter<"IntisBalance"> | number
+    updatedAt?: DateTimeFilter<"IntisBalance"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type IntisBalanceOrderByWithRelationInput = {
+    userId?: SortOrder
+    balance?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type IntisBalanceWhereUniqueInput = Prisma.AtLeast<{
+    userId?: string
+    AND?: IntisBalanceWhereInput | IntisBalanceWhereInput[]
+    OR?: IntisBalanceWhereInput[]
+    NOT?: IntisBalanceWhereInput | IntisBalanceWhereInput[]
+    balance?: IntFilter<"IntisBalance"> | number
+    updatedAt?: DateTimeFilter<"IntisBalance"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "userId">
+
+  export type IntisBalanceOrderByWithAggregationInput = {
+    userId?: SortOrder
+    balance?: SortOrder
+    updatedAt?: SortOrder
+    _count?: IntisBalanceCountOrderByAggregateInput
+    _avg?: IntisBalanceAvgOrderByAggregateInput
+    _max?: IntisBalanceMaxOrderByAggregateInput
+    _min?: IntisBalanceMinOrderByAggregateInput
+    _sum?: IntisBalanceSumOrderByAggregateInput
+  }
+
+  export type IntisBalanceScalarWhereWithAggregatesInput = {
+    AND?: IntisBalanceScalarWhereWithAggregatesInput | IntisBalanceScalarWhereWithAggregatesInput[]
+    OR?: IntisBalanceScalarWhereWithAggregatesInput[]
+    NOT?: IntisBalanceScalarWhereWithAggregatesInput | IntisBalanceScalarWhereWithAggregatesInput[]
+    userId?: StringWithAggregatesFilter<"IntisBalance"> | string
+    balance?: IntWithAggregatesFilter<"IntisBalance"> | number
+    updatedAt?: DateTimeWithAggregatesFilter<"IntisBalance"> | Date | string
+  }
+
+  export type IntisLedgerWhereInput = {
+    AND?: IntisLedgerWhereInput | IntisLedgerWhereInput[]
+    OR?: IntisLedgerWhereInput[]
+    NOT?: IntisLedgerWhereInput | IntisLedgerWhereInput[]
+    id?: StringFilter<"IntisLedger"> | string
+    userId?: StringFilter<"IntisLedger"> | string
+    amount?: IntFilter<"IntisLedger"> | number
+    reason?: StringNullableFilter<"IntisLedger"> | string | null
+    createdAt?: DateTimeFilter<"IntisLedger"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type IntisLedgerOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    amount?: SortOrder
+    reason?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type IntisLedgerWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: IntisLedgerWhereInput | IntisLedgerWhereInput[]
+    OR?: IntisLedgerWhereInput[]
+    NOT?: IntisLedgerWhereInput | IntisLedgerWhereInput[]
+    userId?: StringFilter<"IntisLedger"> | string
+    amount?: IntFilter<"IntisLedger"> | number
+    reason?: StringNullableFilter<"IntisLedger"> | string | null
+    createdAt?: DateTimeFilter<"IntisLedger"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type IntisLedgerOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    amount?: SortOrder
+    reason?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: IntisLedgerCountOrderByAggregateInput
+    _avg?: IntisLedgerAvgOrderByAggregateInput
+    _max?: IntisLedgerMaxOrderByAggregateInput
+    _min?: IntisLedgerMinOrderByAggregateInput
+    _sum?: IntisLedgerSumOrderByAggregateInput
+  }
+
+  export type IntisLedgerScalarWhereWithAggregatesInput = {
+    AND?: IntisLedgerScalarWhereWithAggregatesInput | IntisLedgerScalarWhereWithAggregatesInput[]
+    OR?: IntisLedgerScalarWhereWithAggregatesInput[]
+    NOT?: IntisLedgerScalarWhereWithAggregatesInput | IntisLedgerScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"IntisLedger"> | string
+    userId?: StringWithAggregatesFilter<"IntisLedger"> | string
+    amount?: IntWithAggregatesFilter<"IntisLedger"> | number
+    reason?: StringNullableWithAggregatesFilter<"IntisLedger"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"IntisLedger"> | Date | string
   }
 
   export type MetricsReceiptWhereInput = {
@@ -15511,6 +18098,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptCreateNestedManyWithoutUserInput
     userMetrics?: UserMetricsCreateNestedOneWithoutUserInput
     viewerWatchEvents?: ViewerWatchEventCreateNestedManyWithoutUserInput
+    intisBalance?: IntisBalanceCreateNestedOneWithoutUserInput
+    intisLedgers?: IntisLedgerCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -15530,6 +18119,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptUncheckedCreateNestedManyWithoutUserInput
     userMetrics?: UserMetricsUncheckedCreateNestedOneWithoutUserInput
     viewerWatchEvents?: ViewerWatchEventUncheckedCreateNestedManyWithoutUserInput
+    intisBalance?: IntisBalanceUncheckedCreateNestedOneWithoutUserInput
+    intisLedgers?: IntisLedgerUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -15549,6 +18140,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptUpdateManyWithoutUserNestedInput
     userMetrics?: UserMetricsUpdateOneWithoutUserNestedInput
     viewerWatchEvents?: ViewerWatchEventUpdateManyWithoutUserNestedInput
+    intisBalance?: IntisBalanceUpdateOneWithoutUserNestedInput
+    intisLedgers?: IntisLedgerUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -15568,6 +18161,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptUncheckedUpdateManyWithoutUserNestedInput
     userMetrics?: UserMetricsUncheckedUpdateOneWithoutUserNestedInput
     viewerWatchEvents?: ViewerWatchEventUncheckedUpdateManyWithoutUserNestedInput
+    intisBalance?: IntisBalanceUncheckedUpdateOneWithoutUserNestedInput
+    intisLedgers?: IntisLedgerUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -15650,6 +18245,9 @@ export namespace Prisma {
     id?: string
     size?: number
     hearts?: number
+    lastFed?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     user: UserCreateNestedOneWithoutPetInput
   }
 
@@ -15657,13 +18255,19 @@ export namespace Prisma {
     id?: string
     size?: number
     hearts?: number
+    lastFed?: Date | string | null
     userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type PetUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     size?: FloatFieldUpdateOperationsInput | number
     hearts?: IntFieldUpdateOperationsInput | number
+    lastFed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutPetNestedInput
   }
 
@@ -15671,27 +18275,39 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     size?: FloatFieldUpdateOperationsInput | number
     hearts?: IntFieldUpdateOperationsInput | number
+    lastFed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PetCreateManyInput = {
     id?: string
     size?: number
     hearts?: number
+    lastFed?: Date | string | null
     userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type PetUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     size?: FloatFieldUpdateOperationsInput | number
     hearts?: IntFieldUpdateOperationsInput | number
+    lastFed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PetUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     size?: FloatFieldUpdateOperationsInput | number
     hearts?: IntFieldUpdateOperationsInput | number
+    lastFed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StreamSessionCreateInput = {
@@ -15985,6 +18601,102 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     msWatched?: IntFieldUpdateOperationsInput | number
     occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntisBalanceCreateInput = {
+    balance?: number
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutIntisBalanceInput
+  }
+
+  export type IntisBalanceUncheckedCreateInput = {
+    userId: string
+    balance?: number
+    updatedAt?: Date | string
+  }
+
+  export type IntisBalanceUpdateInput = {
+    balance?: IntFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutIntisBalanceNestedInput
+  }
+
+  export type IntisBalanceUncheckedUpdateInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    balance?: IntFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntisBalanceCreateManyInput = {
+    userId: string
+    balance?: number
+    updatedAt?: Date | string
+  }
+
+  export type IntisBalanceUpdateManyMutationInput = {
+    balance?: IntFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntisBalanceUncheckedUpdateManyInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    balance?: IntFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntisLedgerCreateInput = {
+    id?: string
+    amount: number
+    reason?: string | null
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutIntisLedgersInput
+  }
+
+  export type IntisLedgerUncheckedCreateInput = {
+    id?: string
+    userId: string
+    amount: number
+    reason?: string | null
+    createdAt?: Date | string
+  }
+
+  export type IntisLedgerUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutIntisLedgersNestedInput
+  }
+
+  export type IntisLedgerUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntisLedgerCreateManyInput = {
+    id?: string
+    userId: string
+    amount: number
+    reason?: string | null
+    createdAt?: Date | string
+  }
+
+  export type IntisLedgerUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntisLedgerUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -16363,6 +19075,17 @@ export namespace Prisma {
     none?: ViewerWatchEventWhereInput
   }
 
+  export type IntisBalanceNullableScalarRelationFilter = {
+    is?: IntisBalanceWhereInput | null
+    isNot?: IntisBalanceWhereInput | null
+  }
+
+  export type IntisLedgerListRelationFilter = {
+    every?: IntisLedgerWhereInput
+    some?: IntisLedgerWhereInput
+    none?: IntisLedgerWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -16393,6 +19116,10 @@ export namespace Prisma {
   }
 
   export type ViewerWatchEventOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type IntisLedgerOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -16543,11 +19270,36 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type PetCountOrderByAggregateInput = {
     id?: SortOrder
     size?: SortOrder
     hearts?: SortOrder
+    lastFed?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type PetAvgOrderByAggregateInput = {
@@ -16559,14 +19311,20 @@ export namespace Prisma {
     id?: SortOrder
     size?: SortOrder
     hearts?: SortOrder
+    lastFed?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type PetMinOrderByAggregateInput = {
     id?: SortOrder
     size?: SortOrder
     hearts?: SortOrder
+    lastFed?: SortOrder
     userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type PetSumOrderByAggregateInput = {
@@ -16590,18 +19348,7 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
     notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -16609,7 +19356,24 @@ export namespace Prisma {
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type StreamSessionCountOrderByAggregateInput = {
@@ -16648,34 +19412,6 @@ export namespace Prisma {
 
   export type StreamSessionSumOrderByAggregateInput = {
     durationMs?: SortOrder
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type StreamerMetricsCountOrderByAggregateInput = {
@@ -16808,6 +19544,64 @@ export namespace Prisma {
 
   export type ViewerWatchEventSumOrderByAggregateInput = {
     msWatched?: SortOrder
+  }
+
+  export type IntisBalanceCountOrderByAggregateInput = {
+    userId?: SortOrder
+    balance?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type IntisBalanceAvgOrderByAggregateInput = {
+    balance?: SortOrder
+  }
+
+  export type IntisBalanceMaxOrderByAggregateInput = {
+    userId?: SortOrder
+    balance?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type IntisBalanceMinOrderByAggregateInput = {
+    userId?: SortOrder
+    balance?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type IntisBalanceSumOrderByAggregateInput = {
+    balance?: SortOrder
+  }
+
+  export type IntisLedgerCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    amount?: SortOrder
+    reason?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type IntisLedgerAvgOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type IntisLedgerMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    amount?: SortOrder
+    reason?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type IntisLedgerMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    amount?: SortOrder
+    reason?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type IntisLedgerSumOrderByAggregateInput = {
+    amount?: SortOrder
   }
 
   export type BoolFilter<$PrismaModel = never> = {
@@ -17105,6 +19899,19 @@ export namespace Prisma {
     connect?: ViewerWatchEventWhereUniqueInput | ViewerWatchEventWhereUniqueInput[]
   }
 
+  export type IntisBalanceCreateNestedOneWithoutUserInput = {
+    create?: XOR<IntisBalanceCreateWithoutUserInput, IntisBalanceUncheckedCreateWithoutUserInput>
+    connectOrCreate?: IntisBalanceCreateOrConnectWithoutUserInput
+    connect?: IntisBalanceWhereUniqueInput
+  }
+
+  export type IntisLedgerCreateNestedManyWithoutUserInput = {
+    create?: XOR<IntisLedgerCreateWithoutUserInput, IntisLedgerUncheckedCreateWithoutUserInput> | IntisLedgerCreateWithoutUserInput[] | IntisLedgerUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: IntisLedgerCreateOrConnectWithoutUserInput | IntisLedgerCreateOrConnectWithoutUserInput[]
+    createMany?: IntisLedgerCreateManyUserInputEnvelope
+    connect?: IntisLedgerWhereUniqueInput | IntisLedgerWhereUniqueInput[]
+  }
+
   export type PetUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<PetCreateWithoutUserInput, PetUncheckedCreateWithoutUserInput>
     connectOrCreate?: PetCreateOrConnectWithoutUserInput
@@ -17177,6 +19984,19 @@ export namespace Prisma {
     connectOrCreate?: ViewerWatchEventCreateOrConnectWithoutUserInput | ViewerWatchEventCreateOrConnectWithoutUserInput[]
     createMany?: ViewerWatchEventCreateManyUserInputEnvelope
     connect?: ViewerWatchEventWhereUniqueInput | ViewerWatchEventWhereUniqueInput[]
+  }
+
+  export type IntisBalanceUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<IntisBalanceCreateWithoutUserInput, IntisBalanceUncheckedCreateWithoutUserInput>
+    connectOrCreate?: IntisBalanceCreateOrConnectWithoutUserInput
+    connect?: IntisBalanceWhereUniqueInput
+  }
+
+  export type IntisLedgerUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<IntisLedgerCreateWithoutUserInput, IntisLedgerUncheckedCreateWithoutUserInput> | IntisLedgerCreateWithoutUserInput[] | IntisLedgerUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: IntisLedgerCreateOrConnectWithoutUserInput | IntisLedgerCreateOrConnectWithoutUserInput[]
+    createMany?: IntisLedgerCreateManyUserInputEnvelope
+    connect?: IntisLedgerWhereUniqueInput | IntisLedgerWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -17333,6 +20153,30 @@ export namespace Prisma {
     deleteMany?: ViewerWatchEventScalarWhereInput | ViewerWatchEventScalarWhereInput[]
   }
 
+  export type IntisBalanceUpdateOneWithoutUserNestedInput = {
+    create?: XOR<IntisBalanceCreateWithoutUserInput, IntisBalanceUncheckedCreateWithoutUserInput>
+    connectOrCreate?: IntisBalanceCreateOrConnectWithoutUserInput
+    upsert?: IntisBalanceUpsertWithoutUserInput
+    disconnect?: IntisBalanceWhereInput | boolean
+    delete?: IntisBalanceWhereInput | boolean
+    connect?: IntisBalanceWhereUniqueInput
+    update?: XOR<XOR<IntisBalanceUpdateToOneWithWhereWithoutUserInput, IntisBalanceUpdateWithoutUserInput>, IntisBalanceUncheckedUpdateWithoutUserInput>
+  }
+
+  export type IntisLedgerUpdateManyWithoutUserNestedInput = {
+    create?: XOR<IntisLedgerCreateWithoutUserInput, IntisLedgerUncheckedCreateWithoutUserInput> | IntisLedgerCreateWithoutUserInput[] | IntisLedgerUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: IntisLedgerCreateOrConnectWithoutUserInput | IntisLedgerCreateOrConnectWithoutUserInput[]
+    upsert?: IntisLedgerUpsertWithWhereUniqueWithoutUserInput | IntisLedgerUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: IntisLedgerCreateManyUserInputEnvelope
+    set?: IntisLedgerWhereUniqueInput | IntisLedgerWhereUniqueInput[]
+    disconnect?: IntisLedgerWhereUniqueInput | IntisLedgerWhereUniqueInput[]
+    delete?: IntisLedgerWhereUniqueInput | IntisLedgerWhereUniqueInput[]
+    connect?: IntisLedgerWhereUniqueInput | IntisLedgerWhereUniqueInput[]
+    update?: IntisLedgerUpdateWithWhereUniqueWithoutUserInput | IntisLedgerUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: IntisLedgerUpdateManyWithWhereWithoutUserInput | IntisLedgerUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: IntisLedgerScalarWhereInput | IntisLedgerScalarWhereInput[]
+  }
+
   export type PetUncheckedUpdateOneWithoutUserNestedInput = {
     create?: XOR<PetCreateWithoutUserInput, PetUncheckedCreateWithoutUserInput>
     connectOrCreate?: PetCreateOrConnectWithoutUserInput
@@ -17475,6 +20319,30 @@ export namespace Prisma {
     deleteMany?: ViewerWatchEventScalarWhereInput | ViewerWatchEventScalarWhereInput[]
   }
 
+  export type IntisBalanceUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<IntisBalanceCreateWithoutUserInput, IntisBalanceUncheckedCreateWithoutUserInput>
+    connectOrCreate?: IntisBalanceCreateOrConnectWithoutUserInput
+    upsert?: IntisBalanceUpsertWithoutUserInput
+    disconnect?: IntisBalanceWhereInput | boolean
+    delete?: IntisBalanceWhereInput | boolean
+    connect?: IntisBalanceWhereUniqueInput
+    update?: XOR<XOR<IntisBalanceUpdateToOneWithWhereWithoutUserInput, IntisBalanceUpdateWithoutUserInput>, IntisBalanceUncheckedUpdateWithoutUserInput>
+  }
+
+  export type IntisLedgerUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<IntisLedgerCreateWithoutUserInput, IntisLedgerUncheckedCreateWithoutUserInput> | IntisLedgerCreateWithoutUserInput[] | IntisLedgerUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: IntisLedgerCreateOrConnectWithoutUserInput | IntisLedgerCreateOrConnectWithoutUserInput[]
+    upsert?: IntisLedgerUpsertWithWhereUniqueWithoutUserInput | IntisLedgerUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: IntisLedgerCreateManyUserInputEnvelope
+    set?: IntisLedgerWhereUniqueInput | IntisLedgerWhereUniqueInput[]
+    disconnect?: IntisLedgerWhereUniqueInput | IntisLedgerWhereUniqueInput[]
+    delete?: IntisLedgerWhereUniqueInput | IntisLedgerWhereUniqueInput[]
+    connect?: IntisLedgerWhereUniqueInput | IntisLedgerWhereUniqueInput[]
+    update?: IntisLedgerUpdateWithWhereUniqueWithoutUserInput | IntisLedgerUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: IntisLedgerUpdateManyWithWhereWithoutUserInput | IntisLedgerUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: IntisLedgerScalarWhereInput | IntisLedgerScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutVideosInput = {
     create?: XOR<UserCreateWithoutVideosInput, UserUncheckedCreateWithoutVideosInput>
     connectOrCreate?: UserCreateOrConnectWithoutVideosInput
@@ -17511,6 +20379,14 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
   export type UserUpdateOneRequiredWithoutPetNestedInput = {
     create?: XOR<UserCreateWithoutPetInput, UserUncheckedCreateWithoutPetInput>
     connectOrCreate?: UserCreateOrConnectWithoutPetInput
@@ -17537,14 +20413,6 @@ export namespace Prisma {
     connectOrCreate?: GiftCreateOrConnectWithoutStreamSessionInput | GiftCreateOrConnectWithoutStreamSessionInput[]
     createMany?: GiftCreateManyStreamSessionInputEnvelope
     connect?: GiftWhereUniqueInput | GiftWhereUniqueInput[]
-  }
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
-  }
-
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
   }
 
   export type UserUpdateOneRequiredWithoutStreamSessionsNestedInput = {
@@ -17623,6 +20491,34 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutViewerWatchEventsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutViewerWatchEventsInput, UserUpdateWithoutViewerWatchEventsInput>, UserUncheckedUpdateWithoutViewerWatchEventsInput>
+  }
+
+  export type UserCreateNestedOneWithoutIntisBalanceInput = {
+    create?: XOR<UserCreateWithoutIntisBalanceInput, UserUncheckedCreateWithoutIntisBalanceInput>
+    connectOrCreate?: UserCreateOrConnectWithoutIntisBalanceInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutIntisBalanceNestedInput = {
+    create?: XOR<UserCreateWithoutIntisBalanceInput, UserUncheckedCreateWithoutIntisBalanceInput>
+    connectOrCreate?: UserCreateOrConnectWithoutIntisBalanceInput
+    upsert?: UserUpsertWithoutIntisBalanceInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutIntisBalanceInput, UserUpdateWithoutIntisBalanceInput>, UserUncheckedUpdateWithoutIntisBalanceInput>
+  }
+
+  export type UserCreateNestedOneWithoutIntisLedgersInput = {
+    create?: XOR<UserCreateWithoutIntisLedgersInput, UserUncheckedCreateWithoutIntisLedgersInput>
+    connectOrCreate?: UserCreateOrConnectWithoutIntisLedgersInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutIntisLedgersNestedInput = {
+    create?: XOR<UserCreateWithoutIntisLedgersInput, UserUncheckedCreateWithoutIntisLedgersInput>
+    connectOrCreate?: UserCreateOrConnectWithoutIntisLedgersInput
+    upsert?: UserUpsertWithoutIntisLedgersInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutIntisLedgersInput, UserUpdateWithoutIntisLedgersInput>, UserUncheckedUpdateWithoutIntisLedgersInput>
   }
 
   export type UserCreateNestedOneWithoutMetricsReceiptsInput = {
@@ -17845,6 +20741,28 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -17861,18 +20779,7 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
     notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -17880,7 +20787,10 @@ export namespace Prisma {
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -17895,20 +20805,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type NestedBoolFilter<$PrismaModel = never> = {
@@ -17951,12 +20847,18 @@ export namespace Prisma {
     id?: string
     size?: number
     hearts?: number
+    lastFed?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type PetUncheckedCreateWithoutUserInput = {
     id?: string
     size?: number
     hearts?: number
+    lastFed?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type PetCreateOrConnectWithoutUserInput = {
@@ -18243,6 +21145,45 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type IntisBalanceCreateWithoutUserInput = {
+    balance?: number
+    updatedAt?: Date | string
+  }
+
+  export type IntisBalanceUncheckedCreateWithoutUserInput = {
+    balance?: number
+    updatedAt?: Date | string
+  }
+
+  export type IntisBalanceCreateOrConnectWithoutUserInput = {
+    where: IntisBalanceWhereUniqueInput
+    create: XOR<IntisBalanceCreateWithoutUserInput, IntisBalanceUncheckedCreateWithoutUserInput>
+  }
+
+  export type IntisLedgerCreateWithoutUserInput = {
+    id?: string
+    amount: number
+    reason?: string | null
+    createdAt?: Date | string
+  }
+
+  export type IntisLedgerUncheckedCreateWithoutUserInput = {
+    id?: string
+    amount: number
+    reason?: string | null
+    createdAt?: Date | string
+  }
+
+  export type IntisLedgerCreateOrConnectWithoutUserInput = {
+    where: IntisLedgerWhereUniqueInput
+    create: XOR<IntisLedgerCreateWithoutUserInput, IntisLedgerUncheckedCreateWithoutUserInput>
+  }
+
+  export type IntisLedgerCreateManyUserInputEnvelope = {
+    data: IntisLedgerCreateManyUserInput | IntisLedgerCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type PetUpsertWithoutUserInput = {
     update: XOR<PetUpdateWithoutUserInput, PetUncheckedUpdateWithoutUserInput>
     create: XOR<PetCreateWithoutUserInput, PetUncheckedCreateWithoutUserInput>
@@ -18258,12 +21199,18 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     size?: FloatFieldUpdateOperationsInput | number
     hearts?: IntFieldUpdateOperationsInput | number
+    lastFed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PetUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     size?: FloatFieldUpdateOperationsInput | number
     hearts?: IntFieldUpdateOperationsInput | number
+    lastFed?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type VideoUpsertWithWhereUniqueWithoutUserInput = {
@@ -18548,6 +21495,54 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"ViewerWatchEvent"> | Date | string
   }
 
+  export type IntisBalanceUpsertWithoutUserInput = {
+    update: XOR<IntisBalanceUpdateWithoutUserInput, IntisBalanceUncheckedUpdateWithoutUserInput>
+    create: XOR<IntisBalanceCreateWithoutUserInput, IntisBalanceUncheckedCreateWithoutUserInput>
+    where?: IntisBalanceWhereInput
+  }
+
+  export type IntisBalanceUpdateToOneWithWhereWithoutUserInput = {
+    where?: IntisBalanceWhereInput
+    data: XOR<IntisBalanceUpdateWithoutUserInput, IntisBalanceUncheckedUpdateWithoutUserInput>
+  }
+
+  export type IntisBalanceUpdateWithoutUserInput = {
+    balance?: IntFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntisBalanceUncheckedUpdateWithoutUserInput = {
+    balance?: IntFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntisLedgerUpsertWithWhereUniqueWithoutUserInput = {
+    where: IntisLedgerWhereUniqueInput
+    update: XOR<IntisLedgerUpdateWithoutUserInput, IntisLedgerUncheckedUpdateWithoutUserInput>
+    create: XOR<IntisLedgerCreateWithoutUserInput, IntisLedgerUncheckedCreateWithoutUserInput>
+  }
+
+  export type IntisLedgerUpdateWithWhereUniqueWithoutUserInput = {
+    where: IntisLedgerWhereUniqueInput
+    data: XOR<IntisLedgerUpdateWithoutUserInput, IntisLedgerUncheckedUpdateWithoutUserInput>
+  }
+
+  export type IntisLedgerUpdateManyWithWhereWithoutUserInput = {
+    where: IntisLedgerScalarWhereInput
+    data: XOR<IntisLedgerUpdateManyMutationInput, IntisLedgerUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type IntisLedgerScalarWhereInput = {
+    AND?: IntisLedgerScalarWhereInput | IntisLedgerScalarWhereInput[]
+    OR?: IntisLedgerScalarWhereInput[]
+    NOT?: IntisLedgerScalarWhereInput | IntisLedgerScalarWhereInput[]
+    id?: StringFilter<"IntisLedger"> | string
+    userId?: StringFilter<"IntisLedger"> | string
+    amount?: IntFilter<"IntisLedger"> | number
+    reason?: StringNullableFilter<"IntisLedger"> | string | null
+    createdAt?: DateTimeFilter<"IntisLedger"> | Date | string
+  }
+
   export type UserCreateWithoutVideosInput = {
     id?: string
     nombre: string
@@ -18564,6 +21559,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptCreateNestedManyWithoutUserInput
     userMetrics?: UserMetricsCreateNestedOneWithoutUserInput
     viewerWatchEvents?: ViewerWatchEventCreateNestedManyWithoutUserInput
+    intisBalance?: IntisBalanceCreateNestedOneWithoutUserInput
+    intisLedgers?: IntisLedgerCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutVideosInput = {
@@ -18582,6 +21579,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptUncheckedCreateNestedManyWithoutUserInput
     userMetrics?: UserMetricsUncheckedCreateNestedOneWithoutUserInput
     viewerWatchEvents?: ViewerWatchEventUncheckedCreateNestedManyWithoutUserInput
+    intisBalance?: IntisBalanceUncheckedCreateNestedOneWithoutUserInput
+    intisLedgers?: IntisLedgerUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutVideosInput = {
@@ -18616,6 +21615,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptUpdateManyWithoutUserNestedInput
     userMetrics?: UserMetricsUpdateOneWithoutUserNestedInput
     viewerWatchEvents?: ViewerWatchEventUpdateManyWithoutUserNestedInput
+    intisBalance?: IntisBalanceUpdateOneWithoutUserNestedInput
+    intisLedgers?: IntisLedgerUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVideosInput = {
@@ -18634,6 +21635,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptUncheckedUpdateManyWithoutUserNestedInput
     userMetrics?: UserMetricsUncheckedUpdateOneWithoutUserNestedInput
     viewerWatchEvents?: ViewerWatchEventUncheckedUpdateManyWithoutUserNestedInput
+    intisBalance?: IntisBalanceUncheckedUpdateOneWithoutUserNestedInput
+    intisLedgers?: IntisLedgerUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutPetInput = {
@@ -18652,6 +21655,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptCreateNestedManyWithoutUserInput
     userMetrics?: UserMetricsCreateNestedOneWithoutUserInput
     viewerWatchEvents?: ViewerWatchEventCreateNestedManyWithoutUserInput
+    intisBalance?: IntisBalanceCreateNestedOneWithoutUserInput
+    intisLedgers?: IntisLedgerCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPetInput = {
@@ -18670,6 +21675,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptUncheckedCreateNestedManyWithoutUserInput
     userMetrics?: UserMetricsUncheckedCreateNestedOneWithoutUserInput
     viewerWatchEvents?: ViewerWatchEventUncheckedCreateNestedManyWithoutUserInput
+    intisBalance?: IntisBalanceUncheckedCreateNestedOneWithoutUserInput
+    intisLedgers?: IntisLedgerUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPetInput = {
@@ -18704,6 +21711,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptUpdateManyWithoutUserNestedInput
     userMetrics?: UserMetricsUpdateOneWithoutUserNestedInput
     viewerWatchEvents?: ViewerWatchEventUpdateManyWithoutUserNestedInput
+    intisBalance?: IntisBalanceUpdateOneWithoutUserNestedInput
+    intisLedgers?: IntisLedgerUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPetInput = {
@@ -18722,6 +21731,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptUncheckedUpdateManyWithoutUserNestedInput
     userMetrics?: UserMetricsUncheckedUpdateOneWithoutUserNestedInput
     viewerWatchEvents?: ViewerWatchEventUncheckedUpdateManyWithoutUserNestedInput
+    intisBalance?: IntisBalanceUncheckedUpdateOneWithoutUserNestedInput
+    intisLedgers?: IntisLedgerUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutStreamSessionsInput = {
@@ -18740,6 +21751,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptCreateNestedManyWithoutUserInput
     userMetrics?: UserMetricsCreateNestedOneWithoutUserInput
     viewerWatchEvents?: ViewerWatchEventCreateNestedManyWithoutUserInput
+    intisBalance?: IntisBalanceCreateNestedOneWithoutUserInput
+    intisLedgers?: IntisLedgerCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutStreamSessionsInput = {
@@ -18758,6 +21771,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptUncheckedCreateNestedManyWithoutUserInput
     userMetrics?: UserMetricsUncheckedCreateNestedOneWithoutUserInput
     viewerWatchEvents?: ViewerWatchEventUncheckedCreateNestedManyWithoutUserInput
+    intisBalance?: IntisBalanceUncheckedCreateNestedOneWithoutUserInput
+    intisLedgers?: IntisLedgerUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutStreamSessionsInput = {
@@ -18826,6 +21841,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptUpdateManyWithoutUserNestedInput
     userMetrics?: UserMetricsUpdateOneWithoutUserNestedInput
     viewerWatchEvents?: ViewerWatchEventUpdateManyWithoutUserNestedInput
+    intisBalance?: IntisBalanceUpdateOneWithoutUserNestedInput
+    intisLedgers?: IntisLedgerUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutStreamSessionsInput = {
@@ -18844,6 +21861,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptUncheckedUpdateManyWithoutUserNestedInput
     userMetrics?: UserMetricsUncheckedUpdateOneWithoutUserNestedInput
     viewerWatchEvents?: ViewerWatchEventUncheckedUpdateManyWithoutUserNestedInput
+    intisBalance?: IntisBalanceUncheckedUpdateOneWithoutUserNestedInput
+    intisLedgers?: IntisLedgerUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type GiftUpsertWithWhereUniqueWithoutStreamSessionInput = {
@@ -18878,6 +21897,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptCreateNestedManyWithoutUserInput
     userMetrics?: UserMetricsCreateNestedOneWithoutUserInput
     viewerWatchEvents?: ViewerWatchEventCreateNestedManyWithoutUserInput
+    intisBalance?: IntisBalanceCreateNestedOneWithoutUserInput
+    intisLedgers?: IntisLedgerCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutStreamerMetricsInput = {
@@ -18896,6 +21917,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptUncheckedCreateNestedManyWithoutUserInput
     userMetrics?: UserMetricsUncheckedCreateNestedOneWithoutUserInput
     viewerWatchEvents?: ViewerWatchEventUncheckedCreateNestedManyWithoutUserInput
+    intisBalance?: IntisBalanceUncheckedCreateNestedOneWithoutUserInput
+    intisLedgers?: IntisLedgerUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutStreamerMetricsInput = {
@@ -18930,6 +21953,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptUpdateManyWithoutUserNestedInput
     userMetrics?: UserMetricsUpdateOneWithoutUserNestedInput
     viewerWatchEvents?: ViewerWatchEventUpdateManyWithoutUserNestedInput
+    intisBalance?: IntisBalanceUpdateOneWithoutUserNestedInput
+    intisLedgers?: IntisLedgerUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutStreamerMetricsInput = {
@@ -18948,6 +21973,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptUncheckedUpdateManyWithoutUserNestedInput
     userMetrics?: UserMetricsUncheckedUpdateOneWithoutUserNestedInput
     viewerWatchEvents?: ViewerWatchEventUncheckedUpdateManyWithoutUserNestedInput
+    intisBalance?: IntisBalanceUncheckedUpdateOneWithoutUserNestedInput
+    intisLedgers?: IntisLedgerUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutUserMetricsInput = {
@@ -18966,6 +21993,8 @@ export namespace Prisma {
     comments?: CommentCreateNestedManyWithoutUserInput
     metricsReceipts?: MetricsReceiptCreateNestedManyWithoutUserInput
     viewerWatchEvents?: ViewerWatchEventCreateNestedManyWithoutUserInput
+    intisBalance?: IntisBalanceCreateNestedOneWithoutUserInput
+    intisLedgers?: IntisLedgerCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutUserMetricsInput = {
@@ -18984,6 +22013,8 @@ export namespace Prisma {
     comments?: CommentUncheckedCreateNestedManyWithoutUserInput
     metricsReceipts?: MetricsReceiptUncheckedCreateNestedManyWithoutUserInput
     viewerWatchEvents?: ViewerWatchEventUncheckedCreateNestedManyWithoutUserInput
+    intisBalance?: IntisBalanceUncheckedCreateNestedOneWithoutUserInput
+    intisLedgers?: IntisLedgerUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutUserMetricsInput = {
@@ -19018,6 +22049,8 @@ export namespace Prisma {
     comments?: CommentUpdateManyWithoutUserNestedInput
     metricsReceipts?: MetricsReceiptUpdateManyWithoutUserNestedInput
     viewerWatchEvents?: ViewerWatchEventUpdateManyWithoutUserNestedInput
+    intisBalance?: IntisBalanceUpdateOneWithoutUserNestedInput
+    intisLedgers?: IntisLedgerUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUserMetricsInput = {
@@ -19036,6 +22069,8 @@ export namespace Prisma {
     comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
     metricsReceipts?: MetricsReceiptUncheckedUpdateManyWithoutUserNestedInput
     viewerWatchEvents?: ViewerWatchEventUncheckedUpdateManyWithoutUserNestedInput
+    intisBalance?: IntisBalanceUncheckedUpdateOneWithoutUserNestedInput
+    intisLedgers?: IntisLedgerUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutViewerWatchEventsInput = {
@@ -19054,6 +22089,8 @@ export namespace Prisma {
     comments?: CommentCreateNestedManyWithoutUserInput
     metricsReceipts?: MetricsReceiptCreateNestedManyWithoutUserInput
     userMetrics?: UserMetricsCreateNestedOneWithoutUserInput
+    intisBalance?: IntisBalanceCreateNestedOneWithoutUserInput
+    intisLedgers?: IntisLedgerCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutViewerWatchEventsInput = {
@@ -19072,6 +22109,8 @@ export namespace Prisma {
     comments?: CommentUncheckedCreateNestedManyWithoutUserInput
     metricsReceipts?: MetricsReceiptUncheckedCreateNestedManyWithoutUserInput
     userMetrics?: UserMetricsUncheckedCreateNestedOneWithoutUserInput
+    intisBalance?: IntisBalanceUncheckedCreateNestedOneWithoutUserInput
+    intisLedgers?: IntisLedgerUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutViewerWatchEventsInput = {
@@ -19106,6 +22145,8 @@ export namespace Prisma {
     comments?: CommentUpdateManyWithoutUserNestedInput
     metricsReceipts?: MetricsReceiptUpdateManyWithoutUserNestedInput
     userMetrics?: UserMetricsUpdateOneWithoutUserNestedInput
+    intisBalance?: IntisBalanceUpdateOneWithoutUserNestedInput
+    intisLedgers?: IntisLedgerUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutViewerWatchEventsInput = {
@@ -19124,6 +22165,200 @@ export namespace Prisma {
     comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
     metricsReceipts?: MetricsReceiptUncheckedUpdateManyWithoutUserNestedInput
     userMetrics?: UserMetricsUncheckedUpdateOneWithoutUserNestedInput
+    intisBalance?: IntisBalanceUncheckedUpdateOneWithoutUserNestedInput
+    intisLedgers?: IntisLedgerUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutIntisBalanceInput = {
+    id?: string
+    nombre: string
+    rol: $Enums.Rol
+    password: string
+    contacto?: string | null
+    pet?: PetCreateNestedOneWithoutUserInput
+    videos?: VideoCreateNestedManyWithoutUserInput
+    streamSessions?: StreamSessionCreateNestedManyWithoutUserInput
+    streamerMetrics?: StreamerMetricsCreateNestedOneWithoutUserInput
+    audienceLevels?: AudienceLevelCreateNestedManyWithoutUserInput
+    giftsReceived?: GiftCreateNestedManyWithoutReceiverInput
+    giftsSent?: GiftCreateNestedManyWithoutSenderInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    metricsReceipts?: MetricsReceiptCreateNestedManyWithoutUserInput
+    userMetrics?: UserMetricsCreateNestedOneWithoutUserInput
+    viewerWatchEvents?: ViewerWatchEventCreateNestedManyWithoutUserInput
+    intisLedgers?: IntisLedgerCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutIntisBalanceInput = {
+    id?: string
+    nombre: string
+    rol: $Enums.Rol
+    password: string
+    contacto?: string | null
+    pet?: PetUncheckedCreateNestedOneWithoutUserInput
+    videos?: VideoUncheckedCreateNestedManyWithoutUserInput
+    streamSessions?: StreamSessionUncheckedCreateNestedManyWithoutUserInput
+    streamerMetrics?: StreamerMetricsUncheckedCreateNestedOneWithoutUserInput
+    audienceLevels?: AudienceLevelUncheckedCreateNestedManyWithoutUserInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutReceiverInput
+    giftsSent?: GiftUncheckedCreateNestedManyWithoutSenderInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    metricsReceipts?: MetricsReceiptUncheckedCreateNestedManyWithoutUserInput
+    userMetrics?: UserMetricsUncheckedCreateNestedOneWithoutUserInput
+    viewerWatchEvents?: ViewerWatchEventUncheckedCreateNestedManyWithoutUserInput
+    intisLedgers?: IntisLedgerUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutIntisBalanceInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutIntisBalanceInput, UserUncheckedCreateWithoutIntisBalanceInput>
+  }
+
+  export type UserUpsertWithoutIntisBalanceInput = {
+    update: XOR<UserUpdateWithoutIntisBalanceInput, UserUncheckedUpdateWithoutIntisBalanceInput>
+    create: XOR<UserCreateWithoutIntisBalanceInput, UserUncheckedCreateWithoutIntisBalanceInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutIntisBalanceInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutIntisBalanceInput, UserUncheckedUpdateWithoutIntisBalanceInput>
+  }
+
+  export type UserUpdateWithoutIntisBalanceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
+    password?: StringFieldUpdateOperationsInput | string
+    contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    pet?: PetUpdateOneWithoutUserNestedInput
+    videos?: VideoUpdateManyWithoutUserNestedInput
+    streamSessions?: StreamSessionUpdateManyWithoutUserNestedInput
+    streamerMetrics?: StreamerMetricsUpdateOneWithoutUserNestedInput
+    audienceLevels?: AudienceLevelUpdateManyWithoutUserNestedInput
+    giftsReceived?: GiftUpdateManyWithoutReceiverNestedInput
+    giftsSent?: GiftUpdateManyWithoutSenderNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    metricsReceipts?: MetricsReceiptUpdateManyWithoutUserNestedInput
+    userMetrics?: UserMetricsUpdateOneWithoutUserNestedInput
+    viewerWatchEvents?: ViewerWatchEventUpdateManyWithoutUserNestedInput
+    intisLedgers?: IntisLedgerUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutIntisBalanceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
+    password?: StringFieldUpdateOperationsInput | string
+    contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    pet?: PetUncheckedUpdateOneWithoutUserNestedInput
+    videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
+    streamSessions?: StreamSessionUncheckedUpdateManyWithoutUserNestedInput
+    streamerMetrics?: StreamerMetricsUncheckedUpdateOneWithoutUserNestedInput
+    audienceLevels?: AudienceLevelUncheckedUpdateManyWithoutUserNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutReceiverNestedInput
+    giftsSent?: GiftUncheckedUpdateManyWithoutSenderNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    metricsReceipts?: MetricsReceiptUncheckedUpdateManyWithoutUserNestedInput
+    userMetrics?: UserMetricsUncheckedUpdateOneWithoutUserNestedInput
+    viewerWatchEvents?: ViewerWatchEventUncheckedUpdateManyWithoutUserNestedInput
+    intisLedgers?: IntisLedgerUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutIntisLedgersInput = {
+    id?: string
+    nombre: string
+    rol: $Enums.Rol
+    password: string
+    contacto?: string | null
+    pet?: PetCreateNestedOneWithoutUserInput
+    videos?: VideoCreateNestedManyWithoutUserInput
+    streamSessions?: StreamSessionCreateNestedManyWithoutUserInput
+    streamerMetrics?: StreamerMetricsCreateNestedOneWithoutUserInput
+    audienceLevels?: AudienceLevelCreateNestedManyWithoutUserInput
+    giftsReceived?: GiftCreateNestedManyWithoutReceiverInput
+    giftsSent?: GiftCreateNestedManyWithoutSenderInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    metricsReceipts?: MetricsReceiptCreateNestedManyWithoutUserInput
+    userMetrics?: UserMetricsCreateNestedOneWithoutUserInput
+    viewerWatchEvents?: ViewerWatchEventCreateNestedManyWithoutUserInput
+    intisBalance?: IntisBalanceCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutIntisLedgersInput = {
+    id?: string
+    nombre: string
+    rol: $Enums.Rol
+    password: string
+    contacto?: string | null
+    pet?: PetUncheckedCreateNestedOneWithoutUserInput
+    videos?: VideoUncheckedCreateNestedManyWithoutUserInput
+    streamSessions?: StreamSessionUncheckedCreateNestedManyWithoutUserInput
+    streamerMetrics?: StreamerMetricsUncheckedCreateNestedOneWithoutUserInput
+    audienceLevels?: AudienceLevelUncheckedCreateNestedManyWithoutUserInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutReceiverInput
+    giftsSent?: GiftUncheckedCreateNestedManyWithoutSenderInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    metricsReceipts?: MetricsReceiptUncheckedCreateNestedManyWithoutUserInput
+    userMetrics?: UserMetricsUncheckedCreateNestedOneWithoutUserInput
+    viewerWatchEvents?: ViewerWatchEventUncheckedCreateNestedManyWithoutUserInput
+    intisBalance?: IntisBalanceUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutIntisLedgersInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutIntisLedgersInput, UserUncheckedCreateWithoutIntisLedgersInput>
+  }
+
+  export type UserUpsertWithoutIntisLedgersInput = {
+    update: XOR<UserUpdateWithoutIntisLedgersInput, UserUncheckedUpdateWithoutIntisLedgersInput>
+    create: XOR<UserCreateWithoutIntisLedgersInput, UserUncheckedCreateWithoutIntisLedgersInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutIntisLedgersInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutIntisLedgersInput, UserUncheckedUpdateWithoutIntisLedgersInput>
+  }
+
+  export type UserUpdateWithoutIntisLedgersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
+    password?: StringFieldUpdateOperationsInput | string
+    contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    pet?: PetUpdateOneWithoutUserNestedInput
+    videos?: VideoUpdateManyWithoutUserNestedInput
+    streamSessions?: StreamSessionUpdateManyWithoutUserNestedInput
+    streamerMetrics?: StreamerMetricsUpdateOneWithoutUserNestedInput
+    audienceLevels?: AudienceLevelUpdateManyWithoutUserNestedInput
+    giftsReceived?: GiftUpdateManyWithoutReceiverNestedInput
+    giftsSent?: GiftUpdateManyWithoutSenderNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    metricsReceipts?: MetricsReceiptUpdateManyWithoutUserNestedInput
+    userMetrics?: UserMetricsUpdateOneWithoutUserNestedInput
+    viewerWatchEvents?: ViewerWatchEventUpdateManyWithoutUserNestedInput
+    intisBalance?: IntisBalanceUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutIntisLedgersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
+    password?: StringFieldUpdateOperationsInput | string
+    contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    pet?: PetUncheckedUpdateOneWithoutUserNestedInput
+    videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
+    streamSessions?: StreamSessionUncheckedUpdateManyWithoutUserNestedInput
+    streamerMetrics?: StreamerMetricsUncheckedUpdateOneWithoutUserNestedInput
+    audienceLevels?: AudienceLevelUncheckedUpdateManyWithoutUserNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutReceiverNestedInput
+    giftsSent?: GiftUncheckedUpdateManyWithoutSenderNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    metricsReceipts?: MetricsReceiptUncheckedUpdateManyWithoutUserNestedInput
+    userMetrics?: UserMetricsUncheckedUpdateOneWithoutUserNestedInput
+    viewerWatchEvents?: ViewerWatchEventUncheckedUpdateManyWithoutUserNestedInput
+    intisBalance?: IntisBalanceUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateWithoutMetricsReceiptsInput = {
@@ -19142,6 +22377,8 @@ export namespace Prisma {
     comments?: CommentCreateNestedManyWithoutUserInput
     userMetrics?: UserMetricsCreateNestedOneWithoutUserInput
     viewerWatchEvents?: ViewerWatchEventCreateNestedManyWithoutUserInput
+    intisBalance?: IntisBalanceCreateNestedOneWithoutUserInput
+    intisLedgers?: IntisLedgerCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMetricsReceiptsInput = {
@@ -19160,6 +22397,8 @@ export namespace Prisma {
     comments?: CommentUncheckedCreateNestedManyWithoutUserInput
     userMetrics?: UserMetricsUncheckedCreateNestedOneWithoutUserInput
     viewerWatchEvents?: ViewerWatchEventUncheckedCreateNestedManyWithoutUserInput
+    intisBalance?: IntisBalanceUncheckedCreateNestedOneWithoutUserInput
+    intisLedgers?: IntisLedgerUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMetricsReceiptsInput = {
@@ -19194,6 +22433,8 @@ export namespace Prisma {
     comments?: CommentUpdateManyWithoutUserNestedInput
     userMetrics?: UserMetricsUpdateOneWithoutUserNestedInput
     viewerWatchEvents?: ViewerWatchEventUpdateManyWithoutUserNestedInput
+    intisBalance?: IntisBalanceUpdateOneWithoutUserNestedInput
+    intisLedgers?: IntisLedgerUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMetricsReceiptsInput = {
@@ -19212,6 +22453,8 @@ export namespace Prisma {
     comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
     userMetrics?: UserMetricsUncheckedUpdateOneWithoutUserNestedInput
     viewerWatchEvents?: ViewerWatchEventUncheckedUpdateManyWithoutUserNestedInput
+    intisBalance?: IntisBalanceUncheckedUpdateOneWithoutUserNestedInput
+    intisLedgers?: IntisLedgerUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAudienceLevelsInput = {
@@ -19230,6 +22473,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptCreateNestedManyWithoutUserInput
     userMetrics?: UserMetricsCreateNestedOneWithoutUserInput
     viewerWatchEvents?: ViewerWatchEventCreateNestedManyWithoutUserInput
+    intisBalance?: IntisBalanceCreateNestedOneWithoutUserInput
+    intisLedgers?: IntisLedgerCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAudienceLevelsInput = {
@@ -19248,6 +22493,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptUncheckedCreateNestedManyWithoutUserInput
     userMetrics?: UserMetricsUncheckedCreateNestedOneWithoutUserInput
     viewerWatchEvents?: ViewerWatchEventUncheckedCreateNestedManyWithoutUserInput
+    intisBalance?: IntisBalanceUncheckedCreateNestedOneWithoutUserInput
+    intisLedgers?: IntisLedgerUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAudienceLevelsInput = {
@@ -19282,6 +22529,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptUpdateManyWithoutUserNestedInput
     userMetrics?: UserMetricsUpdateOneWithoutUserNestedInput
     viewerWatchEvents?: ViewerWatchEventUpdateManyWithoutUserNestedInput
+    intisBalance?: IntisBalanceUpdateOneWithoutUserNestedInput
+    intisLedgers?: IntisLedgerUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAudienceLevelsInput = {
@@ -19300,6 +22549,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptUncheckedUpdateManyWithoutUserNestedInput
     userMetrics?: UserMetricsUncheckedUpdateOneWithoutUserNestedInput
     viewerWatchEvents?: ViewerWatchEventUncheckedUpdateManyWithoutUserNestedInput
+    intisBalance?: IntisBalanceUncheckedUpdateOneWithoutUserNestedInput
+    intisLedgers?: IntisLedgerUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutGiftsReceivedInput = {
@@ -19318,6 +22569,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptCreateNestedManyWithoutUserInput
     userMetrics?: UserMetricsCreateNestedOneWithoutUserInput
     viewerWatchEvents?: ViewerWatchEventCreateNestedManyWithoutUserInput
+    intisBalance?: IntisBalanceCreateNestedOneWithoutUserInput
+    intisLedgers?: IntisLedgerCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutGiftsReceivedInput = {
@@ -19336,6 +22589,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptUncheckedCreateNestedManyWithoutUserInput
     userMetrics?: UserMetricsUncheckedCreateNestedOneWithoutUserInput
     viewerWatchEvents?: ViewerWatchEventUncheckedCreateNestedManyWithoutUserInput
+    intisBalance?: IntisBalanceUncheckedCreateNestedOneWithoutUserInput
+    intisLedgers?: IntisLedgerUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutGiftsReceivedInput = {
@@ -19359,6 +22614,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptCreateNestedManyWithoutUserInput
     userMetrics?: UserMetricsCreateNestedOneWithoutUserInput
     viewerWatchEvents?: ViewerWatchEventCreateNestedManyWithoutUserInput
+    intisBalance?: IntisBalanceCreateNestedOneWithoutUserInput
+    intisLedgers?: IntisLedgerCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutGiftsSentInput = {
@@ -19377,6 +22634,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptUncheckedCreateNestedManyWithoutUserInput
     userMetrics?: UserMetricsUncheckedCreateNestedOneWithoutUserInput
     viewerWatchEvents?: ViewerWatchEventUncheckedCreateNestedManyWithoutUserInput
+    intisBalance?: IntisBalanceUncheckedCreateNestedOneWithoutUserInput
+    intisLedgers?: IntisLedgerUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutGiftsSentInput = {
@@ -19436,6 +22695,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptUpdateManyWithoutUserNestedInput
     userMetrics?: UserMetricsUpdateOneWithoutUserNestedInput
     viewerWatchEvents?: ViewerWatchEventUpdateManyWithoutUserNestedInput
+    intisBalance?: IntisBalanceUpdateOneWithoutUserNestedInput
+    intisLedgers?: IntisLedgerUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutGiftsReceivedInput = {
@@ -19454,6 +22715,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptUncheckedUpdateManyWithoutUserNestedInput
     userMetrics?: UserMetricsUncheckedUpdateOneWithoutUserNestedInput
     viewerWatchEvents?: ViewerWatchEventUncheckedUpdateManyWithoutUserNestedInput
+    intisBalance?: IntisBalanceUncheckedUpdateOneWithoutUserNestedInput
+    intisLedgers?: IntisLedgerUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutGiftsSentInput = {
@@ -19483,6 +22746,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptUpdateManyWithoutUserNestedInput
     userMetrics?: UserMetricsUpdateOneWithoutUserNestedInput
     viewerWatchEvents?: ViewerWatchEventUpdateManyWithoutUserNestedInput
+    intisBalance?: IntisBalanceUpdateOneWithoutUserNestedInput
+    intisLedgers?: IntisLedgerUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutGiftsSentInput = {
@@ -19501,6 +22766,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptUncheckedUpdateManyWithoutUserNestedInput
     userMetrics?: UserMetricsUncheckedUpdateOneWithoutUserNestedInput
     viewerWatchEvents?: ViewerWatchEventUncheckedUpdateManyWithoutUserNestedInput
+    intisBalance?: IntisBalanceUncheckedUpdateOneWithoutUserNestedInput
+    intisLedgers?: IntisLedgerUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type StreamSessionUpsertWithoutGiftsInput = {
@@ -19550,6 +22817,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptCreateNestedManyWithoutUserInput
     userMetrics?: UserMetricsCreateNestedOneWithoutUserInput
     viewerWatchEvents?: ViewerWatchEventCreateNestedManyWithoutUserInput
+    intisBalance?: IntisBalanceCreateNestedOneWithoutUserInput
+    intisLedgers?: IntisLedgerCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCommentsInput = {
@@ -19568,6 +22837,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptUncheckedCreateNestedManyWithoutUserInput
     userMetrics?: UserMetricsUncheckedCreateNestedOneWithoutUserInput
     viewerWatchEvents?: ViewerWatchEventUncheckedCreateNestedManyWithoutUserInput
+    intisBalance?: IntisBalanceUncheckedCreateNestedOneWithoutUserInput
+    intisLedgers?: IntisLedgerUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCommentsInput = {
@@ -19602,6 +22873,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptUpdateManyWithoutUserNestedInput
     userMetrics?: UserMetricsUpdateOneWithoutUserNestedInput
     viewerWatchEvents?: ViewerWatchEventUpdateManyWithoutUserNestedInput
+    intisBalance?: IntisBalanceUpdateOneWithoutUserNestedInput
+    intisLedgers?: IntisLedgerUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -19620,6 +22893,8 @@ export namespace Prisma {
     metricsReceipts?: MetricsReceiptUncheckedUpdateManyWithoutUserNestedInput
     userMetrics?: UserMetricsUncheckedUpdateOneWithoutUserNestedInput
     viewerWatchEvents?: ViewerWatchEventUncheckedUpdateManyWithoutUserNestedInput
+    intisBalance?: IntisBalanceUncheckedUpdateOneWithoutUserNestedInput
+    intisLedgers?: IntisLedgerUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type VideoCreateManyUserInput = {
@@ -19691,6 +22966,13 @@ export namespace Prisma {
     id?: string
     msWatched: number
     occurredAt?: Date | string
+    createdAt?: Date | string
+  }
+
+  export type IntisLedgerCreateManyUserInput = {
+    id?: string
+    amount: number
+    reason?: string | null
     createdAt?: Date | string
   }
 
@@ -19908,6 +23190,27 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     msWatched?: IntFieldUpdateOperationsInput | number
     occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntisLedgerUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntisLedgerUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IntisLedgerUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

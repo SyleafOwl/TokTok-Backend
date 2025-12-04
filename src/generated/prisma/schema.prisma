@@ -36,6 +36,8 @@ model User {
   metricsReceipts   MetricsReceipt[]
   userMetrics       UserMetrics?
   viewerWatchEvents ViewerWatchEvent[]
+  intisBalance      IntisBalance?
+  intisLedgers      IntisLedger[]
 }
 
 model Video {
@@ -49,12 +51,16 @@ model Video {
 }
 
 model Pet {
-  id     String @id @default(cuid())
-  size   Float  @default(0.0)
-  hearts Int    @default(0)
+  id      String    @id @default(cuid())
+  size    Float     @default(1.0)
+  hearts  Int       @default(1)
+  lastFed DateTime?
 
   user   User   @relation(fields: [userId], references: [id])
   userId String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model StreamSession {
@@ -131,6 +137,26 @@ model ViewerWatchEvent {
 
   @@index([userId])
   @@index([occurredAt])
+}
+
+// Intis balance por usuario
+model IntisBalance {
+  userId    String   @id
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  balance   Int      @default(0)
+  updatedAt DateTime @default(now())
+}
+
+// Ledger opcional para auditoría
+model IntisLedger {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  amount    Int
+  reason    String?
+  createdAt DateTime @default(now())
+
+  @@index([userId])
 }
 
 // Recibos/idempotencia para cierres de sesión
