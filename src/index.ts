@@ -457,15 +457,20 @@ app.get('/api/metrics/:userId', async (req, res) => {
     const totalSessions = (sessAgg._count?.id as number) ?? 0
     const { level, progressPct } = computeUnifiedLevelAndProgress(totalMs)
 
-    // Persistir en user_metrics para referencia cruzada
+    // Consultar estado previo para preservar lastLevelUpAt
+    const prev = await clientAny.userMetrics.findUnique({ where: { userId } })
+    const isLevelUp = prev ? level > (prev.currentLevel ?? 1) : false
+    const lastLevelUpAt = isLevelUp ? new Date() : prev?.lastLevelUpAt ?? null
+
+    // Persistir en user_metrics para referencia cruzada, actualizando lastLevelUpAt sólo si sube nivel
     await clientAny.userMetrics.upsert({
       where: { userId },
-      update: { totalMs, totalSessions, currentLevel: level, progressPct },
-      create: { userId, totalMs, totalSessions, currentLevel: level, progressPct }
+      update: { totalMs, totalSessions, currentLevel: level, progressPct, lastLevelUpAt },
+      create: { userId, totalMs, totalSessions, currentLevel: level, progressPct, lastLevelUpAt }
     })
 
     // Responder sólo los campos esperados por el front
-    return res.json({ totalMs, totalSessions, currentLevel: level, progressPct })
+    return res.json({ totalMs, totalSessions, currentLevel: level, progressPct, lastLevelUpAt })
   } catch (e: any) {
     console.error('[Metrics GET] Error:', e)
     res.status(500).json({ error: e?.message ?? 'Error obteniendo métricas' })
