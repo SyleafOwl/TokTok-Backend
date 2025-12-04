@@ -8,7 +8,11 @@
     "build": "npm install && npx prisma generate && npx tsc && cp -r src/generated dist/",
     "start": "npx prisma db push && node ./dist/index.js",
     "dev": "ts-node ./src/index.ts",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "prisma:format": "prisma format",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev --name init",
+    "prisma:deploy": "prisma migrate deploy"
   },
   "repository": {
     "type": "git",

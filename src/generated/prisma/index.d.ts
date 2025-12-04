@@ -39,6 +39,11 @@ export type StreamSession = $Result.DefaultSelection<Prisma.$StreamSessionPayloa
  */
 export type StreamerMetrics = $Result.DefaultSelection<Prisma.$StreamerMetricsPayload>
 /**
+ * Model MetricsReceipt
+ * 
+ */
+export type MetricsReceipt = $Result.DefaultSelection<Prisma.$MetricsReceiptPayload>
+/**
  * Model AudienceLevel
  * 
  */
@@ -238,6 +243,16 @@ export class PrismaClient<
     * ```
     */
   get streamerMetrics(): Prisma.StreamerMetricsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.metricsReceipt`: Exposes CRUD operations for the **MetricsReceipt** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MetricsReceipts
+    * const metricsReceipts = await prisma.metricsReceipt.findMany()
+    * ```
+    */
+  get metricsReceipt(): Prisma.MetricsReceiptDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.audienceLevel`: Exposes CRUD operations for the **AudienceLevel** model.
@@ -714,6 +729,7 @@ export namespace Prisma {
     Pet: 'Pet',
     StreamSession: 'StreamSession',
     StreamerMetrics: 'StreamerMetrics',
+    MetricsReceipt: 'MetricsReceipt',
     AudienceLevel: 'AudienceLevel',
     Gift: 'Gift',
     Comment: 'Comment'
@@ -735,7 +751,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "video" | "pet" | "streamSession" | "streamerMetrics" | "audienceLevel" | "gift" | "comment"
+      modelProps: "user" | "video" | "pet" | "streamSession" | "streamerMetrics" | "metricsReceipt" | "audienceLevel" | "gift" | "comment"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1109,6 +1125,80 @@ export namespace Prisma {
           }
         }
       }
+      MetricsReceipt: {
+        payload: Prisma.$MetricsReceiptPayload<ExtArgs>
+        fields: Prisma.MetricsReceiptFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MetricsReceiptFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MetricsReceiptPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MetricsReceiptFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MetricsReceiptPayload>
+          }
+          findFirst: {
+            args: Prisma.MetricsReceiptFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MetricsReceiptPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MetricsReceiptFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MetricsReceiptPayload>
+          }
+          findMany: {
+            args: Prisma.MetricsReceiptFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MetricsReceiptPayload>[]
+          }
+          create: {
+            args: Prisma.MetricsReceiptCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MetricsReceiptPayload>
+          }
+          createMany: {
+            args: Prisma.MetricsReceiptCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MetricsReceiptCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MetricsReceiptPayload>[]
+          }
+          delete: {
+            args: Prisma.MetricsReceiptDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MetricsReceiptPayload>
+          }
+          update: {
+            args: Prisma.MetricsReceiptUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MetricsReceiptPayload>
+          }
+          deleteMany: {
+            args: Prisma.MetricsReceiptDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MetricsReceiptUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MetricsReceiptUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MetricsReceiptPayload>[]
+          }
+          upsert: {
+            args: Prisma.MetricsReceiptUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MetricsReceiptPayload>
+          }
+          aggregate: {
+            args: Prisma.MetricsReceiptAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMetricsReceipt>
+          }
+          groupBy: {
+            args: Prisma.MetricsReceiptGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MetricsReceiptGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MetricsReceiptCountArgs<ExtArgs>
+            result: $Utils.Optional<MetricsReceiptCountAggregateOutputType> | number
+          }
+        }
+      }
       AudienceLevel: {
         payload: Prisma.$AudienceLevelPayload<ExtArgs>
         fields: Prisma.AudienceLevelFieldRefs
@@ -1432,6 +1522,7 @@ export namespace Prisma {
     pet?: PetOmit
     streamSession?: StreamSessionOmit
     streamerMetrics?: StreamerMetricsOmit
+    metricsReceipt?: MetricsReceiptOmit
     audienceLevel?: AudienceLevelOmit
     gift?: GiftOmit
     comment?: CommentOmit
@@ -1521,6 +1612,7 @@ export namespace Prisma {
     giftsReceived: number
     giftsSent: number
     comments: number
+    metricsReceipts: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1530,6 +1622,7 @@ export namespace Prisma {
     giftsReceived?: boolean | UserCountOutputTypeCountGiftsReceivedArgs
     giftsSent?: boolean | UserCountOutputTypeCountGiftsSentArgs
     comments?: boolean | UserCountOutputTypeCountCommentsArgs
+    metricsReceipts?: boolean | UserCountOutputTypeCountMetricsReceiptsArgs
   }
 
   // Custom InputTypes
@@ -1583,6 +1676,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CommentWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountMetricsReceiptsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MetricsReceiptWhereInput
   }
 
 
@@ -1793,6 +1893,7 @@ export namespace Prisma {
     giftsReceived?: boolean | User$giftsReceivedArgs<ExtArgs>
     giftsSent?: boolean | User$giftsSentArgs<ExtArgs>
     comments?: boolean | User$commentsArgs<ExtArgs>
+    metricsReceipts?: boolean | User$metricsReceiptsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1830,6 +1931,7 @@ export namespace Prisma {
     giftsReceived?: boolean | User$giftsReceivedArgs<ExtArgs>
     giftsSent?: boolean | User$giftsSentArgs<ExtArgs>
     comments?: boolean | User$commentsArgs<ExtArgs>
+    metricsReceipts?: boolean | User$metricsReceiptsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1846,6 +1948,7 @@ export namespace Prisma {
       giftsReceived: Prisma.$GiftPayload<ExtArgs>[]
       giftsSent: Prisma.$GiftPayload<ExtArgs>[]
       comments: Prisma.$CommentPayload<ExtArgs>[]
+      metricsReceipts: Prisma.$MetricsReceiptPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2255,6 +2358,7 @@ export namespace Prisma {
     giftsReceived<T extends User$giftsReceivedArgs<ExtArgs> = {}>(args?: Subset<T, User$giftsReceivedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GiftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     giftsSent<T extends User$giftsSentArgs<ExtArgs> = {}>(args?: Subset<T, User$giftsSentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GiftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     comments<T extends User$commentsArgs<ExtArgs> = {}>(args?: Subset<T, User$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    metricsReceipts<T extends User$metricsReceiptsArgs<ExtArgs> = {}>(args?: Subset<T, User$metricsReceiptsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MetricsReceiptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2856,6 +2960,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: CommentScalarFieldEnum | CommentScalarFieldEnum[]
+  }
+
+  /**
+   * User.metricsReceipts
+   */
+  export type User$metricsReceiptsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MetricsReceipt
+     */
+    select?: MetricsReceiptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MetricsReceipt
+     */
+    omit?: MetricsReceiptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MetricsReceiptInclude<ExtArgs> | null
+    where?: MetricsReceiptWhereInput
+    orderBy?: MetricsReceiptOrderByWithRelationInput | MetricsReceiptOrderByWithRelationInput[]
+    cursor?: MetricsReceiptWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MetricsReceiptScalarFieldEnum | MetricsReceiptScalarFieldEnum[]
   }
 
   /**
@@ -7344,6 +7472,1077 @@ export namespace Prisma {
 
 
   /**
+   * Model MetricsReceipt
+   */
+
+  export type AggregateMetricsReceipt = {
+    _count: MetricsReceiptCountAggregateOutputType | null
+    _min: MetricsReceiptMinAggregateOutputType | null
+    _max: MetricsReceiptMaxAggregateOutputType | null
+  }
+
+  export type MetricsReceiptMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    bucketKey: string | null
+    applied: boolean | null
+    createdAt: Date | null
+    appliedAt: Date | null
+  }
+
+  export type MetricsReceiptMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    bucketKey: string | null
+    applied: boolean | null
+    createdAt: Date | null
+    appliedAt: Date | null
+  }
+
+  export type MetricsReceiptCountAggregateOutputType = {
+    id: number
+    userId: number
+    bucketKey: number
+    applied: number
+    createdAt: number
+    appliedAt: number
+    _all: number
+  }
+
+
+  export type MetricsReceiptMinAggregateInputType = {
+    id?: true
+    userId?: true
+    bucketKey?: true
+    applied?: true
+    createdAt?: true
+    appliedAt?: true
+  }
+
+  export type MetricsReceiptMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    bucketKey?: true
+    applied?: true
+    createdAt?: true
+    appliedAt?: true
+  }
+
+  export type MetricsReceiptCountAggregateInputType = {
+    id?: true
+    userId?: true
+    bucketKey?: true
+    applied?: true
+    createdAt?: true
+    appliedAt?: true
+    _all?: true
+  }
+
+  export type MetricsReceiptAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MetricsReceipt to aggregate.
+     */
+    where?: MetricsReceiptWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MetricsReceipts to fetch.
+     */
+    orderBy?: MetricsReceiptOrderByWithRelationInput | MetricsReceiptOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MetricsReceiptWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MetricsReceipts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MetricsReceipts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MetricsReceipts
+    **/
+    _count?: true | MetricsReceiptCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MetricsReceiptMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MetricsReceiptMaxAggregateInputType
+  }
+
+  export type GetMetricsReceiptAggregateType<T extends MetricsReceiptAggregateArgs> = {
+        [P in keyof T & keyof AggregateMetricsReceipt]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMetricsReceipt[P]>
+      : GetScalarType<T[P], AggregateMetricsReceipt[P]>
+  }
+
+
+
+
+  export type MetricsReceiptGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MetricsReceiptWhereInput
+    orderBy?: MetricsReceiptOrderByWithAggregationInput | MetricsReceiptOrderByWithAggregationInput[]
+    by: MetricsReceiptScalarFieldEnum[] | MetricsReceiptScalarFieldEnum
+    having?: MetricsReceiptScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MetricsReceiptCountAggregateInputType | true
+    _min?: MetricsReceiptMinAggregateInputType
+    _max?: MetricsReceiptMaxAggregateInputType
+  }
+
+  export type MetricsReceiptGroupByOutputType = {
+    id: string
+    userId: string
+    bucketKey: string
+    applied: boolean
+    createdAt: Date
+    appliedAt: Date | null
+    _count: MetricsReceiptCountAggregateOutputType | null
+    _min: MetricsReceiptMinAggregateOutputType | null
+    _max: MetricsReceiptMaxAggregateOutputType | null
+  }
+
+  type GetMetricsReceiptGroupByPayload<T extends MetricsReceiptGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MetricsReceiptGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MetricsReceiptGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MetricsReceiptGroupByOutputType[P]>
+            : GetScalarType<T[P], MetricsReceiptGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MetricsReceiptSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    bucketKey?: boolean
+    applied?: boolean
+    createdAt?: boolean
+    appliedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["metricsReceipt"]>
+
+  export type MetricsReceiptSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    bucketKey?: boolean
+    applied?: boolean
+    createdAt?: boolean
+    appliedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["metricsReceipt"]>
+
+  export type MetricsReceiptSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    bucketKey?: boolean
+    applied?: boolean
+    createdAt?: boolean
+    appliedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["metricsReceipt"]>
+
+  export type MetricsReceiptSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    bucketKey?: boolean
+    applied?: boolean
+    createdAt?: boolean
+    appliedAt?: boolean
+  }
+
+  export type MetricsReceiptOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "bucketKey" | "applied" | "createdAt" | "appliedAt", ExtArgs["result"]["metricsReceipt"]>
+  export type MetricsReceiptInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type MetricsReceiptIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type MetricsReceiptIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $MetricsReceiptPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MetricsReceipt"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      bucketKey: string
+      applied: boolean
+      createdAt: Date
+      appliedAt: Date | null
+    }, ExtArgs["result"]["metricsReceipt"]>
+    composites: {}
+  }
+
+  type MetricsReceiptGetPayload<S extends boolean | null | undefined | MetricsReceiptDefaultArgs> = $Result.GetResult<Prisma.$MetricsReceiptPayload, S>
+
+  type MetricsReceiptCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MetricsReceiptFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MetricsReceiptCountAggregateInputType | true
+    }
+
+  export interface MetricsReceiptDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MetricsReceipt'], meta: { name: 'MetricsReceipt' } }
+    /**
+     * Find zero or one MetricsReceipt that matches the filter.
+     * @param {MetricsReceiptFindUniqueArgs} args - Arguments to find a MetricsReceipt
+     * @example
+     * // Get one MetricsReceipt
+     * const metricsReceipt = await prisma.metricsReceipt.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MetricsReceiptFindUniqueArgs>(args: SelectSubset<T, MetricsReceiptFindUniqueArgs<ExtArgs>>): Prisma__MetricsReceiptClient<$Result.GetResult<Prisma.$MetricsReceiptPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one MetricsReceipt that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MetricsReceiptFindUniqueOrThrowArgs} args - Arguments to find a MetricsReceipt
+     * @example
+     * // Get one MetricsReceipt
+     * const metricsReceipt = await prisma.metricsReceipt.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MetricsReceiptFindUniqueOrThrowArgs>(args: SelectSubset<T, MetricsReceiptFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MetricsReceiptClient<$Result.GetResult<Prisma.$MetricsReceiptPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MetricsReceipt that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MetricsReceiptFindFirstArgs} args - Arguments to find a MetricsReceipt
+     * @example
+     * // Get one MetricsReceipt
+     * const metricsReceipt = await prisma.metricsReceipt.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MetricsReceiptFindFirstArgs>(args?: SelectSubset<T, MetricsReceiptFindFirstArgs<ExtArgs>>): Prisma__MetricsReceiptClient<$Result.GetResult<Prisma.$MetricsReceiptPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MetricsReceipt that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MetricsReceiptFindFirstOrThrowArgs} args - Arguments to find a MetricsReceipt
+     * @example
+     * // Get one MetricsReceipt
+     * const metricsReceipt = await prisma.metricsReceipt.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MetricsReceiptFindFirstOrThrowArgs>(args?: SelectSubset<T, MetricsReceiptFindFirstOrThrowArgs<ExtArgs>>): Prisma__MetricsReceiptClient<$Result.GetResult<Prisma.$MetricsReceiptPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more MetricsReceipts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MetricsReceiptFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MetricsReceipts
+     * const metricsReceipts = await prisma.metricsReceipt.findMany()
+     * 
+     * // Get first 10 MetricsReceipts
+     * const metricsReceipts = await prisma.metricsReceipt.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const metricsReceiptWithIdOnly = await prisma.metricsReceipt.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MetricsReceiptFindManyArgs>(args?: SelectSubset<T, MetricsReceiptFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MetricsReceiptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a MetricsReceipt.
+     * @param {MetricsReceiptCreateArgs} args - Arguments to create a MetricsReceipt.
+     * @example
+     * // Create one MetricsReceipt
+     * const MetricsReceipt = await prisma.metricsReceipt.create({
+     *   data: {
+     *     // ... data to create a MetricsReceipt
+     *   }
+     * })
+     * 
+     */
+    create<T extends MetricsReceiptCreateArgs>(args: SelectSubset<T, MetricsReceiptCreateArgs<ExtArgs>>): Prisma__MetricsReceiptClient<$Result.GetResult<Prisma.$MetricsReceiptPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many MetricsReceipts.
+     * @param {MetricsReceiptCreateManyArgs} args - Arguments to create many MetricsReceipts.
+     * @example
+     * // Create many MetricsReceipts
+     * const metricsReceipt = await prisma.metricsReceipt.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MetricsReceiptCreateManyArgs>(args?: SelectSubset<T, MetricsReceiptCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MetricsReceipts and returns the data saved in the database.
+     * @param {MetricsReceiptCreateManyAndReturnArgs} args - Arguments to create many MetricsReceipts.
+     * @example
+     * // Create many MetricsReceipts
+     * const metricsReceipt = await prisma.metricsReceipt.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MetricsReceipts and only return the `id`
+     * const metricsReceiptWithIdOnly = await prisma.metricsReceipt.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MetricsReceiptCreateManyAndReturnArgs>(args?: SelectSubset<T, MetricsReceiptCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MetricsReceiptPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a MetricsReceipt.
+     * @param {MetricsReceiptDeleteArgs} args - Arguments to delete one MetricsReceipt.
+     * @example
+     * // Delete one MetricsReceipt
+     * const MetricsReceipt = await prisma.metricsReceipt.delete({
+     *   where: {
+     *     // ... filter to delete one MetricsReceipt
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MetricsReceiptDeleteArgs>(args: SelectSubset<T, MetricsReceiptDeleteArgs<ExtArgs>>): Prisma__MetricsReceiptClient<$Result.GetResult<Prisma.$MetricsReceiptPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one MetricsReceipt.
+     * @param {MetricsReceiptUpdateArgs} args - Arguments to update one MetricsReceipt.
+     * @example
+     * // Update one MetricsReceipt
+     * const metricsReceipt = await prisma.metricsReceipt.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MetricsReceiptUpdateArgs>(args: SelectSubset<T, MetricsReceiptUpdateArgs<ExtArgs>>): Prisma__MetricsReceiptClient<$Result.GetResult<Prisma.$MetricsReceiptPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more MetricsReceipts.
+     * @param {MetricsReceiptDeleteManyArgs} args - Arguments to filter MetricsReceipts to delete.
+     * @example
+     * // Delete a few MetricsReceipts
+     * const { count } = await prisma.metricsReceipt.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MetricsReceiptDeleteManyArgs>(args?: SelectSubset<T, MetricsReceiptDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MetricsReceipts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MetricsReceiptUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MetricsReceipts
+     * const metricsReceipt = await prisma.metricsReceipt.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MetricsReceiptUpdateManyArgs>(args: SelectSubset<T, MetricsReceiptUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MetricsReceipts and returns the data updated in the database.
+     * @param {MetricsReceiptUpdateManyAndReturnArgs} args - Arguments to update many MetricsReceipts.
+     * @example
+     * // Update many MetricsReceipts
+     * const metricsReceipt = await prisma.metricsReceipt.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more MetricsReceipts and only return the `id`
+     * const metricsReceiptWithIdOnly = await prisma.metricsReceipt.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MetricsReceiptUpdateManyAndReturnArgs>(args: SelectSubset<T, MetricsReceiptUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MetricsReceiptPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one MetricsReceipt.
+     * @param {MetricsReceiptUpsertArgs} args - Arguments to update or create a MetricsReceipt.
+     * @example
+     * // Update or create a MetricsReceipt
+     * const metricsReceipt = await prisma.metricsReceipt.upsert({
+     *   create: {
+     *     // ... data to create a MetricsReceipt
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MetricsReceipt we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MetricsReceiptUpsertArgs>(args: SelectSubset<T, MetricsReceiptUpsertArgs<ExtArgs>>): Prisma__MetricsReceiptClient<$Result.GetResult<Prisma.$MetricsReceiptPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of MetricsReceipts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MetricsReceiptCountArgs} args - Arguments to filter MetricsReceipts to count.
+     * @example
+     * // Count the number of MetricsReceipts
+     * const count = await prisma.metricsReceipt.count({
+     *   where: {
+     *     // ... the filter for the MetricsReceipts we want to count
+     *   }
+     * })
+    **/
+    count<T extends MetricsReceiptCountArgs>(
+      args?: Subset<T, MetricsReceiptCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MetricsReceiptCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MetricsReceipt.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MetricsReceiptAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MetricsReceiptAggregateArgs>(args: Subset<T, MetricsReceiptAggregateArgs>): Prisma.PrismaPromise<GetMetricsReceiptAggregateType<T>>
+
+    /**
+     * Group by MetricsReceipt.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MetricsReceiptGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MetricsReceiptGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MetricsReceiptGroupByArgs['orderBy'] }
+        : { orderBy?: MetricsReceiptGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MetricsReceiptGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMetricsReceiptGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MetricsReceipt model
+   */
+  readonly fields: MetricsReceiptFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MetricsReceipt.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MetricsReceiptClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the MetricsReceipt model
+   */
+  interface MetricsReceiptFieldRefs {
+    readonly id: FieldRef<"MetricsReceipt", 'String'>
+    readonly userId: FieldRef<"MetricsReceipt", 'String'>
+    readonly bucketKey: FieldRef<"MetricsReceipt", 'String'>
+    readonly applied: FieldRef<"MetricsReceipt", 'Boolean'>
+    readonly createdAt: FieldRef<"MetricsReceipt", 'DateTime'>
+    readonly appliedAt: FieldRef<"MetricsReceipt", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MetricsReceipt findUnique
+   */
+  export type MetricsReceiptFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MetricsReceipt
+     */
+    select?: MetricsReceiptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MetricsReceipt
+     */
+    omit?: MetricsReceiptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MetricsReceiptInclude<ExtArgs> | null
+    /**
+     * Filter, which MetricsReceipt to fetch.
+     */
+    where: MetricsReceiptWhereUniqueInput
+  }
+
+  /**
+   * MetricsReceipt findUniqueOrThrow
+   */
+  export type MetricsReceiptFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MetricsReceipt
+     */
+    select?: MetricsReceiptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MetricsReceipt
+     */
+    omit?: MetricsReceiptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MetricsReceiptInclude<ExtArgs> | null
+    /**
+     * Filter, which MetricsReceipt to fetch.
+     */
+    where: MetricsReceiptWhereUniqueInput
+  }
+
+  /**
+   * MetricsReceipt findFirst
+   */
+  export type MetricsReceiptFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MetricsReceipt
+     */
+    select?: MetricsReceiptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MetricsReceipt
+     */
+    omit?: MetricsReceiptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MetricsReceiptInclude<ExtArgs> | null
+    /**
+     * Filter, which MetricsReceipt to fetch.
+     */
+    where?: MetricsReceiptWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MetricsReceipts to fetch.
+     */
+    orderBy?: MetricsReceiptOrderByWithRelationInput | MetricsReceiptOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MetricsReceipts.
+     */
+    cursor?: MetricsReceiptWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MetricsReceipts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MetricsReceipts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MetricsReceipts.
+     */
+    distinct?: MetricsReceiptScalarFieldEnum | MetricsReceiptScalarFieldEnum[]
+  }
+
+  /**
+   * MetricsReceipt findFirstOrThrow
+   */
+  export type MetricsReceiptFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MetricsReceipt
+     */
+    select?: MetricsReceiptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MetricsReceipt
+     */
+    omit?: MetricsReceiptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MetricsReceiptInclude<ExtArgs> | null
+    /**
+     * Filter, which MetricsReceipt to fetch.
+     */
+    where?: MetricsReceiptWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MetricsReceipts to fetch.
+     */
+    orderBy?: MetricsReceiptOrderByWithRelationInput | MetricsReceiptOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MetricsReceipts.
+     */
+    cursor?: MetricsReceiptWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MetricsReceipts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MetricsReceipts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MetricsReceipts.
+     */
+    distinct?: MetricsReceiptScalarFieldEnum | MetricsReceiptScalarFieldEnum[]
+  }
+
+  /**
+   * MetricsReceipt findMany
+   */
+  export type MetricsReceiptFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MetricsReceipt
+     */
+    select?: MetricsReceiptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MetricsReceipt
+     */
+    omit?: MetricsReceiptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MetricsReceiptInclude<ExtArgs> | null
+    /**
+     * Filter, which MetricsReceipts to fetch.
+     */
+    where?: MetricsReceiptWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MetricsReceipts to fetch.
+     */
+    orderBy?: MetricsReceiptOrderByWithRelationInput | MetricsReceiptOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MetricsReceipts.
+     */
+    cursor?: MetricsReceiptWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MetricsReceipts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MetricsReceipts.
+     */
+    skip?: number
+    distinct?: MetricsReceiptScalarFieldEnum | MetricsReceiptScalarFieldEnum[]
+  }
+
+  /**
+   * MetricsReceipt create
+   */
+  export type MetricsReceiptCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MetricsReceipt
+     */
+    select?: MetricsReceiptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MetricsReceipt
+     */
+    omit?: MetricsReceiptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MetricsReceiptInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MetricsReceipt.
+     */
+    data: XOR<MetricsReceiptCreateInput, MetricsReceiptUncheckedCreateInput>
+  }
+
+  /**
+   * MetricsReceipt createMany
+   */
+  export type MetricsReceiptCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MetricsReceipts.
+     */
+    data: MetricsReceiptCreateManyInput | MetricsReceiptCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MetricsReceipt createManyAndReturn
+   */
+  export type MetricsReceiptCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MetricsReceipt
+     */
+    select?: MetricsReceiptSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MetricsReceipt
+     */
+    omit?: MetricsReceiptOmit<ExtArgs> | null
+    /**
+     * The data used to create many MetricsReceipts.
+     */
+    data: MetricsReceiptCreateManyInput | MetricsReceiptCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MetricsReceiptIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MetricsReceipt update
+   */
+  export type MetricsReceiptUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MetricsReceipt
+     */
+    select?: MetricsReceiptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MetricsReceipt
+     */
+    omit?: MetricsReceiptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MetricsReceiptInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MetricsReceipt.
+     */
+    data: XOR<MetricsReceiptUpdateInput, MetricsReceiptUncheckedUpdateInput>
+    /**
+     * Choose, which MetricsReceipt to update.
+     */
+    where: MetricsReceiptWhereUniqueInput
+  }
+
+  /**
+   * MetricsReceipt updateMany
+   */
+  export type MetricsReceiptUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MetricsReceipts.
+     */
+    data: XOR<MetricsReceiptUpdateManyMutationInput, MetricsReceiptUncheckedUpdateManyInput>
+    /**
+     * Filter which MetricsReceipts to update
+     */
+    where?: MetricsReceiptWhereInput
+    /**
+     * Limit how many MetricsReceipts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * MetricsReceipt updateManyAndReturn
+   */
+  export type MetricsReceiptUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MetricsReceipt
+     */
+    select?: MetricsReceiptSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MetricsReceipt
+     */
+    omit?: MetricsReceiptOmit<ExtArgs> | null
+    /**
+     * The data used to update MetricsReceipts.
+     */
+    data: XOR<MetricsReceiptUpdateManyMutationInput, MetricsReceiptUncheckedUpdateManyInput>
+    /**
+     * Filter which MetricsReceipts to update
+     */
+    where?: MetricsReceiptWhereInput
+    /**
+     * Limit how many MetricsReceipts to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MetricsReceiptIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MetricsReceipt upsert
+   */
+  export type MetricsReceiptUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MetricsReceipt
+     */
+    select?: MetricsReceiptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MetricsReceipt
+     */
+    omit?: MetricsReceiptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MetricsReceiptInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MetricsReceipt to update in case it exists.
+     */
+    where: MetricsReceiptWhereUniqueInput
+    /**
+     * In case the MetricsReceipt found by the `where` argument doesn't exist, create a new MetricsReceipt with this data.
+     */
+    create: XOR<MetricsReceiptCreateInput, MetricsReceiptUncheckedCreateInput>
+    /**
+     * In case the MetricsReceipt was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MetricsReceiptUpdateInput, MetricsReceiptUncheckedUpdateInput>
+  }
+
+  /**
+   * MetricsReceipt delete
+   */
+  export type MetricsReceiptDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MetricsReceipt
+     */
+    select?: MetricsReceiptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MetricsReceipt
+     */
+    omit?: MetricsReceiptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MetricsReceiptInclude<ExtArgs> | null
+    /**
+     * Filter which MetricsReceipt to delete.
+     */
+    where: MetricsReceiptWhereUniqueInput
+  }
+
+  /**
+   * MetricsReceipt deleteMany
+   */
+  export type MetricsReceiptDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MetricsReceipts to delete
+     */
+    where?: MetricsReceiptWhereInput
+    /**
+     * Limit how many MetricsReceipts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * MetricsReceipt without action
+   */
+  export type MetricsReceiptDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MetricsReceipt
+     */
+    select?: MetricsReceiptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MetricsReceipt
+     */
+    omit?: MetricsReceiptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MetricsReceiptInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model AudienceLevel
    */
 
@@ -10816,6 +12015,18 @@ export namespace Prisma {
   export type StreamerMetricsScalarFieldEnum = (typeof StreamerMetricsScalarFieldEnum)[keyof typeof StreamerMetricsScalarFieldEnum]
 
 
+  export const MetricsReceiptScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    bucketKey: 'bucketKey',
+    applied: 'applied',
+    createdAt: 'createdAt',
+    appliedAt: 'appliedAt'
+  };
+
+  export type MetricsReceiptScalarFieldEnum = (typeof MetricsReceiptScalarFieldEnum)[keyof typeof MetricsReceiptScalarFieldEnum]
+
+
   export const AudienceLevelScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
@@ -10974,6 +12185,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'Json'
    */
   export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
@@ -11007,6 +12225,7 @@ export namespace Prisma {
     giftsReceived?: GiftListRelationFilter
     giftsSent?: GiftListRelationFilter
     comments?: CommentListRelationFilter
+    metricsReceipts?: MetricsReceiptListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -11023,6 +12242,7 @@ export namespace Prisma {
     giftsReceived?: GiftOrderByRelationAggregateInput
     giftsSent?: GiftOrderByRelationAggregateInput
     comments?: CommentOrderByRelationAggregateInput
+    metricsReceipts?: MetricsReceiptOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -11042,6 +12262,7 @@ export namespace Prisma {
     giftsReceived?: GiftListRelationFilter
     giftsSent?: GiftListRelationFilter
     comments?: CommentListRelationFilter
+    metricsReceipts?: MetricsReceiptListRelationFilter
   }, "id" | "nombre">
 
   export type UserOrderByWithAggregationInput = {
@@ -11317,6 +12538,67 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"StreamerMetrics"> | Date | string
   }
 
+  export type MetricsReceiptWhereInput = {
+    AND?: MetricsReceiptWhereInput | MetricsReceiptWhereInput[]
+    OR?: MetricsReceiptWhereInput[]
+    NOT?: MetricsReceiptWhereInput | MetricsReceiptWhereInput[]
+    id?: StringFilter<"MetricsReceipt"> | string
+    userId?: StringFilter<"MetricsReceipt"> | string
+    bucketKey?: StringFilter<"MetricsReceipt"> | string
+    applied?: BoolFilter<"MetricsReceipt"> | boolean
+    createdAt?: DateTimeFilter<"MetricsReceipt"> | Date | string
+    appliedAt?: DateTimeNullableFilter<"MetricsReceipt"> | Date | string | null
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type MetricsReceiptOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    bucketKey?: SortOrder
+    applied?: SortOrder
+    createdAt?: SortOrder
+    appliedAt?: SortOrderInput | SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type MetricsReceiptWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId_bucketKey?: MetricsReceiptUserIdBucketKeyCompoundUniqueInput
+    AND?: MetricsReceiptWhereInput | MetricsReceiptWhereInput[]
+    OR?: MetricsReceiptWhereInput[]
+    NOT?: MetricsReceiptWhereInput | MetricsReceiptWhereInput[]
+    userId?: StringFilter<"MetricsReceipt"> | string
+    bucketKey?: StringFilter<"MetricsReceipt"> | string
+    applied?: BoolFilter<"MetricsReceipt"> | boolean
+    createdAt?: DateTimeFilter<"MetricsReceipt"> | Date | string
+    appliedAt?: DateTimeNullableFilter<"MetricsReceipt"> | Date | string | null
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userId_bucketKey">
+
+  export type MetricsReceiptOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    bucketKey?: SortOrder
+    applied?: SortOrder
+    createdAt?: SortOrder
+    appliedAt?: SortOrderInput | SortOrder
+    _count?: MetricsReceiptCountOrderByAggregateInput
+    _max?: MetricsReceiptMaxOrderByAggregateInput
+    _min?: MetricsReceiptMinOrderByAggregateInput
+  }
+
+  export type MetricsReceiptScalarWhereWithAggregatesInput = {
+    AND?: MetricsReceiptScalarWhereWithAggregatesInput | MetricsReceiptScalarWhereWithAggregatesInput[]
+    OR?: MetricsReceiptScalarWhereWithAggregatesInput[]
+    NOT?: MetricsReceiptScalarWhereWithAggregatesInput | MetricsReceiptScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MetricsReceipt"> | string
+    userId?: StringWithAggregatesFilter<"MetricsReceipt"> | string
+    bucketKey?: StringWithAggregatesFilter<"MetricsReceipt"> | string
+    applied?: BoolWithAggregatesFilter<"MetricsReceipt"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"MetricsReceipt"> | Date | string
+    appliedAt?: DateTimeNullableWithAggregatesFilter<"MetricsReceipt"> | Date | string | null
+  }
+
   export type AudienceLevelWhereInput = {
     AND?: AudienceLevelWhereInput | AudienceLevelWhereInput[]
     OR?: AudienceLevelWhereInput[]
@@ -11547,6 +12829,7 @@ export namespace Prisma {
     giftsReceived?: GiftCreateNestedManyWithoutReceiverInput
     giftsSent?: GiftCreateNestedManyWithoutSenderInput
     comments?: CommentCreateNestedManyWithoutUserInput
+    metricsReceipts?: MetricsReceiptCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -11563,6 +12846,7 @@ export namespace Prisma {
     giftsReceived?: GiftUncheckedCreateNestedManyWithoutReceiverInput
     giftsSent?: GiftUncheckedCreateNestedManyWithoutSenderInput
     comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    metricsReceipts?: MetricsReceiptUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -11579,6 +12863,7 @@ export namespace Prisma {
     giftsReceived?: GiftUpdateManyWithoutReceiverNestedInput
     giftsSent?: GiftUpdateManyWithoutSenderNestedInput
     comments?: CommentUpdateManyWithoutUserNestedInput
+    metricsReceipts?: MetricsReceiptUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -11595,6 +12880,7 @@ export namespace Prisma {
     giftsReceived?: GiftUncheckedUpdateManyWithoutReceiverNestedInput
     giftsSent?: GiftUncheckedUpdateManyWithoutSenderNestedInput
     comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    metricsReceipts?: MetricsReceiptUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -11868,6 +13154,68 @@ export namespace Prisma {
     lastLevelUpAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MetricsReceiptCreateInput = {
+    id?: string
+    bucketKey: string
+    applied?: boolean
+    createdAt?: Date | string
+    appliedAt?: Date | string | null
+    user: UserCreateNestedOneWithoutMetricsReceiptsInput
+  }
+
+  export type MetricsReceiptUncheckedCreateInput = {
+    id?: string
+    userId: string
+    bucketKey: string
+    applied?: boolean
+    createdAt?: Date | string
+    appliedAt?: Date | string | null
+  }
+
+  export type MetricsReceiptUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bucketKey?: StringFieldUpdateOperationsInput | string
+    applied?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    appliedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user?: UserUpdateOneRequiredWithoutMetricsReceiptsNestedInput
+  }
+
+  export type MetricsReceiptUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    bucketKey?: StringFieldUpdateOperationsInput | string
+    applied?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    appliedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type MetricsReceiptCreateManyInput = {
+    id?: string
+    userId: string
+    bucketKey: string
+    applied?: boolean
+    createdAt?: Date | string
+    appliedAt?: Date | string | null
+  }
+
+  export type MetricsReceiptUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bucketKey?: StringFieldUpdateOperationsInput | string
+    applied?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    appliedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type MetricsReceiptUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    bucketKey?: StringFieldUpdateOperationsInput | string
+    applied?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    appliedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type AudienceLevelCreateInput = {
@@ -12166,6 +13514,12 @@ export namespace Prisma {
     none?: CommentWhereInput
   }
 
+  export type MetricsReceiptListRelationFilter = {
+    every?: MetricsReceiptWhereInput
+    some?: MetricsReceiptWhereInput
+    none?: MetricsReceiptWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -12188,6 +13542,10 @@ export namespace Prisma {
   }
 
   export type CommentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MetricsReceiptOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -12517,6 +13875,51 @@ export namespace Prisma {
     totalSessions?: SortOrder
     currentLevel?: SortOrder
   }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type MetricsReceiptUserIdBucketKeyCompoundUniqueInput = {
+    userId: string
+    bucketKey: string
+  }
+
+  export type MetricsReceiptCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    bucketKey?: SortOrder
+    applied?: SortOrder
+    createdAt?: SortOrder
+    appliedAt?: SortOrder
+  }
+
+  export type MetricsReceiptMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    bucketKey?: SortOrder
+    applied?: SortOrder
+    createdAt?: SortOrder
+    appliedAt?: SortOrder
+  }
+
+  export type MetricsReceiptMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    bucketKey?: SortOrder
+    applied?: SortOrder
+    createdAt?: SortOrder
+    appliedAt?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
   export type JsonNullableFilter<$PrismaModel = never> =
     | PatchUndefined<
         Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
@@ -12748,6 +14151,13 @@ export namespace Prisma {
     connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
   }
 
+  export type MetricsReceiptCreateNestedManyWithoutUserInput = {
+    create?: XOR<MetricsReceiptCreateWithoutUserInput, MetricsReceiptUncheckedCreateWithoutUserInput> | MetricsReceiptCreateWithoutUserInput[] | MetricsReceiptUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MetricsReceiptCreateOrConnectWithoutUserInput | MetricsReceiptCreateOrConnectWithoutUserInput[]
+    createMany?: MetricsReceiptCreateManyUserInputEnvelope
+    connect?: MetricsReceiptWhereUniqueInput | MetricsReceiptWhereUniqueInput[]
+  }
+
   export type PetUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<PetCreateWithoutUserInput, PetUncheckedCreateWithoutUserInput>
     connectOrCreate?: PetCreateOrConnectWithoutUserInput
@@ -12800,6 +14210,13 @@ export namespace Prisma {
     connectOrCreate?: CommentCreateOrConnectWithoutUserInput | CommentCreateOrConnectWithoutUserInput[]
     createMany?: CommentCreateManyUserInputEnvelope
     connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+  }
+
+  export type MetricsReceiptUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<MetricsReceiptCreateWithoutUserInput, MetricsReceiptUncheckedCreateWithoutUserInput> | MetricsReceiptCreateWithoutUserInput[] | MetricsReceiptUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MetricsReceiptCreateOrConnectWithoutUserInput | MetricsReceiptCreateOrConnectWithoutUserInput[]
+    createMany?: MetricsReceiptCreateManyUserInputEnvelope
+    connect?: MetricsReceiptWhereUniqueInput | MetricsReceiptWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -12918,6 +14335,20 @@ export namespace Prisma {
     deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
   }
 
+  export type MetricsReceiptUpdateManyWithoutUserNestedInput = {
+    create?: XOR<MetricsReceiptCreateWithoutUserInput, MetricsReceiptUncheckedCreateWithoutUserInput> | MetricsReceiptCreateWithoutUserInput[] | MetricsReceiptUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MetricsReceiptCreateOrConnectWithoutUserInput | MetricsReceiptCreateOrConnectWithoutUserInput[]
+    upsert?: MetricsReceiptUpsertWithWhereUniqueWithoutUserInput | MetricsReceiptUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: MetricsReceiptCreateManyUserInputEnvelope
+    set?: MetricsReceiptWhereUniqueInput | MetricsReceiptWhereUniqueInput[]
+    disconnect?: MetricsReceiptWhereUniqueInput | MetricsReceiptWhereUniqueInput[]
+    delete?: MetricsReceiptWhereUniqueInput | MetricsReceiptWhereUniqueInput[]
+    connect?: MetricsReceiptWhereUniqueInput | MetricsReceiptWhereUniqueInput[]
+    update?: MetricsReceiptUpdateWithWhereUniqueWithoutUserInput | MetricsReceiptUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: MetricsReceiptUpdateManyWithWhereWithoutUserInput | MetricsReceiptUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: MetricsReceiptScalarWhereInput | MetricsReceiptScalarWhereInput[]
+  }
+
   export type PetUncheckedUpdateOneWithoutUserNestedInput = {
     create?: XOR<PetCreateWithoutUserInput, PetUncheckedCreateWithoutUserInput>
     connectOrCreate?: PetCreateOrConnectWithoutUserInput
@@ -13020,6 +14451,20 @@ export namespace Prisma {
     update?: CommentUpdateWithWhereUniqueWithoutUserInput | CommentUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: CommentUpdateManyWithWhereWithoutUserInput | CommentUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
+  }
+
+  export type MetricsReceiptUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<MetricsReceiptCreateWithoutUserInput, MetricsReceiptUncheckedCreateWithoutUserInput> | MetricsReceiptCreateWithoutUserInput[] | MetricsReceiptUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MetricsReceiptCreateOrConnectWithoutUserInput | MetricsReceiptCreateOrConnectWithoutUserInput[]
+    upsert?: MetricsReceiptUpsertWithWhereUniqueWithoutUserInput | MetricsReceiptUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: MetricsReceiptCreateManyUserInputEnvelope
+    set?: MetricsReceiptWhereUniqueInput | MetricsReceiptWhereUniqueInput[]
+    disconnect?: MetricsReceiptWhereUniqueInput | MetricsReceiptWhereUniqueInput[]
+    delete?: MetricsReceiptWhereUniqueInput | MetricsReceiptWhereUniqueInput[]
+    connect?: MetricsReceiptWhereUniqueInput | MetricsReceiptWhereUniqueInput[]
+    update?: MetricsReceiptUpdateWithWhereUniqueWithoutUserInput | MetricsReceiptUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: MetricsReceiptUpdateManyWithWhereWithoutUserInput | MetricsReceiptUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: MetricsReceiptScalarWhereInput | MetricsReceiptScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutVideosInput = {
@@ -13142,6 +14587,24 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutStreamerMetricsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutStreamerMetricsInput, UserUpdateWithoutStreamerMetricsInput>, UserUncheckedUpdateWithoutStreamerMetricsInput>
+  }
+
+  export type UserCreateNestedOneWithoutMetricsReceiptsInput = {
+    create?: XOR<UserCreateWithoutMetricsReceiptsInput, UserUncheckedCreateWithoutMetricsReceiptsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMetricsReceiptsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type UserUpdateOneRequiredWithoutMetricsReceiptsNestedInput = {
+    create?: XOR<UserCreateWithoutMetricsReceiptsInput, UserUncheckedCreateWithoutMetricsReceiptsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMetricsReceiptsInput
+    upsert?: UserUpsertWithoutMetricsReceiptsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMetricsReceiptsInput, UserUpdateWithoutMetricsReceiptsInput>, UserUncheckedUpdateWithoutMetricsReceiptsInput>
   }
 
   export type UserCreateNestedOneWithoutAudienceLevelsInput = {
@@ -13411,6 +14874,19 @@ export namespace Prisma {
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
   export type NestedJsonNullableFilter<$PrismaModel = never> =
     | PatchUndefined<
         Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
@@ -13652,6 +15128,32 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type MetricsReceiptCreateWithoutUserInput = {
+    id?: string
+    bucketKey: string
+    applied?: boolean
+    createdAt?: Date | string
+    appliedAt?: Date | string | null
+  }
+
+  export type MetricsReceiptUncheckedCreateWithoutUserInput = {
+    id?: string
+    bucketKey: string
+    applied?: boolean
+    createdAt?: Date | string
+    appliedAt?: Date | string | null
+  }
+
+  export type MetricsReceiptCreateOrConnectWithoutUserInput = {
+    where: MetricsReceiptWhereUniqueInput
+    create: XOR<MetricsReceiptCreateWithoutUserInput, MetricsReceiptUncheckedCreateWithoutUserInput>
+  }
+
+  export type MetricsReceiptCreateManyUserInputEnvelope = {
+    data: MetricsReceiptCreateManyUserInput | MetricsReceiptCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type PetUpsertWithoutUserInput = {
     update: XOR<PetUpdateWithoutUserInput, PetUncheckedUpdateWithoutUserInput>
     create: XOR<PetCreateWithoutUserInput, PetUncheckedCreateWithoutUserInput>
@@ -13867,6 +15369,34 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Comment"> | Date | string
   }
 
+  export type MetricsReceiptUpsertWithWhereUniqueWithoutUserInput = {
+    where: MetricsReceiptWhereUniqueInput
+    update: XOR<MetricsReceiptUpdateWithoutUserInput, MetricsReceiptUncheckedUpdateWithoutUserInput>
+    create: XOR<MetricsReceiptCreateWithoutUserInput, MetricsReceiptUncheckedCreateWithoutUserInput>
+  }
+
+  export type MetricsReceiptUpdateWithWhereUniqueWithoutUserInput = {
+    where: MetricsReceiptWhereUniqueInput
+    data: XOR<MetricsReceiptUpdateWithoutUserInput, MetricsReceiptUncheckedUpdateWithoutUserInput>
+  }
+
+  export type MetricsReceiptUpdateManyWithWhereWithoutUserInput = {
+    where: MetricsReceiptScalarWhereInput
+    data: XOR<MetricsReceiptUpdateManyMutationInput, MetricsReceiptUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type MetricsReceiptScalarWhereInput = {
+    AND?: MetricsReceiptScalarWhereInput | MetricsReceiptScalarWhereInput[]
+    OR?: MetricsReceiptScalarWhereInput[]
+    NOT?: MetricsReceiptScalarWhereInput | MetricsReceiptScalarWhereInput[]
+    id?: StringFilter<"MetricsReceipt"> | string
+    userId?: StringFilter<"MetricsReceipt"> | string
+    bucketKey?: StringFilter<"MetricsReceipt"> | string
+    applied?: BoolFilter<"MetricsReceipt"> | boolean
+    createdAt?: DateTimeFilter<"MetricsReceipt"> | Date | string
+    appliedAt?: DateTimeNullableFilter<"MetricsReceipt"> | Date | string | null
+  }
+
   export type UserCreateWithoutVideosInput = {
     id?: string
     nombre: string
@@ -13880,6 +15410,7 @@ export namespace Prisma {
     giftsReceived?: GiftCreateNestedManyWithoutReceiverInput
     giftsSent?: GiftCreateNestedManyWithoutSenderInput
     comments?: CommentCreateNestedManyWithoutUserInput
+    metricsReceipts?: MetricsReceiptCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutVideosInput = {
@@ -13895,6 +15426,7 @@ export namespace Prisma {
     giftsReceived?: GiftUncheckedCreateNestedManyWithoutReceiverInput
     giftsSent?: GiftUncheckedCreateNestedManyWithoutSenderInput
     comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    metricsReceipts?: MetricsReceiptUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutVideosInput = {
@@ -13926,6 +15458,7 @@ export namespace Prisma {
     giftsReceived?: GiftUpdateManyWithoutReceiverNestedInput
     giftsSent?: GiftUpdateManyWithoutSenderNestedInput
     comments?: CommentUpdateManyWithoutUserNestedInput
+    metricsReceipts?: MetricsReceiptUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVideosInput = {
@@ -13941,6 +15474,7 @@ export namespace Prisma {
     giftsReceived?: GiftUncheckedUpdateManyWithoutReceiverNestedInput
     giftsSent?: GiftUncheckedUpdateManyWithoutSenderNestedInput
     comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    metricsReceipts?: MetricsReceiptUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutPetInput = {
@@ -13956,6 +15490,7 @@ export namespace Prisma {
     giftsReceived?: GiftCreateNestedManyWithoutReceiverInput
     giftsSent?: GiftCreateNestedManyWithoutSenderInput
     comments?: CommentCreateNestedManyWithoutUserInput
+    metricsReceipts?: MetricsReceiptCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPetInput = {
@@ -13971,6 +15506,7 @@ export namespace Prisma {
     giftsReceived?: GiftUncheckedCreateNestedManyWithoutReceiverInput
     giftsSent?: GiftUncheckedCreateNestedManyWithoutSenderInput
     comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    metricsReceipts?: MetricsReceiptUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPetInput = {
@@ -14002,6 +15538,7 @@ export namespace Prisma {
     giftsReceived?: GiftUpdateManyWithoutReceiverNestedInput
     giftsSent?: GiftUpdateManyWithoutSenderNestedInput
     comments?: CommentUpdateManyWithoutUserNestedInput
+    metricsReceipts?: MetricsReceiptUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPetInput = {
@@ -14017,6 +15554,7 @@ export namespace Prisma {
     giftsReceived?: GiftUncheckedUpdateManyWithoutReceiverNestedInput
     giftsSent?: GiftUncheckedUpdateManyWithoutSenderNestedInput
     comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    metricsReceipts?: MetricsReceiptUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutStreamSessionsInput = {
@@ -14032,6 +15570,7 @@ export namespace Prisma {
     giftsReceived?: GiftCreateNestedManyWithoutReceiverInput
     giftsSent?: GiftCreateNestedManyWithoutSenderInput
     comments?: CommentCreateNestedManyWithoutUserInput
+    metricsReceipts?: MetricsReceiptCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutStreamSessionsInput = {
@@ -14047,6 +15586,7 @@ export namespace Prisma {
     giftsReceived?: GiftUncheckedCreateNestedManyWithoutReceiverInput
     giftsSent?: GiftUncheckedCreateNestedManyWithoutSenderInput
     comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    metricsReceipts?: MetricsReceiptUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutStreamSessionsInput = {
@@ -14112,6 +15652,7 @@ export namespace Prisma {
     giftsReceived?: GiftUpdateManyWithoutReceiverNestedInput
     giftsSent?: GiftUpdateManyWithoutSenderNestedInput
     comments?: CommentUpdateManyWithoutUserNestedInput
+    metricsReceipts?: MetricsReceiptUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutStreamSessionsInput = {
@@ -14127,6 +15668,7 @@ export namespace Prisma {
     giftsReceived?: GiftUncheckedUpdateManyWithoutReceiverNestedInput
     giftsSent?: GiftUncheckedUpdateManyWithoutSenderNestedInput
     comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    metricsReceipts?: MetricsReceiptUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type GiftUpsertWithWhereUniqueWithoutStreamSessionInput = {
@@ -14158,6 +15700,7 @@ export namespace Prisma {
     giftsReceived?: GiftCreateNestedManyWithoutReceiverInput
     giftsSent?: GiftCreateNestedManyWithoutSenderInput
     comments?: CommentCreateNestedManyWithoutUserInput
+    metricsReceipts?: MetricsReceiptCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutStreamerMetricsInput = {
@@ -14173,6 +15716,7 @@ export namespace Prisma {
     giftsReceived?: GiftUncheckedCreateNestedManyWithoutReceiverInput
     giftsSent?: GiftUncheckedCreateNestedManyWithoutSenderInput
     comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    metricsReceipts?: MetricsReceiptUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutStreamerMetricsInput = {
@@ -14204,6 +15748,7 @@ export namespace Prisma {
     giftsReceived?: GiftUpdateManyWithoutReceiverNestedInput
     giftsSent?: GiftUpdateManyWithoutSenderNestedInput
     comments?: CommentUpdateManyWithoutUserNestedInput
+    metricsReceipts?: MetricsReceiptUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutStreamerMetricsInput = {
@@ -14215,6 +15760,87 @@ export namespace Prisma {
     pet?: PetUncheckedUpdateOneWithoutUserNestedInput
     videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
     streamSessions?: StreamSessionUncheckedUpdateManyWithoutUserNestedInput
+    audienceLevels?: AudienceLevelUncheckedUpdateManyWithoutUserNestedInput
+    giftsReceived?: GiftUncheckedUpdateManyWithoutReceiverNestedInput
+    giftsSent?: GiftUncheckedUpdateManyWithoutSenderNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    metricsReceipts?: MetricsReceiptUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutMetricsReceiptsInput = {
+    id?: string
+    nombre: string
+    rol: $Enums.Rol
+    password: string
+    contacto?: string | null
+    pet?: PetCreateNestedOneWithoutUserInput
+    videos?: VideoCreateNestedManyWithoutUserInput
+    streamSessions?: StreamSessionCreateNestedManyWithoutUserInput
+    streamerMetrics?: StreamerMetricsCreateNestedOneWithoutUserInput
+    audienceLevels?: AudienceLevelCreateNestedManyWithoutUserInput
+    giftsReceived?: GiftCreateNestedManyWithoutReceiverInput
+    giftsSent?: GiftCreateNestedManyWithoutSenderInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutMetricsReceiptsInput = {
+    id?: string
+    nombre: string
+    rol: $Enums.Rol
+    password: string
+    contacto?: string | null
+    pet?: PetUncheckedCreateNestedOneWithoutUserInput
+    videos?: VideoUncheckedCreateNestedManyWithoutUserInput
+    streamSessions?: StreamSessionUncheckedCreateNestedManyWithoutUserInput
+    streamerMetrics?: StreamerMetricsUncheckedCreateNestedOneWithoutUserInput
+    audienceLevels?: AudienceLevelUncheckedCreateNestedManyWithoutUserInput
+    giftsReceived?: GiftUncheckedCreateNestedManyWithoutReceiverInput
+    giftsSent?: GiftUncheckedCreateNestedManyWithoutSenderInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutMetricsReceiptsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutMetricsReceiptsInput, UserUncheckedCreateWithoutMetricsReceiptsInput>
+  }
+
+  export type UserUpsertWithoutMetricsReceiptsInput = {
+    update: XOR<UserUpdateWithoutMetricsReceiptsInput, UserUncheckedUpdateWithoutMetricsReceiptsInput>
+    create: XOR<UserCreateWithoutMetricsReceiptsInput, UserUncheckedCreateWithoutMetricsReceiptsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutMetricsReceiptsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutMetricsReceiptsInput, UserUncheckedUpdateWithoutMetricsReceiptsInput>
+  }
+
+  export type UserUpdateWithoutMetricsReceiptsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
+    password?: StringFieldUpdateOperationsInput | string
+    contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    pet?: PetUpdateOneWithoutUserNestedInput
+    videos?: VideoUpdateManyWithoutUserNestedInput
+    streamSessions?: StreamSessionUpdateManyWithoutUserNestedInput
+    streamerMetrics?: StreamerMetricsUpdateOneWithoutUserNestedInput
+    audienceLevels?: AudienceLevelUpdateManyWithoutUserNestedInput
+    giftsReceived?: GiftUpdateManyWithoutReceiverNestedInput
+    giftsSent?: GiftUpdateManyWithoutSenderNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutMetricsReceiptsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    rol?: EnumRolFieldUpdateOperationsInput | $Enums.Rol
+    password?: StringFieldUpdateOperationsInput | string
+    contacto?: NullableStringFieldUpdateOperationsInput | string | null
+    pet?: PetUncheckedUpdateOneWithoutUserNestedInput
+    videos?: VideoUncheckedUpdateManyWithoutUserNestedInput
+    streamSessions?: StreamSessionUncheckedUpdateManyWithoutUserNestedInput
+    streamerMetrics?: StreamerMetricsUncheckedUpdateOneWithoutUserNestedInput
     audienceLevels?: AudienceLevelUncheckedUpdateManyWithoutUserNestedInput
     giftsReceived?: GiftUncheckedUpdateManyWithoutReceiverNestedInput
     giftsSent?: GiftUncheckedUpdateManyWithoutSenderNestedInput
@@ -14234,6 +15860,7 @@ export namespace Prisma {
     giftsReceived?: GiftCreateNestedManyWithoutReceiverInput
     giftsSent?: GiftCreateNestedManyWithoutSenderInput
     comments?: CommentCreateNestedManyWithoutUserInput
+    metricsReceipts?: MetricsReceiptCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAudienceLevelsInput = {
@@ -14249,6 +15876,7 @@ export namespace Prisma {
     giftsReceived?: GiftUncheckedCreateNestedManyWithoutReceiverInput
     giftsSent?: GiftUncheckedCreateNestedManyWithoutSenderInput
     comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    metricsReceipts?: MetricsReceiptUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAudienceLevelsInput = {
@@ -14280,6 +15908,7 @@ export namespace Prisma {
     giftsReceived?: GiftUpdateManyWithoutReceiverNestedInput
     giftsSent?: GiftUpdateManyWithoutSenderNestedInput
     comments?: CommentUpdateManyWithoutUserNestedInput
+    metricsReceipts?: MetricsReceiptUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAudienceLevelsInput = {
@@ -14295,6 +15924,7 @@ export namespace Prisma {
     giftsReceived?: GiftUncheckedUpdateManyWithoutReceiverNestedInput
     giftsSent?: GiftUncheckedUpdateManyWithoutSenderNestedInput
     comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    metricsReceipts?: MetricsReceiptUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutGiftsReceivedInput = {
@@ -14310,6 +15940,7 @@ export namespace Prisma {
     audienceLevels?: AudienceLevelCreateNestedManyWithoutUserInput
     giftsSent?: GiftCreateNestedManyWithoutSenderInput
     comments?: CommentCreateNestedManyWithoutUserInput
+    metricsReceipts?: MetricsReceiptCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutGiftsReceivedInput = {
@@ -14325,6 +15956,7 @@ export namespace Prisma {
     audienceLevels?: AudienceLevelUncheckedCreateNestedManyWithoutUserInput
     giftsSent?: GiftUncheckedCreateNestedManyWithoutSenderInput
     comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    metricsReceipts?: MetricsReceiptUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutGiftsReceivedInput = {
@@ -14345,6 +15977,7 @@ export namespace Prisma {
     audienceLevels?: AudienceLevelCreateNestedManyWithoutUserInput
     giftsReceived?: GiftCreateNestedManyWithoutReceiverInput
     comments?: CommentCreateNestedManyWithoutUserInput
+    metricsReceipts?: MetricsReceiptCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutGiftsSentInput = {
@@ -14360,6 +15993,7 @@ export namespace Prisma {
     audienceLevels?: AudienceLevelUncheckedCreateNestedManyWithoutUserInput
     giftsReceived?: GiftUncheckedCreateNestedManyWithoutReceiverInput
     comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    metricsReceipts?: MetricsReceiptUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutGiftsSentInput = {
@@ -14416,6 +16050,7 @@ export namespace Prisma {
     audienceLevels?: AudienceLevelUpdateManyWithoutUserNestedInput
     giftsSent?: GiftUpdateManyWithoutSenderNestedInput
     comments?: CommentUpdateManyWithoutUserNestedInput
+    metricsReceipts?: MetricsReceiptUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutGiftsReceivedInput = {
@@ -14431,6 +16066,7 @@ export namespace Prisma {
     audienceLevels?: AudienceLevelUncheckedUpdateManyWithoutUserNestedInput
     giftsSent?: GiftUncheckedUpdateManyWithoutSenderNestedInput
     comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    metricsReceipts?: MetricsReceiptUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutGiftsSentInput = {
@@ -14457,6 +16093,7 @@ export namespace Prisma {
     audienceLevels?: AudienceLevelUpdateManyWithoutUserNestedInput
     giftsReceived?: GiftUpdateManyWithoutReceiverNestedInput
     comments?: CommentUpdateManyWithoutUserNestedInput
+    metricsReceipts?: MetricsReceiptUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutGiftsSentInput = {
@@ -14472,6 +16109,7 @@ export namespace Prisma {
     audienceLevels?: AudienceLevelUncheckedUpdateManyWithoutUserNestedInput
     giftsReceived?: GiftUncheckedUpdateManyWithoutReceiverNestedInput
     comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    metricsReceipts?: MetricsReceiptUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type StreamSessionUpsertWithoutGiftsInput = {
@@ -14518,6 +16156,7 @@ export namespace Prisma {
     audienceLevels?: AudienceLevelCreateNestedManyWithoutUserInput
     giftsReceived?: GiftCreateNestedManyWithoutReceiverInput
     giftsSent?: GiftCreateNestedManyWithoutSenderInput
+    metricsReceipts?: MetricsReceiptCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCommentsInput = {
@@ -14533,6 +16172,7 @@ export namespace Prisma {
     audienceLevels?: AudienceLevelUncheckedCreateNestedManyWithoutUserInput
     giftsReceived?: GiftUncheckedCreateNestedManyWithoutReceiverInput
     giftsSent?: GiftUncheckedCreateNestedManyWithoutSenderInput
+    metricsReceipts?: MetricsReceiptUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCommentsInput = {
@@ -14564,6 +16204,7 @@ export namespace Prisma {
     audienceLevels?: AudienceLevelUpdateManyWithoutUserNestedInput
     giftsReceived?: GiftUpdateManyWithoutReceiverNestedInput
     giftsSent?: GiftUpdateManyWithoutSenderNestedInput
+    metricsReceipts?: MetricsReceiptUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -14579,6 +16220,7 @@ export namespace Prisma {
     audienceLevels?: AudienceLevelUncheckedUpdateManyWithoutUserNestedInput
     giftsReceived?: GiftUncheckedUpdateManyWithoutReceiverNestedInput
     giftsSent?: GiftUncheckedUpdateManyWithoutSenderNestedInput
+    metricsReceipts?: MetricsReceiptUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type VideoCreateManyUserInput = {
@@ -14636,6 +16278,14 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type MetricsReceiptCreateManyUserInput = {
+    id?: string
+    bucketKey: string
+    applied?: boolean
+    createdAt?: Date | string
+    appliedAt?: Date | string | null
   }
 
   export type VideoUpdateWithoutUserInput = {
@@ -14808,6 +16458,30 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MetricsReceiptUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bucketKey?: StringFieldUpdateOperationsInput | string
+    applied?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    appliedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type MetricsReceiptUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bucketKey?: StringFieldUpdateOperationsInput | string
+    applied?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    appliedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type MetricsReceiptUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    bucketKey?: StringFieldUpdateOperationsInput | string
+    applied?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    appliedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type GiftCreateManyStreamSessionInput = {

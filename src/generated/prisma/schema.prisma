@@ -33,6 +33,7 @@ model User {
   giftsReceived   Gift[]           @relation("ReceiverUser")
   giftsSent       Gift[]           @relation("SenderUser")
   comments        Comment[]
+  metricsReceipts MetricsReceipt[]
 }
 
 model Video {
@@ -90,6 +91,21 @@ model StreamerMetrics {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  @@index([userId])
+}
+
+// Recibos/idempotencia para cierres de sesión
+model MetricsReceipt {
+  id        String    @id @default(cuid())
+  userId    String
+  bucketKey String // e.g. userId:minBucket:durationMs
+  applied   Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  appliedAt DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, bucketKey])
   @@index([userId])
 }
 
