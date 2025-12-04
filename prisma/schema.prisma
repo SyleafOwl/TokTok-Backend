@@ -94,6 +94,21 @@ model StreamerMetrics {
   @@index([userId])
 }
 
+// Recibos/idempotencia para cierres de sesión
+model MetricsReceipt {
+  id          String   @id @default(cuid())
+  userId      String
+  bucketKey   String   // e.g. userId:minBucket:durationMs
+  applied     Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  appliedAt   DateTime?
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, bucketKey])
+  @@index([userId])
+}
+
 model AudienceLevel {
   id              String  @id @default(cuid())
   userId          String

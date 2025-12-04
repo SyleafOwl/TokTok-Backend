@@ -380,6 +380,42 @@ app.post('/api/metrics/:userId/session-end', async (req, res) => {
   const { durationMs } = req.body ?? {}
   if (typeof durationMs !== 'number' || durationMs < 0) return res.status(400).json({ error: 'durationMs (number >= 0) es requerido' })
   try {
+    const clientAny = prisma as any
+    // Idempotencia: bucket por ventanas de 5 minutos + duración
+    const now = Date.now()
+    const bucketWindowMs = 5 * 60 * 1000
+    const minBucket = Math.floor(now / bucketWindowMs)
+    const bucketKey = `${userId}:${minBucket}:${Math.floor(durationMs)}`
+
+    // Upsert del recibo: si ya fue aplicado, devolver estado
+    const receipt = await clientAny.metricsReceipt.upsert({
+      where: { userId_bucketKey: { userId, bucketKey } },
+      update: {},
+      create: { userId, bucketKey },
+    })
+
+    if (receipt.applied) {
+      const existing = await ensureMetricsRecord(userId)
+      return res.json(existing)
+    }
+
+    // Cerrar última sesión abierta si existe (tolerante a retrasos)
+    const openSession = await clientAny.streamSession.findFirst({
+      where: { userId, endTime: null },
+      orderBy: { startTime: 'desc' },
+    })
+    if (openSession) {
+      const endTime = new Date()
+      const computedDuration = typeof durationMs === 'number' && durationMs > 0
+        ? Math.floor(durationMs)
+        : Math.max(0, endTime.getTime() - new Date(openSession.startTime).getTime())
+      await clientAny.streamSession.update({
+        where: { id: openSession.id },
+        data: { endTime, durationMs: computedDuration },
+      })
+    }
+
+    // Actualizar métricas acumuladas de forma idempotente
     const current = await ensureMetricsRecord(userId)
     const newTotalMs = (current.totalMs ?? 0) + Math.floor(durationMs)
     const newTotalSessions = (current.totalSessions ?? 0) + 1
@@ -391,7 +427,11 @@ app.post('/api/metrics/:userId/session-end', async (req, res) => {
       dataToUpdate.lastLevelUpAt = new Date()
     }
 
-    const updated = await (prisma as any).streamerMetrics.update({ where: { userId }, data: dataToUpdate })
+    const updated = await clientAny.streamerMetrics.update({ where: { userId }, data: dataToUpdate })
+
+    // Marcar recibo como aplicado
+    await clientAny.metricsReceipt.update({ where: { userId_bucketKey: { userId, bucketKey } }, data: { applied: true, appliedAt: new Date() } })
+
     res.json(updated)
   } catch (e: any) {
     console.error('[Metrics session-end] Error:', e)
